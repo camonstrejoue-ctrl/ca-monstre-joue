@@ -347,7 +347,7 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ---------- gallery (related articles) ---------- */
 .gallery-section{padding:40px 0 80px;}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,275px));gap:20px;align-items:start;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,275px));gap:20px;align-items:start;justify-content:center;}
 .gallery-card{
   position:relative;border-radius:var(--radius-lg);overflow:hidden;border:3px solid var(--black);
   display:block;line-height:0;
@@ -360,9 +360,8 @@ button{font-family:inherit;cursor:pointer;}
 .gallery-card span{color:var(--white);opacity:.85;font-weight:700;font-size:.85rem;white-space:nowrap;flex:none;}
 
 .related-section{padding:40px 0 80px;}
-.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,275px));gap:20px;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,275px));gap:20px;justify-content:center;}
 .related-grid .gallery-card img{aspect-ratio:1/1;object-fit:cover;}
-@media (max-width:700px){.gallery-grid{grid-template-columns:1fr;}}
 
 /* ---------- article page ---------- */
 .article-hero{
