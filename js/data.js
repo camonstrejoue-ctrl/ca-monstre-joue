@@ -364,7 +364,7 @@ window.ARTICLES = [
   },
   {
     slug: 'eila-et-leclat-de-la-montagne-critique',
-    title: "Eila et l'Éclat de la Montagne - Entre appréhension et émotions fortes",
+    title: "Eila - Entre appréhension et émotions fortes",
     date: '2026-08-07',
     gameSlug: 'eila-et-leclat-de-la-montagne',
     hero: 'assets/games/eila-et-leclat-de-la-montagne/eila1-bandeau.png',
