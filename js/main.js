@@ -262,6 +262,7 @@ function renderGamePage() {
 
   const heroTrack = qs('#game-hero-track');
   const heroDotsWrap = qs('#game-hero-dots');
+  const heroScrim = qs('.game-hero-scrim');
   if (heroTrack) {
     const images = (g.heroImages && g.heroImages.length)
       ? g.heroImages
@@ -283,9 +284,28 @@ function renderGamePage() {
     const heroDots = qsa('button', heroDotsWrap);
     let heroIndex = 0;
     let heroTimer = null;
+    // object-fit:contain letterboxes the img inside its full-size box ; the scrim
+    // must only darken the visible photo, not the blank bars, or the bars read as grey.
+    function updateHeroScrim() {
+      if (!heroScrim) return;
+      const container = qs('.game-hero');
+      const activeImg = qs(`.slide:nth-child(${heroIndex + 1}) img`, heroTrack);
+      if (!container || !activeImg || !activeImg.naturalWidth) { heroScrim.style.cssText = ''; return; }
+      const cw = container.clientWidth, ch = container.clientHeight;
+      const containerRatio = cw / ch;
+      const imgRatio = activeImg.naturalWidth / activeImg.naturalHeight;
+      if (imgRatio > containerRatio) {
+        const visibleH = cw / imgRatio;
+        heroScrim.style.cssText = `left:0;width:100%;top:${(ch - visibleH) / 2}px;height:${visibleH}px;`;
+      } else {
+        const visibleW = ch * imgRatio;
+        heroScrim.style.cssText = `top:0;height:100%;left:${(cw - visibleW) / 2}px;width:${visibleW}px;`;
+      }
+    }
     function heroUpdate() {
       heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
       heroDots.forEach((d, i) => d.classList.toggle('active', i === heroIndex));
+      updateHeroScrim();
     }
     function heroGoTo(i) { heroIndex = (i + slides.length) % slides.length; heroUpdate(); heroResetTimer(); }
     function heroResetTimer() {
@@ -294,6 +314,8 @@ function renderGamePage() {
     }
     heroUpdate();
     heroResetTimer();
+    window.addEventListener('resize', updateHeroScrim);
+    qsa('img', heroTrack).forEach(img => img.addEventListener('load', updateHeroScrim));
   }
 
   const idList = qs('#identity-list');
