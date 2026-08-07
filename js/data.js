@@ -27,6 +27,11 @@ window.GAMES = [
     categories: ['jeux-a-deux', 'jeux-cooperatifs'],
     cover: 'assets/games/sub-terra-ii/cover.jpg',
     thumbnail: 'assets/games/sub-terra-ii/sub-terra-ii-liste.jpg',
+    heroImages: [
+      'assets/games/sub-terra-ii/sub-fiche.JPG',
+      'assets/games/sub-terra-ii/tuile-fiche.JPG',
+      'assets/games/sub-terra-ii/perso-fiche.JPG',
+    ],
     intro: "Explorez un temple volcanique, en équipe ! Dans ce jeu d'exploration et de placement de tuiles, vous devrez récupérer 3 clés pour débloquer un artefact légendaire, en évitant les différents pièges et gardes qui vous barrent la route. L'artefact en poche, fuyez avant que le volcan n'entre en éruption et que vous mourriez tous dans d'atroces souffrances !",
     identity: {
       players: '1-6',
