@@ -222,6 +222,16 @@ function renderCategoryGrid() {
 }
 
 // ---------- CATEGORY page ----------
+function gameCard(g) {
+  const card = el('div', { class: 'game-card' });
+  const thumb = el('a', { class: 'thumb', href: `jeu.html?slug=${g.slug}` });
+  thumb.appendChild(mediaElement(g.thumbnail || g.cover, g.name, g.slug));
+  const btn = el('a', { class: 'btn btn--block', href: `jeu.html?slug=${g.slug}`, text: g.name });
+  card.appendChild(thumb);
+  card.appendChild(btn);
+  return card;
+}
+
 function renderCategoryPage() {
   const mount = qs('#games-grid');
   if (!mount) return;
@@ -234,14 +244,35 @@ function renderCategoryPage() {
     mount.appendChild(el('p', { text: 'De nouveaux jeux arrivent bientôt dans cette catégorie !', style: 'text-align:center;color:var(--gray);grid-column:1/-1;' }));
     return;
   }
+  games.forEach(g => mount.appendChild(gameCard(g)));
+}
+
+// ---------- ALL GAMES (alphabetical) page ----------
+function renderAllGamesPage() {
+  const mount = qs('#all-games-list');
+  const alphaNav = qs('#alpha-nav');
+  if (!mount || !alphaNav) return;
+  const games = [...(window.GAMES || [])].sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+  const groups = {};
   games.forEach(g => {
-    const card = el('div', { class: 'game-card' });
-    const thumb = el('a', { class: 'thumb', href: `jeu.html?slug=${g.slug}` });
-    thumb.appendChild(mediaElement(g.thumbnail || g.cover, g.name, g.slug));
-    const btn = el('a', { class: 'btn btn--block', href: `jeu.html?slug=${g.slug}`, text: g.name });
-    card.appendChild(thumb);
-    card.appendChild(btn);
-    mount.appendChild(card);
+    const letter = g.name.trim().charAt(0).toUpperCase();
+    (groups[letter] = groups[letter] || []).push(g);
+  });
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  alphaNav.innerHTML = '';
+  letters.forEach(letter => {
+    alphaNav.appendChild(groups[letter]
+      ? el('a', { href: `#letter-${letter}`, text: letter })
+      : el('span', { text: letter }));
+  });
+  mount.innerHTML = '';
+  letters.filter(letter => groups[letter]).forEach(letter => {
+    const group = el('div', { class: 'letter-group', id: `letter-${letter}` });
+    group.appendChild(el('h2', { class: 'letter-heading', text: letter }));
+    const grid = el('div', { class: 'games-grid' });
+    groups[letter].forEach(g => grid.appendChild(gameCard(g)));
+    group.appendChild(grid);
+    mount.appendChild(group);
   });
 }
 
@@ -497,6 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHomeHero();
   renderCategoryGrid();
   renderCategoryPage();
+  renderAllGamesPage();
   renderGamePage();
   renderArticlePage();
 });

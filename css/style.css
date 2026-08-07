@@ -219,6 +219,22 @@ button{font-family:inherit;cursor:pointer;}
 @media (max-width:880px){.games-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:560px){.games-grid{grid-template-columns:1fr;}}
 
+/* ---------- all games (alphabetical) page ---------- */
+.alpha-nav{
+  position:sticky;top:81px;z-index:99;background:var(--cream);border-bottom:3px solid var(--black);
+  display:flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:10px 24px;
+}
+.alpha-nav a, .alpha-nav span{
+  display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+  border-radius:50%;font-family:var(--font-display);font-weight:700;font-size:.85rem;
+  text-decoration:none;color:var(--black);
+}
+.alpha-nav a:hover{background:var(--coral);color:var(--white);}
+.alpha-nav span{color:var(--cream-dark);}
+.letter-group{padding-top:24px;scroll-margin-top:150px;}
+.letter-group + .letter-group{margin-top:44px;}
+.letter-heading{font-family:var(--font-display);font-size:1.6rem;margin-bottom:20px;border-bottom:3px solid var(--black);padding-bottom:6px;}
+
 /* ---------- placeholder media (decorative, brand-colored) ---------- */
 .ph{
   width:100%;aspect-ratio:4/3;position:relative;overflow:hidden;
