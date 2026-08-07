@@ -306,7 +306,8 @@ window.ARTICLES = [
     title: 'Sub Terra II - Notre compo type',
     date: '2026-08-03',
     gameSlug: 'sub-terra-ii',
-    cover: 'assets/games/sub-terra-ii/gameplay-meeples.jpg',
+    hero: 'assets/games/sub-terra-ii/compo-type-bandeau.png',
+    cover: 'assets/games/sub-terra-ii/compo-type-vignette.png',
     excerpt: 'Les personnages conseillés pour bien débuter le jeu, et les profils plus situationnels à essayer ensuite.',
     blocks: [
       { type: 'h2', text: 'Les personnages conseillés pour bien débuter' },
