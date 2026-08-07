@@ -145,8 +145,12 @@ window.GAMES = [
     slug: 'eila-et-leclat-de-la-montagne',
     name: "Eila et l'Éclat de la Montagne",
     categories: ['jeux-narratifs', 'jeux-a-deux', 'jeux-cooperatifs'],
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    thumbnail: 'assets/games/eila-et-leclat-de-la-montagne/eila-liste.JPG',
+    heroImages: [
+      'assets/games/eila-et-leclat-de-la-montagne/eila1-fiche.JPG',
+      'assets/games/eila-et-leclat-de-la-montagne/eila2-fiche.JPG',
+      'assets/games/eila-et-leclat-de-la-montagne/eila3-fiche.JPG',
+    ],
     intro: [
       "Incarnez Eila, une courageuse petite lapine, dans sa quête initiatique !",
       "Eila et l’Éclat de la Montagne est un jeu narratif et de gestion de ressources. Au travers de 5 chapitres, notre héroïne vit une multitude d’aventures de plus en plus sombres.",
@@ -181,7 +185,7 @@ window.GAMES = [
     video: '',
     spotify: 'https://open.spotify.com/playlist/2NhsVpfsZTNjQ0EqpWAA2p?si=zwXwvuPaTKW_jygs9ynILQ&utm_source=whatsapp&sci=spotify%3Acard-config%3A3sa6PCtW1oJX1vteSqR5r1&nd=1&dlsi=bb4bd28844f645f9',
     gallery: [
-      { image: '', articleSlug: 'eila-et-leclat-de-la-montagne-critique' },
+      { image: 'assets/games/eila-et-leclat-de-la-montagne/eila1-vignette.JPG', articleSlug: 'eila-et-leclat-de-la-montagne-critique' },
     ],
   },
   {
