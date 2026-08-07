@@ -459,6 +459,36 @@ function renderArticlePage() {
       body.appendChild(row);
     }
   });
+
+  const relatedSection = qs('#related-section');
+  const relatedGrid = qs('#related-grid');
+  const game = findGame(a.gameSlug);
+  relatedGrid.innerHTML = '';
+  if (game) {
+    qs('#related-title').textContent = `Pour en découvrir plus sur ${game.name}`;
+    const gameCard = el('a', { class: 'gallery-card', href: `jeu.html?slug=${game.slug}` });
+    gameCard.appendChild(mediaElement(game.thumbnail || game.cover, game.name, game.slug));
+    gameCard.appendChild(el('div', { class: 'overlay' }, [
+      el('h3', { text: game.name }),
+      el('span', { text: 'Voir la fiche jeu' }),
+    ]));
+    relatedGrid.appendChild(gameCard);
+    (game.gallery || [])
+      .filter(item => item.articleSlug !== a.slug && findArticle(item.articleSlug))
+      .forEach(item => {
+        const other = findArticle(item.articleSlug);
+        const card = el('a', { class: 'gallery-card', href: `article.html?slug=${other.slug}` });
+        card.appendChild(mediaElement(item.image || other.cover, other.title, other.slug));
+        card.appendChild(el('div', { class: 'overlay' }, [
+          el('h3', { text: other.title }),
+          el('span', { text: 'Lire l’article' }),
+        ]));
+        relatedGrid.appendChild(card);
+      });
+    relatedSection.style.display = '';
+  } else {
+    relatedSection.style.display = 'none';
+  }
 }
 
 // ---------- init ----------
