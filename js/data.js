@@ -55,7 +55,7 @@ window.GAMES = [
     spotify: 'https://open.spotify.com/track/260FKIaAwovHuUTJ7IvKUK?si=sAW_B1XkTQeVQ5s2HphkxQ&utm_source=whatsapp',
     gallery: [
       { image: 'assets/games/sub-terra-ii/gameplay-plateau-large.jpg', articleSlug: 'sub-terra-ii-critique' },
-      { image: 'assets/games/sub-terra-ii/compo-type.png', articleSlug: 'sub-terra-ii-compo-type' },
+      { image: 'assets/games/sub-terra-ii/compo-type-vignette.png', articleSlug: 'sub-terra-ii-compo-type' },
     ],
   },
   {
@@ -305,7 +305,7 @@ window.ARTICLES = [
     title: 'Sub Terra II - Notre compo type',
     date: '2026-08-03',
     gameSlug: 'sub-terra-ii',
-    cover: 'assets/games/sub-terra-ii/compo-type-vignette.png',
+    cover: 'assets/games/sub-terra-ii/gameplay-meeples.jpg',
     excerpt: 'Les personnages conseillés pour bien débuter le jeu, et les profils plus situationnels à essayer ensuite.',
     blocks: [
       { type: 'h2', text: 'Les personnages conseillés pour bien débuter' },
