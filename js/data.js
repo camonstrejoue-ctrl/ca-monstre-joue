@@ -386,7 +386,6 @@ window.TEAM = [
   { name: 'Guillaume', linkedin: 'https://www.linkedin.com/in/guillaume-laborie-32096191/', role: 'Le maître des règles', bio: 'Bio à compléter.', favoriteGame: 'Ark Nova', photo: 'assets/team/member-3.jpg' },
   { name: 'Mylène', linkedin: 'https://www.linkedin.com/in/mylenepoinard/', role: 'La mauvaise perdante aux Aventuriers du Rail', bio: 'Bio à compléter.', favoriteGame: 'Forêt mixte', photo: 'assets/team/member-4.jpg' },
 ];
-window.GROUP_PHOTO = 'assets/team/group.svg';
 
 // À compléter : URLs réelles des réseaux sociaux.
 window.SOCIALS = {

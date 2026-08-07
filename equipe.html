@@ -36,8 +36,6 @@
 </header>
 
 <main>
-  <div class="group-photo" id="group-photo"></div>
-
   <section class="team-section">
     <div class="container">
       <div class="section-heading">
@@ -86,8 +84,6 @@
 <script src="js/main.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const groupPhoto = qs('#group-photo');
-  groupPhoto.appendChild(mediaElement(window.GROUP_PHOTO, 'La team Ça Monstre Joue', 'group'));
   const grid = qs('#team-grid');
   (window.TEAM || []).forEach(m => {
     const card = el('div', { class: 'team-card' });

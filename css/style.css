@@ -377,7 +377,6 @@ button{font-family:inherit;cursor:pointer;}
 .article-body ul li{margin-bottom:8px;color:var(--black);font-size:1.08rem;}
 
 /* ---------- team page ---------- */
-.group-photo{border-bottom:3px solid var(--black);line-height:0;}
 .team-section{padding:60px 0 80px;}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
 .team-card{text-align:center;}
