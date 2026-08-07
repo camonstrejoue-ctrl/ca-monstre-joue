@@ -192,8 +192,12 @@ window.GAMES = [
     slug: 'escape-the-dark-castle',
     name: 'Escape the Dark Castle',
     categories: ['jeux-a-deux', 'jeux-narratifs', 'jeux-cooperatifs', 'jeux-dambiance'],
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    thumbnail: 'assets/games/escape-the-dark-castle/escape-liste.png',
+    heroImages: [
+      'assets/games/escape-the-dark-castle/escape-fiche.png',
+      'assets/games/escape-the-dark-castle/escape2-fiche.png',
+      'assets/games/escape-the-dark-castle/escape3-fiche.png',
+    ],
     intro: [
       "Pensez-vous sortir vivant du Dark Castle ?",
       "Dans ce jeu d’exploration narratif, préparez-vous à perdre. C’est ce qui fait le charme du jeu.",
