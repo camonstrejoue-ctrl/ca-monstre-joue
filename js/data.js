@@ -54,7 +54,7 @@ window.GAMES = [
     video: 'https://youtube.com/shorts/o5udBSFZtEo',
     spotify: 'https://open.spotify.com/track/260FKIaAwovHuUTJ7IvKUK?si=sAW_B1XkTQeVQ5s2HphkxQ&utm_source=whatsapp',
     gallery: [
-      { image: 'assets/games/sub-terra-ii/gameplay-plateau-large.jpg', articleSlug: 'sub-terra-ii-critique' },
+      { image: 'assets/games/sub-terra-ii/critique-vignette.png', articleSlug: 'sub-terra-ii-critique' },
       { image: 'assets/games/sub-terra-ii/compo-type-vignette.png', articleSlug: 'sub-terra-ii-compo-type' },
     ],
   },
