@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 270" width="780" height="270" fill="none">
+  <defs>
+    <filter id="fur2" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045 0.06" numOctaves="3" seed="6" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(6,4) scale(0.86)">
+    <g filter="url(#fur2)">
+      <path d="M62,92
+        C56,54 82,22 120,22
+        C158,22 184,54 178,92
+        C202,98 208,126 192,144
+        C206,158 200,182 180,188
+        C182,210 168,226 150,222
+        C150,240 136,252 120,252
+        C104,252 90,240 90,222
+        C72,226 58,210 60,188
+        C40,182 34,158 48,144
+        C32,126 38,98 62,92 Z"
+        fill="#F5F5F5" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
+    </g>
+    <path d="M84,70 C70,46 72,20 88,6 C86,26 90,44 100,54 Z" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M88,6 C89,14 88,22 84,30" stroke="#E8392A" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <path d="M156,70 C170,46 168,20 152,6 C154,26 150,44 140,54 Z" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M152,6 C151,14 152,22 156,30" stroke="#E8392A" stroke-width="5" stroke-linecap="round" fill="none"/>
+    <ellipse cx="98" cy="118" rx="10" ry="12" fill="#1A1A1A"/>
+    <ellipse cx="142" cy="118" rx="10" ry="12" fill="#1A1A1A"/>
+    <circle cx="94.5" cy="112" r="2.4" fill="#F5F5F5"/>
+    <circle cx="138.5" cy="112" r="2.4" fill="#F5F5F5"/>
+    <path d="M92,148 C92,136 106,130 120,130 C134,130 148,136 148,148 C148,166 134,176 120,176 C106,176 92,166 92,148 Z" fill="#E8392A" stroke="#1A1A1A" stroke-width="5"/>
+    <path d="M100,140 L104,148 L108,140 Z M113,138 L117,148 L121,138 Z M126,138 L130,148 L134,138 Z M139,140 L135,148 L143,148 Z" fill="#F5F5F5"/>
+    <path d="M103,163 L107,156 L111,163 Z M116,165 L120,157 L124,165 Z M129,163 L133,156 L137,163 Z" fill="#F5F5F5"/>
+  </g>
+
+  <text x="230" y="98" font-family="'Baloo 2', sans-serif" font-weight="800" font-size="86" fill="#1A1A1A">ÇA</text>
+  <text x="230" y="178" font-family="'Baloo 2', sans-serif" font-weight="800" font-size="72" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="5" paint-order="stroke fill" letter-spacing="1">MONSTRE</text>
+  <text x="230" y="248" font-family="'Baloo 2', sans-serif" font-weight="800" font-size="66" fill="#1A1A1A">JOUE</text>
+</svg>

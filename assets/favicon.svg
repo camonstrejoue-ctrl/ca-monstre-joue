@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 220" width="240" height="220" fill="none">
+  <defs>
+    <filter id="fur3" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06 0.08" numOctaves="2" seed="6" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#fur3)">
+    <path d="M62,100 C54,64 82,30 120,30 C158,30 186,64 178,100
+      C198,108 202,132 188,148 C196,168 182,188 158,190
+      C150,200 134,206 120,206 C106,206 90,200 82,190
+      C58,188 44,168 52,148 C38,132 42,108 62,100 Z"
+      fill="#F5F5F5" stroke="#1A1A1A" stroke-width="7" stroke-linejoin="round"/>
+  </g>
+  <path d="M84,74 C70,50 72,24 88,10 C86,30 90,48 100,58 Z" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M88,10 C89,18 88,26 84,34" stroke="#E8392A" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M156,74 C170,50 168,24 152,10 C154,30 150,48 140,58 Z" fill="#F5F5F5" stroke="#1A1A1A" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M152,10 C151,18 152,26 156,34" stroke="#E8392A" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <ellipse cx="98" cy="122" rx="11" ry="13" fill="#1A1A1A"/>
+  <ellipse cx="142" cy="122" rx="11" ry="13" fill="#1A1A1A"/>
+  <circle cx="94" cy="116" r="2.6" fill="#F5F5F5"/>
+  <circle cx="138" cy="116" r="2.6" fill="#F5F5F5"/>
+  <path d="M90,154 C90,141 105,134 120,134 C135,134 150,141 150,154 C150,174 135,184 120,184 C105,184 90,174 90,154 Z" fill="#E8392A" stroke="#1A1A1A" stroke-width="6"/>
+  <path d="M99,145 L103,154 L107,145 Z M113,143 L117,154 L121,143 Z M127,143 L131,154 L135,143 Z M141,145 L137,154 L145,154 Z" fill="#F5F5F5"/>
+</svg>

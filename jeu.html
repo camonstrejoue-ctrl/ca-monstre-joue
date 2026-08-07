@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche jeu — Ça Monstre Joue</title>
+<link rel="icon" type="image/png" href="assets/monstre.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo-link"><img src="assets/logo.png" alt="Ça Monstre Joue"></a>
+    <nav class="main-nav" id="main-nav">
+      <ul>
+        <li class="nav-item has-dropdown">
+          <a href="#" class="nav-link">Découvre ton prochain jeu <span class="nav-caret">▾</span></a>
+          <div class="dropdown">
+            <a href="categorie.html?cat=jeux-a-deux">Jeux à deux</a>
+            <a href="categorie.html?cat=jeux-cooperatifs">Jeux coopératifs</a>
+            <a href="categorie.html?cat=jeux-dambiance">Jeux d'ambiance</a>
+            <a href="categorie.html?cat=jeux-de-strategie">Jeux de stratégie</a>
+            <a href="categorie.html?cat=jeux-narratifs">Jeux narratifs</a>
+            <a href="categorie.html?cat=jeux-famille">Jeux famille</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="equipe.html" class="nav-link">La Team Ça Monstre Joue</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="menu-toggle" aria-label="Ouvrir le menu"><span></span></button>
+  </div>
+</header>
+
+<main id="game-root">
+  <section class="game-hero" id="game-hero">
+    <div class="game-hero-track" id="game-hero-track"></div>
+    <div class="game-hero-scrim"></div>
+    <div class="game-hero-content container">
+      <span class="tag">Fiche jeu</span>
+      <h1 data-game-name>Nom du jeu</h1>
+    </div>
+    <div class="game-hero-dots" id="game-hero-dots"></div>
+  </section>
+
+  <div class="game-intro" data-game-intro></div>
+
+  <section class="video-section">
+    <div class="container">
+      <div class="video-grid">
+        <div class="video-wrap" id="video-wrap"></div>
+        <div class="video-copy">
+          <h3>Découvre si le jeu va te plaire</h3>
+          <p>avec notre vidéo de max 120 secondes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="accordion-section">
+    <div class="container">
+      <details class="accordion" open>
+        <summary class="accordion-header">Carte d'identité <span class="icon">+</span></summary>
+        <div class="accordion-body">
+          <ul class="id-card-list" id="identity-list"></ul>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary class="accordion-header">Ce jeu est-il fait pour toi ? <span class="icon">+</span></summary>
+        <div class="accordion-body" id="fit-body"></div>
+      </details>
+    </div>
+  </section>
+
+  <section class="spotify-section" id="spotify-section">
+    <div class="container">
+      <div class="spotify-card">
+        <h3>Notre playlist conseillée pour une immersion totale !</h3>
+        <div id="spotify-embed"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section" id="gallery-section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Pour aller plus loin</h2>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Ça Monstre Joue">
+        <p>Le blog qui explore les jeux de société avec vous : critiques, conseils et vidéos pour choisir votre prochaine partie.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <form id="newsletter-form" class="newsletter-form">
+          <input type="email" required placeholder="Ton email">
+          <button class="btn" type="submit">S'abonner</button>
+        </form>
+        <p class="newsletter-note">Reçois nos prochains articles et vidéos directement dans ta boîte mail.</p>
+        <p class="newsletter-success">Merci, tu es bien abonné(e) !</p>
+      </div>
+      <div class="footer-col">
+        <h4>Suis-nous</h4>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5zM17.8 6a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.2-1.5 1.6-1.5H17V3.6C16.7 3.5 15.7 3.4 14.6 3.4c-2.3 0-3.9 1.4-3.9 4v2.5H8v3.1h2.7V21z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.2-.8.5-1.6.8-2.5 1a4 4 0 0 0-6.9 3.6A11.3 11.3 0 0 1 3.9 4.9a4 4 0 0 0 1.2 5.3c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 0 0 3.2 3.9c-.6.1-1.2.2-1.8.1a4 4 0 0 0 3.7 2.8A8 8 0 0 1 2 18.6a11.3 11.3 0 0 0 6.1 1.8c7.3 0 11.3-6 11.3-11.3v-.5c.8-.6 1.4-1.3 1.9-2.1z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.5 2h-2.7v13.3a2.6 2.6 0 1 1-2.6-2.6c.2 0 .5 0 .7.1V10a5.3 5.3 0 1 0 4.6 5.3V8.6a6.7 6.7 0 0 0 4 1.3V7.2a4 4 0 0 1-4-4.2z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ça Monstre Joue. Tous droits réservés.</span>
+      <span>Fait avec 🧡 pour les amoureux de jeux de société</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

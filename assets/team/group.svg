@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3600 1300" width="3600" height="1300" fill="none">
+  <rect width="3600" height="1300" fill="#F5F5F5"/>
+
+  <!-- ground shadows -->
+  <ellipse cx="620" cy="1230" rx="230" ry="34" fill="#1A1A1A" opacity=".08"/>
+  <ellipse cx="1460" cy="1230" rx="230" ry="34" fill="#1A1A1A" opacity=".08"/>
+  <ellipse cx="2260" cy="1230" rx="250" ry="34" fill="#1A1A1A" opacity=".08"/>
+  <ellipse cx="3060" cy="1230" rx="230" ry="34" fill="#1A1A1A" opacity=".08"/>
+
+  <!-- Character 1: spiky hair -->
+  <g stroke="#1A1A1A" stroke-width="26" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M480 340 L520 220 L560 320 L610 210 L650 330 L700 240 L730 350" fill="#1A1A1A" stroke="none"/>
+    <circle cx="605" cy="420" r="150" fill="#F5F5F5"/>
+    <circle cx="560" cy="405" r="14" fill="#1A1A1A" stroke="none"/>
+    <circle cx="650" cy="405" r="14" fill="#1A1A1A" stroke="none"/>
+    <path d="M575 460 Q605 485 635 460" fill="none"/>
+    <path d="M605 560 C460 560 420 660 420 800 L420 1080 C420 1110 450 1130 480 1120 L480 1230 L730 1230 L730 1120 C760 1130 790 1110 790 1080 L790 800 C790 660 750 560 605 560 Z" fill="#E8392A"/>
+    <path d="M480 720 L380 900" fill="none"/>
+    <path d="M730 720 L830 900" fill="none"/>
+    <rect x="500" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+    <rect x="620" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+  </g>
+
+  <!-- Character 2: ponytail, taller -->
+  <g stroke="#1A1A1A" stroke-width="26" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M1460 300 C1360 300 1330 380 1340 460 C1300 470 1280 520 1310 560 L1610 560 C1640 520 1620 470 1580 460 C1590 380 1560 300 1460 300 Z" fill="#1A1A1A" stroke="none"/>
+    <path d="M1600 420 C1660 440 1680 520 1650 600 C1630 560 1610 520 1600 480 Z" fill="#1A1A1A" stroke="none"/>
+    <circle cx="1460" cy="470" r="155" fill="#F5F5F5"/>
+    <circle cx="1410" cy="455" r="14" fill="#1A1A1A" stroke="none"/>
+    <circle cx="1505" cy="455" r="14" fill="#1A1A1A" stroke="none"/>
+    <path d="M1425 515 Q1460 540 1495 515" fill="none"/>
+    <path d="M1460 615 C1300 615 1260 720 1260 860 L1260 1080 C1260 1110 1290 1130 1320 1120 L1320 1230 L1600 1230 L1600 1120 C1630 1130 1660 1110 1660 1080 L1660 860 C1660 720 1620 615 1460 615 Z" fill="#F5F5F5"/>
+    <path d="M1320 780 L1220 970" fill="none"/>
+    <path d="M1600 780 L1700 970" fill="none"/>
+    <rect x="1340" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+    <rect x="1460" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+  </g>
+
+  <!-- Character 3: curly hair, wider build -->
+  <g stroke="#1A1A1A" stroke-width="26" stroke-linejoin="round" stroke-linecap="round">
+    <circle cx="2130" cy="330" r="60" fill="#1A1A1A" stroke="none"/>
+    <circle cx="2210" cy="300" r="65" fill="#1A1A1A" stroke="none"/>
+    <circle cx="2300" cy="310" r="60" fill="#1A1A1A" stroke="none"/>
+    <circle cx="2370" cy="345" r="55" fill="#1A1A1A" stroke="none"/>
+    <circle cx="2250" cy="440" r="165" fill="#F5F5F5"/>
+    <circle cx="2195" cy="425" r="14" fill="#1A1A1A" stroke="none"/>
+    <circle cx="2300" cy="425" r="14" fill="#1A1A1A" stroke="none"/>
+    <path d="M2210 490 Q2250 515 2290 490" fill="none"/>
+    <path d="M2250 590 C2070 590 2020 700 2020 840 L2020 1080 C2020 1110 2050 1130 2080 1120 L2080 1230 L2420 1230 L2420 1120 C2450 1130 2480 1110 2480 1080 L2480 840 C2480 700 2430 590 2250 590 Z" fill="#E8392A"/>
+    <path d="M2080 760 L1970 940" fill="none"/>
+    <path d="M2420 760 L2530 940" fill="none"/>
+    <rect x="2110" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+    <rect x="2250" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+  </g>
+
+  <!-- Character 4: cap, waving arm -->
+  <g stroke="#1A1A1A" stroke-width="26" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M2900 360 C2900 280 2960 240 3020 240 C3080 240 3140 280 3140 360 L2900 360 Z" fill="#1A1A1A" stroke="none"/>
+    <rect x="2880" y="350" width="280" height="34" rx="17" fill="#1A1A1A" stroke="none"/>
+    <circle cx="3020" cy="450" r="150" fill="#F5F5F5"/>
+    <circle cx="2975" cy="440" r="14" fill="#1A1A1A" stroke="none"/>
+    <circle cx="3065" cy="440" r="14" fill="#1A1A1A" stroke="none"/>
+    <path d="M2985 500 Q3020 522 3055 500" fill="none"/>
+    <path d="M3020 590 C2875 590 2835 690 2835 830 L2835 1080 C2835 1110 2865 1130 2895 1120 L2895 1230 L3145 1230 L3145 1120 C3175 1130 3205 1110 3205 1080 L3205 830 C3205 690 3165 590 3020 590 Z" fill="#F5F5F5"/>
+    <path d="M2895 750 L2790 930" fill="none"/>
+    <path d="M3205 740 L3260 560 L3320 590" fill="none"/>
+    <rect x="2885" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+    <rect x="3005" y="1080" width="90" height="150" rx="30" fill="#1A1A1A" opacity=".85" stroke="none"/>
+  </g>
+</svg>
