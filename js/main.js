@@ -376,14 +376,22 @@ function renderGamePage() {
   const fitBody = qs('#fit-body');
   fitBody.innerHTML = '';
   if (g.fitIntro) fitBody.appendChild(el('p', { text: g.fitIntro, style: 'margin-bottom:18px;' }));
-  fitBody.appendChild(el('p', { text: 'Ce jeu est fait pour toi si :' }));
-  const yesList = el('ul', { style: 'margin:0 0 20px;padding-left:0;' });
-  g.fitFor.forEach(t => yesList.appendChild(el('li', { text: '✓ ' + t, style: 'margin-bottom:8px;color:var(--black);font-weight:700;' })));
-  fitBody.appendChild(yesList);
-  fitBody.appendChild(el('p', { text: 'Ce jeu n’est malheureusement pas pour toi si :' }));
-  const noList = el('ul', { style: 'padding-left:0;' });
-  g.notFitFor.forEach(t => noList.appendChild(el('li', { text: '✕ ' + t, style: 'margin-bottom:8px;' })));
-  fitBody.appendChild(noList);
+
+  const yesBox = el('div', { class: 'fit-box fit-box--yes' }, [
+    el('h4', { text: 'Ce jeu est fait pour toi si :' }),
+  ]);
+  const yesList = el('ul', {});
+  g.fitFor.forEach(t => yesList.appendChild(el('li', { text: '✓ ' + t })));
+  yesBox.appendChild(yesList);
+  fitBody.appendChild(yesBox);
+
+  const noBox = el('div', { class: 'fit-box fit-box--no' }, [
+    el('h4', { text: 'Ce jeu n’est malheureusement pas pour toi si :' }),
+  ]);
+  const noList = el('ul', {});
+  g.notFitFor.forEach(t => noList.appendChild(el('li', { text: '✕ ' + t })));
+  noBox.appendChild(noList);
+  fitBody.appendChild(noBox);
 
   const videoWrap = qs('#video-wrap');
   const embed = youTubeEmbed(g.video);
