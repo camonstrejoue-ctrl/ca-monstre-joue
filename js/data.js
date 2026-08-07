@@ -226,8 +226,8 @@ window.GAMES = [
     slug: 'finspan',
     name: 'Finspan',
     categories: ['jeux-de-strategie', 'jeux-a-deux'],
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    cover: 'assets/games/finspan/Cover-vignette.JPG',
+    thumbnail: 'assets/games/finspan/Cover-liste.JPG',
     intro: [
       "Finspan c’est l’archétype du jeu compétitif chill du soir.",
       "On en regretterait presque qu’il n’existe pas une version coopérative tellement l’aspect compétitif disparaît.",
