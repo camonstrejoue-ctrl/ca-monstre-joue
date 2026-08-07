@@ -26,6 +26,7 @@ window.GAMES = [
     name: 'Sub Terra II',
     categories: ['jeux-a-deux', 'jeux-cooperatifs'],
     cover: 'assets/games/sub-terra-ii/cover.jpg',
+    thumbnail: 'assets/games/sub-terra-ii/sub-terra-ii-liste.jpg',
     intro: "Explorez un temple volcanique, en équipe ! Dans ce jeu d'exploration et de placement de tuiles, vous devrez récupérer 3 clés pour débloquer un artefact légendaire, en évitant les différents pièges et gardes qui vous barrent la route. L'artefact en poche, fuyez avant que le volcan n'entre en éruption et que vous mourriez tous dans d'atroces souffrances !",
     identity: {
       players: '1-6',
@@ -304,7 +305,7 @@ window.ARTICLES = [
     title: 'Sub Terra II - Notre compo type',
     date: '2026-08-03',
     gameSlug: 'sub-terra-ii',
-    cover: 'assets/games/sub-terra-ii/gameplay-meeples.jpg',
+    cover: 'assets/games/sub-terra-ii/compo-type-vignette.png',
     excerpt: 'Les personnages conseillés pour bien débuter le jeu, et les profils plus situationnels à essayer ensuite.',
     blocks: [
       { type: 'h2', text: 'Les personnages conseillés pour bien débuter' },
