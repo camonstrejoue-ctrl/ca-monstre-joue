@@ -1,0 +1,65 @@
+# Ça Monstre Joue — Notes pour Claude Code
+
+Site statique (HTML/CSS/JS, sans build ni backend) présentant le blog de jeux de société Ça Monstre Joue.
+
+## Workflow Git
+
+L'utilisateur veut toujours garder **deux sauvegardes à jour** : une locale (commit) et une sur GitHub (push).
+Après chaque changement notable (nouveau jeu, nouvel article, modification de design significative),
+crée un commit avec un message clair puis pousse-le vers `origin main` — sans attendre que ce soit demandé
+explicitement à chaque fois, cette instruction vaut comme autorisation permanente pour ce projet.
+
+## Aperçu local
+
+Le site n'a pas de serveur — pour le prévisualiser (notamment les vidéos YouTube, qui ne fonctionnent pas
+en `file://`), lancer :
+
+```bash
+powershell -ExecutionPolicy Bypass -File "serve.ps1"
+```
+
+puis ouvrir `http://localhost:8752/`.
+
+## Suffixes de noms de fichiers image
+
+Quand l'utilisateur ajoute une image, le suffixe indique où elle doit être utilisée :
+
+| Suffixe | Ratio | Usage | Champ de données |
+|---|---|---|---|
+| `-banniere` | 16:9 | Carrousel de la page d'accueil | `banner` (article) |
+| `-vignette` | 1:1 | Miniature d'un article | `cover` (article) |
+| `-categorie` | 1:1 | Tuile d'une catégorie sur l'accueil | `image` (catégorie) |
+| `-liste` | 1:1 | Vignette d'un jeu sur une page de catégorie | `thumbnail` (jeu) |
+| `-bandeau` | 32:9 | Image tout en haut d'une page d'article | `hero` (article) |
+| `-fiche` | 16:9 à 21:9 | Carrousel tournant en haut d'une fiche jeu | `heroImages` (jeu, tableau) |
+
+Sans suffixe reconnu, l'image est identifiée par le contexte de la demande (photo de partie, carte de
+personnage, couverture de jeu, etc.).
+
+## Ajouter un nouveau jeu
+
+1. Dès que l'utilisateur annonce un nouveau jeu (même sans images), créer immédiatement le dossier
+   `assets/games/<slug>/`.
+2. Ajouter l'entrée dans `window.GAMES` (js/data.js) : si les catégories ne sont pas précisées, les
+   demander plutôt que de deviner.
+3. `identity.difficulty` et `identity.note` sont des objets `{ stars, max, label? }` (étoiles, max par
+   défaut 6). `identity.note` est systématiquement sur 6 étoiles (barème suisse — un tooltip l'explique
+   déjà sur "Note de Ça Monstre Joue").
+4. `intro` peut être une chaîne ou un tableau de paragraphes (un tableau donne un texte plus aéré, à
+   préférer pour les intros longues).
+
+## Ajouter un nouvel article
+
+1. Ajouter l'entrée dans `window.ARTICLES` (js/data.js), avec `gameSlug` pointant vers le bon jeu.
+2. **Ne pas oublier** de mettre à jour le tableau `gallery` du jeu correspondant (`{ image, articleSlug }`)
+   pour que l'article apparaisse dans la section "Pour aller plus loin" de la fiche jeu — c'est une erreur
+   déjà faite une fois, à ne pas répéter.
+3. Un bloc `{ type: 'spoiler', title, text }` est disponible pour du contenu à révéler au clic
+   (accordéon fermé par défaut), utile pour les passages qui gâchent l'histoire d'un jeu narratif.
+
+## Vigilance sur le contenu fourni par l'utilisateur
+
+L'utilisateur copie-colle parfois du texte d'un jeu précédent par erreur dans la description d'un nouveau
+jeu (ex. un lien vidéo ou un paragraphe entier réutilisé). Si un passage semble sans rapport avec le reste
+de la description (thème différent, lien identique à un jeu précédent), le signaler avant de l'intégrer
+plutôt que de l'ajouter tel quel.
