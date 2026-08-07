@@ -440,7 +440,7 @@ function renderArticlePage() {
       ]);
       body.appendChild(details);
     } else if (b.type === 'image') {
-      const figure = el('figure', { style: 'margin:28px 0;' });
+      const figure = el('figure', { style: 'margin:28px auto;width:50%;' });
       const box = el('div', { style: 'border-radius:var(--radius-lg);overflow:hidden;border:3px solid var(--black);line-height:0;' });
       box.appendChild(mediaElement(b.src, b.caption, b.src));
       figure.appendChild(box);
