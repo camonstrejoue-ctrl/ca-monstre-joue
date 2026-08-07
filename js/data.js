@@ -282,7 +282,8 @@ window.ARTICLES = [
     title: 'Sub Terra II - Notre critique brûlante',
     date: '2026-08-01',
     gameSlug: 'sub-terra-ii',
-    cover: 'assets/games/sub-terra-ii/gameplay-plateau-large.jpg',
+    hero: 'assets/games/sub-terra-ii/tuiles-bandeau.png',
+    cover: 'assets/games/sub-terra-ii/critique-vignette.png',
     excerpt: "Récupérer un artefact dans un temple volcanique : le jeu en vaut-il la chandelle ?",
     blocks: [
       { type: 'p', text: "Récupérer un artefact dans un temple volcanique : le jeu en vaut-il la chandelle ? Si vous êtes arrivés là ce n'est pas par hasard ! Vous vous demandez surement si visiter un temple volcanique vaut les CHF 48.- que coutent le jeu. Réponse courte : Oh que oui !" },
