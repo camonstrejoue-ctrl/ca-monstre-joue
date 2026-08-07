@@ -378,6 +378,11 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ---------- team page ---------- */
 .team-section{padding:60px 0 80px;}
+.philosophy-section{padding:0 0 80px;}
+.philosophy-heading{max-width:760px;}
+.philosophy-heading p{margin-bottom:16px;}
+.philosophy-heading p:last-child{margin-bottom:0;}
+.philosophy-heading a{color:var(--coral-dark);text-decoration:underline;}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
 .team-card{text-align:center;}
 .team-card .thumb{
