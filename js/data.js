@@ -367,6 +367,7 @@ window.ARTICLES = [
     title: "Eila - Entre appréhension et émotions fortes",
     date: '2026-08-07',
     gameSlug: 'eila-et-leclat-de-la-montagne',
+    banner: 'assets/games/eila-et-leclat-de-la-montagne/eila3-banniere.JPG',
     hero: 'assets/games/eila-et-leclat-de-la-montagne/eila1-bandeau.png',
     cover: 'assets/games/eila-et-leclat-de-la-montagne/eila1-vignette.JPG',
     excerpt: "Notre avis complet, sans spoiler (ou presque), sur Eila et l'Éclat de la Montagne.",
