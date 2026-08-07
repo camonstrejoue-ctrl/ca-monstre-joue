@@ -238,7 +238,7 @@ button{font-family:inherit;cursor:pointer;}
 .ph-6{background:linear-gradient(135deg,var(--cream-dark),var(--gray-light));}
 
 /* ---------- game detail page ---------- */
-.game-hero{position:relative;height:420px;overflow:hidden;background:var(--cream-dark);border-bottom:3px solid var(--black);}
+.game-hero{position:relative;height:420px;overflow:hidden;background:var(--white);border-bottom:3px solid var(--black);}
 .game-hero-track{display:flex;height:100%;transition:transform .8s cubic-bezier(.65,0,.35,1);}
 .game-hero-track .slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;}
 .game-hero-track .slide img{width:100%;height:100%;object-fit:contain;display:block;}
