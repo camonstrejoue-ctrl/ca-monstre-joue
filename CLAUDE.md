@@ -27,10 +27,11 @@ Quand l'utilisateur ajoute une image, le suffixe indique où elle doit être uti
 | Suffixe | Ratio | Usage | Champ de données |
 |---|---|---|---|
 | `-banniere` | 16:9 | Carrousel de la page d'accueil | `banner` (article) |
-| `-vignette` | 1:1 | Miniature d'un article | `cover` (article) |
+| `-vignette` | 1:1 | Miniature d'un article, affichée en bas des pages jeu ("Pour aller plus loin") | `cover` (article) |
 | `-categorie` | 1:1 | Tuile d'une catégorie sur l'accueil | `image` (catégorie) |
 | `-liste` | 1:1 | Vignette d'un jeu sur une page de catégorie | `thumbnail` (jeu) |
 | `-bandeau` | 32:9 | Image tout en haut d'une page d'article | `hero` (article) |
+| `-cover` | 16:9 | Image en haut d'une page jeu | `cover` (jeu) |
 | `-fiche` | 16:9 à 21:9 | Carrousel tournant en haut d'une fiche jeu | `heroImages` (jeu, tableau) |
 
 Sans suffixe reconnu, l'image est identifiée par le contexte de la demande (photo de partie, carte de
