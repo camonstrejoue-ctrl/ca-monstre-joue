@@ -384,6 +384,7 @@ button{font-family:inherit;cursor:pointer;}
 .team-card .thumb{
   border-radius:var(--radius-lg);overflow:hidden;border:3px solid var(--black);margin-bottom:16px;line-height:0;
 }
+.team-card .thumb img{aspect-ratio:1/1;object-fit:cover;}
 .team-card h3{font-size:1.25rem;margin-bottom:2px;}
 .linkedin-link{color:var(--black);text-decoration:none;}
 .linkedin-link:hover{color:var(--coral);text-decoration:underline;}
