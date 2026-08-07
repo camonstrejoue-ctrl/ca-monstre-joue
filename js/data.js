@@ -363,8 +363,8 @@ window.ARTICLES = [
     title: "Eila et l'Éclat de la Montagne - Entre appréhension et émotions fortes",
     date: '2026-08-07',
     gameSlug: 'eila-et-leclat-de-la-montagne',
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    hero: 'assets/games/eila-et-leclat-de-la-montagne/eila1-bandeau.png',
+    cover: 'assets/games/eila-et-leclat-de-la-montagne/eila1-vignette.JPG',
     excerpt: "Notre avis complet, sans spoiler (ou presque), sur Eila et l'Éclat de la Montagne.",
     blocks: [
       { type: 'p', text: "La première fois que nous avons sorti la boîte de « Eila et l’Éclat de la Montagne » pour y jouer, j’ai eu peur. Très peur. Dans une boîte aussi énorme devait forcément se trouver un livre de règles. J’anticipais déjà de longues heures de lutte acharnée contre le sommeil... Mais NON ! Des règles simples introduites de manière progressive, des graphismes sublimes et une histoire qui en émouvra plus d’un. Un vrai coup de cœur !" },
