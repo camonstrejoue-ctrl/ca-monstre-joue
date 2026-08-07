@@ -469,8 +469,7 @@ function renderArticlePage() {
     const gameCard = el('a', { class: 'gallery-card', href: `jeu.html?slug=${game.slug}` });
     gameCard.appendChild(mediaElement(game.thumbnail || game.cover, game.name, game.slug));
     gameCard.appendChild(el('div', { class: 'overlay' }, [
-      el('h3', { text: game.name }),
-      el('span', { text: 'Voir la fiche jeu' }),
+      el('h3', { text: `Retour sur la page de ${game.name}` }),
     ]));
     relatedGrid.appendChild(gameCard);
     (game.gallery || [])
