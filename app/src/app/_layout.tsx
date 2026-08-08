@@ -1,8 +1,9 @@
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, View } from 'react-native';
 
+import { BottomTabBar } from '@/components/bottom-tab-bar';
 import { useTheme } from '@/hooks/use-theme';
 import { AuthProvider } from '@/lib/auth-context';
 
@@ -19,20 +20,27 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <AuthProvider>
-        <Stack
-          screenOptions={{
-            headerStyle: { backgroundColor: theme.background },
-            headerTintColor: theme.text,
-            headerTitleStyle: { color: theme.text },
-            contentStyle: { backgroundColor: theme.background },
-          }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="jeu/[slug]" options={{ title: '' }} />
-          <Stack.Screen name="article/[slug]" options={{ title: '' }} />
-          <Stack.Screen name="categorie/[slug]" options={{ title: '' }} />
-          <Stack.Screen name="joueur/[uid]" options={{ title: '' }} />
-          <Stack.Screen name="cgu" options={{ title: 'Conditions d’utilisation' }} />
-        </Stack>
+        <View style={{ flex: 1, backgroundColor: theme.background }}>
+          <Stack
+            screenOptions={{
+              headerStyle: { backgroundColor: theme.background },
+              headerTintColor: theme.text,
+              headerTitleStyle: { color: theme.text },
+              contentStyle: { backgroundColor: theme.background },
+            }}>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="catalogue" options={{ headerShown: false }} />
+            <Stack.Screen name="ludotheque" options={{ headerShown: false }} />
+            <Stack.Screen name="joueurs" options={{ headerShown: false }} />
+            <Stack.Screen name="profil" options={{ headerShown: false }} />
+            <Stack.Screen name="jeu/[slug]" options={{ title: '' }} />
+            <Stack.Screen name="article/[slug]" options={{ title: '' }} />
+            <Stack.Screen name="categorie/[slug]" options={{ title: '' }} />
+            <Stack.Screen name="joueur/[uid]" options={{ title: '' }} />
+            <Stack.Screen name="cgu" options={{ title: 'Conditions d’utilisation' }} />
+          </Stack>
+          <BottomTabBar />
+        </View>
       </AuthProvider>
     </ThemeProvider>
   );
