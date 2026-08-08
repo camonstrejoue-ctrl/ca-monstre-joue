@@ -129,6 +129,25 @@
   </div>
 </footer>
 
+<div class="chatbot" id="chatbot">
+  <button type="button" class="chatbot-toggle" id="chatbot-toggle" aria-label="Ouvrir P'tit Monstre, notre assistant pour trouver un jeu">
+    <img src="assets/monstre.png" alt="">
+  </button>
+  <div class="chatbot-panel" id="chatbot-panel" hidden>
+    <div class="chatbot-header">
+      <img src="assets/monstre.png" alt="">
+      <div class="chatbot-title">
+        <strong>P'tit Monstre</strong>
+        <span>Je te trouve un jeu !</span>
+      </div>
+      <button type="button" id="chatbot-restart" aria-label="Recommencer">↺</button>
+      <button type="button" id="chatbot-close" aria-label="Fermer">✕</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-choices" id="chatbot-choices"></div>
+  </div>
+</div>
+
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 </body>

@@ -529,10 +529,176 @@ function renderArticlePage() {
   }
 }
 
+// ---------- CHATBOT: P'tit Monstre ----------
+function initChatbot() {
+  const toggle = qs('#chatbot-toggle');
+  const panel = qs('#chatbot-panel');
+  const closeBtn = qs('#chatbot-close');
+  const restartBtn = qs('#chatbot-restart');
+  const messages = qs('#chatbot-messages');
+  const choicesWrap = qs('#chatbot-choices');
+  if (!toggle || !panel) return;
+
+  function parseRange(str) {
+    const nums = (str.match(/\d+/g) || []).map(Number);
+    if (nums.length === 0) return { min: 0, max: Infinity };
+    if (nums.length === 1) return { min: nums[0], max: Infinity };
+    return { min: nums[0], max: nums[1] };
+  }
+  function parseMinAge(str) {
+    const m = str.match(/\d+/);
+    return m ? Number(m[0]) : 0;
+  }
+
+  const STEPS = [
+    {
+      key: 'category',
+      question: 'Quel type de jeu recherches-tu ?',
+      options: () => (window.CATEGORIES || [])
+        .map(c => ({ label: c.name, value: c.slug }))
+        .concat([{ label: 'Peu importe', value: null }]),
+      match: (g, value) => value === null || (g.categories || []).includes(value),
+    },
+    {
+      key: 'players',
+      question: 'Vous serez combien à jouer ?',
+      options: () => [
+        { label: '1-2 joueurs', value: [1, 2] },
+        { label: '3-4 joueurs', value: [3, 4] },
+        { label: '5-6 joueurs', value: [5, 6] },
+        { label: '7 joueurs ou plus', value: [7, Infinity] },
+        { label: 'Peu importe', value: null },
+      ],
+      match: (g, value) => {
+        if (!value) return true;
+        const range = parseRange(g.identity.players);
+        return range.min <= value[1] && range.max >= value[0];
+      },
+    },
+    {
+      key: 'age',
+      question: 'Quel est l’âge des joueurs ?',
+      options: () => [
+        { label: 'Enfants (6-9 ans)', value: 8 },
+        { label: 'Ados (10-13 ans)', value: 12 },
+        { label: '14 ans et plus', value: 17 },
+        { label: 'Peu importe', value: null },
+      ],
+      match: (g, value) => value === null || parseMinAge(g.identity.age) <= value,
+    },
+    {
+      key: 'duration',
+      question: 'Combien de temps voulez-vous jouer ?',
+      options: () => [
+        { label: 'Moins de 30 min', value: [0, 30] },
+        { label: '30 à 60 min', value: [30, 60] },
+        { label: '60 à 90 min', value: [60, 90] },
+        { label: 'Plus de 90 min', value: [90, Infinity] },
+        { label: 'Peu importe', value: null },
+      ],
+      match: (g, value) => {
+        if (!value) return true;
+        const range = parseRange(g.identity.duration);
+        return range.min <= value[1] && range.max >= value[0];
+      },
+    },
+    {
+      key: 'difficulty',
+      question: 'Quel niveau de complexité recherches-tu ?',
+      options: () => [
+        { label: 'Facile', value: [1, 2] },
+        { label: 'Moyenne', value: [3, 4] },
+        { label: 'Difficile', value: [5, 6] },
+        { label: 'Peu importe', value: null },
+      ],
+      match: (g, value) => !value || (g.identity.difficulty.stars >= value[0] && g.identity.difficulty.stars <= value[1]),
+    },
+  ];
+
+  let stepIndex = 0;
+  let answers = {};
+  let pool = [];
+
+  function addMessage(text, from) {
+    messages.appendChild(el('div', { class: `chatbot-msg chatbot-msg--${from}`, text }));
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function renderChoices(options, onPick) {
+    choicesWrap.innerHTML = '';
+    options.forEach(opt => {
+      const btn = el('button', { type: 'button', text: opt.label });
+      btn.addEventListener('click', () => onPick(opt));
+      choicesWrap.appendChild(btn);
+    });
+  }
+
+  function askStep() {
+    if (stepIndex >= STEPS.length) { showResult(); return; }
+    const step = STEPS[stepIndex];
+    addMessage(step.question, 'bot');
+    renderChoices(step.options(), (opt) => {
+      addMessage(opt.label, 'user');
+      answers[step.key] = opt.value;
+      stepIndex++;
+      askStep();
+    });
+  }
+
+  function showResult() {
+    pool = (window.GAMES || []).filter(g => STEPS.every(step => step.match(g, answers[step.key])));
+    if (pool.length === 0) {
+      addMessage('Je ne trouve aucun jeu qui correspond à tous ces critères… Tu veux recommencer avec d’autres réponses ?', 'bot');
+      renderChoices([{ label: 'Recommencer' }], () => restart());
+      return;
+    }
+    suggestOne();
+  }
+
+  function suggestOne() {
+    if (pool.length === 0) {
+      addMessage('J’ai fait le tour de mes idées pour ces critères ! Tu veux changer tes réponses ?', 'bot');
+      renderChoices([{ label: 'Recommencer' }], () => restart());
+      return;
+    }
+    const idx = Math.floor(Math.random() * pool.length);
+    const game = pool.splice(idx, 1)[0];
+    addMessage(`Je te propose : ${game.name} !`, 'bot');
+    renderChoices([
+      { label: 'Voir la fiche du jeu', go: true },
+      { label: 'Me proposer un autre jeu', go: false },
+    ], (opt) => {
+      addMessage(opt.label, 'user');
+      if (opt.go) {
+        window.location.href = `jeu.html?slug=${game.slug}`;
+      } else {
+        suggestOne();
+      }
+    });
+  }
+
+  function restart() {
+    stepIndex = 0;
+    answers = {};
+    pool = [];
+    messages.innerHTML = '';
+    addMessage('Salut, moi c’est P’tit Monstre ! Réponds à quelques questions et je te propose un jeu qui devrait te plaire.', 'bot');
+    askStep();
+  }
+
+  toggle.addEventListener('click', () => {
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden && !messages.children.length) restart();
+  });
+  closeBtn.addEventListener('click', () => { panel.hidden = true; });
+  restartBtn.addEventListener('click', restart);
+}
+
 // ---------- init ----------
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initForms();
+  initChatbot();
   renderHomeHero();
   renderCategoryGrid();
   renderCategoryPage();
