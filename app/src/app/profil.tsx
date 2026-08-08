@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AVATAR_ACCESSORIES, AvatarMonster } from '@/components/avatar-monster';
 import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
@@ -119,6 +120,51 @@ function AuthForms() {
           {mode === 'connexion' ? 'Pas de compte ? Inscris-toi' : 'Déjà un compte ? Connecte-toi'}
         </ThemedText>
       </Pressable>
+    </ThemedView>
+  );
+}
+
+function AvatarPicker() {
+  const { user, profile, refreshProfile } = useAuth();
+  const [saving, setSaving] = useState(false);
+
+  async function handleSelect(accessory: string | null) {
+    if (!user || saving) return;
+    setSaving(true);
+    try {
+      await updateUserProfile(user.uid, { avatarAccessory: accessory });
+      await refreshProfile();
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const current = profile?.avatarAccessory ?? null;
+
+  return (
+    <ThemedView style={styles.form}>
+      <ThemedText type="subtitle">Mon avatar</ThemedText>
+      <AvatarMonster accessory={current} size={96} style={styles.avatarPreview} />
+      <ThemedView style={styles.chipRow}>
+        <Pressable onPress={() => handleSelect(null)} disabled={saving}>
+          <ThemedView
+            type={current === null ? 'backgroundSelected' : 'backgroundElement'}
+            style={styles.accessoryOption}>
+            <AvatarMonster accessory={null} size={40} />
+            <ThemedText type="small">Aucun</ThemedText>
+          </ThemedView>
+        </Pressable>
+        {AVATAR_ACCESSORIES.map((acc) => (
+          <Pressable key={acc.value} onPress={() => handleSelect(acc.value)} disabled={saving}>
+            <ThemedView
+              type={current === acc.value ? 'backgroundSelected' : 'backgroundElement'}
+              style={styles.accessoryOption}>
+              <AvatarMonster accessory={acc.value} size={40} />
+              <ThemedText type="small">{acc.label}</ThemedText>
+            </ThemedView>
+          </Pressable>
+        ))}
+      </ThemedView>
     </ThemedView>
   );
 }
@@ -243,10 +289,15 @@ function ProfileView() {
 
   return (
     <ThemedView style={styles.form}>
-      <ThemedText type="subtitle">{profile?.pseudo ?? 'Mon profil'}</ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        {user?.email}
-      </ThemedText>
+      <ThemedView style={styles.profileHeader}>
+        <AvatarMonster accessory={profile?.avatarAccessory} size={56} />
+        <ThemedView style={styles.profileHeaderText}>
+          <ThemedText type="subtitle">{profile?.pseudo ?? 'Mon profil'}</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            {user?.email}
+          </ThemedText>
+        </ThemedView>
+      </ThemedView>
       {profile?.ville ? <ThemedText type="small">Ville : {profile.ville}</ThemedText> : null}
 
       <Link href="/cgu" asChild>
@@ -257,6 +308,7 @@ function ProfileView() {
 
       <PrimaryButton label="Se déconnecter" onPress={() => signOut()} />
 
+      <AvatarPicker />
       <EditProfileForm />
     </ThemedView>
   );
@@ -296,5 +348,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
     borderRadius: Spacing.five,
+  },
+  profileHeader: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
+  profileHeaderText: { flex: 1, gap: 2 },
+  avatarPreview: { alignSelf: 'center' },
+  accessoryOption: {
+    alignItems: 'center',
+    gap: 4,
+    padding: Spacing.two,
+    borderRadius: Spacing.two,
+    width: 84,
   },
 });

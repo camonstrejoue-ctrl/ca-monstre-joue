@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AvatarMonster } from '@/components/avatar-monster';
 import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -112,9 +113,7 @@ export default function JoueursScreen() {
         renderItem={({ item }) => (
           <Link href={{ pathname: '/joueur/[uid]', params: { uid: item.uid } }} asChild>
             <Pressable style={({ pressed }) => [styles.playerCard, pressed && styles.pressed]}>
-              <ThemedView type="backgroundElement" style={styles.avatar}>
-                <ThemedText type="smallBold">{item.pseudo.charAt(0).toUpperCase()}</ThemedText>
-              </ThemedView>
+              <AvatarMonster accessory={item.avatarAccessory} size={48} />
               <ThemedView style={styles.playerInfo}>
                 <ThemedText type="smallBold">{item.pseudo}</ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
@@ -159,13 +158,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.three,
     marginBottom: Spacing.three,
-  },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   playerInfo: { flex: 1, gap: 2 },
 });

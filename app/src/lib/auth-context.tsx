@@ -28,6 +28,10 @@ export interface UserProfile {
   age?: number;
   categoriesPreferees?: string[];
   visibility?: ProfileVisibility;
+  // Chapeau porté par l'avatar monstre, toujours visible publiquement (pas
+  // une donnée personnelle) : 'haut-de-forme' | 'casquette' | 'melon' | 'bob'
+  // | 'paille' | 'sombrero', ou absent pour aucun accessoire.
+  avatarAccessory?: string;
 }
 
 interface AuthContextValue {
@@ -108,6 +112,7 @@ export async function updateUserProfile(
     age?: number | null;
     categoriesPreferees?: string[];
     visibility?: ProfileVisibility;
+    avatarAccessory?: string | null;
   }
 ) {
   if (!db) throw new Error('Firebase non configuré.');

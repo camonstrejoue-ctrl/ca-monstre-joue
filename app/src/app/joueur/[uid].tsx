@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AvatarMonster } from '@/components/avatar-monster';
 import { ContentState } from '@/components/content-state';
 import { CoverImage } from '@/components/cover-image';
 import { FormField } from '@/components/form-field';
@@ -67,6 +68,7 @@ export default function JoueurScreen() {
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
       <Stack.Screen options={{ title: player.pseudo }} />
       <ScrollView contentContainerStyle={styles.body}>
+        <AvatarMonster accessory={player.avatarAccessory} size={96} style={styles.avatar} />
         <ThemedText type="title" style={styles.title}>
           {player.pseudo}
         </ThemedText>
@@ -148,6 +150,7 @@ const styles = StyleSheet.create({
   notFound: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   body: { padding: Spacing.four, gap: Spacing.two },
   title: { fontSize: 28 },
+  avatar: { marginBottom: Spacing.two },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginTop: Spacing.two },
   chip: { paddingHorizontal: Spacing.three, paddingVertical: 4, borderRadius: Spacing.five },
   contactButton: {
