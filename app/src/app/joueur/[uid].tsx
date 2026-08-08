@@ -12,7 +12,7 @@ import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { getPlayer, getPlayerLudotheque, reportPlayer, type PlayerResult } from '@/lib/joueurs';
-import { findGame } from '@/lib/queries';
+import { findCategory, findGame } from '@/lib/queries';
 
 export default function JoueurScreen() {
   const { uid } = useLocalSearchParams<{ uid: string }>();
@@ -55,6 +55,13 @@ export default function JoueurScreen() {
   }
 
   const games = content ? ludothequeSlugs.map((slug) => findGame(content, slug)).filter(Boolean) : [];
+  const visibility = player.visibility;
+  const categoryNames =
+    content && visibility?.categoriesPreferees
+      ? (player.categoriesPreferees ?? [])
+          .map((slug) => findCategory(content, slug)?.name)
+          .filter(Boolean)
+      : [];
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
@@ -63,9 +70,22 @@ export default function JoueurScreen() {
         <ThemedText type="title" style={styles.title}>
           {player.pseudo}
         </ThemedText>
+        {visibility?.prenom && player.prenom ? (
+          <ThemedText type="small">Prénom : {player.prenom}</ThemedText>
+        ) : null}
+        {visibility?.age && player.age ? <ThemedText type="small">Âge : {player.age}</ThemedText> : null}
         <ThemedText type="small" themeColor="textSecondary">
           {player.ville}
         </ThemedText>
+        {categoryNames.length ? (
+          <ThemedView style={styles.chipRow}>
+            {categoryNames.map((name) => (
+              <ThemedView key={name} type="backgroundElement" style={styles.chip}>
+                <ThemedText type="small">{name}</ThemedText>
+              </ThemedView>
+            ))}
+          </ThemedView>
+        ) : null}
 
         <Pressable onPress={() => Linking.openURL(`mailto:${player.contactEmail}`)}>
           <ThemedView type="backgroundSelected" style={styles.contactButton}>
@@ -128,6 +148,8 @@ const styles = StyleSheet.create({
   notFound: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   body: { padding: Spacing.four, gap: Spacing.two },
   title: { fontSize: 28 },
+  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginTop: Spacing.two },
+  chip: { paddingHorizontal: Spacing.three, paddingVertical: 4, borderRadius: Spacing.five },
   contactButton: {
     marginTop: Spacing.three,
     paddingVertical: Spacing.three,

@@ -1,14 +1,16 @@
 import { Link } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { signIn, signOut, signUp } from '@/lib/auth';
-import { useAuth } from '@/lib/auth-context';
+import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
+import { useContent } from '@/lib/content';
 import { isFirebaseConfigured } from '@/lib/firebase';
 
 function PrimaryButton({
@@ -92,16 +94,11 @@ function AuthForms() {
         <>
           <FormField label="Pseudo" value={pseudo} onChangeText={setPseudo} />
           <FormField label="Ville" value={ville} onChangeText={setVille} />
-          <Pressable
-            style={styles.checkboxRow}
-            onPress={() => setAgeConfirmed((value) => !value)}>
-            <ThemedView
-              style={[styles.checkbox, ageConfirmed && styles.checkboxChecked]}
-            />
-            <ThemedText type="small" style={styles.checkboxLabel}>
-              J’ai 16 ans ou plus
-            </ThemedText>
-          </Pressable>
+          <CheckboxRow
+            label="J’ai 16 ans ou plus"
+            checked={ageConfirmed}
+            onToggle={() => setAgeConfirmed((value) => !value)}
+          />
         </>
       ) : null}
 
@@ -126,6 +123,121 @@ function AuthForms() {
   );
 }
 
+function EditProfileForm() {
+  const { user, profile, refreshProfile } = useAuth();
+  const { content } = useContent();
+
+  const [prenom, setPrenom] = useState(profile?.prenom ?? '');
+  const [age, setAge] = useState(profile?.age ? String(profile.age) : '');
+  const [categories, setCategories] = useState<string[]>(profile?.categoriesPreferees ?? []);
+  const [visibility, setVisibility] = useState<ProfileVisibility>(
+    profile?.visibility ?? DEFAULT_VISIBILITY
+  );
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setPrenom(profile?.prenom ?? '');
+    setAge(profile?.age ? String(profile.age) : '');
+    setCategories(profile?.categoriesPreferees ?? []);
+    setVisibility(profile?.visibility ?? DEFAULT_VISIBILITY);
+  }, [profile]);
+
+  function toggleCategory(slug: string) {
+    setCategories((prev) =>
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
+    );
+  }
+
+  async function handleSave() {
+    if (!user) return;
+    setSaving(true);
+    setSaved(false);
+    setError(null);
+    const parsedAge = age.trim() ? Number(age.trim()) : null;
+    if (age.trim() && (!Number.isFinite(parsedAge) || parsedAge! < 0 || parsedAge! > 120)) {
+      setError('Âge invalide.');
+      setSaving(false);
+      return;
+    }
+    try {
+      await updateUserProfile(user.uid, {
+        prenom: prenom.trim(),
+        age: parsedAge,
+        categoriesPreferees: categories,
+        visibility,
+      });
+      await refreshProfile();
+      setSaved(true);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <ThemedView style={styles.form}>
+      <ThemedText type="subtitle" style={styles.sectionTitle}>
+        Informations supplémentaires (optionnel)
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        Ces informations ne sont visibles par les autres joueurs que si tu coches la case
+        correspondante.
+      </ThemedText>
+
+      <FormField label="Prénom" value={prenom} onChangeText={setPrenom} />
+      <CheckboxRow
+        label="Afficher mon prénom sur mon profil public"
+        checked={visibility.prenom}
+        onToggle={() => setVisibility((v) => ({ ...v, prenom: !v.prenom }))}
+      />
+
+      <FormField label="Âge" value={age} onChangeText={setAge} keyboardType="number-pad" />
+      <CheckboxRow
+        label="Afficher mon âge sur mon profil public"
+        checked={visibility.age}
+        onToggle={() => setVisibility((v) => ({ ...v, age: !v.age }))}
+      />
+
+      <ThemedText type="small" themeColor="textSecondary">
+        Catégories de jeux appréciées
+      </ThemedText>
+      <ThemedView style={styles.chipRow}>
+        {(content?.categories ?? []).map((cat) => {
+          const selected = categories.includes(cat.slug);
+          return (
+            <Pressable key={cat.slug} onPress={() => toggleCategory(cat.slug)}>
+              <ThemedView
+                type={selected ? 'backgroundSelected' : 'backgroundElement'}
+                style={styles.chip}>
+                <ThemedText type="small">{cat.name}</ThemedText>
+              </ThemedView>
+            </Pressable>
+          );
+        })}
+      </ThemedView>
+      <CheckboxRow
+        label="Afficher mes catégories préférées sur mon profil public"
+        checked={visibility.categoriesPreferees}
+        onToggle={() =>
+          setVisibility((v) => ({ ...v, categoriesPreferees: !v.categoriesPreferees }))
+        }
+      />
+
+      {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
+      {saved ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          Enregistré.
+        </ThemedText>
+      ) : null}
+
+      <PrimaryButton label="Enregistrer" onPress={handleSave} disabled={saving} />
+    </ThemedView>
+  );
+}
+
 function ProfileView() {
   const { user, profile } = useAuth();
 
@@ -144,6 +256,8 @@ function ProfileView() {
       </Link>
 
       <PrimaryButton label="Se déconnecter" onPress={() => signOut()} />
+
+      <EditProfileForm />
     </ThemedView>
   );
 }
@@ -168,6 +282,7 @@ const styles = StyleSheet.create({
   scrollContent: { padding: Spacing.four, gap: Spacing.three },
   pageTitle: { fontSize: 32, marginBottom: Spacing.two },
   form: { gap: Spacing.three },
+  sectionTitle: { marginTop: Spacing.four },
   primaryButton: {
     paddingVertical: Spacing.three,
     borderRadius: Spacing.two,
@@ -176,8 +291,10 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.7 },
   switchMode: { textAlign: 'center', marginTop: Spacing.two },
   error: { color: '#D14343' },
-  checkboxRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
-  checkbox: { width: 20, height: 20, borderRadius: 4, borderWidth: 1, borderColor: '#999' },
-  checkboxChecked: { backgroundColor: '#3c87f7', borderColor: '#3c87f7' },
-  checkboxLabel: { flex: 1 },
+  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
+  chip: {
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+    borderRadius: Spacing.five,
+  },
 });

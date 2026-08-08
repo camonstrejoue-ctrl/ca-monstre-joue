@@ -20,6 +20,15 @@ export async function searchPlayersByVille(
     .filter((p) => p.uid !== excludeUid);
 }
 
+export async function listAllPlayers(excludeUid: string): Promise<PlayerResult[]> {
+  if (!db) throw new Error('Firebase non configuré.');
+  const snap = await getDocs(collection(db, 'users'));
+  return snap.docs
+    .map((d) => ({ uid: d.id, ...(d.data() as UserProfile) }))
+    .filter((p) => p.uid !== excludeUid)
+    .sort((a, b) => a.pseudo.localeCompare(b.pseudo, 'fr'));
+}
+
 export async function getPlayer(uid: string): Promise<PlayerResult | null> {
   if (!db) throw new Error('Firebase non configuré.');
   const snap = await getDoc(doc(db, 'users', uid));

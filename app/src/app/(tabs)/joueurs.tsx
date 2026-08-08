@@ -1,5 +1,5 @@
 import { Link } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -8,7 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
-import { searchPlayersByVille, type PlayerResult } from '@/lib/joueurs';
+import { listAllPlayers, searchPlayersByVille, type PlayerResult } from '@/lib/joueurs';
 
 function SignedOutPrompt() {
   return (
@@ -33,12 +33,34 @@ function SignedOutPrompt() {
 export default function JoueursScreen() {
   const { user, initializing } = useAuth();
   const [ville, setVille] = useState('');
-  const [results, setResults] = useState<PlayerResult[] | null>(null);
+  const [results, setResults] = useState<PlayerResult[]>([]);
   const [searching, setSearching] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  async function loadAll() {
+    if (!user) return;
+    setSearching(true);
+    setError(null);
+    try {
+      setResults(await listAllPlayers(user.uid));
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSearching(false);
+    }
+  }
+
+  useEffect(() => {
+    if (user) loadAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid]);
+
   async function handleSearch() {
-    if (!user || !ville.trim()) return;
+    if (!user) return;
+    if (!ville.trim()) {
+      await loadAll();
+      return;
+    }
     setSearching(true);
     setError(null);
     try {
@@ -57,7 +79,7 @@ export default function JoueursScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <FlatList
-        data={results ?? []}
+        data={results}
         keyExtractor={(item) => item.uid}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
@@ -66,21 +88,23 @@ export default function JoueursScreen() {
               Joueurs
             </ThemedText>
             <FormField
-              label="Ville"
+              label="Ville (laisse vide pour voir tout le monde)"
               value={ville}
               onChangeText={setVille}
               placeholder="ex: Genève"
               onSubmitEditing={handleSearch}
             />
-            <Pressable onPress={handleSearch} disabled={searching || !ville.trim()}>
+            <Pressable onPress={handleSearch} disabled={searching}>
               <ThemedView type="backgroundSelected" style={styles.searchButton}>
-                <ThemedText type="smallBold">Rechercher</ThemedText>
+                <ThemedText type="smallBold">
+                  {ville.trim() ? 'Rechercher' : 'Voir tous les joueurs'}
+                </ThemedText>
               </ThemedView>
             </Pressable>
             {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
-            {results && results.length === 0 ? (
+            {!searching && results.length === 0 ? (
               <ThemedText type="small" themeColor="textSecondary">
-                Aucun joueur trouvé dans cette ville pour l’instant.
+                {ville.trim() ? 'Aucun joueur trouvé dans cette ville pour l’instant.' : 'Aucun autre joueur pour l’instant.'}
               </ThemedText>
             ) : null}
           </ThemedView>

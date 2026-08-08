@@ -4,6 +4,18 @@ import { createContext, useContext, useEffect, useState, type PropsWithChildren 
 
 import { auth, db } from '@/lib/firebase';
 
+export interface ProfileVisibility {
+  prenom: boolean;
+  age: boolean;
+  categoriesPreferees: boolean;
+}
+
+export const DEFAULT_VISIBILITY: ProfileVisibility = {
+  prenom: false,
+  age: false,
+  categoriesPreferees: false,
+};
+
 export interface UserProfile {
   pseudo: string;
   ville: string;
@@ -11,6 +23,11 @@ export interface UserProfile {
   contactEmail: string;
   ageConfirmed: boolean;
   createdAt: unknown;
+  // Champs optionnels, visibles sur le profil public seulement si autorisé via `visibility`.
+  prenom?: string;
+  age?: number;
+  categoriesPreferees?: string[];
+  visibility?: ProfileVisibility;
 }
 
 interface AuthContextValue {
@@ -79,6 +96,20 @@ export async function createUserProfile(
   await setDoc(doc(db, 'users', uid), {
     ...data,
     villeLower: data.ville.trim().toLowerCase(),
+    visibility: DEFAULT_VISIBILITY,
     createdAt: serverTimestamp(),
   });
+}
+
+export async function updateUserProfile(
+  uid: string,
+  data: {
+    prenom?: string;
+    age?: number | null;
+    categoriesPreferees?: string[];
+    visibility?: ProfileVisibility;
+  }
+) {
+  if (!db) throw new Error('Firebase non configuré.');
+  await setDoc(doc(db, 'users', uid), data, { merge: true });
 }
