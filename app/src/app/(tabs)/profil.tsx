@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet } from 'react-native';
@@ -12,6 +13,7 @@ import { signIn, signOut, signUp } from '@/lib/auth';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { isFirebaseConfigured } from '@/lib/firebase';
+import { pickProfilePhoto, uploadProfilePhoto } from '@/lib/profile-photo';
 
 function PrimaryButton({
   label,
@@ -136,6 +138,8 @@ function EditProfileForm() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [photoError, setPhotoError] = useState<string | null>(null);
 
   useEffect(() => {
     setPrenom(profile?.prenom ?? '');
@@ -148,6 +152,23 @@ function EditProfileForm() {
     setCategories((prev) =>
       prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
     );
+  }
+
+  async function handlePickPhoto() {
+    if (!user) return;
+    setPhotoError(null);
+    try {
+      const localUri = await pickProfilePhoto();
+      if (!localUri) return;
+      setUploadingPhoto(true);
+      const photoURL = await uploadProfilePhoto(user.uid, localUri);
+      await updateUserProfile(user.uid, { photoURL });
+      await refreshProfile();
+    } catch (err) {
+      setPhotoError((err as Error).message);
+    } finally {
+      setUploadingPhoto(false);
+    }
   }
 
   async function handleSave() {
@@ -186,6 +207,27 @@ function EditProfileForm() {
         Ces informations ne sont visibles par les autres joueurs que si tu coches la case
         correspondante.
       </ThemedText>
+
+      <ThemedView style={styles.photoRow}>
+        {profile?.photoURL ? (
+          <Image source={{ uri: profile.photoURL }} style={styles.photoPreview} />
+        ) : (
+          <ThemedView type="backgroundElement" style={styles.photoPreview} />
+        )}
+        <Pressable onPress={handlePickPhoto} disabled={uploadingPhoto}>
+          <ThemedView type="backgroundElement" style={styles.photoButton}>
+            <ThemedText type="small">
+              {uploadingPhoto ? 'Envoi...' : 'Choisir une photo'}
+            </ThemedText>
+          </ThemedView>
+        </Pressable>
+      </ThemedView>
+      {photoError ? <ThemedText style={styles.error}>{photoError}</ThemedText> : null}
+      <CheckboxRow
+        label="Afficher ma photo sur mon profil public"
+        checked={visibility.photo}
+        onToggle={() => setVisibility((v) => ({ ...v, photo: !v.photo }))}
+      />
 
       <FormField label="Prénom" value={prenom} onChangeText={setPrenom} />
       <CheckboxRow
@@ -293,6 +335,13 @@ const styles = StyleSheet.create({
   error: { color: '#D14343' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
   chip: {
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+    borderRadius: Spacing.five,
+  },
+  photoRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
+  photoPreview: { width: 64, height: 64, borderRadius: 32 },
+  photoButton: {
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
     borderRadius: Spacing.five,

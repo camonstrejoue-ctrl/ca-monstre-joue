@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet } from 'react-native';
@@ -67,6 +68,9 @@ export default function JoueurScreen() {
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
       <Stack.Screen options={{ title: player.pseudo }} />
       <ScrollView contentContainerStyle={styles.body}>
+        {visibility?.photo && player.photoURL ? (
+          <Image source={{ uri: player.photoURL }} style={styles.photo} />
+        ) : null}
         <ThemedText type="title" style={styles.title}>
           {player.pseudo}
         </ThemedText>
@@ -148,6 +152,7 @@ const styles = StyleSheet.create({
   notFound: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   body: { padding: Spacing.four, gap: Spacing.two },
   title: { fontSize: 28 },
+  photo: { width: 96, height: 96, borderRadius: 48, marginBottom: Spacing.two },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginTop: Spacing.two },
   chip: { paddingHorizontal: Spacing.three, paddingVertical: 4, borderRadius: Spacing.five },
   contactButton: {
