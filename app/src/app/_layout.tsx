@@ -30,6 +30,7 @@ export default function RootLayout() {
           <Stack.Screen name="jeu/[slug]" options={{ title: '' }} />
           <Stack.Screen name="article/[slug]" options={{ title: '' }} />
           <Stack.Screen name="categorie/[slug]" options={{ title: '' }} />
+          <Stack.Screen name="joueur/[uid]" options={{ title: '' }} />
           <Stack.Screen name="cgu" options={{ title: 'Conditions d’utilisation' }} />
         </Stack>
       </AuthProvider>

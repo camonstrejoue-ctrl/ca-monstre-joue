@@ -7,6 +7,7 @@ import { auth, db } from '@/lib/firebase';
 export interface UserProfile {
   pseudo: string;
   ville: string;
+  villeLower: string;
   contactEmail: string;
   ageConfirmed: boolean;
   createdAt: unknown;
@@ -75,5 +76,9 @@ export async function createUserProfile(
   data: { pseudo: string; ville: string; contactEmail: string; ageConfirmed: boolean }
 ) {
   if (!db) throw new Error('Firebase non configuré.');
-  await setDoc(doc(db, 'users', uid), { ...data, createdAt: serverTimestamp() });
+  await setDoc(doc(db, 'users', uid), {
+    ...data,
+    villeLower: data.ville.trim().toLowerCase(),
+    createdAt: serverTimestamp(),
+  });
 }
