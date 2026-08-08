@@ -35,6 +35,11 @@ while ($listener.IsListening) {
     $path = [System.Uri]::UnescapeDataString($req.Url.AbsolutePath)
     if ($path -eq "/") { $path = "/index.html" }
     $filePath = Join-Path $Root ($path.TrimStart("/"))
+    # GitHub Pages sert index.html pour une requete de dossier (ex. /jeu/finspan/) ;
+    # on reproduit ce comportement ici pour tester les pages generees en local.
+    if ((Test-Path $filePath -PathType Container) -and (Test-Path (Join-Path $filePath "index.html") -PathType Leaf)) {
+      $filePath = Join-Path $filePath "index.html"
+    }
     if (Test-Path $filePath -PathType Leaf) {
       $ext = [System.IO.Path]::GetExtension($filePath).ToLower()
       $ct = $mime[$ext]

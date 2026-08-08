@@ -37,6 +37,9 @@ jobs:
       - name: Générer data/content.json depuis js/data.js
         run: node scripts/export-data.js
 
+      - name: Générer les pages SEO par jeu/article/catégorie + sitemap.xml
+        run: node scripts/generate-seo-pages.js
+
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5
 

@@ -4,3 +4,9 @@ Thumbs.db
 
 # Généré automatiquement par scripts/export-data.js (voir workflow GitHub Actions)
 /data/
+
+# Généré automatiquement par scripts/generate-seo-pages.js (voir workflow GitHub Actions)
+/jeu/*/
+/article/*/
+/categorie/*/
+/sitemap.xml
