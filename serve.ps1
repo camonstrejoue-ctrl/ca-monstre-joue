@@ -4,9 +4,21 @@ param(
 )
 
 $listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add("http://localhost:$Port/")
-$listener.Start()
+# "+" écoute sur toutes les interfaces (localhost ET l'IP Wi-Fi/LAN du PC), pour
+# pouvoir tester depuis un téléphone sur le même réseau. Si Windows refuse (droits
+# insuffisants pour une liaison générique), on retombe sur localhost uniquement.
+try {
+  $listener.Prefixes.Add("http://+:$Port/")
+  $listener.Start()
+} catch {
+  $listener = New-Object System.Net.HttpListener
+  $listener.Prefixes.Add("http://localhost:$Port/")
+  $listener.Start()
+  Write-Host "Acces reseau (LAN) indisponible (droits insuffisants) - localhost uniquement." -ForegroundColor Yellow
+}
+$lanIp = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch 'Loopback|vEthernet|WSL' -and $_.IPAddress -notlike '169.254.*' } | Select-Object -First 1 -ExpandProperty IPAddress)
 Write-Host "Serving $Root on http://localhost:$Port/"
+if ($lanIp) { Write-Host "Accessible aussi depuis le reseau local sur http://${lanIp}:$Port/" }
 
 $mime = @{
   ".html"="text/html; charset=utf-8"; ".css"="text/css"; ".js"="application/javascript";

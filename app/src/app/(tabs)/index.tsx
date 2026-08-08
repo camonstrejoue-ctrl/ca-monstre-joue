@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { FlatList, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -22,9 +23,11 @@ export default function AccueilScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <ThemedText type="title" style={styles.pageTitle}>
-          Ça Monstre Joue
-        </ThemedText>
+        <Image
+          source={require('@/assets/images/logo.png')}
+          style={styles.logo}
+          contentFit="contain"
+        />
 
         <ThemedText type="subtitle" style={styles.sectionTitle}>
           Derniers articles
@@ -69,7 +72,12 @@ export default function AccueilScreen() {
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   scrollContent: { padding: Spacing.four, gap: Spacing.three },
-  pageTitle: { fontSize: 32, marginBottom: Spacing.two },
+  logo: {
+    width: '75%',
+    aspectRatio: 971 / 489,
+    alignSelf: 'center',
+    marginBottom: Spacing.two,
+  },
   sectionTitle: { fontSize: 20, marginTop: Spacing.three, marginBottom: Spacing.two },
   pressed: { opacity: 0.7 },
   articleCard: { borderRadius: Spacing.three, overflow: 'hidden', marginBottom: Spacing.three },
