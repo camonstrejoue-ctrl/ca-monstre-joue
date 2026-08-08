@@ -1,3 +1,6 @@
 .claude/
 Thumbs.db
 .DS_Store
+
+# Généré automatiquement par scripts/export-data.js (voir workflow GitHub Actions)
+/data/
