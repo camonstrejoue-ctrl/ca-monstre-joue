@@ -58,6 +58,41 @@ personnage, couverture de jeu, etc.).
 3. Un bloc `{ type: 'spoiler', title, text }` est disponible pour du contenu à révéler au clic
    (accordéon fermé par défaut), utile pour les passages qui gâchent l'histoire d'un jeu narratif.
 
+## Optimisation SEO (à maintenir et améliorer, pas seulement préserver)
+
+Le site a reçu une passe SEO complète (2026-08-08) : un `<h1>` unique par page, meta description +
+Open Graph + Twitter Card + `rel="canonical"` sur chaque gabarit, tous les liens internes en
+root-relative (`/jeu.html`, pas `jeu.html`), des pages statiques générées par jeu/article/catégorie
+(`scripts/generate-seo-pages.js`, branché dans `.github/workflows/deploy.yml`) avec `sitemap.xml` et
+`robots.txt`. Domaine de référence : `https://www.camonstrejoue.ch`.
+
+Toute modification ou nouvelle fonctionnalité doit **respecter ces standards et les améliorer si
+l'occasion se présente**, pas seulement éviter de les casser :
+- Toute nouvelle page a un `<h1>` unique, une meta description, des balises OG/Twitter et un canonical.
+- Tout lien interne (HTML statique ou généré en JS) est en root-relative (`/xxx.html`), jamais relatif.
+- Si une nouvelle page « par slug » est ajoutée (sur le modèle jeu/article/catégorie), pense à l'intégrer
+  à `scripts/generate-seo-pages.js` pour qu'elle ait sa propre page statique + entrée sitemap.
+- Un nouveau champ de contenu qui pourrait enrichir une meta description ou une image Open Graph est une
+  bonne occasion d'améliorer ce qui existe déjà, pas seulement de faire le minimum demandé.
+
+## Poids et format des images
+
+Dès que l'utilisateur fournit une nouvelle image (photo), la convertir directement au bon format et au
+poids le plus léger possible avant de l'utiliser, sans qu'il ait besoin de le demander :
+- Redimensionner : 2400px maximum sur le plus grand côté (largement suffisant pour tous les usages du
+  site, y compris en écran retina).
+- Recompresser en JPEG qualité ~82 (visuellement quasi sans perte, standard web).
+- Convertir en JPEG les PNG qui sont en réalité des photos (le PNG est un format sans perte, très mauvais
+  pour ce type de contenu) — sauf les logos/icônes qui ont besoin de transparence
+  (`assets/logo.png`, `assets/monstre.png`, `assets/favicon.svg`, `assets/team/group.svg`) : ceux-là ne
+  se touchent pas.
+- Respecter l'orientation EXIF de la photo source avant de la recompresser (sinon risque de photo
+  pivotée après traitement).
+- Le nom de fichier ne change pas, seule l'extension change si le format change (`.png` → `.jpg`) — dans
+  ce cas, mettre à jour la référence correspondante dans `js/data.js`.
+- Objectif de référence (déjà atteint sur l'ensemble du site le 2026-08-08) : aucune image de plusieurs
+  Mo, le dossier `assets/` complet doit rester de l'ordre de quelques dizaines de Mo max.
+
 ## Vigilance sur le contenu fourni par l'utilisateur
 
 L'utilisateur copie-colle parfois du texte d'un jeu précédent par erreur dans la description d'un nouveau
