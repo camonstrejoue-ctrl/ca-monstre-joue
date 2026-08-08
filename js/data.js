@@ -59,8 +59,8 @@ window.GAMES = [
     video: 'https://youtube.com/shorts/o5udBSFZtEo',
     spotify: 'https://open.spotify.com/track/260FKIaAwovHuUTJ7IvKUK?si=sAW_B1XkTQeVQ5s2HphkxQ&utm_source=whatsapp',
     gallery: [
-      { image: 'assets/games/sub-terra-ii/critique-vignette.png', articleSlug: 'sub-terra-ii-critique' },
-      { image: 'assets/games/sub-terra-ii/compo-type-vignette.png', articleSlug: 'sub-terra-ii-compo-type' },
+      { image: 'assets/games/sub-terra-ii/critique-vignette.jpg', articleSlug: 'sub-terra-ii-critique' },
+      { image: 'assets/games/sub-terra-ii/compo-type-vignette.jpg', articleSlug: 'sub-terra-ii-compo-type' },
     ],
   },
   {
@@ -196,11 +196,11 @@ window.GAMES = [
     slug: 'escape-the-dark-castle',
     name: 'Escape the Dark Castle',
     categories: ['jeux-a-deux', 'jeux-narratifs', 'jeux-cooperatifs', 'jeux-dambiance'],
-    thumbnail: 'assets/games/escape-the-dark-castle/escape-liste.png',
+    thumbnail: 'assets/games/escape-the-dark-castle/escape-liste.jpg',
     heroImages: [
-      'assets/games/escape-the-dark-castle/escape-fiche.png',
-      'assets/games/escape-the-dark-castle/escape2-fiche.png',
-      'assets/games/escape-the-dark-castle/escape3-fiche.png',
+      'assets/games/escape-the-dark-castle/escape-fiche.jpg',
+      'assets/games/escape-the-dark-castle/escape2-fiche.jpg',
+      'assets/games/escape-the-dark-castle/escape3-fiche.jpg',
     ],
     intro: [
       "Pensez-vous sortir vivant du Dark Castle ?",
@@ -299,8 +299,8 @@ window.ARTICLES = [
     title: 'Sub Terra II - Notre critique brûlante',
     date: '2026-08-01',
     gameSlug: 'sub-terra-ii',
-    hero: 'assets/games/sub-terra-ii/tuiles-bandeau.png',
-    cover: 'assets/games/sub-terra-ii/critique-vignette.png',
+    hero: 'assets/games/sub-terra-ii/tuiles-bandeau.jpg',
+    cover: 'assets/games/sub-terra-ii/critique-vignette.jpg',
     excerpt: "Récupérer un artefact dans un temple volcanique : le jeu en vaut-il la chandelle ?",
     blocks: [
       { type: 'p', text: "Récupérer un artefact dans un temple volcanique : le jeu en vaut-il la chandelle ? Si vous êtes arrivés là ce n'est pas par hasard ! Vous vous demandez surement si visiter un temple volcanique vaut les CHF 48.- que coutent le jeu. Réponse courte : Oh que oui !" },
@@ -323,9 +323,9 @@ window.ARTICLES = [
     title: 'Sub Terra II - Notre compo type',
     date: '2026-08-03',
     gameSlug: 'sub-terra-ii',
-    banner: 'assets/games/sub-terra-ii/compo-type-banniere.png',
-    hero: 'assets/games/sub-terra-ii/compo-type-bandeau.png',
-    cover: 'assets/games/sub-terra-ii/compo-type-vignette.png',
+    banner: 'assets/games/sub-terra-ii/compo-type-banniere.jpg',
+    hero: 'assets/games/sub-terra-ii/compo-type-bandeau.jpg',
+    cover: 'assets/games/sub-terra-ii/compo-type-vignette.jpg',
     excerpt: 'Les personnages conseillés pour bien débuter le jeu, et les profils plus situationnels à essayer ensuite.',
     blocks: [
       { type: 'h2', text: 'Les personnages conseillés pour bien débuter' },
@@ -373,7 +373,7 @@ window.ARTICLES = [
     date: '2026-08-07',
     gameSlug: 'eila-et-leclat-de-la-montagne',
     banner: 'assets/games/eila-et-leclat-de-la-montagne/eila3-banniere.JPG',
-    hero: 'assets/games/eila-et-leclat-de-la-montagne/eila1-bandeau.png',
+    hero: 'assets/games/eila-et-leclat-de-la-montagne/eila1-bandeau.jpg',
     cover: 'assets/games/eila-et-leclat-de-la-montagne/eila1-vignette.JPG',
     excerpt: "Notre avis complet, sans spoiler (ou presque), sur Eila et l'Éclat de la Montagne.",
     blocks: [
@@ -403,8 +403,8 @@ window.ARTICLES = [
 
 // À compléter : noms, rôles, bios et photos des 4 membres de la team.
 window.TEAM = [
-  { name: 'Alex', linkedin: 'https://www.linkedin.com/in/alexandre-marchionini-b9500960/', role: "L'insupportable chanceux", bio: "Fan inconditionnel de jeux en tous genres ! En un mot, j’ai besoin de jouer pour être heureux. Que ce soit des jeux de société entre amis, en couple, en soirée ; des jeux vidéos avec Camille ; des jeux en extérieurs comme le Kubb ou encore des sports ludiques comme le tennis, j’ai besoin constamment du jeu pour créer du lien et du liant. Côté jeux de société, je suis un aficionado des jeux coopératifs et des jeux narratifs. Quoi de mieux que gagner ensemble ?", favoriteGame: 'Mysterium', photo: 'assets/team/photo-alex.png' },
-  { name: 'Camille', role: 'La poisseuse', bio: 'Orthophoniste de métier, le jeu est pour moi essentiel, que ce soit dans mon quotidien professionnel ou personnel. Allergique aux "livres de règles" (type "Kingdom Rush"), j’aime les jeux faciles à apprendre (ou alors j’attends qu’Alex apprenne les règles pour me les expliquer). Dotée d’une très grande poisse, je préfère les jeux coopératifs qui m’épargneront une trop grande frustration...', favoriteGame: "Eila et l'Éclat de la Montagne", photo: 'assets/team/photo-camille.png' },
+  { name: 'Alex', linkedin: 'https://www.linkedin.com/in/alexandre-marchionini-b9500960/', role: "L'insupportable chanceux", bio: "Fan inconditionnel de jeux en tous genres ! En un mot, j’ai besoin de jouer pour être heureux. Que ce soit des jeux de société entre amis, en couple, en soirée ; des jeux vidéos avec Camille ; des jeux en extérieurs comme le Kubb ou encore des sports ludiques comme le tennis, j’ai besoin constamment du jeu pour créer du lien et du liant. Côté jeux de société, je suis un aficionado des jeux coopératifs et des jeux narratifs. Quoi de mieux que gagner ensemble ?", favoriteGame: 'Mysterium', photo: 'assets/team/photo-alex.jpg' },
+  { name: 'Camille', role: 'La poisseuse', bio: 'Orthophoniste de métier, le jeu est pour moi essentiel, que ce soit dans mon quotidien professionnel ou personnel. Allergique aux "livres de règles" (type "Kingdom Rush"), j’aime les jeux faciles à apprendre (ou alors j’attends qu’Alex apprenne les règles pour me les expliquer). Dotée d’une très grande poisse, je préfère les jeux coopératifs qui m’épargneront une trop grande frustration...', favoriteGame: "Eila et l'Éclat de la Montagne", photo: 'assets/team/photo-camille.jpg' },
   { name: 'Guillaume', linkedin: 'https://www.linkedin.com/in/guillaume-laborie-32096191/', role: 'Le maître des règles', bio: 'Bio à compléter.', favoriteGame: 'Ark Nova', photo: 'assets/team/member-3.jpg' },
   { name: 'Mylène', linkedin: 'https://www.linkedin.com/in/mylenepoinard/', role: 'La mauvaise perdante aux Aventuriers du Rail', bio: 'Bio à compléter.', favoriteGame: 'Forêt mixte', photo: 'assets/team/member-4.jpg' },
 ];
