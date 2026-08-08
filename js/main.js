@@ -539,6 +539,20 @@ function initChatbot() {
   const choicesWrap = qs('#chatbot-choices');
   if (!toggle || !panel) return;
 
+  const bubble = qs('#chatbot-bubble');
+  if (bubble) {
+    if (localStorage.getItem('ptitMonstreBubbleSeen')) {
+      bubble.remove();
+    } else {
+      const dismissBubble = () => {
+        bubble.remove();
+        localStorage.setItem('ptitMonstreBubbleSeen', '1');
+      };
+      qs('#chatbot-bubble-close')?.addEventListener('click', (e) => { e.stopPropagation(); dismissBubble(); });
+      toggle.addEventListener('click', dismissBubble, { once: true });
+    }
+  }
+
   function parseRange(str) {
     const nums = (str.match(/\d+/g) || []).map(Number);
     if (nums.length === 0) return { min: 0, max: Infinity };
