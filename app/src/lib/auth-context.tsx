@@ -8,14 +8,12 @@ export interface ProfileVisibility {
   prenom: boolean;
   age: boolean;
   categoriesPreferees: boolean;
-  photo: boolean;
 }
 
 export const DEFAULT_VISIBILITY: ProfileVisibility = {
   prenom: false,
   age: false,
   categoriesPreferees: false,
-  photo: false,
 };
 
 export interface UserProfile {
@@ -29,7 +27,6 @@ export interface UserProfile {
   prenom?: string;
   age?: number;
   categoriesPreferees?: string[];
-  photoURL?: string;
   visibility?: ProfileVisibility;
 }
 
@@ -110,7 +107,6 @@ export async function updateUserProfile(
     prenom?: string;
     age?: number | null;
     categoriesPreferees?: string[];
-    photoURL?: string;
     visibility?: ProfileVisibility;
   }
 ) {
