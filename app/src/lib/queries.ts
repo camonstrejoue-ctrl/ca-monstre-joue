@@ -4,6 +4,10 @@ export function findGame(content: SiteContent, slug: string): Game | undefined {
   return content.games.find((g) => g.slug === slug);
 }
 
+export function findGameByBggId(content: SiteContent, bggId: string): Game | undefined {
+  return content.games.find((g) => g.bggId === bggId);
+}
+
 export function findArticle(content: SiteContent, slug: string): Article | undefined {
   return content.articles.find((a) => a.slug === slug);
 }

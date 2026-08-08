@@ -1,38 +1,50 @@
 import { collection, deleteDoc, doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
+import type { BggGame } from '@/lib/bgg';
 import { db } from '@/lib/firebase';
 
+export interface LudothequeEntry {
+  bggId: string;
+  name: string;
+  yearPublished?: number;
+  thumbnail?: string;
+  addedAt: unknown;
+}
+
 export function useLudotheque(uid: string | undefined) {
-  const [slugs, setSlugs] = useState<Set<string>>(new Set());
+  const [entries, setEntries] = useState<LudothequeEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!uid || !db) {
-      setSlugs(new Set());
+      setEntries([]);
       setLoading(false);
       return;
     }
     setLoading(true);
     const unsubscribe = onSnapshot(collection(db, 'users', uid, 'ludotheque'), (snapshot) => {
-      setSlugs(new Set(snapshot.docs.map((d) => d.id)));
+      setEntries(snapshot.docs.map((d) => d.data() as LudothequeEntry));
       setLoading(false);
     });
     return unsubscribe;
   }, [uid]);
 
-  return { slugs, loading };
+  return { entries, loading };
 }
 
-export async function addGameToLudotheque(uid: string, gameSlug: string) {
+export async function addGameToLudotheque(uid: string, game: BggGame) {
   if (!db) throw new Error('Firebase non configuré.');
-  await setDoc(doc(db, 'users', uid, 'ludotheque', gameSlug), {
-    gameSlug,
+  await setDoc(doc(db, 'users', uid, 'ludotheque', game.bggId), {
+    bggId: game.bggId,
+    name: game.name,
+    yearPublished: game.yearPublished ?? null,
+    thumbnail: game.thumbnail ?? null,
     addedAt: serverTimestamp(),
   });
 }
 
-export async function removeGameFromLudotheque(uid: string, gameSlug: string) {
+export async function removeGameFromLudotheque(uid: string, bggId: string) {
   if (!db) throw new Error('Firebase non configuré.');
-  await deleteDoc(doc(db, 'users', uid, 'ludotheque', gameSlug));
+  await deleteDoc(doc(db, 'users', uid, 'ludotheque', bggId));
 }

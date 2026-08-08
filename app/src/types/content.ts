@@ -28,6 +28,10 @@ export interface GalleryItem {
 export interface Game {
   slug: string;
   name: string;
+  // Identifiant BoardGameGeek (BGG) du jeu, pour relier une entrée de
+  // ludothèque (ajoutée via la recherche BGG) à sa fiche sur notre site
+  // quand elle existe.
+  bggId?: string;
   categories: string[];
   cover: string;
   thumbnail?: string;
