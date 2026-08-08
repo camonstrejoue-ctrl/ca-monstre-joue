@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Collapsible } from '@/components/ui/collapsible';
 import { ContentState } from '@/components/content-state';
 import { CoverImage } from '@/components/cover-image';
+import { HighlightedHeading } from '@/components/highlighted-heading';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
@@ -19,9 +20,9 @@ function Block({ block }: { block: ArticleBlock }) {
       return <ThemedText style={styles.paragraph}>{stripHtml(block.text)}</ThemedText>;
     case 'h2':
       return (
-        <ThemedText type="subtitle" style={styles.h2}>
+        <HighlightedHeading size="subtitle" style={styles.h2}>
           {block.text}
-        </ThemedText>
+        </HighlightedHeading>
       );
     case 'list':
       return (
@@ -98,13 +99,13 @@ export default function ArticleScreen() {
         <CoverImage path={article.hero || article.cover} style={styles.hero} />
 
         <ThemedView style={styles.body}>
-          <ThemedText type="title" style={styles.title}>
+          <HighlightedHeading size="title" style={styles.title}>
             {article.title}
-          </ThemedText>
+          </HighlightedHeading>
           {article.subtitle ? (
-            <ThemedText type="subtitle" themeColor="textSecondary" style={styles.subtitle}>
+            <HighlightedHeading size="subtitle" style={styles.subtitle}>
               {article.subtitle}
-            </ThemedText>
+            </HighlightedHeading>
           ) : null}
           <ThemedText type="small" themeColor="textSecondary" style={styles.date}>
             {formattedDate}

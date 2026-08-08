@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentState } from '@/components/content-state';
 import { CoverImage } from '@/components/cover-image';
+import { HighlightedHeading } from '@/components/highlighted-heading';
 import { StarRow } from '@/components/star-row';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -50,9 +51,9 @@ export default function JeuScreen() {
         <CoverImage path={hero} style={styles.hero} />
 
         <ThemedView style={styles.body}>
-          <ThemedText type="title" style={styles.title}>
+          <HighlightedHeading size="title" style={styles.title}>
             {game.name}
-          </ThemedText>
+          </HighlightedHeading>
 
           <ThemedView type="backgroundElement" style={styles.identityCard}>
             <IdentityRow label="Joueurs" value={game.identity.players} />
@@ -82,18 +83,18 @@ export default function JeuScreen() {
 
           {game.fitIntro ? <ThemedText style={styles.paragraph}>{game.fitIntro}</ThemedText> : null}
 
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+          <HighlightedHeading size="subtitle" style={styles.sectionTitle}>
             Ce jeu est fait pour toi si...
-          </ThemedText>
+          </HighlightedHeading>
           {game.fitFor.map((line, i) => (
             <ThemedText key={i} style={styles.listItem}>
               ✓ {line}
             </ThemedText>
           ))}
 
-          <ThemedText type="subtitle" style={styles.sectionTitle}>
+          <HighlightedHeading size="subtitle" style={styles.sectionTitle}>
             Ce n’est pas pour toi si...
-          </ThemedText>
+          </HighlightedHeading>
           {game.notFitFor.map((line, i) => (
             <ThemedText key={i} style={styles.listItem}>
               ✗ {line}
@@ -122,9 +123,9 @@ export default function JeuScreen() {
 
           {gallery.length ? (
             <>
-              <ThemedText type="subtitle" style={styles.sectionTitle}>
+              <HighlightedHeading size="subtitle" style={styles.sectionTitle}>
                 Pour aller plus loin
-              </ThemedText>
+              </HighlightedHeading>
               {gallery.map(({ article }) => (
                 <Link
                   key={article!.slug}
