@@ -75,6 +75,20 @@ export default function AccueilScreen() {
           </ThemedView>
         ) : null}
 
+        <Link href="/ptit-monstre" asChild>
+          <Pressable style={({ pressed }) => [styles.ptitMonstreButton, pressed && styles.pressed]}>
+            <ThemedView type="backgroundSelected" style={styles.ptitMonstreInner}>
+              <Image
+                source={require('@/assets/images/avatars/monstre-aucun.png')}
+                style={styles.ptitMonstreAvatar}
+              />
+              <ThemedText type="smallBold" style={styles.ptitMonstreText}>
+                P’tit Monstre, trouve mon prochain jeu
+              </ThemedText>
+            </ThemedView>
+          </Pressable>
+        </Link>
+
         <ThemedText type="subtitle" style={styles.sectionTitle}>
           Derniers articles
         </ThemedText>
@@ -137,6 +151,17 @@ const styles = StyleSheet.create({
   noResults: { paddingVertical: Spacing.two },
   searchRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, paddingVertical: 4 },
   searchRowImage: { width: 44, height: 44, borderRadius: Spacing.two },
+  ptitMonstreButton: { borderRadius: Spacing.five, overflow: 'hidden' },
+  ptitMonstreInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    paddingVertical: Spacing.two,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Spacing.five,
+  },
+  ptitMonstreAvatar: { width: 40, height: 40, borderRadius: 20 },
+  ptitMonstreText: { flex: 1 },
   sectionTitle: { fontSize: 20, marginTop: Spacing.three, marginBottom: Spacing.two },
   pressed: { opacity: 0.7 },
   articleCard: { borderRadius: Spacing.three, overflow: 'hidden', marginBottom: Spacing.three },

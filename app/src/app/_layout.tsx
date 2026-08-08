@@ -41,6 +41,7 @@ export default function RootLayout() {
             <Stack.Screen name="article/[slug]" options={{ title: '' }} />
             <Stack.Screen name="categorie/[slug]" options={{ title: '' }} />
             <Stack.Screen name="joueur/[uid]" options={{ title: '' }} />
+            <Stack.Screen name="ptit-monstre" />
             <Stack.Screen name="cgu" options={{ title: 'Conditions d’utilisation' }} />
           </Stack>
           <BottomTabBar />
