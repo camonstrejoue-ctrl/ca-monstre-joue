@@ -115,7 +115,7 @@ export default function JeuScreen() {
           {game.spotify ? (
             <Pressable onPress={() => Linking.openURL(game.spotify)}>
               <ThemedView type="backgroundElement" style={styles.linkButton}>
-                <ThemedText type="link">♫ Écouter sur Spotify</ThemedText>
+                <ThemedText type="link">♫ Notre playlist Spotify conseillée</ThemedText>
               </ThemedView>
             </Pressable>
           ) : null}
