@@ -74,6 +74,13 @@ function youTubeEmbed(url) {
   }
   return null;
 }
+// Les chemins d'assets dans data.js sont écrits sans "/" initial (ex. "assets/games/...") ;
+// on les rend root-relative ici pour qu'ils marchent aussi depuis les pages générées en
+// profondeur (ex. /jeu/<slug>/, /categorie/<slug>/), pas seulement depuis la racine du site.
+function assetUrl(src) {
+  if (!src || src.startsWith('/') || /^[a-z]+:/i.test(src)) return src;
+  return '/' + src;
+}
 // palette rotation for image placeholders when no real photo is set yet
 const PH_CLASSES = ['ph-1', 'ph-2', 'ph-3', 'ph-4', 'ph-5', 'ph-6'];
 function placeholderMedia(seed) {
@@ -90,7 +97,7 @@ function hashCode(str) {
 }
 function mediaElement(src, alt, seed) {
   if (!src) return placeholderMedia(seed);
-  const img = el('img', { src, alt: alt || '', loading: 'lazy' });
+  const img = el('img', { src: assetUrl(src), alt: alt || '', loading: 'lazy' });
   img.style.display = 'block';
   img.style.width = '100%';
   img.style.height = 'auto';
@@ -148,7 +155,7 @@ function carouselSlideMedia(src, alt, seed) {
     ph.style.aspectRatio = 'auto';
     return ph;
   }
-  const img = el('img', { src, alt: alt || '' });
+  const img = el('img', { src: assetUrl(src), alt: alt || '' });
   img.addEventListener('error', () => { img.replaceWith(carouselSlideMedia(null, alt, seed)); }, { once: true });
   return img;
 }
@@ -282,6 +289,51 @@ function renderAllGamesPage() {
   });
 }
 
+// ---------- share row (jeu + article pages) ----------
+const SHARE_ICONS = {
+  facebook: 'M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.2-1.5 1.6-1.5H17V3.6C16.7 3.5 15.7 3.4 14.6 3.4c-2.3 0-3.9 1.4-3.9 4v2.5H8v3.1h2.7V21z',
+  x: 'M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.2-.8.5-1.6.8-2.5 1a4 4 0 0 0-6.9 3.6A11.3 11.3 0 0 1 3.9 4.9a4 4 0 0 0 1.2 5.3c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 0 0 3.2 3.9c-.6.1-1.2.2-1.8.1a4 4 0 0 0 3.7 2.8A8 8 0 0 1 2 18.6a11.3 11.3 0 0 0 6.1 1.8c7.3 0 11.3-6 11.3-11.3v-.5c.8-.6 1.4-1.3 1.9-2.1z',
+  whatsapp: 'M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.85.5 3.58 1.36 5.06L2 22l5.19-1.44a9.87 9.87 0 0 0 4.85 1.24h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2zm0 17.9a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.1.87.83-3.02-.19-.31a8.15 8.15 0 0 1-1.24-4.31c0-4.51 3.68-8.19 8.19-8.19a8.13 8.13 0 0 1 5.78 2.4 8.14 8.14 0 0 1 2.4 5.79c0 4.51-3.68 8.19-8.19 8.19zm4.49-6.14c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.96-.14.16-.29.18-.53.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.45-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.04s.88 2.37 1 2.53c.12.16 1.73 2.64 4.19 3.7.58.25 1.04.4 1.4.51.59.19 1.12.16 1.55.1.47-.07 1.46-.6 1.67-1.18.2-.58.2-1.07.14-1.18-.06-.1-.22-.16-.47-.28z',
+  telegram: 'M21.94 4.11a1.5 1.5 0 0 0-1.53-.21L3.32 10.85a1.42 1.42 0 0 0 .07 2.68l4.56 1.47 1.76 5.68a1.14 1.14 0 0 0 1.94.44l2.42-2.53 4.6 3.4a1.34 1.34 0 0 0 2.1-.79l2.9-13.7a1.5 1.5 0 0 0-.73-1.39zM9.6 14.56l-.03 3.36-1.4-4.53 10.9-6.87-9.47 8.04z',
+  email: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 2v.01L12 12l8-5.99V6H4zm16 2.24-7.4 5.55a1 1 0 0 1-1.2 0L4 8.24V18h16V8.24z',
+  link: 'M10.59 13.41a1 1 0 0 1 0-1.41l2.83-2.83a1 1 0 1 1 1.41 1.41l-2.83 2.83a1 1 0 0 1-1.41 0zm-2.12 2.12a3 3 0 0 1 0-4.24l2.83-2.83a3 3 0 0 1 4.24 0 1 1 0 0 1-1.41 1.41 1 1 0 0 0-1.42 0l-2.83 2.83a1 1 0 0 0 0 1.42 1 1 0 0 1-1.41 1.41zm8.49-8.49a3 3 0 0 1 0 4.24l-1.42 1.41a1 1 0 0 1-1.41-1.41l1.41-1.42a1 1 0 0 0 0-1.41 1 1 0 0 1 1.42-1.41z',
+  share: 'M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .05 3.71l-6.13 3.5a3 3 0 1 0 0 3.58l6.13 3.5A3 3 0 1 0 16 16a2.98 2.98 0 0 0-.78.11l-6.13-3.5a3.02 3.02 0 0 0 0-1.44l6.13-3.5c.55.34 1.19.54 1.83.54.03 0 0 0 0 0z',
+};
+function svgIcon(name) {
+  return `<svg viewBox="0 0 24 24"><path d="${SHARE_ICONS[name]}"/></svg>`;
+}
+function renderShareRow(container, url, title) {
+  if (!container) return;
+  container.innerHTML = '';
+  if (navigator.share) {
+    const nativeBtn = el('button', { type: 'button', 'aria-label': 'Partager' });
+    nativeBtn.innerHTML = svgIcon('share');
+    nativeBtn.addEventListener('click', () => navigator.share({ title, url }).catch(() => {}));
+    container.appendChild(nativeBtn);
+  }
+  [
+    { label: 'Facebook', icon: 'facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}` },
+    { label: 'X', icon: 'x', href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}` },
+    { label: 'WhatsApp', icon: 'whatsapp', href: `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}` },
+    { label: 'Telegram', icon: 'telegram', href: `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}` },
+    { label: 'Email', icon: 'email', href: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}` },
+  ].forEach(t => {
+    const a = el('a', { href: t.href, target: '_blank', rel: 'noopener', 'aria-label': t.label });
+    a.innerHTML = svgIcon(t.icon);
+    container.appendChild(a);
+  });
+  const copyBtn = el('button', { type: 'button', class: 'share-copy', 'aria-label': 'Copier le lien' });
+  copyBtn.innerHTML = `${svgIcon('link')}<span>Copier le lien</span>`;
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(url).then(() => {
+      const span = copyBtn.querySelector('span');
+      span.textContent = 'Lien copié !';
+      setTimeout(() => { span.textContent = 'Copier le lien'; }, 2000);
+    }).catch(() => {});
+  });
+  container.appendChild(copyBtn);
+}
+
 // ---------- GAME page ----------
 function renderGamePage() {
   const root = qs('#game-root');
@@ -292,6 +344,7 @@ function renderGamePage() {
     return;
   }
   document.title = `${g.name} — Ça Monstre Joue`;
+  renderShareRow(qs('#share-row'), `${window.location.origin}/jeu/${g.slug}/`, g.name);
   qsa('[data-game-name]').forEach(n => n.textContent = g.name);
   const introEl = qs('[data-game-intro]');
   introEl.innerHTML = '';
@@ -457,6 +510,7 @@ function renderArticlePage() {
     return;
   }
   document.title = `${a.title} — Ça Monstre Joue`;
+  renderShareRow(qs('#share-row'), `${window.location.origin}/article/${a.slug}/`, a.title);
   const hero = qs('#article-hero');
   hero.innerHTML = '';
   hero.appendChild(carouselSlideMedia(a.hero || a.cover, a.title, a.slug));
