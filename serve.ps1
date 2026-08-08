@@ -19,6 +19,7 @@ while ($listener.IsListening) {
   $req = $context.Request
   $res = $context.Response
   try {
+    $res.Headers.Add("Access-Control-Allow-Origin", "*")
     $path = [System.Uri]::UnescapeDataString($req.Url.AbsolutePath)
     if ($path -eq "/") { $path = "/index.html" }
     $filePath = Join-Path $Root ($path.TrimStart("/"))
