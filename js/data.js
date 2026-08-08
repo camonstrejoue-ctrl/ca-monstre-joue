@@ -5,12 +5,12 @@
    ============================================ */
 
 window.CATEGORIES = [
-  { slug: 'jeux-a-deux',        name: 'Jeux à deux' },
-  { slug: 'jeux-cooperatifs',   name: 'Jeux coopératifs',   image: 'assets/categories/jeux-cooperatifs-categorie.png' },
+  { slug: 'jeux-a-deux',        name: 'Jeux à deux',        image: 'assets/categories/jeux-adeux-categorie.JPG' },
+  { slug: 'jeux-cooperatifs',   name: 'Jeux coopératifs',   image: 'assets/categories/jeux-cooperatifs-categorie.jpg' },
   { slug: 'jeux-dambiance',     name: "Jeux d'ambiance",    image: 'assets/categories/jeux-dambiance-categorie.jpg' },
-  { slug: 'jeux-de-strategie',  name: 'Jeux de stratégie' },
-  { slug: 'jeux-narratifs',     name: 'Jeux narratifs' },
-  { slug: 'jeux-famille',       name: 'Jeux famille' },
+  { slug: 'jeux-de-strategie',  name: 'Jeux de stratégie',  image: 'assets/categories/jeux-strategie-categorie.JPG' },
+  { slug: 'jeux-narratifs',     name: 'Jeux narratifs',     image: 'assets/categories/jeux-narratifs-categorie.JPG' },
+  { slug: 'jeux-famille',       name: 'Jeux famille',       image: 'assets/categories/jeux-famille-categorie.JPG' },
 ];
 
 // Astuce : ajoute un champ `thumbnail: 'chemin/vers/image-carree.jpg'` à un jeu
@@ -67,8 +67,12 @@ window.GAMES = [
     slug: 'dorf-romantik-sakura',
     name: 'Dorf Romantik - Sakura',
     categories: ['jeux-a-deux', 'jeux-cooperatifs'],
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    thumbnail: 'assets/games/dorf-romantik-sakura/dorf-romantik-sakura-liste.JPG',
+    heroImages: [
+      'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-fiche.JPG',
+      'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-fiche2.JPG',
+      'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-fiche3.JPG',
+    ],
     intro: "Façonnez votre paysage dans un univers japonais magnifique. Dans ce jeu de pose de tuiles relaxant, vous jouez ensemble pour atteindre des objectifs précis à chaque partie. Réalisez la route la plus longue possible, créez une rizière de 5 tuiles adjacentes, dessinez une rivière de 6 tuiles contenant 2 carpes Koi... Agencez votre paysage de manière harmonieuse (ou pas) et marquez le plus de points possible à chaque partie pour débloquer de nouveaux éléments de jeu en suivant une campagne qui progresse à chaque partie et amène une grande variété.",
     identity: {
       players: '1-6',
