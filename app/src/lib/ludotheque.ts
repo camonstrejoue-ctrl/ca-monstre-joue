@@ -24,7 +24,12 @@ export function useLudotheque(uid: string | undefined) {
     }
     setLoading(true);
     const unsubscribe = onSnapshot(collection(db, 'users', uid, 'ludotheque'), (snapshot) => {
-      setEntries(snapshot.docs.map((d) => d.data() as LudothequeEntry));
+      // Ignore les entrées d'un ancien format (avant le passage à la
+      // recherche BGG) qui n'auraient pas `bggId`/`name`.
+      const valid = snapshot.docs
+        .map((d) => d.data() as Partial<LudothequeEntry>)
+        .filter((e): e is LudothequeEntry => Boolean(e.bggId && e.name));
+      setEntries(valid);
       setLoading(false);
     });
     return unsubscribe;
