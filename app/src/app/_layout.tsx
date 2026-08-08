@@ -33,6 +33,9 @@ export default function RootLayout() {
             <Stack.Screen name="ludotheque" options={{ headerShown: false }} />
             <Stack.Screen name="joueurs" options={{ headerShown: false }} />
             <Stack.Screen name="profil" options={{ headerShown: false }} />
+            <Stack.Screen name="outils" options={{ headerShown: false }} />
+            <Stack.Screen name="outils/des" />
+            <Stack.Screen name="outils/score" />
             <Stack.Screen name="jeu/[slug]" options={{ title: '' }} />
             <Stack.Screen name="article/[slug]" options={{ title: '' }} />
             <Stack.Screen name="categorie/[slug]" options={{ title: '' }} />

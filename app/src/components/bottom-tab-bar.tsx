@@ -10,14 +10,15 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 const TABS: {
-  href: '/' | '/catalogue' | '/ludotheque' | '/joueurs' | '/profil';
+  href: '/' | '/catalogue' | '/ludotheque' | '/joueurs' | '/outils' | '/profil';
   label: string;
   icon: ComponentProps<typeof Ionicons>['name'];
 }[] = [
   { href: '/', label: 'Accueil', icon: 'home' },
   { href: '/catalogue', label: 'Catalogue', icon: 'game-controller' },
-  { href: '/ludotheque', label: 'Ma ludothèque', icon: 'albums' },
+  { href: '/ludotheque', label: 'Ludothèque', icon: 'albums' },
   { href: '/joueurs', label: 'Joueurs', icon: 'people' },
+  { href: '/outils', label: 'Outils', icon: 'dice' },
   { href: '/profil', label: 'Profil', icon: 'person-circle' },
 ];
 
