@@ -5,32 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ça Monstre Joue — Le blog des jeux de société</title>
 <meta name="description" content="Ça Monstre Joue explore les jeux de société : critiques, vidéos et conseils pour trouver votre prochain jeu préféré.">
-<link rel="icon" type="image/png" href="assets/monstre.png">
+<link rel="canonical" href="https://www.camonstrejoue.ch/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Ça Monstre Joue">
+<meta property="og:title" content="Ça Monstre Joue — Le blog des jeux de société">
+<meta property="og:description" content="Ça Monstre Joue explore les jeux de société : critiques, vidéos et conseils pour trouver votre prochain jeu préféré.">
+<meta property="og:image" content="https://www.camonstrejoue.ch/assets/logo.png">
+<meta property="og:url" content="https://www.camonstrejoue.ch/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ça Monstre Joue — Le blog des jeux de société">
+<meta name="twitter:description" content="Ça Monstre Joue explore les jeux de société : critiques, vidéos et conseils pour trouver votre prochain jeu préféré.">
+<meta name="twitter:image" content="https://www.camonstrejoue.ch/assets/logo.png">
+<link rel="icon" type="image/png" href="/assets/monstre.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo-link"><img src="assets/logo.png" alt="Ça Monstre Joue"></a>
+    <a href="/index.html" class="logo-link"><img src="/assets/logo.png" alt="Ça Monstre Joue"></a>
     <nav class="main-nav" id="main-nav">
       <ul>
         <li class="nav-item has-dropdown">
           <a href="#" class="nav-link">Découvrir ton prochain jeu <span class="nav-caret">▾</span></a>
           <div class="dropdown">
-            <a href="categorie.html?cat=jeux-a-deux">Jeux à deux</a>
-            <a href="categorie.html?cat=jeux-cooperatifs">Jeux coopératifs</a>
-            <a href="categorie.html?cat=jeux-dambiance">Jeux d'ambiance</a>
-            <a href="categorie.html?cat=jeux-de-strategie">Jeux de stratégie</a>
-            <a href="categorie.html?cat=jeux-narratifs">Jeux narratifs</a>
-            <a href="categorie.html?cat=jeux-famille">Jeux famille</a>
+            <a href="/categorie.html?cat=jeux-a-deux">Jeux à deux</a>
+            <a href="/categorie.html?cat=jeux-cooperatifs">Jeux coopératifs</a>
+            <a href="/categorie.html?cat=jeux-dambiance">Jeux d'ambiance</a>
+            <a href="/categorie.html?cat=jeux-de-strategie">Jeux de stratégie</a>
+            <a href="/categorie.html?cat=jeux-narratifs">Jeux narratifs</a>
+            <a href="/categorie.html?cat=jeux-famille">Jeux famille</a>
           </div>
         </li>
-        <li class="nav-item"><a href="tous-les-jeux.html" class="nav-link">Chercher un jeu précis</a></li>
-        <li class="nav-item"><a href="equipe.html" class="nav-link">La Team Ça Monstre Joue</a></li>
-        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="/tous-les-jeux.html" class="nav-link">Chercher un jeu précis</a></li>
+        <li class="nav-item"><a href="/equipe.html" class="nav-link">La Team Ça Monstre Joue</a></li>
+        <li class="nav-item"><a href="/contact.html" class="nav-link">Contact</a></li>
       </ul>
     </nav>
     <button class="menu-toggle" aria-label="Ouvrir le menu"><span></span></button>
@@ -51,7 +63,7 @@
 
   <section class="quote-section">
     <div class="container">
-      <div class="watermark watermark--center"><img src="assets/monstre.png" alt=""></div>
+      <div class="watermark watermark--center"><img src="/assets/monstre.png" alt=""></div>
       <blockquote>Jouer, c'est bon pour la santé</blockquote>
       <cite>— Johann Schneider-Ammonstre</cite>
     </div>
@@ -60,7 +72,7 @@
   <section class="categories-section">
     <div class="container">
       <div class="section-heading">
-        <h2>Découvre ton prochain jeu</h2>
+        <h1>Découvre ton prochain jeu</h1>
         <p>Six familles de jeux, une seule mission : trouver la partie parfaite pour ce soir.</p>
       </div>
       <div class="cat-grid" id="category-grid"></div>
@@ -72,7 +84,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="assets/logo.png" alt="Ça Monstre Joue">
+        <img src="/assets/logo.png" alt="Ça Monstre Joue">
         <p>Le blog qui explore les jeux de société avec vous : critiques, conseils et vidéos pour choisir votre prochaine partie.</p>
       </div>
       <div class="footer-col">
@@ -108,11 +120,11 @@
     <button type="button" class="chatbot-bubble-close" id="chatbot-bubble-close" aria-label="Fermer la bulle">✕</button>
   </div>
   <button type="button" class="chatbot-toggle" id="chatbot-toggle" aria-label="Ouvrir P'tit Monstre, notre assistant pour trouver un jeu">
-    <img src="assets/monstre.png" alt="">
+    <img src="/assets/monstre.png" alt="">
   </button>
   <div class="chatbot-panel" id="chatbot-panel" hidden>
     <div class="chatbot-header">
-      <img src="assets/monstre.png" alt="">
+      <img src="/assets/monstre.png" alt="">
       <div class="chatbot-title">
         <strong>P'tit Monstre</strong>
         <span>Je te trouve un jeu !</span>
@@ -125,7 +137,7 @@
   </div>
 </div>
 
-<script src="js/data.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/data.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

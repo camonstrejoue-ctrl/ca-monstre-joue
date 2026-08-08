@@ -183,12 +183,14 @@ button{font-family:inherit;cursor:pointer;}
   width:140px;
 }
 .categories-section .section-heading{position:relative;}
+.categories-section .section-heading h1,
 .categories-section .section-heading h2,
 .categories-section .section-heading p{position:relative;z-index:1;}
 
 /* ---------- category grid (home) ---------- */
 .categories-section{padding:20px 0 70px;}
 .section-heading{text-align:center;max-width:640px;margin:0 auto 36px;}
+.section-heading h1,
 .section-heading h2{font-size:clamp(1.7rem,3vw,2.3rem);}
 .section-heading p{color:var(--gray);}
 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}

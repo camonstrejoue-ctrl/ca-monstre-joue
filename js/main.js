@@ -6,6 +6,12 @@
 function qs(sel, ctx) { return (ctx || document).querySelector(sel); }
 function qsa(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
 function getParam(name) { return new URLSearchParams(window.location.search).get(name); }
+// Sur les URLs générées au déploiement (ex. /jeu/finspan/), le slug est dans
+// le chemin plutôt qu'en paramètre — on prend le dernier segment non vide.
+function getSlugFromPath() {
+  const parts = window.location.pathname.split('/').filter(p => p && p !== 'index.html');
+  return parts.length ? parts[parts.length - 1] : null;
+}
 function el(tag, attrs, children) {
   const node = document.createElement(tag);
   Object.entries(attrs || {}).forEach(([k, v]) => {
@@ -73,7 +79,7 @@ const PH_CLASSES = ['ph-1', 'ph-2', 'ph-3', 'ph-4', 'ph-5', 'ph-6'];
 function placeholderMedia(seed) {
   const idx = Math.abs(hashCode(seed || '')) % PH_CLASSES.length;
   const wrap = el('div', { class: `ph ${PH_CLASSES[idx]}` });
-  const img = el('img', { class: 'mascot', src: 'assets/logo.png', alt: '' });
+  const img = el('img', { class: 'mascot', src: '/assets/logo.png', alt: '' });
   wrap.appendChild(img);
   return wrap;
 }
@@ -163,7 +169,7 @@ function renderHomeHero() {
   if (latest.length === 0) { carousel.style.display = 'none'; return; }
 
   latest.forEach((a, i) => {
-    const slide = el('a', { class: 'carousel-slide', href: `article.html?slug=${a.slug}` });
+    const slide = el('a', { class: 'carousel-slide', href: `/article.html?slug=${a.slug}` });
     slide.appendChild(carouselSlideMedia(a.banner || a.cover, a.title, a.slug));
     slide.appendChild(el('span', { class: 'badge', text: 'Nouvel article' }));
     slide.appendChild(el('div', { class: 'overlay' }, [
@@ -212,7 +218,7 @@ function renderCategoryGrid() {
   if (!mount) return;
   mount.innerHTML = '';
   (window.CATEGORIES || []).forEach(cat => {
-    const card = el('a', { class: 'cat-card', href: `categorie.html?cat=${cat.slug}` });
+    const card = el('a', { class: 'cat-card', href: `/categorie.html?cat=${cat.slug}` });
     card.appendChild(mediaElement(cat.image, cat.name, cat.slug));
     card.appendChild(el('div', { class: 'overlay' }, [
       el('span', { class: 'highlight', text: cat.name }),
@@ -224,9 +230,9 @@ function renderCategoryGrid() {
 // ---------- CATEGORY page ----------
 function gameCard(g) {
   const card = el('div', { class: 'game-card' });
-  const thumb = el('a', { class: 'thumb', href: `jeu.html?slug=${g.slug}` });
+  const thumb = el('a', { class: 'thumb', href: `/jeu.html?slug=${g.slug}` });
   thumb.appendChild(mediaElement(g.thumbnail || g.cover, g.name, g.slug));
-  const btn = el('a', { class: 'btn btn--block', href: `jeu.html?slug=${g.slug}`, text: g.name });
+  const btn = el('a', { class: 'btn btn--block', href: `/jeu.html?slug=${g.slug}`, text: g.name });
   card.appendChild(thumb);
   card.appendChild(btn);
   return card;
@@ -235,7 +241,7 @@ function gameCard(g) {
 function renderCategoryPage() {
   const mount = qs('#games-grid');
   if (!mount) return;
-  const catSlug = getParam('cat');
+  const catSlug = getParam('cat') || getSlugFromPath();
   const cat = findCategory(catSlug);
   qsa('[data-cat-name]').forEach(n => n.textContent = cat ? cat.name : 'Catégorie');
   const games = gamesInCategory(catSlug);
@@ -280,7 +286,7 @@ function renderAllGamesPage() {
 function renderGamePage() {
   const root = qs('#game-root');
   if (!root) return;
-  const g = findGame(getParam('slug'));
+  const g = findGame(getParam('slug') || getSlugFromPath());
   if (!g) {
     root.innerHTML = '<div class="container"><p style="padding:60px 0;text-align:center;">Ce jeu n\'existe pas (encore).</p></div>';
     return;
@@ -431,7 +437,7 @@ function renderGamePage() {
   gallerySection.style.display = resolvedGallery.length === 0 ? 'none' : '';
   resolvedGallery.forEach(item => {
     const article = findArticle(item.articleSlug);
-    const card = el('a', { class: 'gallery-card', href: `article.html?slug=${article.slug}` });
+    const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${article.slug}` });
     card.appendChild(mediaElement(item.image || article.cover, article.title, article.slug));
     card.appendChild(el('div', { class: 'overlay' }, [
       el('h3', { text: article.title }),
@@ -445,7 +451,7 @@ function renderGamePage() {
 function renderArticlePage() {
   const root = qs('#article-root');
   if (!root) return;
-  const a = findArticle(getParam('slug'));
+  const a = findArticle(getParam('slug') || getSlugFromPath());
   if (!a) {
     root.innerHTML = '<div class="container"><p style="padding:60px 0;text-align:center;">Cet article n\'existe pas (encore).</p></div>';
     return;
@@ -505,7 +511,7 @@ function renderArticlePage() {
   relatedGrid.innerHTML = '';
   if (game) {
     qs('#related-title').textContent = `Pour en découvrir plus sur ${game.name}`;
-    const gameCard = el('a', { class: 'gallery-card', href: `jeu.html?slug=${game.slug}` });
+    const gameCard = el('a', { class: 'gallery-card', href: `/jeu.html?slug=${game.slug}` });
     gameCard.appendChild(mediaElement(game.thumbnail || game.cover, game.name, game.slug));
     gameCard.appendChild(el('div', { class: 'overlay' }, [
       el('h3', { text: `Retour sur la page de ${game.name}` }),
@@ -515,7 +521,7 @@ function renderArticlePage() {
       .filter(item => item.articleSlug !== a.slug && findArticle(item.articleSlug))
       .forEach(item => {
         const other = findArticle(item.articleSlug);
-        const card = el('a', { class: 'gallery-card', href: `article.html?slug=${other.slug}` });
+        const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${other.slug}` });
         card.appendChild(mediaElement(item.image || other.cover, other.title, other.slug));
         card.appendChild(el('div', { class: 'overlay' }, [
           el('h3', { text: other.title }),
@@ -684,7 +690,7 @@ function initChatbot() {
     ], (opt) => {
       addMessage(opt.label, 'user');
       if (opt.go) {
-        window.location.href = `jeu.html?slug=${game.slug}`;
+        window.location.href = `/jeu.html?slug=${game.slug}`;
       } else {
         suggestOne();
       }
