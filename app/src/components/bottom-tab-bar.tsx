@@ -10,7 +10,7 @@ import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 const TABS: {
-  href: '/' | '/catalogue' | '/ludotheque' | '/joueurs' | '/outils' | '/profil';
+  href: '/' | '/catalogue' | '/ludotheque' | '/joueurs' | '/agenda' | '/outils' | '/profil';
   label: string;
   icon: ComponentProps<typeof Ionicons>['name'];
 }[] = [
@@ -18,6 +18,7 @@ const TABS: {
   { href: '/catalogue', label: 'Catalogue', icon: 'game-controller' },
   { href: '/ludotheque', label: 'Ludothèque', icon: 'albums' },
   { href: '/joueurs', label: 'Joueurs', icon: 'people' },
+  { href: '/agenda', label: 'Agenda', icon: 'calendar' },
   { href: '/outils', label: 'Outils', icon: 'dice' },
   { href: '/profil', label: 'Profil', icon: 'person-circle' },
 ];
@@ -39,8 +40,8 @@ export function BottomTabBar() {
         const color = active ? theme.text : theme.textSecondary;
         return (
           <Pressable key={tab.href} style={styles.tab} onPress={() => router.push(tab.href)}>
-            <Ionicons name={tab.icon} size={22} color={color} />
-            <ThemedText type="small" style={[styles.label, { color }]}>
+            <Ionicons name={tab.icon} size={20} color={color} />
+            <ThemedText type="small" style={[styles.label, { color }]} numberOfLines={1}>
               {tab.label}
             </ThemedText>
           </Pressable>
@@ -57,6 +58,6 @@ const styles = StyleSheet.create({
     borderTopColor: 'rgba(128,128,128,0.3)',
     paddingTop: Spacing.two,
   },
-  tab: { flex: 1, alignItems: 'center', gap: 2 },
-  label: { fontSize: 11 },
+  tab: { flex: 1, alignItems: 'center', gap: 2, paddingHorizontal: 2 },
+  label: { fontSize: 9.5 },
 });

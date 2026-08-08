@@ -18,6 +18,18 @@ service cloud.firestore {
       }
     }
 
+    // Agenda : événements publics (festivals, tournois en boutique, soirées
+    // jeux entre particuliers, etc.), lisibles par tout le monde, y compris
+    // sans compte. Création réservée aux connectés, modification/suppression
+    // réservées à l'auteur.
+    match /events/{eventId} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.createdBy == request.auth.uid;
+      allow update, delete: if request.auth != null
+        && resource.data.createdBy == request.auth.uid;
+    }
+
     // Signalements : n'importe quel utilisateur connecté peut en créer un,
     // mais personne ne peut les lire, modifier ou supprimer depuis l'app
     // (consultation manuelle par l'admin depuis la console Firebase).
