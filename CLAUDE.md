@@ -75,6 +75,31 @@ l'occasion se présente**, pas seulement éviter de les casser :
 - Un nouveau champ de contenu qui pourrait enrichir une meta description ou une image Open Graph est une
   bonne occasion d'améliorer ce qui existe déjà, pas seulement de faire le minimum demandé.
 
+## Tracking Google Analytics 4 et liens UTM
+
+Le site a un tag GA4 (ID `G-2ST1V87HQW`, propriété partagée avec le projet Firebase de l'app pour un
+reporting unifié blog + app) posé juste après `<head>` sur chaque gabarit HTML (`index.html`, `jeu.html`,
+`article.html`, `categorie.html`, `contact.html`, `equipe.html`, `tous-les-jeux.html`) — donc aussi sur
+les pages générées automatiquement par `scripts/generate-seo-pages.js`, qui copient ces gabarits. Toute
+nouvelle page HTML statique du même type doit recevoir le même snippet.
+
+Convention UTM pour tout lien vers le site posté sur les réseaux sociaux (Instagram, TikTok, YouTube...) :
+
+`https://www.camonstrejoue.ch/<page>?utm_source=<réseau>&utm_medium=<emplacement>&utm_campaign=<contenu>`
+
+- `utm_source` : réseau d'origine — `instagram`, `tiktok`, `youtube`, `facebook`...
+- `utm_medium` : type d'emplacement — `bio` (lien fixe en bio), `story`, `video` (description vidéo)
+- `utm_campaign` : slug du jeu/article promu (ex. `catan`), ou nom de campagne générale (ex. `lancement`)
+
+Exemples :
+- Lien fixe en bio Instagram : `?utm_source=instagram&utm_medium=bio&utm_campaign=lien_bio`
+- Story Instagram vers une fiche jeu précise : `/jeu/catan/?utm_source=instagram&utm_medium=story&utm_campaign=catan`
+- Description YouTube d'une vidéo sur un jeu : `/jeu/<slug>/?utm_source=youtube&utm_medium=video&utm_campaign=<slug>`
+
+Le lien vers l'app (store) n'est pas encore intégré sur le site — quand il le sera, lui appliquer la même
+convention (`utm_source`/`utm_medium` selon le réseau qui pousse vers l'app, `utm_campaign` selon la
+campagne), pour distinguer dans GA4 le trafic blog → app.
+
 ## Poids et format des images
 
 Dès que l'utilisateur fournit une nouvelle image (photo), la convertir directement au bon format et au
