@@ -205,7 +205,7 @@ button{font-family:inherit;cursor:pointer;}
 .cat-card .highlight{
   font-family:var(--font-display);font-weight:800;color:var(--white);
   background:var(--coral);display:inline-block;padding:6px 14px;border-radius:8px;
-  font-size:1.15rem;box-shadow:4px 4px 0 var(--black);
+  font-size:2.3rem;box-shadow:4px 4px 0 var(--black);
 }
 @media (max-width:880px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:560px){.cat-grid{grid-template-columns:1fr;}}
