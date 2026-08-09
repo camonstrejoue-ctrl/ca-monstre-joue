@@ -38,5 +38,13 @@ service cloud.firestore {
         && request.resource.data.reporterUid == request.auth.uid;
       allow read, update, delete: if false;
     }
+
+    // Suggestions de fonctionnalités : même principe que les signalements,
+    // consultation manuelle depuis la console Firebase.
+    match /suggestions/{suggestionId} {
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if false;
+    }
   }
 }

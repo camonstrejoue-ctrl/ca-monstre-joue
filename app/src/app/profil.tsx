@@ -13,6 +13,7 @@ import { signIn, signOut, signUp } from '@/lib/auth';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { isFirebaseConfigured } from '@/lib/firebase';
+import { submitSuggestion } from '@/lib/suggestions';
 
 function PrimaryButton({
   label,
@@ -284,6 +285,66 @@ function EditProfileForm() {
   );
 }
 
+function SuggestionForm() {
+  const { user, profile } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit() {
+    if (!user || !text.trim()) return;
+    setSubmitting(true);
+    setError(null);
+    try {
+      await submitSuggestion(user.uid, profile?.pseudo ?? '', text.trim());
+      setSent(true);
+      setText('');
+      setOpen(false);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <ThemedView style={styles.form}>
+      <ThemedText type="subtitle" style={styles.sectionTitle}>
+        Une idée pour l’app ?
+      </ThemedText>
+      {sent ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          Merci, ta suggestion a bien été envoyée !
+        </ThemedText>
+      ) : open ? (
+        <>
+          <FormField
+            label="Ta suggestion"
+            value={text}
+            onChangeText={setText}
+            multiline
+            placeholder="Ex : ajouter un mode sombre, permettre de filtrer la ludothèque par catégorie..."
+          />
+          {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
+          <PrimaryButton
+            label="Envoyer la suggestion"
+            onPress={handleSubmit}
+            disabled={submitting || !text.trim()}
+          />
+        </>
+      ) : (
+        <Pressable onPress={() => setOpen(true)}>
+          <ThemedView type="backgroundElement" style={styles.suggestionButton}>
+            <ThemedText type="smallBold">💡 Proposer une nouvelle fonctionnalité</ThemedText>
+          </ThemedView>
+        </Pressable>
+      )}
+    </ThemedView>
+  );
+}
+
 function ProfileView() {
   const { user, profile } = useAuth();
 
@@ -310,6 +371,7 @@ function ProfileView() {
 
       <AvatarPicker />
       <EditProfileForm />
+      <SuggestionForm />
     </ThemedView>
   );
 }
@@ -358,5 +420,11 @@ const styles = StyleSheet.create({
     padding: Spacing.two,
     borderRadius: Spacing.two,
     width: 84,
+  },
+  suggestionButton: {
+    paddingVertical: Spacing.three,
+    paddingHorizontal: Spacing.three,
+    borderRadius: Spacing.two,
+    alignItems: 'center',
   },
 });
