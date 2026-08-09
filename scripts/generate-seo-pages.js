@@ -71,6 +71,97 @@ function writePage(outDir, html) {
   fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
 }
 
+function parsePlayerRange(str) {
+  const nums = ((str || '').match(/\d+/g) || []).map(Number);
+  if (nums.length === 0) return null;
+  return { min: nums[0], max: nums.length > 1 ? nums[1] : Infinity };
+}
+
+// Insère un ou plusieurs objets JSON-LD (un <script> par objet) juste avant
+// </head> — données structurées lues par les moteurs de réponse IA
+// (Perplexity, AI Overviews...) pour extraire des faits fiables sans avoir à
+// exécuter de JavaScript.
+function injectJsonLd(html, objects) {
+  const scripts = objects
+    .map((obj) => `<script type="application/ld+json">\n${JSON.stringify(obj)}\n</script>`)
+    .join('\n');
+  return html.replace('</head>', `${scripts}\n</head>`);
+}
+
+function breadcrumb(items) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map(([name, item], i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name,
+      item,
+    })),
+  };
+}
+
+function gameJsonLd(g, categories, url) {
+  const firstCat = categories.find((c) => (g.categories || [])[0] === c.slug);
+  const crumbs = [['Accueil', `${BASE_URL}/`]];
+  if (firstCat) crumbs.push([firstCat.name, `${BASE_URL}/categorie/${firstCat.slug}/`]);
+  crumbs.push([g.name, url]);
+
+  const players = parsePlayerRange(g.identity && g.identity.players);
+  const review = {
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    itemReviewed: {
+      '@type': 'Game',
+      name: g.name,
+      description: toDescription(g.intro || g.fitIntro || '', 300),
+      image: absoluteUrl(g.cover || g.thumbnail) || FALLBACK_IMAGE,
+      ...(players ? { numberOfPlayers: { '@type': 'QuantitativeValue', minValue: players.min, ...(Number.isFinite(players.max) ? { maxValue: players.max } : {}) } } : {}),
+    },
+    ...(g.identity && g.identity.note
+      ? { reviewRating: { '@type': 'Rating', ratingValue: g.identity.note.stars, bestRating: g.identity.note.max || 6, worstRating: 1 } }
+      : {}),
+    author: { '@type': 'Organization', name: 'Ça Monstre Joue' },
+    publisher: { '@type': 'Organization', name: 'Ça Monstre Joue' },
+  };
+  return [breadcrumb(crumbs), review];
+}
+
+function articleJsonLd(a, game, url) {
+  const crumbs = [['Accueil', `${BASE_URL}/`]];
+  if (game) crumbs.push([game.name, `${BASE_URL}/jeu/${game.slug}/`]);
+  crumbs.push([a.title, url]);
+
+  const article = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: a.title,
+    description: toDescription(a.excerpt || '', 300),
+    image: absoluteUrl(a.banner || a.cover) || FALLBACK_IMAGE,
+    ...(a.date ? { datePublished: a.date } : {}),
+    author: { '@type': 'Organization', name: 'Ça Monstre Joue' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Ça Monstre Joue',
+      logo: { '@type': 'ImageObject', url: FALLBACK_IMAGE },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  };
+  return [breadcrumb(crumbs), article];
+}
+
+function categoryJsonLd(c, url) {
+  const crumbs = [['Accueil', `${BASE_URL}/`], [c.name, url]];
+  const collection = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${c.name} — Ça Monstre Joue`,
+    description: `Tous nos jeux de la catégorie ${c.name} sur Ça Monstre Joue.`,
+    url,
+  };
+  return [breadcrumb(crumbs), collection];
+}
+
 function main() {
   const { GAMES = [], ARTICLES = [], CATEGORIES = [] } = loadContent();
 
@@ -82,7 +173,7 @@ function main() {
 
   GAMES.forEach((g) => {
     const url = `${BASE_URL}/jeu/${g.slug}/`;
-    const html = injectMeta(gameTemplate, {
+    let html = injectMeta(gameTemplate, {
       genericTitle: 'Fiche jeu — Ça Monstre Joue',
       genericDescription: 'Découvre nos fiches jeux détaillées : identité complète, notre avis, vidéo et bien plus, sur le blog Ça Monstre Joue.',
       title: `${g.name} — Ça Monstre Joue`,
@@ -91,13 +182,14 @@ function main() {
       url,
       ogType: 'website',
     });
+    html = injectJsonLd(html, gameJsonLd(g, CATEGORIES, url));
     writePage(path.join(rootDir, 'jeu', g.slug), html);
     urls.push(url);
   });
 
   ARTICLES.forEach((a) => {
     const url = `${BASE_URL}/article/${a.slug}/`;
-    const html = injectMeta(articleTemplate, {
+    let html = injectMeta(articleTemplate, {
       genericTitle: 'Article — Ça Monstre Joue',
       genericDescription: "Critiques, conseils et avis détaillés sur des jeux de société, par l'équipe de Ça Monstre Joue.",
       title: `${a.title} — Ça Monstre Joue`,
@@ -106,13 +198,15 @@ function main() {
       url,
       ogType: 'article',
     });
+    const game = GAMES.find((g) => g.slug === a.gameSlug);
+    html = injectJsonLd(html, articleJsonLd(a, game, url));
     writePage(path.join(rootDir, 'article', a.slug), html);
     urls.push(url);
   });
 
   CATEGORIES.forEach((c) => {
     const url = `${BASE_URL}/categorie/${c.slug}/`;
-    const html = injectMeta(categoryTemplate, {
+    let html = injectMeta(categoryTemplate, {
       genericTitle: 'Catégorie — Ça Monstre Joue',
       genericDescription: 'Explore nos jeux de société classés par catégorie sur Ça Monstre Joue.',
       title: `${c.name} — Ça Monstre Joue`,
@@ -121,6 +215,7 @@ function main() {
       url,
       ogType: 'website',
     });
+    html = injectJsonLd(html, categoryJsonLd(c, url));
     writePage(path.join(rootDir, 'categorie', c.slug), html);
     urls.push(url);
   });
@@ -134,8 +229,27 @@ function main() {
   ].join('\n');
   fs.writeFileSync(path.join(rootDir, 'sitemap.xml'), sitemap, 'utf8');
 
+  const llmsTxt = [
+    '# Ça Monstre Joue',
+    '',
+    '> Blog suisse de jeux de société tenu par quatre passionnés : critiques honnêtes, fiches jeux',
+    '> détaillées (nombre de joueurs, âge, durée, complexité, note sur 6) et conseils pour choisir',
+    '> sa prochaine partie.',
+    '',
+    '## Jeux',
+    ...GAMES.map((g) => `- [${g.name}](${BASE_URL}/jeu/${g.slug}/): ${toDescription(g.intro || g.fitIntro || '', 200)}`),
+    '',
+    '## Articles',
+    ...ARTICLES.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)}`),
+    '',
+    '## Catégories',
+    ...CATEGORIES.map((c) => `- [${c.name}](${BASE_URL}/categorie/${c.slug}/)`),
+    '',
+  ].join('\n');
+  fs.writeFileSync(path.join(rootDir, 'llms.txt'), llmsTxt, 'utf8');
+
   console.log(
-    `Pages SEO générées : ${GAMES.length} jeux, ${ARTICLES.length} articles, ${CATEGORIES.length} catégories. sitemap.xml : ${urls.length} URLs.`
+    `Pages SEO générées : ${GAMES.length} jeux, ${ARTICLES.length} articles, ${CATEGORIES.length} catégories. sitemap.xml : ${urls.length} URLs. llms.txt généré.`
   );
 }
 

@@ -1,4 +1,44 @@
 User-agent: *
 Allow: /
 
+# Autorisation explicite des robots IA (entraînement et réponse/citation) :
+# choix assumé du 2026-08-08 pour maximiser les chances d'être cité par les
+# IA répondantes (Perplexity, ChatGPT Search, Copilot...), au prix d'accepter
+# que le contenu puisse aussi servir à l'entraînement de modèles.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
 Sitemap: https://www.camonstrejoue.ch/sitemap.xml
