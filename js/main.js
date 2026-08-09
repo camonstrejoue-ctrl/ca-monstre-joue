@@ -590,6 +590,16 @@ function renderArticlePage() {
   hero.innerHTML = '';
   hero.appendChild(carouselSlideMedia(a.hero || a.cover, a.title, a.slug));
   qs('#article-meta').textContent = formatDate(a.date);
+  const authorEl = qs('#article-author');
+  const author = (window.TEAM || []).find((m) => m.name === a.author);
+  authorEl.innerHTML = '';
+  if (author) {
+    authorEl.style.display = '';
+    authorEl.appendChild(el('img', { src: assetUrl(author.photo), alt: '' }));
+    authorEl.appendChild(el('span', { text: `Par ${author.name}` }));
+  } else {
+    authorEl.style.display = 'none';
+  }
   qs('#article-title').textContent = a.title;
   qs('#article-subtitle').textContent = a.subtitle || '';
 
