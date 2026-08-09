@@ -59,6 +59,15 @@
         <li class="nav-item"><a href="/app.html?utm_source=blog&utm_medium=nav&utm_campaign=lien_menu" class="nav-link">Vers l'app</a></li>
       </ul>
     </nav>
+    <div class="search-widget" id="search-widget">
+      <button type="button" class="search-toggle" id="search-toggle" aria-label="Rechercher">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+      </button>
+      <form class="search-form" id="search-form" role="search">
+        <input type="search" id="search-input" placeholder="Rechercher un jeu, un article..." autocomplete="off">
+      </form>
+      <div class="search-results" id="search-results"></div>
+    </div>
     <button class="menu-toggle" aria-label="Ouvrir le menu"><span></span></button>
   </div>
 </header>

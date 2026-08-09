@@ -126,6 +126,74 @@ function initNav() {
   });
 }
 
+// ---------- header search ----------
+function normalizeSearch(str) {
+  return (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+function initSearch() {
+  const widget = qs('#search-widget');
+  const toggle = qs('#search-toggle');
+  const form = qs('#search-form');
+  const input = qs('#search-input');
+  const resultsWrap = qs('#search-results');
+  if (!widget || !toggle || !form || !input || !resultsWrap) return;
+
+  function closeSearch() {
+    widget.classList.remove('open', 'has-results');
+    input.value = '';
+    resultsWrap.innerHTML = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    if (widget.classList.contains('open')) {
+      closeSearch();
+    } else {
+      widget.classList.add('open');
+      input.focus();
+    }
+  });
+
+  form.addEventListener('submit', (e) => e.preventDefault());
+
+  input.addEventListener('input', () => {
+    const q = normalizeSearch(input.value.trim());
+    resultsWrap.innerHTML = '';
+    if (q.length < 2) {
+      widget.classList.remove('has-results');
+      return;
+    }
+    const gameResults = (window.GAMES || [])
+      .filter((g) => normalizeSearch(g.name).includes(q))
+      .map((g) => ({ type: 'Jeu', title: g.name, href: `/jeu.html?slug=${g.slug}`, image: g.thumbnail || g.cover }));
+    const articleResults = (window.ARTICLES || [])
+      .filter((a) => normalizeSearch(a.title).includes(q) || normalizeSearch(a.excerpt || '').includes(q))
+      .map((a) => ({ type: 'Article', title: a.title, href: `/article.html?slug=${a.slug}`, image: a.cover }));
+    const results = [...gameResults, ...articleResults].slice(0, 8);
+
+    widget.classList.add('has-results');
+    if (results.length === 0) {
+      resultsWrap.appendChild(el('div', { class: 'search-empty', text: 'Aucun résultat.' }));
+      return;
+    }
+    results.forEach((r) => {
+      const link = el('a', { class: 'search-result', href: r.href });
+      link.appendChild(el('img', { src: assetUrl(r.image) || '/assets/logo.png', alt: '' }));
+      link.appendChild(el('div', { class: 'meta' }, [
+        el('strong', { text: r.title }),
+        el('span', { text: r.type }),
+      ]));
+      resultsWrap.appendChild(link);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!widget.contains(e.target)) closeSearch();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeSearch();
+  });
+}
+
 // ---------- newsletter + contact forms ----------
 function initForms() {
   const nl = qs('#newsletter-form');
@@ -778,6 +846,7 @@ function initChatbot() {
 // ---------- init ----------
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
+  initSearch();
   initForms();
   initChatbot();
   renderHomeHero();
