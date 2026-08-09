@@ -57,6 +57,9 @@ personnage, couverture de jeu, etc.).
    déjà faite une fois, à ne pas répéter.
 3. Un bloc `{ type: 'spoiler', title, text }` est disponible pour du contenu à révéler au clic
    (accordéon fermé par défaut), utile pour les passages qui gâchent l'histoire d'un jeu narratif.
+4. Ajouter `author: '<Prénom>'`, qui doit correspondre exactement à un `name` de `window.TEAM` (photo +
+   prénom affichés en haut de l'article, cliquable vers la page équipe) — demander qui a écrit l'article
+   plutôt que de deviner.
 
 ## Optimisation SEO (à maintenir et améliorer, pas seulement préserver)
 
