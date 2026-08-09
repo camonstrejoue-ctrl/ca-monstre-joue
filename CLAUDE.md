@@ -96,9 +96,13 @@ Exemples :
 - Story Instagram vers une fiche jeu précise : `/jeu/catan/?utm_source=instagram&utm_medium=story&utm_campaign=catan`
 - Description YouTube d'une vidéo sur un jeu : `/jeu/<slug>/?utm_source=youtube&utm_medium=video&utm_campaign=<slug>`
 
-Le lien vers l'app (store) n'est pas encore intégré sur le site — quand il le sera, lui appliquer la même
-convention (`utm_source`/`utm_medium` selon le réseau qui pousse vers l'app, `utm_campaign` selon la
-campagne), pour distinguer dans GA4 le trafic blog → app.
+Le lien vers l'app (bouton "Vers l'app" du menu, bouton "Regarde ce contenu sur l'app" du bloc partage)
+pointe vers `/app.html` (page "bientôt disponible", en attendant la publication sur les stores), avec la
+même convention UTM appliquée depuis le blog lui-même : `utm_source=blog`, `utm_medium=nav` (menu) ou
+`partage` (bloc partage jeu/article), `utm_campaign=lien_menu` ou slug du contenu partagé — pour
+distinguer dans GA4 le trafic blog → app. Quand l'app sera publiée sur les stores, remplacer les hrefs de
+`/app.html` par les vraies URLs de store (en gardant les mêmes paramètres UTM), et remplacer le contenu de
+`app.html` par une redirection ou une page de présentation complète.
 
 ## Poids et format des images
 

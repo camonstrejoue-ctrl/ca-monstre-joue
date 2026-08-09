@@ -169,7 +169,7 @@ function main() {
   const articleTemplate = fs.readFileSync(path.join(rootDir, 'article.html'), 'utf8');
   const categoryTemplate = fs.readFileSync(path.join(rootDir, 'categorie.html'), 'utf8');
 
-  const urls = [`${BASE_URL}/`, `${BASE_URL}/tous-les-jeux.html`, `${BASE_URL}/equipe.html`, `${BASE_URL}/contact.html`];
+  const urls = [`${BASE_URL}/`, `${BASE_URL}/tous-les-jeux.html`, `${BASE_URL}/equipe.html`, `${BASE_URL}/contact.html`, `${BASE_URL}/app.html`];
 
   GAMES.forEach((g) => {
     const url = `${BASE_URL}/jeu/${g.slug}/`;

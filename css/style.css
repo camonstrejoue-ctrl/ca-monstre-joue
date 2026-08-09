@@ -398,6 +398,7 @@ button{font-family:inherit;cursor:pointer;}
 }
 .share-box h3{font-family:var(--font-display);margin-bottom:16px;}
 .share-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;}
+.app-share-link{display:inline-block;margin-top:18px;}
 .share-row a, .share-row button{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   width:44px;height:44px;border-radius:50%;border:2px solid var(--black);

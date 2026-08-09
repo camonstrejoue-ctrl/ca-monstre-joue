@@ -333,6 +333,11 @@ function renderShareRow(container, url, title) {
   });
   container.appendChild(copyBtn);
 }
+function renderAppShareLink(slug) {
+  const link = qs('#app-share-link');
+  if (!link) return;
+  link.href = `/app.html?utm_source=blog&utm_medium=partage&utm_campaign=${encodeURIComponent(slug)}`;
+}
 
 // ---------- GAME page ----------
 function renderGamePage() {
@@ -345,6 +350,7 @@ function renderGamePage() {
   }
   document.title = `${g.name} — Ça Monstre Joue`;
   renderShareRow(qs('#share-row'), `${window.location.origin}/jeu/${g.slug}/`, g.name);
+  renderAppShareLink(g.slug);
   qsa('[data-game-name]').forEach(n => n.textContent = g.name);
   const introEl = qs('[data-game-intro]');
   introEl.innerHTML = '';
@@ -511,6 +517,7 @@ function renderArticlePage() {
   }
   document.title = `${a.title} — Ça Monstre Joue`;
   renderShareRow(qs('#share-row'), `${window.location.origin}/article/${a.slug}/`, a.title);
+  renderAppShareLink(a.slug);
   const hero = qs('#article-hero');
   hero.innerHTML = '';
   hero.appendChild(carouselSlideMedia(a.hero || a.cover, a.title, a.slug));
