@@ -81,6 +81,8 @@ button{font-family:inherit;cursor:pointer;}
   display:inline-flex;align-items:center;gap:6px;
 }
 .nav-link:hover, .nav-item.open > .nav-link{background:var(--black);color:var(--white);}
+.nav-link--app{background:var(--coral);color:var(--white);border:2px solid var(--black);}
+.nav-link--app:hover{background:var(--coral-dark);color:var(--white);}
 .nav-item{position:relative;}
 .nav-caret{font-size:.7em;transition:transform .2s ease;}
 .nav-item.open .nav-caret{transform:rotate(180deg);}
