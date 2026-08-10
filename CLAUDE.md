@@ -65,6 +65,13 @@ personnage, couverture de jeu, etc.).
    prénom affichés en haut de l'article, cliquable vers la page équipe) — demander qui a écrit l'article
    plutôt que de deviner.
 
+## Tutoiement (règle éditoriale, depuis le 2026-08-10)
+
+Tout le contenu du site s'adresse au lecteur en tutoiement, jamais en vouvoiement — que ce soit dans
+`js/data.js` (intros de jeux, `fitIntro`, blocs d'articles) ou dans le texte statique des pages HTML.
+Toute nouvelle rédaction (nouveau jeu, nouvel article, nouveau texte d'interface) doit être écrite
+directement en tutoiement, sans qu'il soit besoin de le redemander.
+
 ## Optimisation SEO (à maintenir et améliorer, pas seulement préserver)
 
 Le site a reçu une passe SEO complète (2026-08-08) : un `<h1>` unique par page, meta description +
