@@ -228,6 +228,17 @@ function carouselSlideMedia(src, alt, seed) {
   return img;
 }
 
+// ---------- HOME: banner ad (random pick on each page load) ----------
+function renderHomeBanner() {
+  const link = qs('#home-banner-link');
+  const banners = window.HOME_BANNERS || [];
+  if (!link || banners.length === 0) return;
+  const banner = banners[Math.floor(Math.random() * banners.length)];
+  link.setAttribute('href', banner.href);
+  link.innerHTML = '';
+  link.appendChild(el('img', { src: assetUrl(banner.image), alt: banner.alt || '' }));
+}
+
 function renderHomeHero() {
   const carousel = qs('#hero-carousel');
   if (!carousel) return;
@@ -859,6 +870,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initForms();
   initChatbot();
+  renderHomeBanner();
   renderHomeHero();
   renderCategoryGrid();
   renderCategoryPage();

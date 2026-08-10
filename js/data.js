@@ -4,6 +4,13 @@
    Pour ajouter un article : dupliquer un objet dans ARTICLES.
    ============================================ */
 
+// Bannière publicitaire (format Superbanner 970x90) au-dessus du carrousel
+// d'accueil. Plusieurs entrées = une bannière est tirée au hasard à chaque
+// chargement de la page.
+window.HOME_BANNERS = [
+  { image: 'assets/banner-exemple.png', href: '/app.html?utm_source=blog&utm_medium=nav&utm_campaign=lien_menu', alt: "Vers l'app Ça Monstre Joue" },
+];
+
 window.CATEGORIES = [
   { slug: 'jeux-a-deux',        name: 'Jeux à deux',        image: 'assets/categories/jeux-adeux-categorie.JPG' },
   { slug: 'jeux-cooperatifs',   name: 'Jeux coopératifs',   image: 'assets/categories/jeux-cooperatifs-categorie.jpg' },
