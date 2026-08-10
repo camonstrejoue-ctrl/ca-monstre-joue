@@ -510,7 +510,7 @@ window.ARTICLES = [
       { type: 'p', text: "Vous lancez à voix haute, le doigt figé sur le bouton de la télécommande : « Allez ce soir on teste le jeu ! »." },
       { type: 'p', text: "Avec un regain d’énergie, vous découvrez que les règles sont extrêmement faciles à apprendre et que le jeu vous les fera découvrir au fur et à mesure que vous avancerez dans la campagne, rajoutant toujours plus d’éléments au jeu." },
       { type: 'p', text: "Vous placez vos tuiles, vous créez des rizières, vous dessinez une longue rivière en plein milieu de votre village, imaginez une route qui parcourt la région et traverse une vaste forêt luxuriante." },
-      { type: 'image', src: 'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-rivière.JPG', caption: 'Une rivière serpente au cœur du village.' },
+      { type: 'image', src: 'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-rivière.JPG', caption: 'Une rivière serpente au milieu du paysage.' },
       { type: 'p', text: "Vous discutez ensemble de la meilleure manière d’agencer vos tuiles et vous marquez ainsi toujours plus de points en accomplissant les nombreux objectifs demandés : une rivière faite de 5 tuiles, fait ! une rizière de 6 tuiles, ok !" },
       { type: 'p', text: "À la manière d’un jardin zen, vous sentez que votre esprit se repose et que votre besoin de clôture est satisfait." },
       { type: 'p', text: "La pile de tuile est épuisée et la partie s’achève. Bingo ! Votre nombre de points vous permet d’avancer sur la piste de la campagne et vous débloquez du nouveau contenu !" },
