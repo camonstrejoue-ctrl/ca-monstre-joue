@@ -48,6 +48,10 @@ personnage, couverture de jeu, etc.).
    déjà sur "Note de Ça Monstre Joue").
 4. `intro` peut être une chaîne ou un tableau de paragraphes (un tableau donne un texte plus aéré, à
    préférer pour les intros longues).
+5. Respecter le même schéma que les jeux existants dans `window.GAMES` (mêmes champs, même structure
+   `identity`, mêmes conventions). Si le contenu fourni par l'utilisateur pour ce nouveau jeu diverge du
+   schéma existant (champ manquant, structure différente, information qui ne rentre dans aucun champ
+   actuel), le signaler et demander s'il faut harmoniser plutôt que d'improviser un nouveau format.
 
 ## Ajouter un nouvel article
 
