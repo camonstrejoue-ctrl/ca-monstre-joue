@@ -65,18 +65,16 @@ personnage, couverture de jeu, etc.).
    prénom affichés en haut de l'article, cliquable vers la page équipe) — demander qui a écrit l'article
    plutôt que de deviner.
 
-## Tutoiement (règle éditoriale, depuis le 2026-08-10)
+## Tutoiement / vouvoiement (règle éditoriale, depuis le 2026-08-10)
 
-Tout le contenu du site s'adresse au lecteur en tutoiement, jamais en vouvoiement — que ce soit dans
-`js/data.js` (intros de jeux, `fitIntro`, blocs d'articles) ou dans le texte statique des pages HTML.
-Toute nouvelle rédaction (nouveau jeu, nouvel article, nouveau texte d'interface) doit être écrite
-directement en tutoiement, sans qu'il soit besoin de le redemander.
+Après plusieurs allers-retours à essayer de trancher tu/vous au cas par cas dans le contenu (trop
+compliqué à généraliser), la règle finale est simple :
 
-**Exception** : quand le texte parle explicitement d'un groupe (l'équipe de joueurs dans un jeu coopératif
-joué à plusieurs, ou l'équipe de Ça Monstre Joue elle-même — ex. "Est-ce que vous testez chaque jeu ?"),
-le "vous" reste légitime, ce n'est pas du vouvoiement de politesse. Sub Terra II et Daybreak (jeux
-coopératifs joués en équipe) utilisent ainsi "vous" de bout en bout, contrairement aux autres fiches jeu.
-En cas de doute sur un nouveau texte, demander plutôt que de trancher seul.
+- **Contenu à l'intérieur des articles et fiches jeu** (`js/data.js` : intros, `fitIntro`, `fitFor`,
+  `notFitFor`, blocs d'articles) : ne jamais changer le tu/vous de sa propre initiative. Ce texte reste
+  exactement dans la formulation donnée par l'utilisateur — s'il y a un souci, il le signalera lui-même.
+- **Interface** (chatbot, boutons, footer, formulaires, textes techniques comme les meta description) :
+  toujours en tutoiement.
 
 ## Optimisation SEO (à maintenir et améliorer, pas seulement préserver)
 
