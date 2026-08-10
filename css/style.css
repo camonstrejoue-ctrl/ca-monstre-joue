@@ -370,6 +370,8 @@ button{font-family:inherit;cursor:pointer;}
 .fit-box--yes h4{color:var(--green-dark);}
 .fit-box--no{background:var(--coral-light);}
 .fit-box--no h4{color:var(--coral-dark);}
+.fit-box--yes li a{color:var(--green-dark);text-decoration:underline;}
+.fit-box--no li a{color:var(--coral-dark);text-decoration:underline;}
 
 /* ---------- tooltip ---------- */
 .tooltip{

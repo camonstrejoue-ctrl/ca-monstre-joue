@@ -286,6 +286,47 @@ window.GAMES = [
       { image: '', articleSlug: 'finspan-extension-requins-recifs' },
     ],
   },
+  {
+    slug: 'wingspan',
+    name: 'Wingspan',
+    categories: ['jeux-de-strategie', 'jeux-a-deux'],
+    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
+    cover: '',
+    intro: [
+      "Avec Wingspan, on apprend en s’amusant.",
+      "Vous avez toujours rêvé de savoir quel est l’oiseau que vous entendez chaque matin dans votre jardin ? Vous ne le saurez pas plus en jouant à Wingspan ! Mais vous apprendrez plein de noms d’oiseaux, et d’informations intéressantes à leur sujet.",
+      "Combien mesure un Geai bleu ? Quel type de nid utilise un Héron vert ? Combien d’œufs peut pondre un Tarin des pins ? Vous trouverez toutes ces réponses au fil de vos parties, en même temps que vous écraserez vos adversaires grâce à votre stratégie rondement ficelée.",
+      "Placez un maximum d’oiseaux, pondez le plus d’œufs possibles, et marquez toutes sortes de points en remplissant des objectifs de manche et des objectifs secrets sur vos cartes bonus !",
+    ],
+    identity: {
+      players: '1-5',
+      age: '10 ans et plus',
+      duration: '45-60 minutes',
+      year: '2019',
+      type: 'Compétitif',
+      difficulty: { stars: 3, label: 'Moyenne' },
+      note: { stars: 5, max: 6 },
+    },
+    fitIntro: "Wingspan est un jeu qui saura vous faire entrer dans le monde magnifique de l’ornithologie. Des parties relativement courtes et sans interactions vigoureuses entre joueurs vous offriront des soirées ludiques mais reposantes.",
+    fitFor: [
+      'Tu aimes faire tes combos dans ton coin sans qu’on passe la partie à te mettre des bâtons dans les roues',
+      'Tu adores apprendre en t’amusant et souhaite découvrir chaque espèce',
+      'Tu as un jeune ado à la maison et cherche un jeu pour le stimuler intellectuellement tout en s’amusant',
+      'Tu as adoré Finspan ou Wyrmspan et souhaites varier les univers',
+    ],
+    notFitFor: [
+      'La nature, c’est vraiment pas ton truc',
+      'Pour toi les oiseaux, c’est clairement pas assez cool. Tu veux des dragons !',
+      'T’as le budget que pour un jeu et t’es fan de poissons, va voir <a href="/jeu.html?slug=finspan">Finspan</a> !',
+      'Tu veux un jeu pour jouer avec ton enfant. 10 ans c’est vraiment le minimum.',
+    ],
+    // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
+    video: '',
+    // Pas encore de playlist reçue.
+    spotify: '',
+    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
+    gallery: [],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article

@@ -514,7 +514,7 @@ function renderGamePage() {
     el('h4', { text: 'Ce jeu est fait pour toi si :' }),
   ]);
   const yesList = el('ul', {});
-  g.fitFor.forEach(t => yesList.appendChild(el('li', { text: '✓ ' + t })));
+  g.fitFor.forEach(t => yesList.appendChild(el('li', { html: '✓ ' + t })));
   yesBox.appendChild(yesList);
   fitBody.appendChild(yesBox);
 
@@ -522,7 +522,7 @@ function renderGamePage() {
     el('h4', { text: 'Ce jeu n’est malheureusement pas pour toi si :' }),
   ]);
   const noList = el('ul', {});
-  g.notFitFor.forEach(t => noList.appendChild(el('li', { text: '✕ ' + t })));
+  g.notFitFor.forEach(t => noList.appendChild(el('li', { html: '✕ ' + t })));
   noBox.appendChild(noList);
   fitBody.appendChild(noBox);
 
