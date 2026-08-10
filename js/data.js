@@ -106,8 +106,9 @@ window.GAMES = [
     // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
     video: '',
     spotify: 'https://open.spotify.com/playlist/0ALucT2kHAEvPVpWZeXj4T?si=V2_AGKaxRGCSGb0ozdsDUQ&utm_source=whatsapp&pi=EQXDWwI-RU2m9',
-    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
-    gallery: [],
+    gallery: [
+      { image: 'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-vignette.JPG', articleSlug: 'dorf-romantik-sakura-critique' },
+    ],
   },
   {
     slug: 'daybreak',
@@ -486,6 +487,36 @@ window.ARTICLES = [
       { type: 'p', text: "Mais du coup vous vous dites : « bon ok ça a l’air cool mais ils veulent en venir où ? »" },
       { type: 'p', text: "C’est vrai, on aurait pu vous épargner tout cet article. En bref, notre avis pourrait se résumer en une phrase :" },
       { type: 'p', text: "<strong>Les oiseaux, c’est pas notre truc, pourtant le jeu a su nous happer et nous émerveiller.</strong>" },
+    ],
+  },
+  {
+    slug: 'dorf-romantik-sakura-critique',
+    title: 'Dorf Romantik Sakura - Votre couple mérite mieux que Netflix',
+    date: '2026-08-10',
+    author: 'Alex',
+    gameSlug: 'dorf-romantik-sakura',
+    hero: 'assets/games/dorf-romantik-sakura/sakura-bandeau.png',
+    cover: 'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-vignette.JPG',
+    banner: 'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-banniere.JPG',
+    excerpt: "Comment un jeu de placement de tuiles japonisant a fini par détrôner la routine Netflix du soir.",
+    blocks: [
+      { type: 'p', text: "Dans ce jeu de placement de tuiles, vous façonnez votre paysage dans un univers japonais apaisant." },
+      { type: 'p', text: "Imaginez la scène. Après une éprouvante journée de boulot, après avoir encore lancé une lessive, fait un peu de rangement et cuisiné pendant une heure, vous venez de finir de manger." },
+      { type: 'p', text: "Complètement avachis sur le canapé, vous êtes à deux doigt d’appuyer sur le bouton de la télécommande pour, comme chaque soir, lancer la même série Netflix et éteindre votre cerveau." },
+      { type: 'p', text: "Soudain vous l’apercevez. Là, sur la table du salon, posé depuis le weekend dernier, date à laquelle vous l’avez acheté, Dorf Romantik Sakura vous observe. Pire, il vous juge et vous rappelle que cela fait maintenant 4 jours qu’il est posé là, toujours sous blister." },
+      { type: 'p', text: "Pourquoi l’avez-vous acheté déjà ? Ah oui, dans la boutique les couleurs flashy ont attiré votre œil et vous l’avez instantanément montré à votre moitié : « Oh un jeu sur le japon, trop cool, j’adore ! ». Pris d’une achtite aiguë, vous craquez et ressortez tous les deux du magasin, la boite sous le bras et avec une allure d’enfant le matin de Noël." },
+      { type: 'p', text: "Arrivé à la maison, vous l’avez posé sur la table en disant « On y joue tout à l’heure ! ». Cela fait maintenant 4 jours, depuis cette date fatidique." },
+      { type: 'p', text: "Il vous fixe et vous commencez à le prendre personnellement. « On est des larves ou quoi ? »" },
+      { type: 'p', text: "Vous lancez à voix haute, le doigt figé sur le bouton de la télécommande : « Allez ce soir on teste le jeu ! »." },
+      { type: 'p', text: "Avec un regain d’énergie, vous découvrez que les règles sont extrêmement faciles à apprendre et que le jeu vous les fera découvrir au fur et à mesure que vous avancerez dans la campagne, rajoutant toujours plus d’éléments au jeu." },
+      { type: 'p', text: "Vous placez vos tuiles, vous créez des rizières, vous dessinez une longue rivière en plein milieu de votre village, imaginez une route qui parcourt la région et traverse une vaste forêt luxuriante." },
+      { type: 'image', src: 'assets/games/dorf-romantik-sakura/Dork-romantik-sakura-rivière.JPG', caption: 'Une rivière serpente au cœur du village.' },
+      { type: 'p', text: "Vous discutez ensemble de la meilleure manière d’agencer vos tuiles et vous marquez ainsi toujours plus de points en accomplissant les nombreux objectifs demandés : une rivière faite de 5 tuiles, fait ! une rizière de 6 tuiles, ok !" },
+      { type: 'p', text: "À la manière d’un jardin zen, vous sentez que votre esprit se repose et que votre besoin de clôture est satisfait." },
+      { type: 'p', text: "La pile de tuile est épuisée et la partie s’achève. Bingo ! Votre nombre de points vous permet d’avancer sur la piste de la campagne et vous débloquez du nouveau contenu !" },
+      { type: 'image', src: 'assets/games/dorf-romantik-sakura/Dorf-romantik-sakura-campagne.JPG', caption: 'La campagne se dévoile au fil des parties.' },
+      { type: 'p', text: "Désormais, de nouvelles tuiles s’ajoutent diversifiant les objectifs. Et ce n’est que le début. De longues soirées reposantes vous attendent. Une fois la première partie lancée, c’est fini pour vous, vous êtes devenus accro. Vous avez besoin de votre dose de calme et d’apaisement." },
+      { type: 'p', text: "Alors…convaincu ? Sakuracheter le jeu ou pas ?" },
     ],
   },
 ];
