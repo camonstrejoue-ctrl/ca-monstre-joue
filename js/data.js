@@ -15,7 +15,20 @@ window.HOME_BANNERS = [
 // après vérification (voir le formulaire "Proposer un événement" de la page) :
 // { title, date: 'YYYY-MM-DD', time: 'HH:MM', location, description, price,
 //   registrationLink?, image?, contact }
-window.EVENTS = [];
+window.EVENTS = [
+  // Événement de test, à retirer une fois la mise en page validée.
+  {
+    title: 'Soirée jeux Ça Monstre Joue',
+    date: '2026-09-12',
+    time: '19:00',
+    location: 'Genève',
+    description: "Une soirée conviviale pour découvrir nos jeux coups de cœur du moment, entre amateurs et curieux.",
+    price: 'Gratuit',
+    registrationLink: 'https://www.camonstrejoue.ch/contact.html',
+    image: 'assets/logo.png',
+    contact: 'camonstrejoue@gmail.com',
+  },
+];
 
 window.CATEGORIES = [
   { slug: 'jeux-a-deux',        name: 'Jeux à deux',        image: 'assets/categories/jeux-adeux-categorie.JPG' },
