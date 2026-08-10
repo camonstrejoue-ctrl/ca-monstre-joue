@@ -563,11 +563,11 @@ button{font-family:inherit;cursor:pointer;}
 /* ---------- footer ---------- */
 .site-footer{background:var(--black);color:var(--cream);padding:60px 0 26px;margin-top:60px;}
 .footer-grid{display:grid;grid-template-columns:auto 1fr 1fr;gap:40px;margin-bottom:40px;}
-.footer-brand{margin-top:64px;}
-.footer-contact{display:flex;align-items:center;gap:14px;}
+.footer-brand h4{visibility:hidden;}
+.footer-contact{display:flex;align-items:flex-start;gap:14px;}
 .footer-contact .btn{border-color:var(--white);}
 .footer-monster{width:72px;height:auto;flex:none;}
-.footer-col h4{font-family:var(--font-display);color:var(--white);font-size:1rem;margin-bottom:16px;}
+.footer-brand h4, .footer-col h4{font-family:var(--font-display);color:var(--white);font-size:1rem;margin-bottom:16px;}
 .newsletter-form{display:flex;gap:8px;flex-wrap:wrap;}
 .newsletter-form input{
   flex:1;min-width:180px;padding:12px 14px;border-radius:999px;border:2px solid var(--gray);
