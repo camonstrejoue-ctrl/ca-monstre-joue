@@ -72,6 +72,12 @@ Tout le contenu du site s'adresse au lecteur en tutoiement, jamais en vouvoiemen
 Toute nouvelle rédaction (nouveau jeu, nouvel article, nouveau texte d'interface) doit être écrite
 directement en tutoiement, sans qu'il soit besoin de le redemander.
 
+**Exception** : quand le texte parle explicitement d'un groupe (l'équipe de joueurs dans un jeu coopératif
+joué à plusieurs, ou l'équipe de Ça Monstre Joue elle-même — ex. "Est-ce que vous testez chaque jeu ?"),
+le "vous" reste légitime, ce n'est pas du vouvoiement de politesse. Sub Terra II et Daybreak (jeux
+coopératifs joués en équipe) utilisent ainsi "vous" de bout en bout, contrairement aux autres fiches jeu.
+En cas de doute sur un nouveau texte, demander plutôt que de trancher seul.
+
 ## Optimisation SEO (à maintenir et améliorer, pas seulement préserver)
 
 Le site a reçu une passe SEO complète (2026-08-08) : un `<h1>` unique par page, meta description +
