@@ -53,6 +53,13 @@ personnage, couverture de jeu, etc.).
    schéma existant (champ manquant, structure différente, information qui ne rentre dans aucun champ
    actuel), le signaler et demander s'il faut harmoniser plutôt que d'improviser un nouveau format.
 
+## Bannière publicitaire (accueil)
+
+Format Superbanner (970×90, fallback mobile 320×50) au-dessus du carrousel d'accueil. Les bannières sont
+listées dans `window.HOME_BANNERS` (js/data.js, champs `image`/`href`/`alt`) ; une est tirée au hasard à
+chaque chargement de la page. Pour ajouter une bannière, ajouter une entrée à ce tableau — pas besoin de
+toucher au HTML/CSS.
+
 ## Ajouter un nouvel article
 
 1. Ajouter l'entrée dans `window.ARTICLES` (js/data.js), avec `gameSlug` pointant vers le bon jeu.
