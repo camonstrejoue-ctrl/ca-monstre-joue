@@ -563,8 +563,9 @@ button{font-family:inherit;cursor:pointer;}
 /* ---------- footer ---------- */
 .site-footer{background:var(--black);color:var(--cream);padding:60px 0 26px;margin-top:60px;}
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px;}
-.footer-brand img{height:50px;margin-bottom:14px;}
-.footer-brand p{color:var(--gray-light);font-size:.95rem;max-width:320px;}
+.footer-contact{display:flex;align-items:center;gap:14px;}
+.footer-contact .btn{border-color:var(--white);}
+.footer-monster{width:52px;height:auto;flex:none;}
 .footer-col h4{font-family:var(--font-display);color:var(--white);font-size:1rem;margin-bottom:16px;}
 .newsletter-form{display:flex;gap:8px;flex-wrap:wrap;}
 .newsletter-form input{
