@@ -357,7 +357,7 @@ window.GAMES = [
       'assets/games/flyin-goblin/flyin-goblin-fiche4.JPG',
     ],
     intro: [
-      "Messire, que notre armé de goblins se tienne prête !",
+      "Messire, que notre armée de goblins se tienne prête !",
       "Préparez-vous à attaquer le château !",
       "Quoi ? Comment ça une autre armée de Goblins les attaque par le côté Sud ?",
       "Ils ne manquent pas de culot ceux-là ! On va leur montrer qui sont les meilleurs !",
@@ -375,15 +375,15 @@ window.GAMES = [
       note: { stars: 6, max: 6 },
     },
     fitFor: [
-      'Vous aimez les jeux d’adresse et savez bien viser et doser votre force',
-      'Vous cherchez un jeu à faire avec vos enfants',
-      'Vous souhaitez pimenter votre couple à l’heure de l’apéro',
-      'Vous cherchez un jeu super original pour votre prochaine soirée entre potes pour changer du Times up et du Uno',
+      'Tu aimes les jeux d’adresse et sais bien viser et doser ta force',
+      'Tu cherches un jeu à faire avec tes enfants',
+      'Tu souhaites pimenter ton couple à l’heure de l’apéro',
+      'Tu cherches un jeu super original pour ta prochaine soirée entre potes pour changer du Times up et du Uno',
     ],
     notFitFor: [
-      'Vous n’avez aucun sens de l’humour',
-      'Vous êtes daltonien ? Vous risquez de dégommer vos propres forces !',
-      'Franchement à part ça, je ne vois pas, le jeu est une pépite. Vous allez vous éclater !',
+      'Tu n’as aucun sens de l’humour',
+      'Tu es daltonien ? Tu risques de dégommer tes propres forces !',
+      'Franchement à part ça, je ne vois pas, le jeu est une pépite. Tu vas t’éclater !',
     ],
     video: 'https://www.instagram.com/reel/DTbDz3sDRv8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     // Pas encore de playlist reçue.
