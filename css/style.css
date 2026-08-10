@@ -334,6 +334,8 @@ button{font-family:inherit;cursor:pointer;}
   border:3px solid var(--black);box-shadow:var(--shadow);background:var(--black);
 }
 .video-wrap iframe, .video-wrap .video-placeholder{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.video-wrap .instagram-media{position:absolute!important;inset:0!important;width:100%!important;min-width:0!important;max-width:100%!important;margin:0!important;}
+.video-wrap .instagram-media iframe{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;}
 .video-placeholder{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
   background:linear-gradient(135deg,var(--black),#2a231b);color:var(--white);text-align:center;padding:20px;

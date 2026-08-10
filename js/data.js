@@ -345,6 +345,47 @@ window.GAMES = [
       { image: 'assets/games/wingspan/wingspan-quelspanestu-vignette.JPG', articleSlug: 'wingspan-quel-span-es-tu' },
     ],
   },
+  {
+    slug: 'flyin-goblin',
+    name: "Flyin' Goblin",
+    categories: ['jeux-a-deux', 'jeux-famille', 'jeux-dambiance'],
+    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
+    cover: '',
+    intro: [
+      "Messire, que notre armé de goblins se tienne prête !",
+      "Préparez-vous à attaquer le château !",
+      "Quoi ? Comment ça une autre armée de Goblins les attaque par le côté Sud ?",
+      "Ils ne manquent pas de culot ceux-là ! On va leur montrer qui sont les meilleurs !",
+      "Et ne vous avisez pas de revenir avec moins d’or et de diamants que ces énergumènes, vous êtes prévenus !",
+      "Tout est prêt ? Visez la tour, feu !",
+      "Dans ce jeu familial (hilarant en soirée avec un coup dans le nez), vous devrez littéralement catapulter vos forces au sein du château afin de récupérer de l’or, des diamants et de prendre le contrôle de la forteresse, avant les autres bien sûr ! Visez bien et tirez !",
+    ],
+    identity: {
+      players: '2-4',
+      age: '8 ans et plus',
+      duration: '30-45 minutes',
+      year: '2020',
+      type: 'Compétitif',
+      difficulty: { stars: 1, label: 'Facile' },
+      note: { stars: 6, max: 6 },
+    },
+    fitFor: [
+      'Vous aimez les jeux d’adresse et savez bien viser et doser votre force',
+      'Vous cherchez un jeu à faire avec vos enfants',
+      'Vous souhaitez pimenter votre couple à l’heure de l’apéro',
+      'Vous cherchez un jeu super original pour votre prochaine soirée entre potes pour changer du Times up et du Uno',
+    ],
+    notFitFor: [
+      'Vous n’avez aucun sens de l’humour',
+      'Vous êtes daltonien ? Vous risquez de dégommer vos propres forces !',
+      'Franchement à part ça, je ne vois pas, le jeu est une pépite. Vous allez vous éclater !',
+    ],
+    video: 'https://www.instagram.com/reel/DTbDz3sDRv8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    // Pas encore de playlist reçue.
+    spotify: '',
+    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
+    gallery: [],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article

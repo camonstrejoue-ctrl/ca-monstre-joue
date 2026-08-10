@@ -74,6 +74,23 @@ function youTubeEmbed(url) {
   }
   return null;
 }
+function isInstagramUrl(url) {
+  return !!url && /instagram\.com\/(reel|p)\//.test(url);
+}
+let instagramEmbedScriptPromise = null;
+function loadInstagramEmbedScript() {
+  if (window.instgrm) return Promise.resolve();
+  if (!instagramEmbedScriptPromise) {
+    instagramEmbedScriptPromise = new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://www.instagram.com/embed.js';
+      script.async = true;
+      script.onload = resolve;
+      document.body.appendChild(script);
+    });
+  }
+  return instagramEmbedScriptPromise;
+}
 // Les chemins d'assets dans data.js sont écrits sans "/" initial (ex. "assets/games/...") ;
 // on les rend root-relative ici pour qu'ils marchent aussi depuis les pages générées en
 // profondeur (ex. /jeu/<slug>/, /categorie/<slug>/), pas seulement depuis la racine du site.
@@ -540,7 +557,12 @@ function renderGamePage() {
   const videoWrap = qs('#video-wrap');
   const embed = youTubeEmbed(g.video);
   videoWrap.innerHTML = '';
-  if (embed) {
+  if (isInstagramUrl(g.video)) {
+    videoWrap.appendChild(el('blockquote', {
+      class: 'instagram-media', 'data-instgrm-permalink': g.video, 'data-instgrm-version': '14',
+    }));
+    loadInstagramEmbedScript().then(() => window.instgrm && window.instgrm.Embeds.process());
+  } else if (embed) {
     videoWrap.appendChild(el('iframe', {
       src: embed, title: g.name,
       allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
