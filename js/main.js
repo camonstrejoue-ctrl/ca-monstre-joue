@@ -720,7 +720,7 @@ function initChatbot() {
     },
     {
       key: 'players',
-      question: 'Tu seras combien à jouer ?',
+      question: 'Vous serez combien à jouer ?',
       options: () => [
         { label: '1-2 joueurs', value: [1, 2] },
         { label: '3-4 joueurs', value: [3, 4] },
