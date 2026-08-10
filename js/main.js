@@ -248,7 +248,7 @@ function renderHomeHero() {
   const nextBtn = qs('#carousel-next');
   const latest = [...(window.ARTICLES || [])]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 3);
+    .slice(0, 5);
 
   track.innerHTML = '';
   dotsWrap.innerHTML = '';
