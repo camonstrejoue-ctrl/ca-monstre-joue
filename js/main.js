@@ -720,7 +720,7 @@ function initChatbot() {
     },
     {
       key: 'players',
-      question: 'Vous serez combien à jouer ?',
+      question: 'Tu seras combien à jouer ?',
       options: () => [
         { label: '1-2 joueurs', value: [1, 2] },
         { label: '3-4 joueurs', value: [3, 4] },
@@ -747,7 +747,7 @@ function initChatbot() {
     },
     {
       key: 'duration',
-      question: 'Combien de temps voulez-vous jouer ?',
+      question: 'Combien de temps veux-tu jouer ?',
       options: () => [
         { label: 'Moins de 30 min', value: [0, 30] },
         { label: '30 à 60 min', value: [30, 60] },
