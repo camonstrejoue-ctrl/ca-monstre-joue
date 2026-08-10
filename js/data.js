@@ -11,6 +11,12 @@ window.HOME_BANNERS = [
   { image: 'assets/banner-exemple.png', href: '/app.html?utm_source=blog&utm_medium=nav&utm_campaign=lien_menu', alt: "Vers l'app Ça Monstre Joue" },
 ];
 
+// Événements affichés sur /agenda.html. Chaque entrée est publiée à la main
+// après vérification (voir le formulaire "Proposer un événement" de la page) :
+// { title, date: 'YYYY-MM-DD', time: 'HH:MM', location, description, price,
+//   registrationLink?, image?, contact }
+window.EVENTS = [];
+
 window.CATEGORIES = [
   { slug: 'jeux-a-deux',        name: 'Jeux à deux',        image: 'assets/categories/jeux-adeux-categorie.JPG' },
   { slug: 'jeux-cooperatifs',   name: 'Jeux coopératifs',   image: 'assets/categories/jeux-cooperatifs-categorie.jpg' },

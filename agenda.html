@@ -10,19 +10,19 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Article — Ça Monstre Joue</title>
-<meta name="description" content="Critiques, conseils et avis détaillés sur des jeux de société, par l'équipe de Ça Monstre Joue.">
-<link rel="canonical" href="https://www.camonstrejoue.ch/article.html">
-<meta property="og:type" content="article">
+<title>Agenda — Ça Monstre Joue</title>
+<meta name="description" content="Retrouve les prochains événements jeux de société à ne pas manquer, et propose gratuitement le tien.">
+<link rel="canonical" href="https://www.camonstrejoue.ch/agenda.html">
+<meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Ça Monstre Joue">
-<meta property="og:title" content="Article — Ça Monstre Joue">
-<meta property="og:description" content="Critiques, conseils et avis détaillés sur des jeux de société, par l'équipe de Ça Monstre Joue.">
+<meta property="og:title" content="Agenda — Ça Monstre Joue">
+<meta property="og:description" content="Retrouve les prochains événements jeux de société à ne pas manquer, et propose gratuitement le tien.">
 <meta property="og:image" content="https://www.camonstrejoue.ch/assets/logo.png">
-<meta property="og:url" content="https://www.camonstrejoue.ch/article.html">
+<meta property="og:url" content="https://www.camonstrejoue.ch/agenda.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Article — Ça Monstre Joue">
-<meta name="twitter:description" content="Critiques, conseils et avis détaillés sur des jeux de société, par l'équipe de Ça Monstre Joue.">
+<meta name="twitter:title" content="Agenda — Ça Monstre Joue">
+<meta name="twitter:description" content="Retrouve les prochains événements jeux de société à ne pas manquer, et propose gratuitement le tien.">
 <meta name="twitter:image" content="https://www.camonstrejoue.ch/assets/logo.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.camonstrejoue.ch/#organization","name":"Ça Monstre Joue","url":"https://www.camonstrejoue.ch/","logo":"https://www.camonstrejoue.ch/assets/logo.png"},{"@type":"WebSite","@id":"https://www.camonstrejoue.ch/#website","name":"Ça Monstre Joue","url":"https://www.camonstrejoue.ch/","publisher":{"@id":"https://www.camonstrejoue.ch/#organization"},"inLanguage":"fr-CH"}]}
@@ -70,32 +70,70 @@
   </div>
 </header>
 
-<main id="article-root">
-  <div class="article-hero" id="article-hero"></div>
-  <article class="article-body">
-    <p class="meta" id="article-meta"></p>
-    <a class="article-author" id="article-author" href="/equipe.html"></a>
-    <h1 id="article-title"></h1>
-    <p class="article-subtitle" id="article-subtitle"></p>
-    <div id="article-blocks"></div>
-  </article>
-
-  <section class="related-section" id="related-section">
+<main>
+  <section class="page-hero">
     <div class="container">
-      <div class="section-heading">
-        <h2 id="related-title"></h2>
-      </div>
-      <div class="related-grid" id="related-grid"></div>
+      <h1>Agenda</h1>
+      <p>Les prochains événements jeux de société à ne pas manquer — et une envie d'en organiser un ? Propose-le gratuitement, juste en dessous !</p>
     </div>
   </section>
 
-  <section class="share-section">
+  <section class="agenda-section">
     <div class="container">
-      <div class="share-box">
-        <h3>Partage ce contenu</h3>
-        <div class="share-row" id="share-row"></div>
-        <a href="#" id="app-share-link" class="btn btn--outline app-share-link">Regarde ce contenu sur l'app</a>
+      <div class="agenda-list" id="agenda-list"></div>
+    </div>
+  </section>
+
+  <section class="agenda-form-section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Proposer un événement</h2>
+        <p>C'est gratuit ! On vérifie chaque événement avant de le publier.</p>
       </div>
+      <form id="event-form" class="contact-form event-form">
+        <div class="field">
+          <label for="event-title">Nom de l'événement</label>
+          <input type="text" id="event-title" name="title" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="event-date">Date</label>
+            <input type="date" id="event-date" name="date" required>
+          </div>
+          <div class="field">
+            <label for="event-time">Heure</label>
+            <input type="time" id="event-time" name="time" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="event-location">Lieu</label>
+          <input type="text" id="event-location" name="location" required>
+        </div>
+        <div class="field">
+          <label for="event-description">Description</label>
+          <textarea id="event-description" name="description" required></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="event-price">Prix</label>
+            <input type="text" id="event-price" name="price" placeholder="Gratuit, 5 CHF..." required>
+          </div>
+          <div class="field">
+            <label for="event-link">Lien d'inscription</label>
+            <input type="url" id="event-link" name="registrationLink" placeholder="https://...">
+          </div>
+        </div>
+        <div class="field">
+          <label for="event-image">Image / affiche</label>
+          <input type="file" id="event-image" name="image" accept="image/*">
+        </div>
+        <div class="field">
+          <label for="event-contact">Contact</label>
+          <input type="text" id="event-contact" name="contact" placeholder="E-mail ou téléphone" required>
+        </div>
+        <button type="submit" class="btn btn--block">Envoyer pour validation</button>
+        <p class="form-success">Merci ! Ton événement est en cours de vérification, on te recontacte vite.</p>
+      </form>
     </div>
   </section>
 </main>

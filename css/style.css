@@ -539,6 +539,27 @@ button{font-family:inherit;cursor:pointer;}
 .form-success.show{display:block;}
 @media (max-width:800px){.contact-grid{grid-template-columns:1fr;}}
 
+/* ---------- agenda page ---------- */
+.agenda-section{padding:20px 0 40px;}
+.agenda-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;}
+.agenda-empty{grid-column:1/-1;text-align:center;color:var(--gray);padding:20px 0;}
+.agenda-card{
+  border:3px solid var(--black);border-radius:var(--radius-lg);overflow:hidden;
+  background:var(--white);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
+}
+.agenda-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+.agenda-card-body{padding:18px 20px;display:flex;flex-direction:column;gap:6px;}
+.agenda-date{font-family:var(--font-display);font-weight:700;color:var(--coral-dark);font-size:.85rem;}
+.agenda-card-body h3{font-size:1.2rem;margin:0;}
+.agenda-location{color:var(--gray);font-weight:700;font-size:.9rem;margin:0;}
+.agenda-price{font-weight:700;}
+.agenda-card-body .btn{align-self:flex-start;margin-top:8px;}
+.agenda-form-section{padding:20px 0 90px;}
+.agenda-form-section .contact-form{max-width:560px;margin:0 auto;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.field-row .field{margin-bottom:18px;}
+@media (max-width:560px){.field-row{grid-template-columns:1fr;gap:0;}}
+
 /* ---------- footer ---------- */
 .site-footer{background:var(--black);color:var(--cream);padding:60px 0 26px;margin-top:60px;}
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px;}

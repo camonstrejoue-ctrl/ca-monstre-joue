@@ -229,6 +229,48 @@ function initForms() {
       contact.reset();
     });
   }
+  const eventForm = qs('#event-form');
+  if (eventForm) {
+    eventForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      qs('.form-success', eventForm.parentElement)?.classList.add('show');
+      eventForm.reset();
+    });
+  }
+}
+
+// ---------- AGENDA page ----------
+function renderAgendaPage() {
+  const list = qs('#agenda-list');
+  if (!list) return;
+  const events = [...(window.EVENTS || [])]
+    .filter((ev) => ev.date >= new Date().toISOString().slice(0, 10))
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  list.innerHTML = '';
+  if (events.length === 0) {
+    list.appendChild(el('p', {
+      class: 'agenda-empty',
+      text: 'Aucun événement pour le moment — reviens bientôt, ou propose le tien juste en dessous !',
+    }));
+    return;
+  }
+  events.forEach((ev) => {
+    const card = el('div', { class: 'agenda-card' });
+    card.appendChild(mediaElement(ev.image, ev.title, ev.title));
+    const body = el('div', { class: 'agenda-card-body' }, [
+      el('span', { class: 'agenda-date', text: formatDate(ev.date) + (ev.time ? ` · ${ev.time}` : '') }),
+      el('h3', { text: ev.title }),
+      el('p', { class: 'agenda-location', text: ev.location }),
+      el('p', { text: ev.description }),
+      el('span', { class: 'agenda-price', text: ev.price }),
+    ]);
+    if (ev.registrationLink) {
+      body.appendChild(el('a', { href: ev.registrationLink, class: 'btn', target: '_blank', rel: 'noopener', text: "S'inscrire" }));
+    }
+    card.appendChild(body);
+    list.appendChild(card);
+  });
 }
 
 // ---------- HOME: hero carousel + category grid ----------
@@ -899,4 +941,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAllGamesPage();
   renderGamePage();
   renderArticlePage();
+  renderAgendaPage();
 });
