@@ -172,6 +172,20 @@ function initSearch() {
 
   form.addEventListener('submit', (e) => e.preventDefault());
 
+  // Sur petit écran, le widget est près du bord droit : un panneau ancré à sa
+  // largeur fixe déborderait à gauche de l'écran. On le fixe alors par
+  // rapport au viewport plutôt qu'au widget.
+  function positionSearchResults() {
+    if (document.documentElement.clientWidth > 480) {
+      resultsWrap.style.cssText = '';
+      return;
+    }
+    const toggleRect = toggle.getBoundingClientRect();
+    const vw = document.documentElement.clientWidth;
+    resultsWrap.style.cssText = `position:fixed;left:16px;top:${Math.round(toggleRect.bottom + 10)}px;width:${vw - 32}px;max-width:none;`;
+  }
+  window.addEventListener('resize', positionSearchResults);
+
   input.addEventListener('input', () => {
     const q = normalizeSearch(input.value.trim());
     resultsWrap.innerHTML = '';
@@ -188,6 +202,7 @@ function initSearch() {
     const results = [...gameResults, ...articleResults].slice(0, 8);
 
     widget.classList.add('has-results');
+    positionSearchResults();
     if (results.length === 0) {
       resultsWrap.appendChild(el('div', { class: 'search-empty', text: 'Aucun résultat.' }));
       return;
