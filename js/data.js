@@ -349,8 +349,13 @@ window.GAMES = [
     slug: 'flyin-goblin',
     name: "Flyin' Goblin",
     categories: ['jeux-a-deux', 'jeux-famille', 'jeux-dambiance'],
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    thumbnail: 'assets/games/flyin-goblin/flyin-goblin-liste.JPG',
+    heroImages: [
+      'assets/games/flyin-goblin/flyin-goblin-fiche1.JPG',
+      'assets/games/flyin-goblin/flyin-goblin-fiche2.JPG',
+      'assets/games/flyin-goblin/flyin-goblin-fiche3.JPG',
+      'assets/games/flyin-goblin/flyin-goblin-fiche4.JPG',
+    ],
     intro: [
       "Messire, que notre armé de goblins se tienne prête !",
       "Préparez-vous à attaquer le château !",
