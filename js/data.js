@@ -290,8 +290,14 @@ window.GAMES = [
     slug: 'wingspan',
     name: 'Wingspan',
     categories: ['jeux-de-strategie', 'jeux-a-deux'],
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    thumbnail: 'assets/games/wingspan/wingspan-liste.JPG',
+    heroImages: [
+      'assets/games/wingspan/wingspan-fiche1.JPG',
+      'assets/games/wingspan/wingspan-fiche2.JPG',
+      'assets/games/wingspan/wingspan-fiche3.JPG',
+      'assets/games/wingspan/wingspan-fiche4.JPG',
+      'assets/games/wingspan/wingspan-fiche5.JPG',
+    ],
     intro: [
       "Avec Wingspan, on apprend en s’amusant.",
       "Vous avez toujours rêvé de savoir quel est l’oiseau que vous entendez chaque matin dans votre jardin ? Vous ne le saurez pas plus en jouant à Wingspan ! Mais vous apprendrez plein de noms d’oiseaux, et d’informations intéressantes à leur sujet.",
@@ -324,8 +330,12 @@ window.GAMES = [
     video: '',
     // Pas encore de playlist reçue.
     spotify: '',
-    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
-    gallery: [],
+    gallery: [
+      { image: 'assets/games/wingspan/wingspan-cavautlecoupdaile-vignette.JPG', articleSlug: 'wingspan-critique' },
+      // Article "quel span es-tu" pas encore rédigé : la galerie l'affichera
+      // automatiquement dès qu'il sera ajouté avec ce slug.
+      { image: 'assets/games/wingspan/wingspan-quelspanestu-vignette.JPG', articleSlug: 'wingspan-quel-span-es-tu' },
+    ],
   },
 ];
 
@@ -442,6 +452,33 @@ window.ARTICLES = [
       { type: 'h2', text: 'Hasard ou talent ?' },
       { type: 'p', text: "Une place importante est accordée aux lancers de dés qui peuvent parfois s’avérer frustrants si, comme moi, vous avez une poisse d’enfer. Par ailleurs, comme je le mentionnais plus haut, nous retrouvons beaucoup d’aléatoire lors des tirages de cartes. Si l’ordre vous est particulièrement défavorable, vous pouvez tout aussi bien recommencer le chapitre !" },
       { type: 'p', text: "Si vous avez été convaincu, on espère que vous allez prendre autant de plaisir que nous ! N’hésitez pas à revenir ici pour nous donner votre avis sur le jeu dans les commentaires." },
+    ],
+  },
+  {
+    slug: 'wingspan-critique',
+    title: 'Wingspan, ça vaut l’coup d’aile ?',
+    date: '2026-08-10',
+    author: 'Alex',
+    gameSlug: 'wingspan',
+    hero: 'assets/games/wingspan/wingspan-bandeau1.png',
+    cover: 'assets/games/wingspan/wingspan-cavautlecoupdaile-vignette.JPG',
+    banner: 'assets/games/wingspan/wingspan-banniere.JPG',
+    excerpt: "On n’était pas franchement portés sur les oiseaux, et pourtant Wingspan a complètement réussi à nous conquérir. Notre avis sur le bestseller qui a lancé toute la franchise Span.",
+    blocks: [
+      { type: 'p', text: "Wingspan, le bestseller qui a lancé toute la franchise des Span ! Sorti en 2019, ce jeu est rapidement devenu un classique au sein de la communauté des amoureux du jeu de société." },
+      { type: 'p', text: 'Et bien figurez-vous qu’on ne l’a testé que très récemment ! Et pour cause, parmi nous, aucun n’était particulièrement fan d’oiseaux ! Ainsi, on est entré dans la franchise par <a href="/jeu.html?slug=finspan">Finspan</a> et on a adoré.' },
+      { type: 'p', text: "Bon ok, on n’est peut-être pas si objectifs que ça vu qu’on a chacun un aquarium à la maison !" },
+      { type: 'p', text: "De là, on s’est dit, et pourquoi pas tester Wingspan ?!" },
+      { type: 'p', text: "Déjà, il faut le dire, le matériel est magnifique. Les cartes sont illustrées avec soin, les œufs rajoutent un charme fou au jeu, et surtout il y a une mangeoire à oiseau qui sert à lancer les dés (ça, on a kiffé comme disent les jeunes)." },
+      { type: 'image', src: 'assets/games/wingspan/mangeoire.JPG', caption: 'La fameuse mangeoire, qui sert aussi à lancer les dés.' },
+      { type: 'p', text: "Vous le savez si vous avez lu nos autres critiques, Camille et moi on est vraiment fans des jeux coop et surtout pas des jeux prises de tête. Et bien Wingspan, c’est pas coop, mais c’est vraiment chill. Chacun fait son plateau de son côté, on est focus sur sa stratégie, sur ses cartes, on prend plaisir à découvrir chaque oiseau et tous les détails le concernant." },
+      { type: 'image', src: 'assets/games/wingspan/wingspan-oiseau.JPG', caption: 'Chaque oiseau a ses propres caractéristiques et informations à découvrir.' },
+      { type: 'p', text: "Bien sûr, l’objectif reste de gagner, et si vous êtes vraiment des compétitifs purs et durs, vous allez vous y retrouver. À la fin, on compte bien évidemment les points, et comme d’hab, avec sa poisse légendaire combinée à ma chance insolente, Camille perd." },
+      { type: 'p', text: "Le jeu a de nombreux avantages qui ont su nous conquérir. D’abord, il est facile à apprendre. Les mécaniques sont sensiblement les mêmes que dans Finspan, on n’était donc pas perdu. Mais même pour un novice, c’est vite compris et vite appris." },
+      { type: 'p', text: "Les parties sont plutôt rapides et ne vous bloqueront pas une après-midi complète. Côté rejouabilité, chaque partie est différente ! Avec des objectifs tirés aléatoirement, qu’ils soient communs ou personnels, votre stratégie et votre expérience de jeu seront complètement différentes à chaque fois." },
+      { type: 'p', text: "Mais du coup vous vous dites : « bon ok ça a l’air cool mais ils veulent en venir où ? »" },
+      { type: 'p', text: "C’est vrai, on aurait pu vous épargner tout cet article. En bref, notre avis pourrait se résumer en une phrase :" },
+      { type: 'p', text: "<strong>Les oiseaux, c’est pas notre truc, pourtant le jeu a su nous happer et nous émerveiller.</strong>" },
     ],
   },
 ];
