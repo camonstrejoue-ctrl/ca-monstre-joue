@@ -356,6 +356,7 @@ window.GAMES = [
       'T’as le budget que pour un jeu et t’es fan de poissons, va voir <a href="/jeu.html?slug=finspan">Finspan</a> !',
       'Tu veux un jeu pour jouer avec ton enfant. 10 ans c’est vraiment le minimum.',
     ],
+    monsterTip: 'À Pâques, substitue les œufs par des œufs en chocolat !',
     // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
     video: '',
     // Pas encore de playlist reçue.
