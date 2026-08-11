@@ -447,6 +447,48 @@ window.GAMES = [
     // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
     gallery: [],
   },
+  {
+    slug: 'bandido',
+    name: 'Bandido',
+    categories: ['jeux-a-deux', 'jeux-cooperatifs', 'jeux-famille'],
+    // Pas encore d'images reçues : cover/thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
+    cover: '',
+    thumbnail: '',
+    heroImages: [],
+    intro: [
+      "Bandido, c’est l’exemple parfait du petit jeu qui ne paie pas de mine mais qui auquel tu deviens vite accro !",
+      "Un prisonnier tente de s’échapper. Ton objectif est de réussir à lui couper toute possibilité de fuite en fermant l’intégralité de ses tunnels.",
+      "Place les tuiles une à une, pose judicieusement les tunnels et veille à ne pas créer trop d’embranchements sinon, ça va être compliqué de tout fermer !",
+      "Tu l’auras compris, Bandido est un jeu coopératif de placement de tuiles, de contrôle et d’optimisation.",
+      "Idéal à jouer en couple comme petit jeu du soir ou en famille pour stimuler ses enfants et leur apprendre à anticiper !",
+    ],
+    identity: {
+      players: '1-4',
+      age: '6 ans et plus',
+      duration: '15 minutes',
+      year: '2016',
+      type: 'Coopératif',
+      difficulty: { stars: 1, label: 'Facile' },
+      note: { stars: 6, max: 6 },
+    },
+    fitIntro: "Bandido c’est vraiment le petit jeu qu’on adore sortir à 22h pour faire une partie avant d’aller se coucher. Ça permet de couper des écrans, de mettre une musique reposante et de passer un bon moment ensemble.",
+    fitFor: [
+      'Tu cherches un jeu couple/famille facile et addictif',
+      'Tu aimes placer des tuiles et créer des routes',
+      'Tu veux un jeu très simple, facile à apprendre et vite joué',
+    ],
+    notFitFor: [
+      'Tu veux de la compétition',
+      'Tu cherches un gros jeu pour ta prochaine soirée entre amis',
+      'Je sais plus quoi dire pour te dissuader de l’acheter, ce jeu est trop bien !',
+    ],
+    // Pas de vidéo reçue pour l'instant.
+    video: '',
+    // Pas de playlist reçue pour l'instant.
+    spotify: '',
+    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
+    gallery: [],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article
