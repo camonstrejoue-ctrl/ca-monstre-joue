@@ -410,6 +410,43 @@ window.GAMES = [
     // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
     gallery: [],
   },
+  {
+    slug: 'daydream',
+    name: 'Daydream',
+    categories: ['jeux-a-deux', 'jeux-dambiance'],
+    // Pas encore d'images reçues : thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
+    thumbnail: '',
+    heroImages: [],
+    intro: [
+      "Tu veux un jeu pour accompagner ton petit café post repas mais t’en as marre du sudoku ?",
+      "Daydream est le jeu qu’il te faut !",
+      "Dans Daydream, tu lances les dés, tu inscris les valeurs obtenues dans les cases et tu essaies d'optimiser le remplissage pour débloquer le maximum d'objets !",
+    ],
+    identity: {
+      players: '1-5',
+      age: '8 ans et plus',
+      duration: '15 minutes',
+      year: '2025',
+      type: 'Solo / chacun pour soi',
+      difficulty: { stars: 1, label: 'Facile' },
+      note: { stars: 4, max: 6 },
+    },
+    fitIntro: "Daydream, c’est pas le jeu révolutionnaire, mais c’est chill et ça fait du bien quand tu as 15 minutes à tuer avec une boisson chaude. Ça change vraiment des mots-croisés, du sudoku et autres jeux du genre et ça t’évite de scroller sur ton téléphone !",
+    fitFor: [
+      'Tu cherches un jeu solo pour passer le temps',
+      'Tu veux une alternative au sudoku et aux mots-croisés',
+      'Tu veux un jeu très simple, facile à apprendre',
+    ],
+    notFitFor: [
+      'Tu veux de l’interaction entre joueurs',
+      'T’es en recherche d’un jeu dynamique pour ton prochain apéro',
+      'Tu sais pas compter jusqu’à 6',
+    ],
+    video: 'https://www.instagram.com/reel/DU3rtAEDeUv/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
+    spotify: 'https://open.spotify.com/playlist/37i9dQZF1E8UXK7v4Zr1yF?si=ZJIiJislQvSxiuHmIdeSYw&utm_source=whatsapp&pi=9XZHIFq8T0q_F&sci=spotify%3Acard-config%3A1q0aB72RaNdTd0LmTwWDxz',
+    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
+    gallery: [],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article
