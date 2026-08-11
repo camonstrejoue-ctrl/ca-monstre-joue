@@ -482,6 +482,7 @@ window.GAMES = [
       'Tu cherches un gros jeu pour ta prochaine soirée entre amis',
       'Je sais plus quoi dire pour te dissuader de l’acheter, ce jeu est trop bien !',
     ],
+    monsterTip: 'Le format parfait à prendre en vacances. Hop, dans la valise !',
     // Pas de vidéo reçue pour l'instant.
     video: '',
     // Pas de playlist reçue pour l'instant.

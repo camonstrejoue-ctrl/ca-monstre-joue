@@ -611,6 +611,14 @@ function renderGamePage() {
   noBox.appendChild(noList);
   fitBody.appendChild(noBox);
 
+  const tipSection = qs('#tip-section');
+  if (g.monsterTip) {
+    tipSection.style.display = '';
+    qs('#tip-text').textContent = g.monsterTip;
+  } else {
+    tipSection.style.display = 'none';
+  }
+
   const videoWrap = qs('#video-wrap');
   const embed = youTubeEmbed(g.video);
   videoWrap.innerHTML = '';
