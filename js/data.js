@@ -214,7 +214,7 @@ window.GAMES = [
       'Tu ne supportes pas la frustration du destin laissé aux dés',
       'Tu es un grand expert des jeux narratifs et tu es venu à bout des plus difficiles d’entre eux',
     ],
-    monsterTip: "Si tu n'as pas eu la fin C, tu as raté l'essence du jeu. Refais une partie !",
+    monsterTip: "On t'encourage à tester toutes les fins !",
     // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
     video: '',
     spotify: 'https://open.spotify.com/playlist/2NhsVpfsZTNjQ0EqpWAA2p?si=zwXwvuPaTKW_jygs9ynILQ&utm_source=whatsapp&sci=spotify%3Acard-config%3A3sa6PCtW1oJX1vteSqR5r1&nd=1&dlsi=bb4bd28844f645f9',
