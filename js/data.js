@@ -456,7 +456,7 @@ window.GAMES = [
     thumbnail: '',
     heroImages: [],
     intro: [
-      "Bandido, c’est l’exemple parfait du petit jeu qui ne paie pas de mine mais qui auquel tu deviens vite accro !",
+      "Bandido, c’est l’exemple parfait du petit jeu qui ne paie pas de mine mais auquel tu deviens vite accro !",
       "Un prisonnier tente de s’échapper. Ton objectif est de réussir à lui couper toute possibilité de fuite en fermant l’intégralité de ses tunnels.",
       "Place les tuiles une à une, pose judicieusement les tunnels et veille à ne pas créer trop d’embranchements sinon, ça va être compliqué de tout fermer !",
       "Tu l’auras compris, Bandido est un jeu coopératif de placement de tuiles, de contrôle et d’optimisation.",
