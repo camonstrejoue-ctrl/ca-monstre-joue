@@ -82,6 +82,7 @@ window.GAMES = [
       'Tu détestes les jeux de société (tu t’es perdu ??)',
       'T’as pas aimé le premier Sub Terra',
     ],
+    monsterTip: 'Réfléchis bien à ton choix d’équipe ! Nous on a notre <a href="/article.html?slug=sub-terra-ii-compo-type">compo type</a>.',
     video: 'https://youtube.com/shorts/o5udBSFZtEo',
     spotify: 'https://open.spotify.com/track/260FKIaAwovHuUTJ7IvKUK?si=sAW_B1XkTQeVQ5s2HphkxQ&utm_source=whatsapp',
     gallery: [

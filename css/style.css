@@ -427,14 +427,16 @@ button{font-family:inherit;cursor:pointer;}
 }
 .stars-label{margin-left:6px;color:var(--gray);font-weight:700;font-size:.85rem;}
 
-/* ---------- spotify block ---------- */
+/* ---------- monster tip block ---------- */
 .tip-section{padding:10px 0 10px;}
 .tip-card{
   max-width:820px;margin:0 auto;padding:24px;text-align:center;
 }
 .tip-card h3{font-size:1.2rem;margin-bottom:16px;}
 .tip-card .video-mascot img{width:100px;}
+.tip-card .speech-bubble a{color:var(--coral-dark);text-decoration:underline;}
 
+/* ---------- spotify block ---------- */
 .spotify-section{padding:10px 0 10px;}
 .spotify-card{
   max-width:820px;margin:0 auto;border:3px solid var(--black);border-radius:var(--radius-md);

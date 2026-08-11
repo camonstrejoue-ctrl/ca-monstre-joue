@@ -614,7 +614,7 @@ function renderGamePage() {
   const tipSection = qs('#tip-section');
   if (g.monsterTip) {
     tipSection.style.display = '';
-    qs('#tip-text').textContent = g.monsterTip;
+    qs('#tip-text').innerHTML = g.monsterTip;
   } else {
     tipSection.style.display = 'none';
   }
