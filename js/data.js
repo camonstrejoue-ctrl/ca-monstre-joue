@@ -404,6 +404,7 @@ window.GAMES = [
       'Tu es daltonien ? Tu risques de dégommer tes propres forces !',
       'Franchement à part ça, je ne vois pas, le jeu est une pépite. Tu vas t’éclater !',
     ],
+    monsterTip: 'Ne joue surtout pas sur ton balcon !',
     video: 'https://www.instagram.com/reel/DTbDz3sDRv8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     // Pas encore de playlist reçue.
     spotify: '',
