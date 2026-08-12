@@ -685,7 +685,15 @@ window.ARTICLES = [
       { type: 'p', text: "Prenez un petit jeu de carte qui mesure 10cm. Vous sortez du magasin avec cette nouvelle boite sous le bras. 10 cm c’est bien, vous allez avoir de belles parties de plaisir c’est sûr et cet achat vous a procuré une dose non négligeable de bonheur." },
       { type: 'p', text: "Mais prenons maintenant une belle boite, 40 cm de Seigneur des anneaux, avec des figurines détaillées et de longues heures de jeu qui vous attendent. Votre bonheur qui certes vous pèse au bout du bras n’est-il pas plus conséquent à la sortie du magasin ?" },
       { type: 'p', text: "Alors oui si n+1 c’est être toujours un peu plus proche du bonheur, pourquoi ne pas simplement acheter plein de petits jeux me direz vous ? n+2, n+3 etc. Mais en fait c’est oublier les cm et le bonheur qui y est associé. Oubliez ce timide n+3 composé de petites boites ridicules. Prenez votre valise dans ce magasin de jeu et assumez votre envie d’un n+33 !" },
-      { type: 'p', text: 'Vous l’aurez compris une boite de plus c’est tendre vers le bonheur. Une boite plus grosse de plus c’est tendre encore plus vers ce bonheur. Et en parlant de grosses boites, vous avez déjà entendu parler de ces jeux exceptionnels ? <a href="/jeu.html?slug=eila-et-leclat-de-la-montagne">Eila et l’Éclat de la Montagne</a>, Fate et La Communauté de l’Anneau.' },
+      { type: 'p', text: "Vous l’aurez compris une boite de plus c’est tendre vers le bonheur. Une boite plus grosse de plus c’est tendre encore plus vers ce bonheur. Et en parlant de grosses boites, vous avez déjà entendu parler de ces jeux exceptionnels ?" },
+      {
+        type: 'games',
+        items: [
+          { slug: 'eila-et-leclat-de-la-montagne' },
+          { name: 'Fate' },
+          { name: 'La Communauté de l’Anneau' },
+        ],
+      },
     ],
   },
 ];

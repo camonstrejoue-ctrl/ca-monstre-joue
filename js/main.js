@@ -762,6 +762,22 @@ function renderArticlePage() {
       row.appendChild(thumb);
       row.appendChild(text);
       body.appendChild(row);
+    } else if (b.type === 'games') {
+      const row = el('div', { class: 'article-games-row' });
+      b.items.forEach(item => {
+        const g = item.slug ? findGame(item.slug) : null;
+        if (g) {
+          row.appendChild(gameCard(g));
+        } else {
+          const thumb = el('div', { class: 'thumb' });
+          thumb.appendChild(mediaElement(null, item.name, item.name));
+          row.appendChild(el('div', { class: 'game-card game-card--soon' }, [
+            thumb,
+            el('span', { class: 'btn btn--block btn--outline', text: `${item.name} (bientôt)` }),
+          ]));
+        }
+      });
+      body.appendChild(row);
     }
   });
 
