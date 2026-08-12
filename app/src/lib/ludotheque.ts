@@ -9,7 +9,7 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
-import type { BggGame } from '@/lib/bgg';
+import { getBggGameDetails, type BggGame } from '@/lib/bgg';
 import { db } from '@/lib/firebase';
 
 export interface LudothequeEntry {
@@ -66,4 +66,25 @@ export async function addGameToLudotheque(uid: string, game: BggGame) {
 export async function removeGameFromLudotheque(uid: string, bggId: string) {
   if (!db) throw new Error('Firebase non configuré.');
   await deleteDoc(doc(db, 'users', uid, 'ludotheque', bggId));
+}
+
+/**
+ * Complète en tâche de fond les entrées ajoutées avant qu'on récupère
+ * catégories/nombre de joueurs depuis BGG (sinon elles restent invisibles
+ * dans les filtres, qui ignorent les entrées sans cette donnée).
+ */
+export async function backfillEntryDetails(uid: string, entry: LudothequeEntry) {
+  if (!db) return;
+  const details = await getBggGameDetails(entry.bggId);
+  if (!details) return;
+  await setDoc(
+    doc(db, 'users', uid, 'ludotheque', entry.bggId),
+    {
+      categories: details.categories ?? [],
+      minPlayers: details.minPlayers ?? null,
+      maxPlayers: details.maxPlayers ?? null,
+      thumbnail: entry.thumbnail ?? details.thumbnail ?? null,
+    },
+    { merge: true }
+  );
 }

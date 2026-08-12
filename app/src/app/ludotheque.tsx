@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -14,6 +14,7 @@ import { isBggConfigured, searchBgg, type BggGame } from '@/lib/bgg';
 import { useContent } from '@/lib/content';
 import {
   addGameToLudotheque,
+  backfillEntryDetails,
   removeGameFromLudotheque,
   useLudotheque,
   type LudothequeEntry,
@@ -195,6 +196,26 @@ export default function LudothequeScreen() {
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [playersFilter, setPlayersFilter] = useState<[number, number] | null>(null);
   const [sortBy, setSortBy] = useState<SortMode>('name');
+  const backfilled = useRef(new Set<string>());
+
+  // Complète en tâche de fond les entrées ajoutées avant qu'on récupère
+  // catégories/nombre de joueurs depuis BGG, sinon elles restent invisibles
+  // dans les filtres (qui ignorent les entrées sans cette donnée).
+  useEffect(() => {
+    if (!user) return;
+    for (const entry of entries) {
+      // `categories` vaut toujours au moins [] pour une entrée ajoutée avec
+      // le code actuel : `undefined` signale donc à coup sûr une ancienne
+      // entrée (avant qu'on récupère ces infos depuis BGG).
+      const incomplete = entry.categories === undefined;
+      if (incomplete && !backfilled.current.has(entry.bggId)) {
+        backfilled.current.add(entry.bggId);
+        backfillEntryDetails(user.uid, entry).catch(() => {
+          backfilled.current.delete(entry.bggId);
+        });
+      }
+    }
+  }, [entries, user]);
 
   if (initializing) return null;
   if (!user) return <SignedOutPrompt />;

@@ -14,7 +14,7 @@ function ToolCard({
   title,
   description,
 }: {
-  href: '/outils/des' | '/outils/score';
+  href: '/outils/des' | '/outils/score' | '/outils/souvenirs/index';
   icon: React.ComponentProps<typeof Ionicons>['name'];
   title: string;
   description: string;
@@ -56,6 +56,12 @@ export default function OutilsScreen() {
           icon="trophy"
           title="Compteur de points"
           description="Suis les scores des joueurs pendant la partie"
+        />
+        <ToolCard
+          href="/outils/souvenirs/index"
+          icon="images"
+          title="Souvenirs"
+          description="Garde une trace de tes événements et parties, avec tes photos"
         />
       </ThemedView>
     </SafeAreaView>

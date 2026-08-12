@@ -33,7 +33,14 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 180
         }
-      ]
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Autorise l'accès à tes photos pour les associer à tes souvenirs."
+        }
+      ],
+      "expo-sharing"
     ],
     "experiments": {
       "typedRoutes": true,
