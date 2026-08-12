@@ -778,6 +778,17 @@ function renderArticlePage() {
         }
       });
       body.appendChild(row);
+    } else if (b.type === 'article') {
+      const other = findArticle(b.slug);
+      if (other) {
+        const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${other.slug}`, style: 'max-width:320px;margin:28px auto;display:block;' });
+        card.appendChild(mediaElement(other.cover, other.title, other.slug));
+        card.appendChild(el('div', { class: 'overlay' }, [
+          el('h3', { text: other.title }),
+          el('span', { text: 'Lire l’article' }),
+        ]));
+        body.appendChild(card);
+      }
     }
   });
 

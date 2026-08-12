@@ -696,6 +696,33 @@ window.ARTICLES = [
       },
     ],
   },
+  {
+    slug: 'comment-trainer-sa-moitie-au-magasin-de-jeux',
+    title: 'Comment traîner subtilement votre moitié dans un magasin de jeu ?',
+    subtitle: "Les 3 stratégies de P’tit Monstre",
+    date: '2026-08-12',
+    author: 'Alex',
+    guide: true,
+    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    excerpt: "Trois techniques testées et approuvées pour remplir subtilement votre ludothèque, sans jamais éveiller les soupçons.",
+    blocks: [
+      { type: 'p', text: 'Je vais vous parler d’expérience. Dans un soucis d’anonymat nous allons prendre des prénoms totalement fictifs. Mettons <a href="/equipe.html">Alex et Camille</a>. Ces techniques marchent à la perfection mais méfiez-vous, et utilisez les avec parcimonie. Car oui, toute la subtilité tient dans le fait de varier les techniques pour toujours bénéficier de l’effet de surprise. Si vous faites encore et encore le même coup, vous vous doutez bien que ça va finir par se voir et par ne plus marcher du tout…' },
+      { type: 'h2', text: 'Plan n°1 : Le hasard prémédité' },
+      { type: 'p', text: "Imaginez. Vous êtes en vacances en France dans une ville que vous découvrez pour la première fois. Planning prévu pour aujourd’hui. Visites de la vieille ville, des lieux emblématiques, monuments, places, châteaux, cathédrales et certainement petite pause repas au restaurant à midi." },
+      { type: 'p', text: "Premier point important. Vous devez impérativement être le guide et donc avoir la maîtrise du tracé et du GPS. Si ce n’est pas dans votre habitude, préparez votre coup quelques jours/semaines à l’avance et proposez-vous de regarder vous même le chemin à prendre. Menez votre moitié au premier monument, puis au second. Proposez de prendre cette petite rue car vous voyez qu’elle a de jolies façades, celle-ci car vous voyez un chat posé sur un rebord ou encore cette autre rue car il y a l’air d’avoir plus de monde." },
+      { type: 'p', text: "En secret bien sûr, et sous prétexte de ne pas vous perdre, vous contrôlez parfaitement votre trajet. Dans votre esprit c’est très clair. Entre la cathédrale St Justin et la place Louis IX, vous l’avez repéré. Il est là, votre objectif qui vous appelle et qui vous attire, qui monopolise toutes vos pensées, le magasin de jeu. Et c’est là qu’au détour d’une rue «Oh, un magasin de jeux de société ! Attends je vais jeter un œil 5 minutes.» BINGO. Le plan est parfait. Vous restez 3h30 et sortez avec 2 sacs bien dodus." },
+      { type: 'p', text: "Au premier votre moitié n’y verra que du feu. Au second elle va pousser un petit soupir. Au 3e vous aurez droit à un regard suspicieux lourd de sens. Et au 4e...on vous laisse imaginer. N’abusez pas de cette technique ! Mais rassurez-vous...il y a les autres." },
+      { type: 'h2', text: 'Plan n°2 : L’obligation «professionnelle»' },
+      { type: 'p', text: "Celle-ci demande préparation mais vous apportera bien plus de constance que la précédente. Vous allez devoir, à la manière d’Inception, instiller dans son esprit que vous envisagez (à long terme pour pas trop l’inquiéter), de monter votre propre magasin de jeux. Ainsi à chaque fois que vous visiterez un nouvel endroit, vous aurez toute la légitimité requise pour prononcer cette phrase : «On va passer vite fait dans les 3 magasins de jeux pour que je regarde comment c’est agencé et que ça me donne des idées pour le futur magasin». Et BOUM, vous avez de nouveau acheté 2 jeux par magasin car «c’est malpoli de sortir d’un magasin sans rien acheter !»." },
+      { type: 'h2', text: 'Plan n°3 : L’excuse des prochains «cadeaux»' },
+      { type: 'p', text: "6 mois dans l’année c’est facile. «C’est bientôt Noël et j’ai pas encore de cadeau pour Justin (oui le même qui a une cathédrale à son nom). J’ai une idée de jeu je vais aller regarder s’ils l’ont !». Bien évidemment vous ressortez du magasin avec des jeux pour vous." },
+      { type: 'p', text: "Pour les 6 premiers mois de l’année, il va falloir que vous fassiez un peu plus d’effort. En effet, la seconde occasion de faire des cadeaux c’est bien évidemment les anniversaires mais attention c’est là que ça se corse. Vous n’allez pas acheter le cadeau d’anniversaire de Justin en février s’il est né en novembre." },
+      { type: 'p', text: "La conclusion est simple. Faites vous des amis qui ont des anniversaires dans les 6 premiers mois de l’année, de manière bien répartie. Idéalement 6 amis, chacun ayant son anniversaire un mois différent. Évitez les amis qui ont des anniversaires de juillet à décembre, ils n’apportent rien." },
+      { type: 'p', text: "Et voilà, vous avez maintenant 3 techniques solides qui ont été testées et éprouvées et qui vous permettront de remplir subtilement votre ludothèque car après tout, c’est pas ça le bonheur ?" },
+      { type: 'p', text: "D’ailleurs, si vous voulez savoir combien de jeu il faut vraiment posséder pour être heureux, on aborde la question dans cet article." },
+      { type: 'article', slug: 'combien-de-jeux-pour-etre-heureux' },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des 4 membres de la team.
