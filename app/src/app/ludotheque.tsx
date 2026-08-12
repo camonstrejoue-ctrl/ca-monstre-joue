@@ -1,6 +1,7 @@
+import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Pressable, StyleSheet } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CoverImage } from '@/components/cover-image';
@@ -80,6 +81,13 @@ function AddGameSearch({ uid, onAdded }: { uid: string; onAdded: () => void }) {
 
   return (
     <ThemedView style={styles.searchBox}>
+      <View style={styles.bggBadge}>
+        <Image
+          source={require('@/assets/images/powered-by-bgg.jpeg')}
+          style={styles.bggBadgeImage}
+          contentFit="contain"
+        />
+      </View>
       <FormField
         label="Nom du jeu"
         value={query}
@@ -245,6 +253,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchBox: { gap: Spacing.two },
+  bggBadge: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#FFFFFF',
+    borderRadius: Spacing.two,
+    padding: Spacing.two,
+  },
+  bggBadgeImage: { width: 120, height: 30 },
   searchButton: {
     paddingVertical: Spacing.two,
     borderRadius: Spacing.two,

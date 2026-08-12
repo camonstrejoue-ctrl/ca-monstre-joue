@@ -54,17 +54,40 @@ export interface BggGame {
   thumbnail?: string;
 }
 
+// L'endpoint /search de BGG ne renvoie ni image ni vignette (seulement
+// id/nom/année) : il faut un second appel à /thing pour ça. On peut lui
+// passer plusieurs id séparés par des virgules en un seul appel.
+async function getThumbnails(ids: string[]): Promise<Record<string, string>> {
+  if (ids.length === 0) return {};
+  const data = await bggFetch(`/thing?id=${ids.join(',')}`);
+  const items = asArray(data?.items?.item);
+  const map: Record<string, string> = {};
+  for (const item of items) {
+    if (item.thumbnail) map[String(item['@_id'])] = item.thumbnail;
+  }
+  return map;
+}
+
 export async function searchBgg(query: string): Promise<BggGame[]> {
   if (!TOKEN) throw new Error('BGG non configuré.');
   const data = await bggFetch(`/search?query=${encodeURIComponent(query)}&type=boardgame`);
   const items = asArray(data?.items?.item);
-  return items.slice(0, 20).map((item) => ({
+  const games = items.slice(0, 20).map((item) => ({
     bggId: String(item['@_id']),
     name: primaryName(item),
     yearPublished: item.yearpublished?.['@_value']
       ? Number(item.yearpublished['@_value'])
       : undefined,
   }));
+
+  try {
+    const thumbnails = await getThumbnails(games.map((g) => g.bggId));
+    return games.map((g) => ({ ...g, thumbnail: thumbnails[g.bggId] }));
+  } catch {
+    // Si le second appel échoue, on garde quand même les résultats de recherche
+    // (sans image plutôt que pas de résultats du tout).
+    return games;
+  }
 }
 
 export async function getBggGameDetails(bggId: string): Promise<BggGame | null> {
