@@ -64,6 +64,17 @@ export async function addMemory(data: {
   return memory;
 }
 
+export async function updateMemory(
+  id: string,
+  data: { title: string; date: string; location: string; photoUris: string[] }
+): Promise<void> {
+  const memories = await listMemories();
+  const idx = memories.findIndex((m) => m.id === id);
+  if (idx === -1) return;
+  memories[idx] = { ...memories[idx], ...data };
+  await saveAll(memories);
+}
+
 export async function deleteMemory(id: string): Promise<void> {
   const memories = await listMemories();
   const memory = memories.find((m) => m.id === id);
