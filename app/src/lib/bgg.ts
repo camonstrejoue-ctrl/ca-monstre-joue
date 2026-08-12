@@ -30,10 +30,21 @@ function asArray<T>(value: T | T[] | undefined): T[] {
   return Array.isArray(value) ? value : [value];
 }
 
+// fast-xml-parser ne décode pas toujours les entités numériques (ex: &#039;)
+// à l'intérieur des valeurs d'attributs — filet de sécurité manuel.
+function decodeEntities(str: string): string {
+  return str
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, '\'');
+}
+
 function primaryName(item: any): string {
   const names = asArray(item.name);
   const primary = names.find((n) => n['@_type'] === 'primary') ?? names[0];
-  return primary?.['@_value'] ?? 'Sans titre';
+  return decodeEntities(primary?.['@_value'] ?? 'Sans titre');
 }
 
 export interface BggGame {
