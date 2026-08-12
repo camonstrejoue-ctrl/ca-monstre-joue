@@ -413,6 +413,29 @@ function renderCategoryPage() {
   games.forEach(g => mount.appendChild(gameCard(g)));
 }
 
+// ---------- GUIDES DU MONSTRE page ----------
+function renderGuidesPage() {
+  const mount = qs('#guides-grid');
+  if (!mount) return;
+  const guides = (window.ARTICLES || [])
+    .filter(a => a.guide)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  mount.innerHTML = '';
+  if (guides.length === 0) {
+    mount.appendChild(el('p', { text: 'De nouveaux guides arrivent bientôt !', style: 'text-align:center;color:var(--gray);grid-column:1/-1;' }));
+    return;
+  }
+  guides.forEach(a => {
+    const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${a.slug}` });
+    card.appendChild(mediaElement(a.cover, a.title, a.slug));
+    card.appendChild(el('div', { class: 'overlay' }, [
+      el('h3', { text: a.title }),
+      el('span', { text: 'Lire l’article' }),
+    ]));
+    mount.appendChild(card);
+  });
+}
+
 // ---------- ALL GAMES (alphabetical) page ----------
 function renderAllGamesPage() {
   const mount = qs('#all-games-list');
@@ -962,6 +985,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCategoryGrid();
   renderCategoryPage();
   renderAllGamesPage();
+  renderGuidesPage();
   renderGamePage();
   renderArticlePage();
   renderAgendaPage();
