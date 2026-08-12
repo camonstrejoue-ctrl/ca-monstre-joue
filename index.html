@@ -54,19 +54,23 @@
           </div>
         </li>
         <li class="nav-item"><a href="/tous-les-jeux.html" class="nav-link">Chercher un jeu précis</a></li>
-        <li class="nav-item"><a href="/agenda.html" class="nav-link">Agenda</a></li>
-        <li class="nav-item"><a href="/equipe.html" class="nav-link">La Team Ça Monstre Joue</a></li>
+        <li class="nav-item"><a href="/equipe.html" class="nav-link">L'équipe</a></li>
         <li class="nav-item"><a href="/app.html?utm_source=blog&utm_medium=nav&utm_campaign=lien_menu" class="nav-link nav-link--app">Vers l'app</a></li>
       </ul>
     </nav>
-    <div class="search-widget" id="search-widget">
-      <button type="button" class="search-toggle" id="search-toggle" aria-label="Rechercher">
-        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
-      </button>
-      <form class="search-form" id="search-form" role="search">
-        <input type="search" id="search-input" placeholder="Rechercher un jeu, un article..." autocomplete="off">
-      </form>
-      <div class="search-results" id="search-results"></div>
+    <div class="header-actions">
+      <a href="/agenda.html" class="agenda-toggle" aria-label="Agenda">
+        <svg viewBox="0 0 24 24"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zM4 10v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V10H4zm3 3h3v3H7v-3z"/></svg>
+      </a>
+      <div class="search-widget" id="search-widget">
+        <button type="button" class="search-toggle" id="search-toggle" aria-label="Rechercher">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+        </button>
+        <form class="search-form" id="search-form" role="search">
+          <input type="search" id="search-input" placeholder="Rechercher un jeu, un article..." autocomplete="off">
+        </form>
+        <div class="search-results" id="search-results"></div>
+      </div>
     </div>
     <button class="menu-toggle" aria-label="Ouvrir le menu"><span></span></button>
   </div>

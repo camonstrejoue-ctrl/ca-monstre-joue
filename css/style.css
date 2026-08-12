@@ -97,6 +97,16 @@ button{font-family:inherit;cursor:pointer;}
 .dropdown a{display:block;padding:10px 14px;border-radius:var(--radius-sm);font-weight:700;}
 .dropdown a:hover{background:var(--coral-light);color:var(--coral-dark);}
 
+.header-actions{display:flex;align-items:center;gap:10px;}
+.agenda-toggle{
+  width:44px;height:44px;flex:none;border-radius:50%;border:3px solid var(--black);
+  background:var(--white);display:flex;align-items:center;justify-content:center;
+  transition:background .15s ease;
+}
+.agenda-toggle svg{width:20px;height:20px;fill:var(--black);}
+.agenda-toggle:hover{background:var(--coral);border-color:var(--coral);}
+.agenda-toggle:hover svg{fill:var(--white);}
+
 .search-widget{position:relative;display:flex;align-items:center;flex:none;}
 .search-toggle{
   width:44px;height:44px;flex:none;border-radius:50%;border:3px solid var(--black);
