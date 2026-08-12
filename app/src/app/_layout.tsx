@@ -37,8 +37,8 @@ export default function RootLayout() {
             <Stack.Screen name="outils" options={{ headerShown: false }} />
             <Stack.Screen name="outils/des" />
             <Stack.Screen name="outils/score" />
-            <Stack.Screen name="outils/souvenirs/index" options={{ title: 'Souvenirs' }} />
-            <Stack.Screen name="outils/souvenirs/[id]" options={{ title: '' }} />
+            <Stack.Screen name="outils/souvenirs" options={{ title: 'Souvenirs' }} />
+            <Stack.Screen name="outils/souvenir/[id]" options={{ title: '' }} />
             <Stack.Screen name="jeu/[slug]" options={{ title: '' }} />
             <Stack.Screen name="article/[slug]" options={{ title: '' }} />
             <Stack.Screen name="categorie/[slug]" options={{ title: '' }} />
