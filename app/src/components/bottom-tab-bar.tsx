@@ -15,7 +15,7 @@ const TABS: {
   icon: ComponentProps<typeof Ionicons>['name'];
 }[] = [
   { href: '/', label: 'Accueil', icon: 'home' },
-  { href: '/catalogue', label: 'Catalogue', icon: 'game-controller' },
+  { href: '/catalogue', label: 'Blog', icon: 'game-controller' },
   { href: '/ludotheque', label: 'Ludothèque', icon: 'albums' },
   { href: '/joueurs', label: 'Joueurs', icon: 'people' },
   { href: '/agenda', label: 'Agenda', icon: 'calendar' },

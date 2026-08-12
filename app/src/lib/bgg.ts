@@ -52,18 +52,37 @@ export interface BggGame {
   name: string;
   yearPublished?: number;
   thumbnail?: string;
+  categories?: string[];
+  minPlayers?: number;
+  maxPlayers?: number;
 }
 
-// L'endpoint /search de BGG ne renvoie ni image ni vignette (seulement
-// id/nom/année) : il faut un second appel à /thing pour ça. On peut lui
-// passer plusieurs id séparés par des virgules en un seul appel.
-async function getThumbnails(ids: string[]): Promise<Record<string, string>> {
+type ExtraDetails = Pick<BggGame, 'thumbnail' | 'categories' | 'minPlayers' | 'maxPlayers'>;
+
+function extractExtraDetails(item: any): ExtraDetails {
+  const links = asArray(item.link);
+  const categories = links
+    .filter((l) => l['@_type'] === 'boardgamecategory')
+    .map((l) => decodeEntities(String(l['@_value'])));
+  return {
+    thumbnail: item.thumbnail || undefined,
+    categories: categories.length ? categories : undefined,
+    minPlayers: item.minplayers?.['@_value'] ? Number(item.minplayers['@_value']) : undefined,
+    maxPlayers: item.maxplayers?.['@_value'] ? Number(item.maxplayers['@_value']) : undefined,
+  };
+}
+
+// L'endpoint /search de BGG ne renvoie que id/nom/année (pas d'image, pas de
+// catégories, pas de nombre de joueurs) : il faut un second appel à /thing
+// pour ça. On peut lui passer plusieurs id séparés par des virgules en un
+// seul appel.
+async function getExtraDetailsBatch(ids: string[]): Promise<Record<string, ExtraDetails>> {
   if (ids.length === 0) return {};
   const data = await bggFetch(`/thing?id=${ids.join(',')}`);
   const items = asArray(data?.items?.item);
-  const map: Record<string, string> = {};
+  const map: Record<string, ExtraDetails> = {};
   for (const item of items) {
-    if (item.thumbnail) map[String(item['@_id'])] = item.thumbnail;
+    map[String(item['@_id'])] = extractExtraDetails(item);
   }
   return map;
 }
@@ -81,11 +100,11 @@ export async function searchBgg(query: string): Promise<BggGame[]> {
   }));
 
   try {
-    const thumbnails = await getThumbnails(games.map((g) => g.bggId));
-    return games.map((g) => ({ ...g, thumbnail: thumbnails[g.bggId] }));
+    const details = await getExtraDetailsBatch(games.map((g) => g.bggId));
+    return games.map((g) => ({ ...g, ...details[g.bggId] }));
   } catch {
     // Si le second appel échoue, on garde quand même les résultats de recherche
-    // (sans image plutôt que pas de résultats du tout).
+    // (sans image/catégories plutôt que pas de résultats du tout).
     return games;
   }
 }
@@ -101,6 +120,6 @@ export async function getBggGameDetails(bggId: string): Promise<BggGame | null> 
     yearPublished: item.yearpublished?.['@_value']
       ? Number(item.yearpublished['@_value'])
       : undefined,
-    thumbnail: item.thumbnail,
+    ...extractExtraDetails(item),
   };
 }

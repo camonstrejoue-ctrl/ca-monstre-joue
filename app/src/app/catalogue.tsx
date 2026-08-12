@@ -26,7 +26,7 @@ export default function CatalogueScreen() {
         contentContainerStyle={styles.list}
         ListHeaderComponent={
           <ThemedText type="title" style={styles.pageTitle}>
-            Catalogue
+            Blog
           </ThemedText>
         }
         renderItem={({ item }) => (

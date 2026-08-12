@@ -178,16 +178,51 @@ function LudothequeRow({
   );
 }
 
+const PLAYER_RANGES: { label: string; range: [number, number] }[] = [
+  { label: '1-2', range: [1, 2] },
+  { label: '3-4', range: [3, 4] },
+  { label: '5-6', range: [5, 6] },
+  { label: '7+', range: [7, Infinity] },
+];
+
+type SortMode = 'name' | 'addedAt';
+
 export default function LudothequeScreen() {
   const { user, initializing } = useAuth();
   const { content } = useContent();
   const { entries, loading } = useLudotheque(user?.uid);
   const [showSearch, setShowSearch] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+  const [playersFilter, setPlayersFilter] = useState<[number, number] | null>(null);
+  const [sortBy, setSortBy] = useState<SortMode>('name');
 
   if (initializing) return null;
   if (!user) return <SignedOutPrompt />;
 
-  const sorted = [...entries].sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+  const availableCategories = Array.from(
+    new Set(entries.flatMap((e) => e.categories ?? []))
+  ).sort((a, b) => a.localeCompare(b, 'fr'));
+
+  let filtered = entries;
+  if (categoryFilter) {
+    filtered = filtered.filter((e) => e.categories?.includes(categoryFilter));
+  }
+  if (playersFilter) {
+    filtered = filtered.filter(
+      (e) =>
+        e.minPlayers != null &&
+        e.maxPlayers != null &&
+        e.minPlayers <= playersFilter[1] &&
+        e.maxPlayers >= playersFilter[0]
+    );
+  }
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortBy === 'addedAt') {
+      return (b.addedAt?.toMillis() ?? 0) - (a.addedAt?.toMillis() ?? 0);
+    }
+    return a.name.localeCompare(b.name, 'fr');
+  });
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -210,9 +245,79 @@ export default function LudothequeScreen() {
             {showSearch ? (
               <AddGameSearch uid={user.uid} onAdded={() => setShowSearch(false)} />
             ) : null}
-            {!loading && sorted.length === 0 && !showSearch ? (
+
+            {!showSearch && entries.length > 0 ? (
+              <ThemedView style={styles.filters}>
+                {availableCategories.length > 0 ? (
+                  <>
+                    <ThemedText type="small" themeColor="textSecondary">
+                      Catégorie
+                    </ThemedText>
+                    <ThemedView style={styles.chipRow}>
+                      {availableCategories.map((cat) => (
+                        <Pressable
+                          key={cat}
+                          onPress={() => setCategoryFilter((c) => (c === cat ? null : cat))}>
+                          <ThemedView
+                            type={categoryFilter === cat ? 'backgroundSelected' : 'backgroundElement'}
+                            style={styles.chip}>
+                            <ThemedText type="small">{cat}</ThemedText>
+                          </ThemedView>
+                        </Pressable>
+                      ))}
+                    </ThemedView>
+                  </>
+                ) : null}
+
+                <ThemedText type="small" themeColor="textSecondary">
+                  Nombre de joueurs
+                </ThemedText>
+                <ThemedView style={styles.chipRow}>
+                  {PLAYER_RANGES.map((p) => (
+                    <Pressable
+                      key={p.label}
+                      onPress={() =>
+                        setPlayersFilter((cur) => (cur === p.range ? null : p.range))
+                      }>
+                      <ThemedView
+                        type={playersFilter === p.range ? 'backgroundSelected' : 'backgroundElement'}
+                        style={styles.chip}>
+                        <ThemedText type="small">{p.label}</ThemedText>
+                      </ThemedView>
+                    </Pressable>
+                  ))}
+                </ThemedView>
+
+                <ThemedText type="small" themeColor="textSecondary">
+                  Trier par
+                </ThemedText>
+                <ThemedView style={styles.chipRow}>
+                  <Pressable onPress={() => setSortBy('name')}>
+                    <ThemedView
+                      type={sortBy === 'name' ? 'backgroundSelected' : 'backgroundElement'}
+                      style={styles.chip}>
+                      <ThemedText type="small">Nom</ThemedText>
+                    </ThemedView>
+                  </Pressable>
+                  <Pressable onPress={() => setSortBy('addedAt')}>
+                    <ThemedView
+                      type={sortBy === 'addedAt' ? 'backgroundSelected' : 'backgroundElement'}
+                      style={styles.chip}>
+                      <ThemedText type="small">Date d’ajout</ThemedText>
+                    </ThemedView>
+                  </Pressable>
+                </ThemedView>
+              </ThemedView>
+            ) : null}
+
+            {!loading && entries.length === 0 && !showSearch ? (
               <ThemedText type="small" themeColor="textSecondary">
                 Aucun jeu dans ta ludothèque pour l’instant.
+              </ThemedText>
+            ) : null}
+            {!loading && entries.length > 0 && sorted.length === 0 && !showSearch ? (
+              <ThemedText type="small" themeColor="textSecondary">
+                Aucun jeu ne correspond à ces filtres.
               </ThemedText>
             ) : null}
           </ThemedView>
@@ -253,6 +358,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   searchBox: { gap: Spacing.two },
+  filters: { gap: Spacing.two },
+  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginBottom: Spacing.two },
+  chip: {
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+    borderRadius: Spacing.five,
+  },
   bggBadge: {
     alignSelf: 'flex-start',
     backgroundColor: '#FFFFFF',

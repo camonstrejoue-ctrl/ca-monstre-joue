@@ -1,4 +1,12 @@
-import { collection, deleteDoc, doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  serverTimestamp,
+  setDoc,
+  Timestamp,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 import type { BggGame } from '@/lib/bgg';
@@ -9,7 +17,10 @@ export interface LudothequeEntry {
   name: string;
   yearPublished?: number;
   thumbnail?: string;
-  addedAt: unknown;
+  categories?: string[];
+  minPlayers?: number;
+  maxPlayers?: number;
+  addedAt: Timestamp | null;
 }
 
 export function useLudotheque(uid: string | undefined) {
@@ -45,6 +56,9 @@ export async function addGameToLudotheque(uid: string, game: BggGame) {
     name: game.name,
     yearPublished: game.yearPublished ?? null,
     thumbnail: game.thumbnail ?? null,
+    categories: game.categories ?? [],
+    minPlayers: game.minPlayers ?? null,
+    maxPlayers: game.maxPlayers ?? null,
     addedAt: serverTimestamp(),
   });
 }
