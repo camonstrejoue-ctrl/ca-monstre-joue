@@ -675,7 +675,7 @@ window.ARTICLES = [
     date: '2026-08-12',
     author: 'Alex',
     guide: true,
-    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    cover: 'assets/guides/combien-de-jeux-pour-etre-heureux/combien-de-jeux-pour-etre-heureux-vignette.jpg',
     excerpt: "Réponse courte : toujours un de plus. Une théorie du bonheur ludique, mesurée en centimètres de boîte.",
     blocks: [
       { type: 'p', text: "Réponse courte. Toujours un de plus." },
@@ -703,7 +703,8 @@ window.ARTICLES = [
     date: '2026-08-12',
     author: 'Alex',
     guide: true,
-    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    hero: 'assets/guides/comment-trainer-sa-moitie-au-magasin-de-jeux/comment-trainer-sa-moitie-au-magasin-de-jeux-bandeau.jpg',
+    cover: 'assets/guides/comment-trainer-sa-moitie-au-magasin-de-jeux/comment-trainer-sa-moitie-au-magasin-de-jeux-vignette.jpg',
     excerpt: "Trois techniques testées et approuvées pour remplir subtilement votre ludothèque, sans jamais éveiller les soupçons.",
     blocks: [
       { type: 'p', text: 'Je vais vous parler d’expérience. Dans un soucis d’anonymat nous allons prendre des prénoms totalement fictifs. Mettons <a href="/equipe.html">Alex et Camille</a>. Ces techniques marchent à la perfection mais méfiez-vous, et utilisez les avec parcimonie. Car oui, toute la subtilité tient dans le fait de varier les techniques pour toujours bénéficier de l’effet de surprise. Si vous faites encore et encore le même coup, vous vous doutez bien que ça va finir par se voir et par ne plus marcher du tout…' },
