@@ -34,21 +34,22 @@ function HomeTile({
 }) {
   const theme = useTheme();
   return (
-    <Link href={href} asChild>
-      <Pressable
-        style={({ pressed }) => [
-          styles.tile,
-          full ? styles.tileFull : styles.tileHalf,
-          pressed && styles.pressed,
-        ]}>
-        <ThemedView type="backgroundElement" style={styles.tileInner}>
-          <Ionicons name={icon} size={28} color={theme.text} />
-          <ThemedText type="smallBold" style={styles.tileLabel}>
-            {label}
-          </ThemedText>
-        </ThemedView>
-      </Pressable>
-    </Link>
+    // `Link asChild` rend un <a> sur web qui ne grandit pas tout seul dans une
+    // rangée flex (il garde sa taille naturelle) : on fixe donc la taille de
+    // la tuile sur ce conteneur englobant, et le lien/bouton se contente de
+    // remplir 100% de cet espace.
+    <View style={full ? styles.tileFull : styles.tileHalf}>
+      <Link href={href} asChild>
+        <Pressable style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
+          <ThemedView type="backgroundElement" style={styles.tileInner}>
+            <Ionicons name={icon} size={28} color={theme.text} />
+            <ThemedText type="smallBold" style={styles.tileLabel}>
+              {label}
+            </ThemedText>
+          </ThemedView>
+        </Pressable>
+      </Link>
+    </View>
   );
 }
 
@@ -127,11 +128,12 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.7 },
   grid: { gap: Spacing.three, marginTop: Spacing.two },
   row: { flexDirection: 'row', gap: Spacing.three },
-  tile: { borderRadius: Spacing.three, overflow: 'hidden' },
+  tile: { width: '100%', height: '100%', borderRadius: Spacing.three, overflow: 'hidden' },
   tileHalf: { flex: 1, aspectRatio: 1 },
   tileFull: { flex: 1, aspectRatio: 16 / 7 },
   tileInner: {
-    flex: 1,
+    width: '100%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     gap: Spacing.two,
