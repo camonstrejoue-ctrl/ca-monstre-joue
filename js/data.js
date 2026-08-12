@@ -669,6 +669,25 @@ window.ARTICLES = [
       { type: 'p', text: "Alors…convaincu ? Sakuracheter le jeu ou pas ?" },
     ],
   },
+  {
+    slug: 'combien-de-jeux-pour-etre-heureux',
+    title: 'Combien de jeux faut-il posséder pour être vraiment heureux ?',
+    date: '2026-08-12',
+    author: 'Alex',
+    guide: true,
+    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    excerpt: "Réponse courte : toujours un de plus. Une théorie du bonheur ludique, mesurée en centimètres de boîte.",
+    blocks: [
+      { type: 'p', text: "Réponse courte. Toujours un de plus." },
+      { type: 'p', text: "Le bonheur et c’est bien connu, est un état vers lequel nous essayons tous de « tendre ». Et c’est là toute l’importance. Le fait de tendre vers quelque chose, implique que nous devions ajouter une chose pour y arriver. Et cette chose vous vous en doutez, c’est un jeu de société." },
+      { type: 'p', text: "En effet, si n est égal au nombre de jeux possédé, nous touchons du doigt le bonheur à n+1." },
+      { type: 'p', text: "Maintenant le bonheur n’est pas qu’une question de 0 ou de 1, vous le savez dans la vie rien n’est binaire. La vie, le bonheur, c’est aussi une affaire de centimètres." },
+      { type: 'p', text: "Prenez un petit jeu de carte qui mesure 10cm. Vous sortez du magasin avec cette nouvelle boite sous le bras. 10 cm c’est bien, vous allez avoir de belles parties de plaisir c’est sûr et cet achat vous a procuré une dose non négligeable de bonheur." },
+      { type: 'p', text: "Mais prenons maintenant une belle boite, 40 cm de Seigneur des anneaux, avec des figurines détaillées et de longues heures de jeu qui vous attendent. Votre bonheur qui certes vous pèse au bout du bras n’est-il pas plus conséquent à la sortie du magasin ?" },
+      { type: 'p', text: "Alors oui si n+1 c’est être toujours un peu plus proche du bonheur, pourquoi ne pas simplement acheter plein de petits jeux me direz vous ? n+2, n+3 etc. Mais en fait c’est oublier les cm et le bonheur qui y est associé. Oubliez ce timide n+3 composé de petites boites ridicules. Prenez votre valise dans ce magasin de jeu et assumez votre envie d’un n+33 !" },
+      { type: 'p', text: 'Vous l’aurez compris une boite de plus c’est tendre vers le bonheur. Une boite plus grosse de plus c’est tendre encore plus vers ce bonheur. Et en parlant de grosses boites, vous avez déjà entendu parler de ces jeux exceptionnels ? <a href="/jeu.html?slug=eila-et-leclat-de-la-montagne">Eila et l’Éclat de la Montagne</a>, Fate et La Communauté de l’Anneau.' },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des 4 membres de la team.
