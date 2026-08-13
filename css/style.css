@@ -104,9 +104,8 @@ button{font-family:inherit;cursor:pointer;}
   background:var(--white);display:flex;align-items:center;justify-content:center;
   transition:background .15s ease;
 }
-.agenda-toggle svg{width:20px;height:20px;fill:var(--black);}
+.agenda-toggle img{width:28px;height:28px;object-fit:contain;}
 .agenda-toggle:hover{background:var(--coral);border-color:var(--coral);}
-.agenda-toggle:hover svg{fill:var(--white);}
 
 .search-widget{position:relative;display:flex;align-items:center;flex:none;}
 .search-toggle{
@@ -275,7 +274,6 @@ button{font-family:inherit;cursor:pointer;}
 .shortcut-card--guides{background:var(--coral-light);}
 .shortcut-card--agenda{background:var(--cream-dark);}
 .shortcut-icon{width:64px;flex:none;}
-.shortcut-icon--svg{height:64px;fill:var(--black);}
 .shortcut-copy .tag{
   display:inline-block;font-family:var(--font-display);font-weight:700;font-size:.8rem;
   color:var(--coral-dark);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;
