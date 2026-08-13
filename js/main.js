@@ -822,7 +822,7 @@ function renderArticlePage() {
       });
       body.appendChild(row);
     } else if (b.type === 'instagram') {
-      const wrap = el('div', { class: 'video-wrap', style: 'margin:28px auto;' });
+      const wrap = el('div', { class: 'article-instagram' });
       if (isInstagramUrl(b.url)) {
         wrap.appendChild(el('blockquote', {
           class: 'instagram-media', 'data-instgrm-permalink': b.url, 'data-instgrm-version': '14',
