@@ -704,6 +704,7 @@ window.ARTICLES = [
     author: 'Alex',
     guide: true,
     hero: 'assets/guides/comment-trainer-sa-moitie-au-magasin-de-jeux/comment-trainer-sa-moitie-au-magasin-de-jeux-bandeau.jpg',
+    banner: 'assets/guides/comment-trainer-sa-moitie-au-magasin-de-jeux/comment-trainer-sa-moitie-au-magasin-de-jeux-banniere.jpg',
     cover: 'assets/guides/comment-trainer-sa-moitie-au-magasin-de-jeux/comment-trainer-sa-moitie-au-magasin-de-jeux-vignette.jpg',
     excerpt: "Trois techniques testées et approuvées pour remplir subtilement votre ludothèque, sans jamais éveiller les soupçons.",
     blocks: [
