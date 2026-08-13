@@ -730,7 +730,7 @@ function renderArticlePage() {
     if (b.type === 'p') {
       body.appendChild(el('p', { html: b.text }));
     } else if (b.type === 'h2') {
-      body.appendChild(el('h2', { text: b.text, style: 'margin-top:40px;' }));
+      body.appendChild(el('h2', { html: b.text, style: 'margin-top:40px;' }));
     } else if (b.type === 'list') {
       const ul = el('ul', {});
       b.items.forEach(item => ul.appendChild(el('li', { html: item })));
