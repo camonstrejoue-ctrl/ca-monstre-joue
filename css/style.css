@@ -299,7 +299,7 @@ button{font-family:inherit;cursor:pointer;}
 @media (max-width:880px){.games-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:560px){.games-grid{grid-template-columns:1fr;}}
 
-.article-games-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:28px 0;}
+.article-games-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,275px));gap:20px;margin:28px 0;justify-content:center;}
 .game-card--soon .thumb{opacity:.55;}
 .game-card--soon .btn{opacity:.55;pointer-events:none;}
 @media (max-width:560px){.article-games-row{grid-template-columns:1fr;}}

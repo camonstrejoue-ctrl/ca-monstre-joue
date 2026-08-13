@@ -785,8 +785,7 @@ window.ARTICLES = [
       { type: 'p', text: "Vous vous dites probablement que quel que soit le résultat, avec un jeu coopératif, c’est certain, la soirée va bien se passer. D’expérience, cela n’a rien d’une certitude ! Dans un groupe, il y a toujours des gens qui vont essayer de s’imposer, parler fort, prendre les devants et imposer leur stratégie, même quand cela n’est pas leur tour de jeu. D’autres se retrouvent alors esseulés et n’ont plus du tout l’impression ni de s’amuser, ni de jouer tout court. Et c’est bien là le risque." },
       { type: 'p', text: "Finalement, peu importe le jeu ou même le type de jeu. Vous devez analyser le groupe et anticiper les dynamiques les plus probables et choisir le jeu qui vous paraîtra correspondre le mieux." },
       { type: 'p', text: "Si vous souhaitez tout de même un conseil de P’tit Monstre, testez Flyin’Goblin en début de soirée. Fous rires garantis !" },
-      { type: 'games', items: [{ slug: 'flyin-goblin' }] },
-      { type: 'articles', items: [{ name: 'Les 3 jeux qui vont briser votre amitié' }] },
+      { type: 'articles', items: [{ gameSlug: 'flyin-goblin' }, { name: 'Les 3 jeux qui vont briser votre amitié' }] },
     ],
   },
   {

@@ -793,12 +793,21 @@ function renderArticlePage() {
       const row = el('div', { class: 'article-games-row' });
       b.items.forEach(item => {
         const other = item.slug ? findArticle(item.slug) : null;
+        const game = item.gameSlug ? findGame(item.gameSlug) : null;
         if (other) {
           const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${other.slug}` });
           card.appendChild(mediaElement(other.cover, other.title, other.slug));
           card.appendChild(el('div', { class: 'overlay' }, [
             el('h3', { text: other.title }),
             el('span', { text: 'Lire l’article' }),
+          ]));
+          row.appendChild(card);
+        } else if (game) {
+          const card = el('a', { class: 'gallery-card', href: `/jeu.html?slug=${game.slug}` });
+          card.appendChild(mediaElement(game.thumbnail || game.cover, game.name, game.slug));
+          card.appendChild(el('div', { class: 'overlay' }, [
+            el('h3', { text: game.name }),
+            el('span', { text: 'Voir le jeu' }),
           ]));
           row.appendChild(card);
         } else {
