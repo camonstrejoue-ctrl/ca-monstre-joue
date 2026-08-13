@@ -761,6 +761,34 @@ window.ARTICLES = [
       },
     ],
   },
+  {
+    slug: 'organiser-soiree-jeux-competitif-ou-cooperatif',
+    title: 'Organiser une soirée jeux – Jeux compétitifs ou coopératifs ?',
+    date: '2026-08-13',
+    author: 'Alex',
+    guide: true,
+    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    excerpt: "Compétitif ou coopératif : comment choisir le bon jeu pour que votre soirée entre amis ne finisse pas en froid glacial ?",
+    blocks: [
+      { type: 'p', text: "Vous vous êtes mis dans l’idée d’organiser prochainement une soirée jeux avec vos amis. Au moment d’envoyer les invitations, ça vous semblait être une super idée. Vous pensiez peut-être même réussir à intégrer des amis qui ne se sont jamais rencontrés, créer du lien et éviter les blancs gênants lorsque les principaux sujets de conversation seront épuisés." },
+      { type: 'p', text: "Sur le principe ça a tout l’air d’être l’idée de l’année. Mais plus la date se rapproche et plus vous doutez. À raison ? On va en discuter." },
+      { type: 'h2', text: 'Le choix cornélien des jeux' },
+      { type: 'p', text: "Plusieurs cas de figures. Si vous organisez une soirée jeux entre des amis qui sont déjà immergées jusqu’au cou dans le monde du jeu de société, vous n’avez pas besoin de vous cantonner aux simples « jeux d’ambiance » qui permettent d’animer facilement une soirée." },
+      { type: 'p', text: "En effet, avec des novices allergiques aux règles d’un jeu, pas de doute possible, partez directement vers des jeux faciles à apprendre et qui brisent la glace. Pourquoi pas l’excellent That’s not a hat, ou encore le classique Service Compris ?" },
+      { type: 'p', text: "Mais mettons que vous souhaitiez une soirée un peu plus conséquente au niveau ludique, avec des personnes qui sont d’accord d’apprendre des règles pendant plus de 5 minutes. Vous vous demandez alors mais quel jeu ?" },
+      { type: 'p', text: "Mais avant de choisir les élus, il faut vous demander, compétitif ou coopératif ?" },
+      { type: 'h2', text: 'Jeux compétitifs, l’assurance de briser une amitié qui n’existe pas encore' },
+      { type: 'p', text: "Dans le lot d’amis invités, c’est presque certain, vous avez des mauvais perdants. Mais voilà, vous les aimez bien et vous avez quand même envie qu’ils viennent." },
+      { type: 'p', text: "Dans ce cas-là, soyez très prudents dans le choix des jeux. Les jeux compétitifs peuvent se révéler très risqués. En particulier si, à l’opposé, l’un des invités joue pour gagner et ne voit aucun problème à bloquer quelqu’un dans sa stratégie pour arriver à ses fins." },
+      { type: 'p', text: "Étudiez bien vos invités et si vous anticipez ce problème, une seule solution." },
+      { type: 'h2', text: 'Jeux coopératifs, l’assurance d’une soirée apaisée. Vraiment ?' },
+      { type: 'p', text: "Vous vous dites probablement que quel que soit le résultat, avec un jeu coopératif, c’est certain, la soirée va bien se passer. D’expérience, cela n’a rien d’une certitude ! Dans un groupe, il y a toujours des gens qui vont essayer de s’imposer, parler fort, prendre les devants et imposer leur stratégie, même quand cela n’est pas leur tour de jeu. D’autres se retrouvent alors esseulés et n’ont plus du tout l’impression ni de s’amuser, ni de jouer tout court. Et c’est bien là le risque." },
+      { type: 'p', text: "Finalement, peu importe le jeu ou même le type de jeu. Vous devez analyser le groupe et anticiper les dynamiques les plus probables et choisir le jeu qui vous paraîtra correspondre le mieux." },
+      { type: 'p', text: "Si vous souhaitez tout de même un conseil de P’tit Monstre, testez Flyin’Goblin en début de soirée. Fous rires garantis !" },
+      { type: 'games', items: [{ slug: 'flyin-goblin' }] },
+      { type: 'articles', items: [{ name: 'Les 3 jeux qui vont briser votre amitié' }] },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des 4 membres de la team.
