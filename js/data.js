@@ -789,6 +789,36 @@ window.ARTICLES = [
       { type: 'articles', items: [{ name: 'Les 3 jeux qui vont briser votre amitié' }] },
     ],
   },
+  {
+    slug: 'jeux-pour-lapero',
+    title: 'Les 3 jeux qui changent pour l’apéro',
+    date: '2026-08-13',
+    author: 'Camille',
+    guide: true,
+    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    excerpt: "Escape the Dark Castle, Jenga et Flyin’ Goblin : nos 3 jeux préférés pour changer un peu des sempiternelles Blanc-Manger Coco et Time’s Up à l’apéro.",
+    blocks: [
+      { type: 'p', text: "Quand on a réfléchi aux différentes catégories de jeux pour le site on a vite été confrontés à un souci de définition… Un jeu d’ambiance, c’est quoi ??? Un p’tit jeu qu’on sort à l’apéro, qui comporte généralement un certain nombre de blagues salaces et qui va permettre de recueillir des informations croustillantes sur les convives ? Voilà en tout cas le genre de jeux d’ambiance que l’on peut retrouver dans les rayons dédiés de grands magasins." },
+      { type: 'p', text: "Mais pour nous, un jeu d’ambiance c’est avant tout un jeu pas trop compliqué (qui ne prend pas 2h d’étude de règles), pendant lequel on arrive à grignoter et que l’on peut sortir pour créer un moment spécial : cocooning, rigolade ou autre." },
+      { type: 'p', text: "Cette petite question terminologique étant réglée, nous pouvons en venir au vif du sujet : quels jeux sortir à l’apéro pour changer un peu des sempiternelles Blanc manger coco, Time’s Up et compagnie ? Afin de ne pas me répéter dans la suite de cet article, veuillez prendre note que la consommation d’alcool doit bien évidemment se faire avec modération (même si le degré d’amusement est souvent proportionnel au nombre de verres ingurgités)." },
+      { type: 'h2', text: 'Notre n°1 : Escape the Dark Castle' },
+      { type: 'p', text: "Si vous flânez sur le site, vous l’aurez peut-être remarqué, nous parlons beaucoup de ce jeu et pour cause : il fait partie de nos jeux préférés ! Les règles sont très rapidement expliquées et il est très facile de jouer avec les dés dans une main et un cocktail dans l’autre. Qui plus est, il anime agréablement l’apéro puisqu’il permet de vivre une véritable aventure interactive, tous ensemble. Les plus théâtraux d’entre nous pourront briller par leur lecture fougueuse des différentes cartes de chapitre, ce qui ne manquera pas de transporter et faire rire l’assemblée." },
+      { type: 'p', text: "Pour en découvrir plus, regardez notre présentation du jeu !" },
+      { type: 'h2', text: 'Jenga, le bon second' },
+      { type: 'p', text: "Je vous entends déjà ! « Quoi, le Jenga !? Y a pas plus original que ça !? » Et bien, des fois, il faut savoir retourner aux classiques. Le Jenga de base est un jeu hyper sympa avec un coup dans le nez. D’un coup, le jeu paraît 15 fois plus difficile. Pour pimenter vos soirées, nous vous proposons également une customisation de votre Jenga. Après vous être amusés avec quelques bombes de peinture, vous pourrez écrire sur vos petits morceaux de bois. Pour ceux qui ont du mal à faire un choix, ça peut permettre de choisir le film du soir (la dernière brique qui fait tomber la tour détermine le film). Pour ceux qui veulent piéger leurs invités, ils peuvent noter des défis. Pour les grands intellectuels, des citations. Pour ceux qui détestent cuisiner, noter des noms sur les briques. Celui dont le nom est sur la dernière brique qui fait tomber la tour doit préparer le souper ! Bref, notez tout ce qui vous passe par la tête, adaptez-le à vos convives et vous obtiendrez un jeu super sympa pour l’apéro !" },
+      { type: 'h2', text: 'Sur le podium : Flyin’ Goblin' },
+      { type: 'p', text: "C’est notre dernière recommandation pour accompagner vos apéros. Si Escape the Dark Castle est particulièrement adapté à un apéritif entre adultes, Flyin’ Goblin est bien plus inclusif et vous permettra des parties avec de jeunes convives. Jeu léger par essence, il fera rire petits et grands !" },
+      { type: 'p', text: "Notez que si le jeu est sympa avec des enfants présents, il sera encore plus drôle, entre adultes, à mesure que les verres s’enchaîneront. Petite idée bonus : 5 diamants si vous visez le verre de votre voisin !" },
+      {
+        type: 'games',
+        items: [
+          { slug: 'escape-the-dark-castle' },
+          { name: 'Jenga' },
+          { slug: 'flyin-goblin' },
+        ],
+      },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des 4 membres de la team.
