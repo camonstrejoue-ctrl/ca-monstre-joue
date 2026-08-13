@@ -495,6 +495,9 @@ button{font-family:inherit;cursor:pointer;}
 }
 .gallery-card h3{color:var(--white);font-size:1.3rem;margin-bottom:2px;}
 .gallery-card span{color:var(--white);opacity:.85;font-weight:700;font-size:.85rem;white-space:nowrap;flex:none;}
+.gallery-card--soon{opacity:.55;}
+.article-games-row .gallery-card{aspect-ratio:1/1;}
+.article-games-row .gallery-card img{width:100%;height:100%;object-fit:cover;}
 
 /* ---------- share (jeu/article) ---------- */
 .share-section{padding:0 0 60px;}

@@ -725,6 +725,42 @@ window.ARTICLES = [
       { type: 'article', slug: 'combien-de-jeux-pour-etre-heureux' },
     ],
   },
+  {
+    slug: 'extensions-jeux-de-societe-une-arnaque',
+    title: 'Les extensions de jeux sont-elles une arnaque ?',
+    subtitle: 'La corde nostalgique',
+    date: '2026-08-13',
+    author: 'Alex',
+    guide: true,
+    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    excerpt: "Entre nostalgie et pile de la honte : y a-t-il une vraie différence entre les extensions qui enrichissent un jeu et celles qui en créent un nouveau ?",
+    blocks: [
+      { type: 'p', text: "Soyons francs (au moins autant que Clovis), combien d’entre nous ont déjà craqué sur des extensions de jeux de société que nous avons adorés ? Allez-y, comptez ! Combien d’extensions avez-vous dans votre ludothèque ? Et parmi elles, combien appréciez-vous réellement ?" },
+      { type: 'h2', text: 'La corde nostalgique' },
+      { type: 'p', text: "Pour moi, le principe même d’une extension, du point de vue d’un éditeur, c’est de jouer sur la corde nostalgique des joueurs pour vous faire acheter." },
+      { type: 'p', text: "Prenons un exemple assez classique. Catan. On ne compte plus le nombre d’extension pour ce bestseller des jeux de société. Beaucoup (et j’en fais partie) ont adoré le jeu de base et sont peut-être même rentré dans l’addiction aux jeux de société par ce titre." },
+      { type: 'p', text: "Pour ma part Catan est réellement le jeu qui m’a fait basculer entièrement dans la ludomania." },
+      { type: 'p', text: "C’est donc tout naturellement que je regardais les extensions avec envie. Et pour être franc j’en ai acheté une seule, il y a maintenant 2 ans. Barbares et marchands. Résultat, je n’ai toujours pas sorti la boite de ma « pile de la honte ». Vous savez cette pile de jeux que vous avez acheté mais que vous n’avez jamais essayé car il y a toujours de nouveaux jeux qui lui passent devant. En réalité, j’ai simplement craqué car ma fibre nostalgique me rappelle que j’adore le jeu Catan. Mais pour être franc, il me suffit. Dès que j’ai envie de jouer à Catan, je ressors avec plaisir la boite de base." },
+      { type: 'p', text: "Il faut aussi dire qu’un des problèmes qui m’empêche d’ouvrir l’extension, c’est les nouvelles règles." },
+      { type: 'p', text: "Et c’est là qu’on en arrive au cœur du sujet. En fait, il y a deux sortes d’extensions dans les jeux de société." },
+      { type: 'h2', text: 'Celles qui sont en fait « un nouveau jeu ».' },
+      { type: 'p', text: "Vous voyez de quoi je parle. Oui il faut le jeu de base, donc il s’agit en théorie d’une extension. Mais dans les faits, les règles à ajouter sont si importantes qu’elles en dénaturent presque le jeu de base. Ce n’est plus du tout le jeu pour lequel vous avez de la nostalgie. Cela ne veut en aucun cas dire que le résultat est décevant, mais cela a un coût. Une boite de plus à déballer, des règles à intégrer et à mémoriser." },
+      { type: 'h2', text: 'Celles qui enrichissent le jeu de base' },
+      { type: 'p', text: "Pour moi, et c’est là un avis qui n’engage que moi, le vrai plaisir d’une extension, c’est l’enrichissement du jeu de base sans en perdre l’essence. Et cela se résume aussi ainsi : on peut tout ranger dans la même boite (jeu de base + extension) sans que cela ne pose d’autre problème que celui de la place." },
+      { type: 'p', text: "Quand je pense à ce type d’extension, je ne peux m’empêcher de vous parler des boites de contenu supplémentaire de Fate les défenseurs de Grimheim qui rajoutent de nouveaux héros avec leurs propres capacités par exemple." },
+      { type: 'p', text: "Ou encore des extensions de Mysterium qui ajoutent de nouvelles illustrations, de nouveaux personnages, lieux et objets. Et même si ça a tendance à déborder, tout peut aller dans la même boite et se mélanger !" },
+      { type: 'p', text: "Et c’est là que je prends le plus de plaisir dans les extensions. Un peu comme si dans un jeu vidéo, on faisait des mises à jour constantes du jeu pour diversifier le contenu, sans forcément créer une extension entièrement nouvelle." },
+      { type: 'p', text: "Car oui, pour bon nombre (trop) d’extensions, j’ai la même impression que quand je regarde une suite de films à rallonge ou encore la saison 10 d’une série qui aurait dû s’arrêter à la 3e. J’ai toujours l’espoir de retrouver le plaisir de la saison 1 mais ça n’est qu’une chimère à laquelle ma nostalgie s’accroche et qui épuise simplement mon porte-monnaie." },
+      {
+        type: 'articles',
+        items: [
+          { slug: 'combien-de-jeux-pour-etre-heureux' },
+          { slug: 'comment-trainer-sa-moitie-au-magasin-de-jeux' },
+          { name: 'Bientôt un nouveau guide' },
+        ],
+      },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des 4 membres de la team.

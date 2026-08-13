@@ -789,6 +789,29 @@ function renderArticlePage() {
         ]));
         body.appendChild(card);
       }
+    } else if (b.type === 'articles') {
+      const row = el('div', { class: 'article-games-row' });
+      b.items.forEach(item => {
+        const other = item.slug ? findArticle(item.slug) : null;
+        if (other) {
+          const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${other.slug}` });
+          card.appendChild(mediaElement(other.cover, other.title, other.slug));
+          card.appendChild(el('div', { class: 'overlay' }, [
+            el('h3', { text: other.title }),
+            el('span', { text: 'Lire l’article' }),
+          ]));
+          row.appendChild(card);
+        } else {
+          const card = el('div', { class: 'gallery-card gallery-card--soon' });
+          card.appendChild(mediaElement(null, item.name, item.name));
+          card.appendChild(el('div', { class: 'overlay' }, [
+            el('h3', { text: item.name }),
+            el('span', { text: 'Bientôt' }),
+          ]));
+          row.appendChild(card);
+        }
+      });
+      body.appendChild(row);
     }
   });
 
