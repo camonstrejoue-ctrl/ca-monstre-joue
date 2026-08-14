@@ -13,40 +13,26 @@ Ton compagnon du jeu de société : agenda, joueurs proches, blog.
 ```
 Ça Monstre Joue, c'est ton compagnon pour tout ce qui touche aux jeux de société.
 
-🎲 DÉCOUVRE
-Retrouve toutes nos critiques et fiches jeux détaillées : nombre de joueurs, durée, difficulté,
-et notre avis sincère sur chaque titre.
+AGENDA - Découvre ou publie des événements jeux de société près de chez toi.
 
-🐉 P'TIT MONSTRE
-Pas d'inspiration ? Réponds à quelques questions et notre mascotte te propose un jeu adapté à
-ton groupe, en quelques secondes.
+TROUVE DES JOUEURS - Recherche par ville, consulte leur ludothèque publique, contacte-les pour jouer ou échanger.
 
-📚 TA LUDOTHÈQUE
-Ajoute n'importe quel jeu (recherche connectée à BoardGameGeek) à ta ludothèque personnelle.
-Filtre par catégorie, nombre de joueurs, et trie par date d'ajout.
+DÉCOUVERTES - Toutes nos critiques et fiches jeux détaillées : joueurs, durée, difficulté, notre avis sincère.
 
-🧑‍🤝‍🧑 TROUVE DES JOUEURS
-Recherche des joueurs près de chez toi par ville, consulte leur ludothèque publique (si
-partagée) et contacte-les pour organiser une partie ou un échange de jeux.
+P'TIT MONSTRE - Pas d'inspiration ? Réponds à quelques questions, notre mascotte te propose un jeu adapté.
 
-📅 AGENDA
-Découvre les prochains événements jeux de société près de chez toi — soirées entre
-particuliers, tournois en boutique, festivals — ou publie le tien.
+TA LUDOTHÈQUE - Ajoute n'importe quel jeu et crée ta propre collection
 
-🎲 OUTILS DE PARTIE
-Lanceur de dés et compteur de points intégrés, prêts à l'emploi pendant tes soirées jeux.
+OUTILS DE JEU - Lanceur de dés et compteur de points intégrés.
 
-📸 SOUVENIRS
-Garde une trace de tes soirées jeux avec photos, date et lieu — 100% privé, stocké sur ton
-téléphone.
+BIBLIOTHEQUE DE SOUVENIRS - Garde une trace de tes soirées jeux (photos, date, lieu) - 100% privé, sur ton téléphone.
 
 Rejoins la communauté Ça Monstre Joue !
 ```
 
 ## Notes
 
-- Émojis à ajuster/retirer selon préférence — la Play Console les affiche tels quels.
 - Catégorie suggérée : **Loisirs créatifs** ou **Style de vie** (pas de catégorie "jeux de
   société" dédiée pour les apps non-jeu sur le Play Store).
 - Mots-clés déjà présents dans le texte pour la recherche interne au store : jeux de société,
-  ludothèque, joueurs, BoardGameGeek, agenda, soirée jeux.
+  ludothèque, joueurs, agenda, soirée jeux.
