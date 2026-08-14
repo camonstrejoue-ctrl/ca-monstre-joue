@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
   },
   ptitMonstreAvatar: { width: 40, height: 40 },
-  ptitMonstreText: { flex: 1 },
+  ptitMonstreText: { flex: 1, color: Brand.black },
   pressed: { opacity: 0.85 },
   grid: { gap: Spacing.four, marginTop: Spacing.two },
   row: { flexDirection: 'row', gap: Spacing.four },
@@ -140,5 +140,5 @@ const styles = StyleSheet.create({
     padding: Spacing.three,
   },
   tileAvatar: { width: 48, height: 48 },
-  tileLabel: { textAlign: 'center', fontSize: 16, lineHeight: 20 },
+  tileLabel: { textAlign: 'center', fontSize: 16, lineHeight: 20, color: Brand.black },
 });
