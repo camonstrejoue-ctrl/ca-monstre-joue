@@ -51,11 +51,30 @@ Produit un fichier `.aab` (Android App Bundle).
 Dans la [Play Console](https://play.google.com/console) :
 
 1. Créer une application → "Ça Monstre Joue".
-2. Renseigner la fiche store : description courte/longue, icône 512×512, image de couverture
-   1024×500, captures d'écran (au moins 2, prises depuis l'app).
+2. Renseigner la fiche store : description courte/longue (texte déjà rédigé dans
+   `store-listing.md`, prêt à copier-coller), icône 512×512, image de couverture 1024×500,
+   captures d'écran (au moins 2, prises depuis l'app).
 3. Remplir le questionnaire de classification de contenu et la section confidentialité (données
    collectées : e-mail, pseudo, ville — voir `src/app/cgu.tsx` pour le texte déjà rédigé).
 4. Uploader le `.aab` généré à l'étape 5 dans un canal de test (interne ou fermé) d'abord.
+
+## 6bis. Activer les App Links (le site "ouvre" l'app dans les résultats Google)
+
+Déjà préparé dans `app.json` (`android.intentFilters`) et `.well-known/assetlinks.json` à la
+racine du site. Il ne reste que deux étapes, une fois le site en ligne :
+
+1. Récupère l'empreinte de signature de l'app (nécessite d'avoir fait l'étape 3 ci-dessus) :
+   ```bash
+   eas credentials -p android
+   ```
+   Choisis le profil `production`, l'empreinte `SHA256` s'affiche.
+2. Remplace `"REMPLACER_PAR_EMPREINTE_EAS"` dans `.well-known/assetlinks.json` (racine du repo,
+   pas dans `app/`) par cette empreinte, puis commit + push — le fichier doit être accessible
+   publiquement sur `https://www.camonstrejoue.ch/.well-known/assetlinks.json` une fois le site
+   publié.
+
+Android vérifie ce fichier automatiquement au premier lancement de l'app ; aucune autre action
+nécessaire ensuite.
 
 ## 7. Soumettre (optionnel, via EAS)
 

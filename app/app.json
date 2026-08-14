@@ -18,7 +18,19 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            { "scheme": "https", "host": "www.camonstrejoue.ch", "pathPrefix": "/jeu/" },
+            { "scheme": "https", "host": "www.camonstrejoue.ch", "pathPrefix": "/article/" },
+            { "scheme": "https", "host": "www.camonstrejoue.ch", "pathPrefix": "/categorie/" }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "web": {
       "output": "static",
