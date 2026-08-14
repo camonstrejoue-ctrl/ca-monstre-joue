@@ -827,7 +827,9 @@ window.ARTICLES = [
     date: '2026-08-13',
     author: 'Alex',
     guide: true,
-    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    hero: 'assets/guides/jeux-pour-convertir-un-non-joueur/jeux-pour-convertir-un-non-joueur-bandeau.jpg',
+    banner: 'assets/guides/jeux-pour-convertir-un-non-joueur/jeux-pour-convertir-un-non-joueur-banniere.jpg',
+    cover: 'assets/guides/jeux-pour-convertir-un-non-joueur/jeux-pour-convertir-un-non-joueur-vignette.jpg',
     excerpt: "Escape the Dark Castle, Pictionary, Jenga, That’s Not a Hat et Dilemme Express : 5 jeux capables de faire aimer les jeux de société aux plus réfractaires.",
     blocks: [
       { type: 'h2', text: '1. <a href="/jeu.html?slug=escape-the-dark-castle">Escape the Dark Castle</a>' },
