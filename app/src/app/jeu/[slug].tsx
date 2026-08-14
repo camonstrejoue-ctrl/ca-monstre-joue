@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   notFound: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   hero: { width: '100%', aspectRatio: 16 / 9 },
   body: { padding: Spacing.four, gap: Spacing.two },
-  title: { fontSize: 28, marginBottom: Spacing.two },
+  title: { marginBottom: Spacing.two },
   identityCard: {
     borderRadius: Spacing.three,
     padding: Spacing.three,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   identityRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   paragraph: { marginBottom: Spacing.two },
-  sectionTitle: { fontSize: 18, marginTop: Spacing.three, marginBottom: Spacing.two },
+  sectionTitle: { marginTop: Spacing.three, marginBottom: Spacing.two },
   listItem: { marginBottom: 4 },
   pressed: { opacity: 0.7 },
   linkButton: {

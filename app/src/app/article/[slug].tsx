@@ -99,13 +99,9 @@ export default function ArticleScreen() {
         <CoverImage path={article.hero || article.cover} style={styles.hero} />
 
         <ThemedView style={styles.body}>
-          <HighlightedHeading size="title" style={styles.title}>
-            {article.title}
-          </HighlightedHeading>
+          <HighlightedHeading size="title">{article.title}</HighlightedHeading>
           {article.subtitle ? (
-            <HighlightedHeading size="subtitle" style={styles.subtitle}>
-              {article.subtitle}
-            </HighlightedHeading>
+            <HighlightedHeading size="subtitle">{article.subtitle}</HighlightedHeading>
           ) : null}
           <ThemedText type="small" themeColor="textSecondary" style={styles.date}>
             {formattedDate}
@@ -134,9 +130,7 @@ const styles = StyleSheet.create({
   notFound: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   hero: { width: '100%', aspectRatio: 32 / 9 },
   body: { padding: Spacing.four, gap: Spacing.two },
-  title: { fontSize: 26 },
-  subtitle: { fontSize: 16 },
-  date: { marginBottom: Spacing.three },
+  date: { marginBottom: Spacing.three, marginTop: Spacing.two },
   paragraph: { marginBottom: Spacing.three },
   h2: { fontSize: 18, marginTop: Spacing.two, marginBottom: Spacing.two },
   listItem: { marginBottom: 4 },

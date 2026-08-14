@@ -1,6 +1,7 @@
-import { StyleSheet, Text, type StyleProp, type TextStyle } from 'react-native';
+import { StyleSheet, Text, type StyleProp, type ViewStyle } from 'react-native';
 
-const CORAL = '#E8392A';
+import { StickerBox } from '@/components/sticker';
+import { Brand, Fonts, Radius } from '@/constants/theme';
 
 export function HighlightedHeading({
   children,
@@ -9,29 +10,32 @@ export function HighlightedHeading({
 }: {
   children: string;
   size?: 'title' | 'subtitle';
-  style?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
 }) {
   return (
-    <Text style={[styles.base, size === 'title' ? styles.title : styles.subtitle, style]}>
-      {children}
-    </Text>
+    <StickerBox
+      backgroundColor={Brand.coral}
+      radius={Radius.sm}
+      shadowOffset={4}
+      style={[styles.wrap, style]}>
+      <Text style={[styles.text, size === 'title' ? styles.title : styles.subtitle]}>
+        {children}
+      </Text>
+    </StickerBox>
   );
 }
 
 const styles = StyleSheet.create({
-  base: {
-    alignSelf: 'flex-start',
-    backgroundColor: CORAL,
-    color: '#FFFFFF',
-    fontWeight: '800',
+  wrap: { alignSelf: 'flex-start' },
+  text: {
+    color: Brand.white,
+    fontFamily: Fonts.displayExtraBold,
     paddingHorizontal: 14,
     paddingVertical: 6,
-    borderRadius: 8,
-    overflow: 'hidden',
   },
   title: {
-    fontSize: 24,
-    lineHeight: 32,
+    fontSize: 22,
+    lineHeight: 30,
   },
   subtitle: {
     fontSize: 17,

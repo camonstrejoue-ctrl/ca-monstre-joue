@@ -24,11 +24,26 @@
           "action": "VIEW",
           "autoVerify": true,
           "data": [
-            { "scheme": "https", "host": "www.camonstrejoue.ch", "pathPrefix": "/jeu/" },
-            { "scheme": "https", "host": "www.camonstrejoue.ch", "pathPrefix": "/article/" },
-            { "scheme": "https", "host": "www.camonstrejoue.ch", "pathPrefix": "/categorie/" }
+            {
+              "scheme": "https",
+              "host": "www.camonstrejoue.ch",
+              "pathPrefix": "/jeu/"
+            },
+            {
+              "scheme": "https",
+              "host": "www.camonstrejoue.ch",
+              "pathPrefix": "/article/"
+            },
+            {
+              "scheme": "https",
+              "host": "www.camonstrejoue.ch",
+              "pathPrefix": "/categorie/"
+            }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
       ]
     },
@@ -52,7 +67,8 @@
           "photosPermission": "Autorise l'accès à tes photos pour les associer à tes souvenirs."
         }
       ],
-      "expo-sharing"
+      "expo-sharing",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,

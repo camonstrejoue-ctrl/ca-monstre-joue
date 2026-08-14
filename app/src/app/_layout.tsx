@@ -1,9 +1,22 @@
+import {
+  Baloo2_600SemiBold,
+  Baloo2_700Bold,
+  Baloo2_800ExtraBold,
+} from '@expo-google-fonts/baloo-2';
+import {
+  Nunito_400Regular,
+  Nunito_600SemiBold,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+  useFonts,
+} from '@expo-google-fonts/nunito';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { useColorScheme, View } from 'react-native';
 
 import { BottomTabBar } from '@/components/bottom-tab-bar';
+import { Fonts } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { AuthProvider } from '@/lib/auth-context';
 
@@ -12,10 +25,21 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const theme = useTheme();
+  const [fontsLoaded] = useFonts({
+    Baloo2_600SemiBold,
+    Baloo2_700Bold,
+    Baloo2_800ExtraBold,
+    Nunito_400Regular,
+    Nunito_600SemiBold,
+    Nunito_700Bold,
+    Nunito_800ExtraBold,
+  });
 
   useEffect(() => {
-    SplashScreen.hideAsync();
-  }, []);
+    if (fontsLoaded) SplashScreen.hideAsync();
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -25,7 +49,7 @@ export default function RootLayout() {
             screenOptions={{
               headerStyle: { backgroundColor: theme.background },
               headerTintColor: theme.text,
-              headerTitleStyle: { color: theme.text },
+              headerTitleStyle: { color: theme.text, fontFamily: Fonts.display },
               contentStyle: { backgroundColor: theme.background },
             }}>
             <Stack.Screen name="index" options={{ headerShown: false }} />

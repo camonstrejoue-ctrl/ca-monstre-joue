@@ -6,9 +6,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { AVATAR_ACCESSORIES, AvatarMonster } from '@/components/avatar-monster';
 import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
+import { StickerBox } from '@/components/sticker';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
+import { Brand, Radius, Spacing } from '@/constants/theme';
 import { signIn, signOut, signUp } from '@/lib/auth';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
@@ -27,11 +28,14 @@ function PrimaryButton({
   return (
     <Pressable onPress={onPress} disabled={disabled}>
       {({ pressed }) => (
-        <ThemedView
-          type="backgroundSelected"
-          style={[styles.primaryButton, (pressed || disabled) && styles.pressed]}>
-          <ThemedText type="smallBold">{label}</ThemedText>
-        </ThemedView>
+        <StickerBox
+          backgroundColor={disabled ? Brand.grayLight : Brand.coral}
+          radius={Radius.md}
+          style={pressed && styles.pressed}>
+          <ThemedText type="smallBold" style={styles.primaryButtonText}>
+            {label}
+          </ThemedText>
+        </StickerBox>
       )}
     </Pressable>
   );
@@ -397,10 +401,11 @@ const styles = StyleSheet.create({
   pageTitle: { fontSize: 32, marginBottom: Spacing.two },
   form: { gap: Spacing.three },
   sectionTitle: { marginTop: Spacing.four },
-  primaryButton: {
+  primaryButtonText: {
+    color: Brand.white,
+    textAlign: 'center',
     paddingVertical: Spacing.three,
-    borderRadius: Spacing.two,
-    alignItems: 'center',
+    paddingHorizontal: Spacing.four,
   },
   pressed: { opacity: 0.7 },
   switchMode: { textAlign: 'center', marginTop: Spacing.two },
