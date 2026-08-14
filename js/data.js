@@ -419,8 +419,8 @@ window.GAMES = [
     slug: 'daydream',
     name: 'Daydream',
     categories: ['jeux-a-deux', 'jeux-dambiance'],
-    // Pas encore d'images reçues : thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
-    thumbnail: '',
+    cover: 'assets/games/daydream/Daydream-cover.JPG',
+    thumbnail: 'assets/games/daydream/Daydream-vignette.JPG',
     heroImages: [],
     intro: [
       "Tu veux un jeu pour accompagner ton petit café post repas mais t’en as marre du sudoku ?",
@@ -456,9 +456,8 @@ window.GAMES = [
     slug: 'bandido',
     name: 'Bandido',
     categories: ['jeux-a-deux', 'jeux-cooperatifs', 'jeux-famille'],
-    // Pas encore d'images reçues : cover/thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
-    cover: '',
-    thumbnail: '',
+    cover: 'assets/games/bandido/Bandido-cover.JPG',
+    thumbnail: 'assets/games/bandido/Bandido-vignette.JPG',
     heroImages: [],
     intro: [
       "Bandido, c’est l’exemple parfait du petit jeu qui ne paie pas de mine mais auquel tu deviens vite accro !",
