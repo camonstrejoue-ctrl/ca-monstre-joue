@@ -229,6 +229,9 @@ function main() {
   ].join('\n');
   fs.writeFileSync(path.join(rootDir, 'sitemap.xml'), sitemap, 'utf8');
 
+  const guideArticles = ARTICLES.filter((a) => a.guide);
+  const otherArticles = ARTICLES.filter((a) => !a.guide);
+
   const llmsTxt = [
     '# Ça Monstre Joue',
     '',
@@ -240,7 +243,10 @@ function main() {
     ...GAMES.map((g) => `- [${g.name}](${BASE_URL}/jeu/${g.slug}/): ${toDescription(g.intro || g.fitIntro || '', 200)}`),
     '',
     '## Articles',
-    ...ARTICLES.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)}`),
+    ...otherArticles.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)}`),
+    '',
+    `## Guides du Monstre (${BASE_URL}/guides.html)`,
+    ...guideArticles.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)}`),
     '',
     '## Catégories',
     ...CATEGORIES.map((c) => `- [${c.name}](${BASE_URL}/categorie/${c.slug}/)`),
