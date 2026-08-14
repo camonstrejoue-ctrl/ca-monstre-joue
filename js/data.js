@@ -797,7 +797,9 @@ window.ARTICLES = [
     date: '2026-08-13',
     author: 'Camille',
     guide: true,
-    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    hero: 'assets/guides/jeux-pour-lapero/jeux-pour-lapero-bandeau.jpg',
+    banner: 'assets/guides/jeux-pour-lapero/jeux-pour-lapero-banniere.jpg',
+    cover: 'assets/guides/jeux-pour-lapero/jeux-pour-lapero-vignette.jpg',
     excerpt: "Escape the Dark Castle, Jenga et Flyin’ Goblin : nos 3 jeux préférés pour changer un peu des sempiternelles Blanc-Manger Coco et Time’s Up à l’apéro.",
     blocks: [
       { type: 'p', text: "Quand on a réfléchi aux différentes catégories de jeux pour le site on a vite été confrontés à un souci de définition… Un jeu d’ambiance, c’est quoi ??? Un p’tit jeu qu’on sort à l’apéro, qui comporte généralement un certain nombre de blagues salaces et qui va permettre de recueillir des informations croustillantes sur les convives ? Voilà en tout cas le genre de jeux d’ambiance que l’on peut retrouver dans les rayons dédiés de grands magasins." },
