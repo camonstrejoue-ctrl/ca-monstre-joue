@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   tileInner: {
     width: '100%',
     height: '100%',
+    borderRadius: Spacing.five,
     alignItems: 'center',
     justifyContent: 'center',
     gap: Spacing.two,
