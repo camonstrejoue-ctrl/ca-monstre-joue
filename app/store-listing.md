@@ -5,7 +5,7 @@
 ## Description courte (max 80 caractères)
 
 ```
-Critiques de jeux, ludothèque, joueurs près de toi et agenda de parties.
+Ton compagnon du jeu de société : agenda, joueurs proches, blog.
 ```
 
 ## Description complète
