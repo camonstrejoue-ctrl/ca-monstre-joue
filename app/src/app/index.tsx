@@ -1,7 +1,5 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
-import type { ComponentProps } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,7 +7,6 @@ import { ContentState } from '@/components/content-state';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
 import { useContent } from '@/lib/content';
 
 type HomeLinkHref =
@@ -23,16 +20,13 @@ type HomeLinkHref =
 
 function HomeTile({
   href,
-  icon,
   label,
   full = false,
 }: {
   href: HomeLinkHref;
-  icon: ComponentProps<typeof Ionicons>['name'];
   label: string;
   full?: boolean;
 }) {
-  const theme = useTheme();
   return (
     // `Link asChild` rend un <a> sur web qui ne grandit pas tout seul dans une
     // rangée flex (il garde sa taille naturelle) : on fixe donc la taille de
@@ -42,7 +36,10 @@ function HomeTile({
       <Link href={href} asChild>
         <Pressable style={({ pressed }) => [styles.tile, pressed && styles.pressed]}>
           <ThemedView type="backgroundElement" style={styles.tileInner}>
-            <Ionicons name={icon} size={28} color={theme.text} />
+            <Image
+              source={require('@/assets/images/avatars/monstre-aucun.png')}
+              style={styles.tileAvatar}
+            />
             <ThemedText type="smallBold" style={styles.tileLabel}>
               {label}
             </ThemedText>
@@ -85,19 +82,19 @@ export default function AccueilScreen() {
 
         <View style={styles.grid}>
           <View style={styles.row}>
-            <HomeTile href="/agenda" icon="calendar" label="Agenda" />
-            <HomeTile href="/catalogue" icon="newspaper" label="Blog" />
+            <HomeTile href="/agenda" label="Agenda" />
+            <HomeTile href="/catalogue" label="Blog" />
           </View>
           <View style={styles.row}>
-            <HomeTile href="/ludotheque" icon="albums" label="Ma ludothèque" />
-            <HomeTile href="/outils/souvenirs" icon="images" label="Mes souvenirs" />
+            <HomeTile href="/ludotheque" label="Ma ludothèque" />
+            <HomeTile href="/outils/souvenirs" label="Mes souvenirs" />
           </View>
           <View style={styles.row}>
-            <HomeTile href="/joueurs" icon="people" label="Trouver des joueurs près de chez moi" full />
+            <HomeTile href="/joueurs" label="Trouver des joueurs près de chez moi" full />
           </View>
           <View style={styles.row}>
-            <HomeTile href="/outils/des" icon="dice" label="Lanceur de dés" />
-            <HomeTile href="/outils/score" icon="trophy" label="Compteur de points" />
+            <HomeTile href="/outils/des" label="Lanceur de dés" />
+            <HomeTile href="/outils/score" label="Compteur de points" />
           </View>
         </View>
       </ScrollView>
@@ -128,7 +125,7 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.7 },
   grid: { gap: Spacing.three, marginTop: Spacing.two },
   row: { flexDirection: 'row', gap: Spacing.three },
-  tile: { width: '100%', height: '100%', borderRadius: Spacing.three, overflow: 'hidden' },
+  tile: { width: '100%', height: '100%', borderRadius: Spacing.five, overflow: 'hidden' },
   tileHalf: { flex: 1, aspectRatio: 1 },
   tileFull: { flex: 1, aspectRatio: 16 / 7 },
   tileInner: {
@@ -139,5 +136,6 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
     padding: Spacing.three,
   },
-  tileLabel: { textAlign: 'center' },
+  tileAvatar: { width: 48, height: 48 },
+  tileLabel: { textAlign: 'center', fontSize: 16, lineHeight: 20 },
 });
