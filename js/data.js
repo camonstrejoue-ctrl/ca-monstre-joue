@@ -731,7 +731,9 @@ window.ARTICLES = [
     date: '2026-08-13',
     author: 'Alex',
     guide: true,
-    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    hero: 'assets/guides/extensions-jeux-de-societe-une-arnaque/extensions-jeux-de-societe-une-arnaque-bandeau.jpg',
+    banner: 'assets/guides/extensions-jeux-de-societe-une-arnaque/extensions-jeux-de-societe-une-arnaque-banniere.jpg',
+    cover: 'assets/guides/extensions-jeux-de-societe-une-arnaque/extensions-jeux-de-societe-une-arnaque-vignette.jpg',
     excerpt: "Entre nostalgie et pile de la honte : y a-t-il une vraie différence entre les extensions qui enrichissent un jeu et celles qui en créent un nouveau ?",
     blocks: [
       { type: 'p', text: "Soyons francs (au moins autant que Clovis), combien d’entre nous ont déjà craqué sur des extensions de jeux de société que nous avons adorés ? Allez-y, comptez ! Combien d’extensions avez-vous dans votre ludothèque ? Et parmi elles, combien appréciez-vous réellement ?" },
@@ -766,7 +768,9 @@ window.ARTICLES = [
     date: '2026-08-13',
     author: 'Alex',
     guide: true,
-    // Pas encore d'images reçues : hero/banner/cover vides, placeholder généré automatiquement en attendant.
+    hero: 'assets/guides/organiser-soiree-jeux-competitif-ou-cooperatif/organiser-soiree-jeux-competitif-ou-cooperatif-bandeau.jpg',
+    banner: 'assets/guides/organiser-soiree-jeux-competitif-ou-cooperatif/organiser-soiree-jeux-competitif-ou-cooperatif-banniere.jpg',
+    cover: 'assets/guides/organiser-soiree-jeux-competitif-ou-cooperatif/organiser-soiree-jeux-competitif-ou-cooperatif-vignette.jpg',
     excerpt: "Compétitif ou coopératif : comment choisir le bon jeu pour que votre soirée entre amis ne finisse pas en froid glacial ?",
     blocks: [
       { type: 'p', text: "Vous vous êtes mis dans l’idée d’organiser prochainement une soirée jeux avec vos amis. Au moment d’envoyer les invitations, ça vous semblait être une super idée. Vous pensiez peut-être même réussir à intégrer des amis qui ne se sont jamais rencontrés, créer du lien et éviter les blancs gênants lorsque les principaux sujets de conversation seront épuisés." },
