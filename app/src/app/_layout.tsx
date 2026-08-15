@@ -25,7 +25,11 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const theme = useTheme();
-  const [fontsLoaded] = useFonts({
+  // On ne bloque plus l'affichage de l'app tant que les polices ne sont pas
+  // chargées : un souci réseau/chargement ferait sinon planter l'app sur un
+  // écran vide indéfiniment. Les polices s'appliquent dès qu'elles arrivent ;
+  // en attendant, React Native retombe sur une police système.
+  useFonts({
     Baloo2_600SemiBold,
     Baloo2_700Bold,
     Baloo2_800ExtraBold,
@@ -36,10 +40,8 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) return null;
+    SplashScreen.hideAsync();
+  }, []);
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
