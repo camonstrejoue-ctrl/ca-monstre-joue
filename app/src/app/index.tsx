@@ -66,7 +66,7 @@ export default function AccueilScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <Image
-        source={require('@/assets/images/avatars/monstre-aucun.png')}
+        source={require('@/assets/images/monstre-fond.png')}
         style={styles.backgroundMonster}
         contentFit="contain"
         pointerEvents="none"
