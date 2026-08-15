@@ -22,10 +22,12 @@ type HomeLinkHref =
 function HomeTile({
   href,
   label,
+  image,
   full = false,
 }: {
   href: HomeLinkHref;
   label: string;
+  image: string;
   full?: boolean;
 }) {
   return (
@@ -38,8 +40,9 @@ function HomeTile({
         <Pressable style={({ pressed }) => [styles.tileTouchable, pressed && styles.pressed]}>
           <StickerBox backgroundColor={Brand.white} radius={Radius.lg} style={styles.tileSticker}>
             <View style={styles.tileImageWrap}>
-              {/* Image de test en attendant une vraie illustration par section. */}
-              <CoverImage path={undefined} style={styles.tileImage} />
+              {/* Images 1:1 existantes du site, en test en attendant une
+                  illustration dédiée par section. */}
+              <CoverImage path={image} style={styles.tileImage} />
               <View style={styles.tileOverlay}>
                 <ThemedText type="smallBold" style={styles.tileLabel}>
                   {label}
@@ -87,19 +90,48 @@ export default function AccueilScreen() {
 
         <View style={styles.grid}>
           <View style={styles.row}>
-            <HomeTile href="/agenda" label="Agenda" />
-            <HomeTile href="/catalogue" label="Blog" />
+            <HomeTile
+              href="/agenda"
+              label="Agenda"
+              image="assets/categories/jeux-adeux-categorie.JPG"
+            />
+            <HomeTile
+              href="/catalogue"
+              label="Blog"
+              image="assets/categories/jeux-cooperatifs-categorie.jpg"
+            />
           </View>
           <View style={styles.row}>
-            <HomeTile href="/ludotheque" label="Ma ludothèque" />
-            <HomeTile href="/outils/souvenirs" label="Mes souvenirs" />
+            <HomeTile
+              href="/ludotheque"
+              label="Ma ludothèque"
+              image="assets/categories/jeux-dambiance-categorie.jpg"
+            />
+            <HomeTile
+              href="/outils/souvenirs"
+              label="Mes souvenirs"
+              image="assets/categories/jeux-strategie-categorie.JPG"
+            />
           </View>
           <View style={styles.row}>
-            <HomeTile href="/joueurs" label="Trouver des joueurs près de chez moi" full />
+            <HomeTile
+              href="/joueurs"
+              label="Trouver des joueurs près de chez moi"
+              image="assets/categories/jeux-narratifs-categorie.JPG"
+              full
+            />
           </View>
           <View style={styles.row}>
-            <HomeTile href="/outils/des" label="Lanceur de dés" />
-            <HomeTile href="/outils/score" label="Compteur de points" />
+            <HomeTile
+              href="/outils/des"
+              label="Lanceur de dés"
+              image="assets/categories/jeux-famille-categorie.JPG"
+            />
+            <HomeTile
+              href="/outils/score"
+              label="Compteur de points"
+              image="assets/games/sub-terra-ii/sub-terra-ii-liste.jpg"
+            />
           </View>
         </View>
       </ScrollView>
