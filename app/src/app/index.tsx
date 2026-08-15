@@ -65,6 +65,12 @@ export default function AccueilScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <Image
+        source={require('@/assets/images/avatars/monstre-aucun.png')}
+        style={styles.backgroundMonster}
+        contentFit="contain"
+        pointerEvents="none"
+      />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         <Image
           source={require('@/assets/images/logo.png')}
@@ -141,6 +147,14 @@ export default function AccueilScreen() {
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
+  backgroundMonster: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    opacity: 0.08,
+  },
   scrollContent: { padding: Spacing.four, gap: Spacing.four },
   logo: {
     width: '75%',
@@ -179,8 +193,8 @@ const styles = StyleSheet.create({
   },
   tileLabel: {
     textAlign: 'center',
-    fontSize: 18,
-    lineHeight: 22,
+    fontSize: 22,
+    lineHeight: 26,
     color: Brand.white,
   },
 });
