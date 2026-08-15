@@ -4,6 +4,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentState } from '@/components/content-state';
+import { CoverImage } from '@/components/cover-image';
 import { StickerBox } from '@/components/sticker';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
@@ -36,14 +37,14 @@ function HomeTile({
       <Link href={href} asChild>
         <Pressable style={({ pressed }) => [styles.tileTouchable, pressed && styles.pressed]}>
           <StickerBox backgroundColor={Brand.white} radius={Radius.lg} style={styles.tileSticker}>
-            <View style={styles.tileInner}>
-              <Image
-                source={require('@/assets/images/avatars/monstre-aucun.png')}
-                style={styles.tileAvatar}
-              />
-              <ThemedText type="smallBold" style={styles.tileLabel}>
-                {label}
-              </ThemedText>
+            <View style={styles.tileImageWrap}>
+              {/* Image de test en attendant une vraie illustration par section. */}
+              <CoverImage path={undefined} style={styles.tileImage} />
+              <View style={styles.tileOverlay}>
+                <ThemedText type="smallBold" style={styles.tileLabel}>
+                  {label}
+                </ThemedText>
+              </View>
             </View>
           </StickerBox>
         </Pressable>
@@ -131,14 +132,23 @@ const styles = StyleSheet.create({
   tileHalf: { flex: 1, aspectRatio: 1 },
   tileFull: { flex: 1, aspectRatio: 16 / 7 },
   tileSticker: { width: '100%', height: '100%' },
-  tileInner: {
-    width: '100%',
-    height: '100%',
+  tileImageWrap: { width: '100%', height: '100%' },
+  tileImage: { width: '100%', height: '100%' },
+  tileOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(26,26,26,0.45)',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: Spacing.two,
     padding: Spacing.three,
   },
-  tileAvatar: { width: 48, height: 48 },
-  tileLabel: { textAlign: 'center', fontSize: 16, lineHeight: 20, color: Brand.black },
+  tileLabel: {
+    textAlign: 'center',
+    fontSize: 32,
+    lineHeight: 36,
+    color: Brand.white,
+  },
 });
