@@ -104,12 +104,12 @@ export default function AccueilScreen() {
           <View style={styles.row}>
             <HomeTile
               href="/ludotheque"
-              label="Ma ludothèque"
+              label="Ludothèque"
               image="assets/categories/jeux-dambiance-categorie.jpg"
             />
             <HomeTile
               href="/outils/souvenirs"
-              label="Mes souvenirs"
+              label="Souvenirs"
               image="assets/categories/jeux-strategie-categorie.JPG"
             />
           </View>
@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
   },
   tileLabel: {
     textAlign: 'center',
-    fontSize: 32,
-    lineHeight: 36,
+    fontSize: 31,
+    lineHeight: 35,
     color: Brand.white,
   },
 });
