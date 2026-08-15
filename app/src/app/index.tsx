@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
   },
   tileLabel: {
     textAlign: 'center',
-    fontSize: 31,
-    lineHeight: 35,
+    fontSize: 18,
+    lineHeight: 22,
     color: Brand.white,
   },
 });
