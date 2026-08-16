@@ -63,7 +63,7 @@ export default function AccueilScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: Brand.coralLight },
+  safeArea: { flex: 1 },
   scrollContent: { padding: Spacing.four, gap: Spacing.four },
   logo: {
     width: '112.5%',

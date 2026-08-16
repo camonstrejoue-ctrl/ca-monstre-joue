@@ -25,9 +25,12 @@ export const Brand = {
 export const Colors = {
   light: {
     text: Brand.black,
-    background: Brand.cream,
+    background: Brand.coralLight,
     backgroundElement: Brand.white,
-    backgroundSelected: Brand.coralLight,
+    // Reste blanc (pas corail plein) : beaucoup d'endroits affichent du texte
+    // noir par-dessus cette couleur, qui serait peu lisible sur un corail
+    // saturé sans reprendre chaque composant pour passer le texte en blanc.
+    backgroundSelected: Brand.white,
     textSecondary: Brand.gray,
   },
   dark: {
