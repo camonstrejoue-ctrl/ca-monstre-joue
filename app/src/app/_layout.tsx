@@ -55,6 +55,8 @@ export default function RootLayout() {
               contentStyle: { backgroundColor: theme.background },
             }}>
             <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="monde-du-jeu" />
+            <Stack.Screen name="mon-univers" />
             <Stack.Screen name="catalogue" options={{ headerShown: false }} />
             <Stack.Screen name="ludotheque" options={{ headerShown: false }} />
             <Stack.Screen name="joueurs" options={{ headerShown: false }} />
