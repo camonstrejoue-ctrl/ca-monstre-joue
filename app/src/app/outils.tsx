@@ -1,11 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { StickerBox } from '@/components/sticker';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
+import { Brand, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
 function ToolCard({
@@ -22,17 +23,19 @@ function ToolCard({
   const theme = useTheme();
   return (
     <Link href={href} asChild>
-      <Pressable style={({ pressed }) => [styles.card, pressed && styles.pressed]}>
-        <ThemedView type="backgroundElement" style={styles.cardInner}>
-          <Ionicons name={icon} size={32} color={theme.text} />
-          <ThemedView style={styles.cardText}>
-            <ThemedText type="smallBold">{title}</ThemedText>
-            <ThemedText type="small" themeColor="textSecondary">
-              {description}
-            </ThemedText>
-          </ThemedView>
-          <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
-        </ThemedView>
+      <Pressable style={({ pressed }) => [pressed && styles.pressed]}>
+        <StickerBox backgroundColor={Brand.white} radius={Radius.md}>
+          <View style={styles.cardInner}>
+            <Ionicons name={icon} size={32} color={theme.text} />
+            <View style={styles.cardText}>
+              <ThemedText type="smallBold">{title}</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                {description}
+              </ThemedText>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
+          </View>
+        </StickerBox>
       </Pressable>
     </Link>
   );
@@ -64,10 +67,9 @@ export default function OutilsScreen() {
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
-  content: { padding: Spacing.four, gap: Spacing.three },
+  content: { padding: Spacing.four, gap: Spacing.four },
   pageTitle: { fontSize: 32, marginBottom: Spacing.two },
-  pressed: { opacity: 0.7 },
-  card: { borderRadius: Spacing.three, overflow: 'hidden' },
+  pressed: { opacity: 0.85 },
   cardInner: {
     flexDirection: 'row',
     alignItems: 'center',
