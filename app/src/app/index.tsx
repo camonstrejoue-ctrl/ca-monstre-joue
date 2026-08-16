@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: Brand.coralLight },
   scrollContent: { padding: Spacing.four, gap: Spacing.four },
   logo: {
-    width: '75%',
+    width: '112.5%',
     aspectRatio: 971 / 489,
     alignSelf: 'center',
     marginBottom: Spacing.two,
