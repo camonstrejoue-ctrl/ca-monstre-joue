@@ -22,6 +22,8 @@ export const Brand = {
   grayLight: '#CFCFCF',
 } as const;
 
+// Le site n'a pas de mode sombre (marque 100% claire) : l'app n'en propose
+// pas non plus, une seule palette toujours utilisée (voir hooks/use-theme.ts).
 export const Colors = {
   light: {
     text: Brand.black,
@@ -33,18 +35,9 @@ export const Colors = {
     backgroundSelected: Brand.white,
     textSecondary: Brand.gray,
   },
-  dark: {
-    // Pas de mode sombre défini sur le site (marque 100% claire) : on garde
-    // les mêmes accents mais sur un fond sombre pour rester utilisable.
-    text: Brand.white,
-    background: Brand.black,
-    backgroundElement: '#2A2A2A',
-    backgroundSelected: Brand.coralDark,
-    textSecondary: Brand.grayLight,
-  },
 } as const;
 
-export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
+export type ThemeColor = keyof typeof Colors.light;
 
 // Correspond à --font-display / --font-body du site.
 export const Fonts = {

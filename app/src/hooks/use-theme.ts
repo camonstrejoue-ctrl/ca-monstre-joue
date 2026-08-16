@@ -1,14 +1,8 @@
-/**
- * Learn more about light and dark modes:
- * https://docs.expo.dev/guides/color-schemes/
- */
-
 import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
 
+// Le site n'a pas de mode sombre (marque 100% claire) : l'app reste donc
+// toujours sur la palette claire, peu importe le réglage du téléphone,
+// pour ne jamais surprendre avec un thème différent du site.
 export function useTheme() {
-  const scheme = useColorScheme();
-  const theme = scheme === 'unspecified' ? 'light' : scheme;
-
-  return Colors[theme];
+  return Colors.light;
 }

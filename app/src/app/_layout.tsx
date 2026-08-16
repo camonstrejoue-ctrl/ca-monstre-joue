@@ -10,10 +10,10 @@ import {
   Nunito_800ExtraBold,
   useFonts,
 } from '@expo-google-fonts/nunito';
-import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { useColorScheme, View } from 'react-native';
+import { View } from 'react-native';
 
 import { BottomTabBar } from '@/components/bottom-tab-bar';
 import { Fonts } from '@/constants/theme';
@@ -23,7 +23,6 @@ import { AuthProvider } from '@/lib/auth-context';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const theme = useTheme();
   // On ne bloque plus l'affichage de l'app tant que les polices ne sont pas
   // chargées : un souci réseau/chargement ferait sinon planter l'app sur un
@@ -44,7 +43,7 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
       <AuthProvider>
         <View style={{ flex: 1, backgroundColor: theme.background }}>
           <Stack
