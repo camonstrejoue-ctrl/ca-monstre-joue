@@ -524,6 +524,48 @@ window.GAMES = [
     // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
     gallery: [],
   },
+  {
+    slug: 'seigneur-des-anneaux-le-destin-de-la-communaute',
+    name: 'Seigneur des Anneaux : Le Destin de la Communauté',
+    categories: ['jeux-cooperatifs', 'jeux-de-strategie', 'jeux-a-deux'],
+    // Pas encore d'images reçues : cover/thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
+    cover: '',
+    thumbnail: '',
+    heroImages: [],
+    intro: [
+      "Dans Le Destin de la Communauté, choisissez de revivre ou de réécrire l’histoire du Seigneur des anneaux.",
+      "Vous vous êtes toujours dit « Mais Frodon avait juste à prendre les aigles pour aller jeter l’anneau dans le feu ! » ou encore « Pourquoi on n’est pas allé chercher quelques nains pour défendre Minas Tirith ? », et bien figurez-vous que ce jeu est l’occasion pour vous de tester tout ce qui vous passe par la tête, et c’est assez jouissif !",
+    ],
+    identity: {
+      players: '1-5',
+      age: '14 ans et plus',
+      duration: '120-180 minutes',
+      year: '2025',
+      publisher: 'Z-Man',
+      author: 'Matt Leacock',
+      illustrator: 'Cory Godbey et Jared Blando',
+      type: 'Coopératif',
+      difficulty: { stars: 5, label: 'Forte' },
+      note: { stars: 6, max: 6 },
+    },
+    fitIntro: "Le Destin de la Communauté fait partie des jeux que nous qualifierons d’expert. Pas parce que ses règles sont compliquées à apprendre (c’est même relativement simple), mais surtout car l’aspect stratégique est fortement présent. Une stratégie finement rôdée, en équipe, peut vous amener difficilement vers la victoire. Mais attention, le moindre faux pas, la moindre petite erreur d’appréciation et c’est la défaite immédiate.",
+    fitFor: [
+      'Tu aimes le challenge et la tension constante dans un jeu où tu peux perdre à chaque instant',
+      'Fan du Seigneur des anneaux, tu rêves de pouvoir tester de nouvelles variantes de l’histoire',
+      'Tu adores communiquer avec tes amis (ou avec toi-même) dans les jeux coopératifs',
+      'Tu sais anticiper plusieurs coups à l’avance et avoir un peu de chance dans le tirage',
+    ],
+    notFitFor: [
+      'Les Hobbits et les Nains c’est la même chose pour toi',
+      'Au bout de 20 minutes autour d’une table tu ne te sens pas très bien',
+      'Les jeux c’est chacun dans son coin pour faire sa stratégie',
+    ],
+    // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
+    video: '',
+    spotify: 'https://open.spotify.com/playlist/4BixNhXlM6VJlF34MFokl8?si=lWQctfeySNWVQwoUPI8yHg&utm_source=copy-link&pi=_nQKXHUjTEaBM&sci=spotify%3Acard-config%3A26kI0SIFiv1a16SiUdimJ9',
+    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
+    gallery: [],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article
