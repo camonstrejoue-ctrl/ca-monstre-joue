@@ -528,10 +528,12 @@ window.GAMES = [
     slug: 'seigneur-des-anneaux-le-destin-de-la-communaute',
     name: 'Seigneur des Anneaux : Le Destin de la Communauté',
     categories: ['jeux-cooperatifs', 'jeux-de-strategie', 'jeux-a-deux'],
-    // Pas encore d'images reçues : cover/thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
-    cover: '',
-    thumbnail: '',
-    heroImages: [],
+    thumbnail: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-liste.JPG',
+    heroImages: [
+      'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-fiche1.JPG',
+      'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-fiche2.JPG',
+      'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-fiche3.JPG',
+    ],
     intro: [
       "Dans Le Destin de la Communauté, choisissez de revivre ou de réécrire l’histoire du Seigneur des anneaux.",
       "Vous vous êtes toujours dit « Mais Frodon avait juste à prendre les aigles pour aller jeter l’anneau dans le feu ! » ou encore « Pourquoi on n’est pas allé chercher quelques nains pour défendre Minas Tirith ? », et bien figurez-vous que ce jeu est l’occasion pour vous de tester tout ce qui vous passe par la tête, et c’est assez jouissif !",
@@ -563,8 +565,9 @@ window.GAMES = [
     // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
     video: '',
     spotify: 'https://open.spotify.com/playlist/4BixNhXlM6VJlF34MFokl8?si=lWQctfeySNWVQwoUPI8yHg&utm_source=copy-link&pi=_nQKXHUjTEaBM&sci=spotify%3Acard-config%3A26kI0SIFiv1a16SiUdimJ9',
-    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
-    gallery: [],
+    gallery: [
+      { image: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-vignette.JPG', articleSlug: 'seigneur-des-anneaux-critique' },
+    ],
   },
 ];
 
@@ -931,6 +934,32 @@ window.ARTICLES = [
           { slug: 'organiser-soiree-jeux-competitif-ou-cooperatif' },
         ],
       },
+    ],
+  },
+  {
+    slug: 'seigneur-des-anneaux-critique',
+    title: 'Le Destin de la communauté – Bientôt votre jeu le plus précieux ?',
+    subtitle: 'Êtes-vous prêt à réécrire l’histoire du Seigneur des anneaux ?',
+    date: '2026-08-17',
+    author: 'Alex',
+    gameSlug: 'seigneur-des-anneaux-le-destin-de-la-communaute',
+    banner: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-banniere.JPG',
+    cover: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-vignette.JPG',
+    excerpt: "On a testé Le Destin de la Communauté : réécrire l'histoire du Seigneur des anneaux, un défi coopératif aussi beau qu'impitoyable.",
+    blocks: [
+      { type: 'p', text: "On ne va pas y aller par 4 chemins, pouvoir modifier l’histoire c’est certainement ce qui, pour nous, a rendu l’aventure d’autant plus palpitante." },
+      { type: 'p', text: "Dans ce jeu de stratégie coopératif, chacun de vous incarne deux personnages (on a testé à 3 !) du Seigneur des anneaux, qu’ils soient bons ou Gollum. Votre mission, remplir 3 objectifs préliminaires avant de pouvoir espérer jeter l’anneau dans le volcan de la Montagne du Destin." },
+      { type: 'image', src: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-perso.JPG', caption: 'Chaque joueur incarne deux personnages, chacun avec ses propres capacités.' },
+      { type: 'p', text: "Petit exemple d’objectif qui vous attend : « Défier Sauron » devant la porte noire du Mordor avec un personnage, 2 armées elfes, 2 armées du Rohan et 3 armées du Gondor !" },
+      { type: 'p', text: "À chaque tour, vous discuterez ensemble des meilleures décisions à prendre pour parvenir à vos fins. Devez-vous rester soudés et vous déplacer tous ensemble ou au contraire accomplir des quêtes séparées pour remplir vos objectifs simultanément ?" },
+      { type: 'p', text: "Durant notre première partie, Frodon et Sam se sont rapidement déplacés de la Comté à Fondcombe puis direction Minas Tirith en compagnie de Merry et Pippin. Arwen et Aragorn de leur côté ont recruté de nombreuses armées Elfes pour couper toute possibilité à l’ennemi d’attaquer le Rohan. Legolas, seul héros contre des légions d’Orcs ininterrompues a repoussé les attaques sur Erebor aux côtés des armées naines tandis qu’Éowyn, à la tête d’une armée de Rohirrims a défendu la Comté et supprimé de sa main quelques Nazgûls. Ça change, n’est-ce pas ?" },
+      { type: 'image', src: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-alex.jpeg', caption: 'L’Anneau Unique... ou une capsule de café, difficile à dire.' },
+      { type: 'p', text: "Soyez prêt à vivre un véritable périple d’au moins deux heures ! La mise en place est assez longue mais la beauté du matériel et des illustrations (aux dessins pour le moins originaux) en vaut le coup et offre une immersion de qualité." },
+      { type: 'p', text: "Raconté ainsi, le jeu paraît sympathique et fun, et c’est le cas, sans l’ombre d’un doute !" },
+      { type: 'p', text: "Mais attention, ne vous attendez pas à gagner à chaque partie. Les chances ne sont clairement pas de votre côté. Les mécaniques du jeu inspirées du célèbre Pandemic, sont excessivement oppressantes et vous pouvez vite vous retrouver submergés entre les attaques innombrables des armées du Mordor aux 4 coins de la Terre du Milieu et la traque de l’œil de Sauron et de ses fidèles Nazgûls qui encercleront vite Frodon et décimeront vos armées, grâce à de nombreux jets de dés (pipés en votre défaveur)." },
+      { type: 'p', text: "Le challenge sera au rendez-vous et même la difficulté la plus faible vous fera cravacher et c’est tout ce qui fait le charme du Destin de la Communauté !" },
+      { type: 'p', text: "On vous résumera cet excellent jeu par une citation qui vous parlera certainement :" },
+      { type: 'p', text: "« Une mort certaine ? De faibles chances de survie ? Et bien, qu’attendons-nous ? »" },
     ],
   },
 ];
