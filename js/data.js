@@ -526,7 +526,7 @@ window.GAMES = [
   },
   {
     slug: 'seigneur-des-anneaux-le-destin-de-la-communaute',
-    name: 'Seigneur des Anneaux : Le Destin de la Communauté',
+    name: 'SDA : Le Destin de la Communauté',
     categories: ['jeux-cooperatifs', 'jeux-de-strategie', 'jeux-a-deux'],
     thumbnail: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-liste.JPG',
     heroImages: [
@@ -943,6 +943,7 @@ window.ARTICLES = [
     date: '2026-08-17',
     author: 'Alex',
     gameSlug: 'seigneur-des-anneaux-le-destin-de-la-communaute',
+    hero: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-bandeau.jpg',
     banner: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-banniere.JPG',
     cover: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-vignette.JPG',
     excerpt: "On a testé Le Destin de la Communauté : réécrire l'histoire du Seigneur des anneaux, un défi coopératif aussi beau qu'impitoyable.",
