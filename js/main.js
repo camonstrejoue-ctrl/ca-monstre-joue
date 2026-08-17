@@ -603,10 +603,15 @@ function renderGamePage() {
     ['Âge recommandé', g.identity.age],
     ['Temps de jeu', g.identity.duration],
     ['Année d’édition', g.identity.year],
+  ];
+  if (g.identity.publisher) rows.push(['Éditeur', g.identity.publisher]);
+  if (g.identity.author) rows.push(['Auteur', g.identity.author]);
+  if (g.identity.illustrator) rows.push(['Illustrateur', g.identity.illustrator]);
+  rows.push(
     ['Type de jeu', g.identity.type],
     ['Difficulté', starRow(g.identity.difficulty.stars, g.identity.difficulty.max || 6, g.identity.difficulty.label)],
     [labelWithTip('Note de Ça Monstre Joue', swissTip), starRow(g.identity.note.stars, g.identity.note.max || 6)],
-  ];
+  );
   idList.innerHTML = '';
   rows.forEach(([label, value]) => {
     const labelNode = typeof label === 'string' ? el('span', { class: 'label', text: label }) : label;
