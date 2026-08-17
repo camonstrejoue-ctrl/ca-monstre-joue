@@ -130,8 +130,7 @@ window.GAMES = [
       'Tu as cru que Sakura faisait référence au personnage de Naruto et t’es triste que y’ait pas de ninjas',
     ],
     monsterTip: "Laisse le jeu traîner sur la table. C'est bien plus pratique pour enchaîner chaque jour !",
-    // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
-    video: '',
+    video: 'https://www.instagram.com/reel/DUOiNQqDWDh/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
     spotify: 'https://open.spotify.com/playlist/0ALucT2kHAEvPVpWZeXj4T?si=V2_AGKaxRGCSGb0ozdsDUQ&utm_source=whatsapp&pi=EQXDWwI-RU2m9',
     gallery: [
       { image: 'assets/games/dorf-romantik-sakura/Dorf-romantik-sakura-vignette.JPG', articleSlug: 'dorf-romantik-sakura-critique' },
