@@ -527,6 +527,8 @@ window.GAMES = [
   {
     slug: 'seigneur-des-anneaux-le-destin-de-la-communaute',
     name: 'SDA : Le Destin de la Communauté',
+    // Titre affiché sur l'image de la fiche jeu (sur 2 lignes), distinct du nom court `name` utilisé partout ailleurs (nav, cartes, listes).
+    heroTitle: ['Seigneur des Anneaux', 'Le Destin de la Communauté'],
     categories: ['jeux-cooperatifs', 'jeux-de-strategie', 'jeux-a-deux'],
     thumbnail: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-liste.JPG',
     heroImages: [

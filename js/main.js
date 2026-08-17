@@ -527,7 +527,14 @@ function renderGamePage() {
   document.title = `${g.name} — Ça Monstre Joue`;
   renderShareRow(qs('#share-row'), `${window.location.origin}/jeu/${g.slug}/`, g.name);
   renderAppShareLink(g.slug);
-  qsa('[data-game-name]').forEach(n => n.textContent = g.name);
+  qsa('[data-game-name]').forEach(n => {
+    const lines = Array.isArray(g.heroTitle) ? g.heroTitle : [g.heroTitle || g.name];
+    n.innerHTML = '';
+    lines.forEach((line, i) => {
+      if (i > 0) n.appendChild(el('br', {}));
+      n.appendChild(document.createTextNode(line));
+    });
+  });
   const introEl = qs('[data-game-intro]');
   introEl.innerHTML = '';
   (Array.isArray(g.intro) ? g.intro : [g.intro]).forEach(p => introEl.appendChild(el('p', { text: p })));
