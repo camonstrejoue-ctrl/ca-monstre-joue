@@ -16,8 +16,10 @@ export interface CommunityEvent {
   id: string;
   title: string;
   location: string;
-  date: string; // 'YYYY-MM-DD'
-  time: string; // 'HH:MM'
+  date: string; // 'YYYY-MM-DD' (début)
+  time: string; // 'HH:MM' (début)
+  endDate?: string; // 'YYYY-MM-DD' — optionnel, pour un événement sur plusieurs jours
+  endTime?: string; // 'HH:MM'
   price: string; // texte libre, ex: "Gratuit", "5 CHF"
   contact: string; // e-mail, téléphone ou lien
   description?: string;
@@ -39,7 +41,9 @@ export function useUpcomingEvents() {
       const today = new Date().toISOString().slice(0, 10);
       const upcoming = snapshot.docs
         .map((d) => ({ id: d.id, ...d.data() }) as CommunityEvent)
-        .filter((e) => e.date >= today);
+        // Reste affiché tant que l'événement n'est pas terminé (utile pour
+        // les événements sur plusieurs jours, ex: un festival).
+        .filter((e) => (e.endDate || e.date) >= today);
       setEvents(upcoming);
       setLoading(false);
     });
@@ -56,6 +60,8 @@ export async function addEvent(
     location: string;
     date: string;
     time: string;
+    endDate?: string;
+    endTime?: string;
     price: string;
     contact: string;
     description?: string;

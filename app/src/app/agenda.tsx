@@ -18,6 +18,13 @@ function formatDate(date: string) {
   return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
+function formatEventDateTime(event: CommunityEvent) {
+  const start = formatDate(event.date) + (event.time ? ` à ${event.time}` : '');
+  if (!event.endDate || event.endDate === event.date) return start;
+  const end = formatDate(event.endDate) + (event.endTime ? ` à ${event.endTime}` : '');
+  return `Du ${start} au ${end}`;
+}
+
 function SignedOutHint() {
   return (
     <ThemedView style={styles.hintBox}>
@@ -38,6 +45,8 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [price, setPrice] = useState('');
   const [contact, setContact] = useState('');
   const [description, setDescription] = useState('');
@@ -54,6 +63,10 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
       setError('La date doit être au format AAAA-MM-JJ (ex: 2026-09-15).');
       return;
     }
+    if (endDate.trim() && !DATE_RE.test(endDate.trim())) {
+      setError('La date de fin doit être au format AAAA-MM-JJ (ex: 2026-09-17).');
+      return;
+    }
     setSubmitting(true);
     try {
       await addEvent(uid, {
@@ -61,6 +74,8 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         location: location.trim(),
         date: date.trim(),
         time: time.trim(),
+        endDate: endDate.trim() || undefined,
+        endTime: endTime.trim() || undefined,
         price: price.trim() || 'Gratuit',
         contact: contact.trim(),
         description: description.trim(),
@@ -84,6 +99,13 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         placeholder="2026-09-15"
       />
       <FormField label="Heure" value={time} onChangeText={setTime} placeholder="19:00" />
+      <FormField
+        label="Date de fin (optionnel, si l'événement dure plusieurs jours)"
+        value={endDate}
+        onChangeText={setEndDate}
+        placeholder="2026-09-17"
+      />
+      <FormField label="Heure de fin" value={endTime} onChangeText={setEndTime} placeholder="20:00" />
       <FormField
         label="Prix"
         value={price}
@@ -122,8 +144,7 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
     <ThemedView type="backgroundElement" style={styles.card}>
       <ThemedText type="smallBold">{event.title}</ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
-        {formatDate(event.date)}
-        {event.time ? ` à ${event.time}` : ''} · {event.location}
+        {formatEventDateTime(event)} · {event.location}
       </ThemedText>
       <ThemedText type="small">{event.price}</ThemedText>
       {event.description ? <ThemedText type="small">{event.description}</ThemedText> : null}
