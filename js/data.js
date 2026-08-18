@@ -766,7 +766,7 @@ window.ARTICLES = [
         items: [
           { slug: 'eila-et-leclat-de-la-montagne' },
           { name: 'Fate' },
-          { name: 'La Communauté de l’Anneau' },
+          { slug: 'seigneur-des-anneaux-le-destin-de-la-communaute' },
         ],
       },
     ],
