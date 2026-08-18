@@ -23,6 +23,7 @@ export interface CommunityEvent {
   price: string; // texte libre, ex: "Gratuit", "5 CHF"
   contact: string; // e-mail, téléphone ou lien
   description?: string;
+  poster?: string; // data URI base64 (pas de Firebase Storage, voir lib/image-base64.ts)
   createdBy: string;
   createdAt: unknown;
 }
@@ -65,6 +66,7 @@ export async function addEvent(
     price: string;
     contact: string;
     description?: string;
+    poster?: string;
   }
 ) {
   if (!db) throw new Error('Firebase non configuré.');

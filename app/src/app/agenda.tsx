@@ -1,3 +1,4 @@
+import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import { FlatList, Linking, Pressable, StyleSheet } from 'react-native';
@@ -9,6 +10,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { addEvent, removeEvent, reportEvent, useUpcomingEvents, type CommunityEvent } from '@/lib/events';
+import { pickImageAsBase64 } from '@/lib/image-base64';
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -50,8 +52,23 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   const [price, setPrice] = useState('');
   const [contact, setContact] = useState('');
   const [description, setDescription] = useState('');
+  const [poster, setPoster] = useState<string | null>(null);
+  const [pickingPoster, setPickingPoster] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  async function handlePickPoster() {
+    setError(null);
+    setPickingPoster(true);
+    try {
+      const dataUri = await pickImageAsBase64();
+      if (dataUri) setPoster(dataUri);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setPickingPoster(false);
+    }
+  }
 
   async function handleSubmit() {
     setError(null);
@@ -79,6 +96,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         price: price.trim() || 'Gratuit',
         contact: contact.trim(),
         description: description.trim(),
+        poster: poster ?? undefined,
       });
       onAdded();
     } catch (err) {
@@ -123,6 +141,16 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         onChangeText={setDescription}
         multiline
       />
+
+      {poster ? <Image source={{ uri: poster }} style={styles.posterPreview} /> : null}
+      <Pressable onPress={handlePickPoster} disabled={pickingPoster}>
+        <ThemedView type="backgroundElement" style={styles.posterButton}>
+          <ThemedText type="small">
+            {pickingPoster ? 'Traitement...' : poster ? "Changer l'affiche" : "Ajouter l'affiche (optionnel)"}
+          </ThemedText>
+        </ThemedView>
+      </Pressable>
+
       {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
       <Pressable onPress={handleSubmit} disabled={submitting}>
         <ThemedView type="backgroundSelected" style={styles.submitButton}>
@@ -142,6 +170,7 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
 
   return (
     <ThemedView type="backgroundElement" style={styles.card}>
+      {event.poster ? <Image source={{ uri: event.poster }} style={styles.posterImage} /> : null}
       <ThemedText type="smallBold">{event.title}</ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
         {formatEventDateTime(event)} · {event.location}
@@ -266,7 +295,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   error: { color: '#D14343' },
+  posterButton: {
+    paddingVertical: Spacing.two,
+    borderRadius: Spacing.two,
+    alignItems: 'center',
+  },
+  posterPreview: {
+    width: '100%',
+    aspectRatio: 4 / 3,
+    borderRadius: Spacing.two,
+    marginBottom: Spacing.two,
+  },
   card: { gap: 4, padding: Spacing.three, borderRadius: Spacing.three, marginBottom: Spacing.three },
+  posterImage: {
+    width: '100%',
+    aspectRatio: 4 / 3,
+    borderRadius: Spacing.two,
+    marginBottom: Spacing.two,
+  },
   cardFooter: { flexDirection: 'row', marginTop: Spacing.two },
   removeLink: { color: '#D14343' },
   reportForm: { gap: Spacing.two, marginTop: Spacing.two },
