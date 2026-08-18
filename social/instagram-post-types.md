@@ -1,138 +1,85 @@
 # Types de posts Instagram — Ça Monstre Joue
 
-Bibliothèque de gabarits réutilisables pour générer des posts Instagram à partir du contenu déjà présent
-sur le site (`js/data.js`). Pour déclencher un post, donner à Claude : le **type** (ci-dessous) + le
-**jeu ou l'article** concerné. Claude va chercher le contenu réel dans `js/data.js` et rédige la caption
-complète (accroche, corps, CTA, hashtags, lien UTM) — jamais de contenu inventé, toujours tiré des
-champs existants (intro, fitFor/notFitFor, blocks, identity, etc.).
+Banque unique de types de posts (angles), applicable à n'importe quel article du site. Pour un article
+donné, 5 à 8 de ces types s'appliqueront généralement — pas besoin de tous les utiliser à chaque fois.
 
-Ton : tutoiement (cohérent avec l'interface du site et le ton déjà utilisé dans `fitFor`/`notFitFor`).
-Le texte des articles/fiches jeu lui-même (intro, blocks) ne doit jamais être reformulé sur le fond,
-seulement extrait/mis en forme pour Instagram.
+Pour déclencher des posts : donner l'article (ou le jeu) concerné, Claude relit le contenu réel dans
+`js/data.js` et propose 5 idées (ou plus) en piochant parmi ces types, avec pour chacune une caption
+complète (accroche + corps + CTA + hashtags + lien UTM). Le contenu de fond n'est jamais inventé, toujours
+tiré des `blocks` de l'article ou des champs de la fiche jeu.
+
+Ton : tutoiement (cohérent avec l'interface et le ton déjà présent sur le site). Le texte des articles
+lui-même n'est jamais reformulé sur le fond, seulement extrait/mis en forme pour Instagram.
 
 ## Lien et UTM
 
-Convention du site (voir `CLAUDE.md`) :
-
 `https://www.camonstrejoue.ch/<page>?utm_source=instagram&utm_medium=<emplacement>&utm_campaign=<slug>`
 
-- Fiche jeu : `/jeu/<slug>/` — `utm_campaign=<slug-du-jeu>`
-- Article : `/article/<slug>/` — `utm_campaign=<slug-de-larticle>`
-- `utm_medium` : `bio` (lien fixe en bio), `story`, `video` (description vidéo/reel), `post` (lien en légende)
+- Article : `/article/<slug>/`, Fiche jeu : `/jeu/<slug>/`
+- `utm_medium` : `bio`, `story`, `video` (reel), `post` (lien en légende)
 
 ---
 
-## I. Fiches jeu (`window.GAMES`)
+## Les types de posts
 
-Champs sources : `name`, `intro`, `identity` (players/age/duration/type/difficulty/note),
-`fitFor`/`notFitFor`, `monsterTip`, `video`, `heroImages`, `categories`.
+**1. Confession / anecdote perso**
+Repartir d'une anecdote vécue racontée dans l'article (l'extension jamais ouverte d'Alex, la peur de
+Camille en ouvrant la boîte d'Eila, la poisse aux dés...). Format le plus authentique, accroche à la
+première personne.
 
-**1. Présentation flash**
-Reel ou post simple. Accroche = phrase la plus forte de `intro`. Overlay avec les specs
-(`identity.players`, `identity.duration`, `identity.age`). CTA vers la fiche jeu.
-
-**2. Fit for / Not fit for**
-Carrousel 2 temps : *"Ce jeu est fait pour toi si..."* (liste `fitFor`, déjà écrite en tutoiement, à
-reprendre telle quelle) puis *"Passe ton chemin si..."* (`notFitFor`). Format qui se suffit à lui-même,
-peu de réécriture nécessaire.
-
-**3. Le conseil du Monstre**
-Post court centré sur `monsterTip`, ton mascotte/complice. Bon format pour varier des posts "avis".
-
-**4. Verdict en un coup d'œil**
-Visuel avec la note (`identity.note.stars` / 6) et la difficulté (`identity.difficulty`). Accroche type
-*"Notre note pour {name} : {note}/6"*. Fonctionne bien en story avec sticker "d'accord ?".
-
-**5. Table / immersion visuelle**
-Post photo(s) tirées de `heroImages`, peu ou pas de texte — juste une légende courte et une accroche
-sensorielle (thème, ambiance). Bon format quand le visuel est fort et parle de lui-même.
-
-**6. Repartage vidéo existante**
-Si `video` pointe vers un Reel/Short déjà tourné : nouvelle accroche + nouveau contexte pour republier
-sans retourner de contenu.
-
----
-
-## II. Articles critique (avis détaillé d'un jeu, ex. `sub-terra-ii-critique`)
-
-Champs sources : `title`, `subtitle`, `excerpt`, `blocks` (paragraphes et `h2`).
-
-**1. Verdict en punchline**
-Repérer la phrase la plus tranchée/mémorable dans les `blocks` et la poser en gros sur un visuel du jeu.
-
-**2. Point fort / point faible**
-Carrousel 2 slides contrastées, extraites du raisonnement de l'article (pas inventées).
-
-**3. Citation choc**
-Une phrase drôle ou marquante de l'article, mise en avant façon citation, avec `subtitle` de l'article
-en accroche si pertinent (ex. *"La corde nostalgique"*).
-
-**4. On a testé (immersif)**
-Reel/post à la première personne, ton retour d'expérience, s'appuie sur les anecdotes concrètes
-présentes dans l'article plutôt que sur un résumé générique.
-
----
-
-## III. Articles compo type / stratégie (ex. `sub-terra-ii-compo-type`)
-
-Champs sources : `blocks` (conseils, étapes, personnages/rôles évoqués).
-
-**1. Astuce express**
-Un seul conseil fort en punchline : *"Le conseil qu'on aurait aimé avoir avant notre première partie."*
-
-**2. L'erreur à éviter**
-Angle négatif/relatable : *"L'erreur qu'on a tous faite en y jouant."*
-
-**3. Carrousel stratégie**
-Liste des conseils/étapes de l'article, un par slide, numérotés.
-
-**4. Duel de choix**
-Si l'article compare des options (perso/équipe/stratégie) : poser en débat *"Team A vs Team B, tu choisis
-quoi ?"* pour driver les commentaires.
-
----
-
-## IV. Articles guide / opinion (sujet général, pas lié à un seul jeu — ex. `extensions-jeux-de-societe-une-arnaque`, `jeux-pour-lapero`, `combien-de-jeux-pour-etre-heureux`, `organiser-soiree-jeux-competitif-ou-cooperatif`)
-
-Champs sources : `blocks` en entier (thèse, sous-parties en `h2`, exemples, anecdotes).
-
-**1. Confession personnelle**
-Reprendre l'anecdote perso de l'auteur si l'article en contient une (souvent le cas — cf. Alex et Catan).
-Accroche à la première personne, très relatable.
-
-**2. Sondage / engagement**
-Story avec sticker sondage/curseur, question posée dès la thèse de l'article. Bon format pour driver du
-trafic vers le lien en story.
+**2. Punchline / verdict choc**
+Une phrase forte, déjà écrite dans l'article, sortie telle quelle en gros sur un visuel. Ex. *"Les
+oiseaux, c'est pas notre truc, pourtant le jeu a su nous happer."* Post court, rapide à produire.
 
 **3. Carrousel pédagogique**
-Découpe l'article selon ses `h2` : 1 slide de thèse, 1 slide par sous-partie, 1 slide de conclusion/CTA.
-Le format le plus fidèle au raisonnement complet de l'article.
+Découpe l'article selon ses sous-parties (`h2`) : 1 slide de thèse, 1 slide par sous-partie, 1 slide de
+conclusion/CTA. Le format le plus fidèle au raisonnement complet de l'article.
 
-**4. Punchline / meme relatable**
-Une seule accroche courte et drôle, sans développer — juste teaser + lien en bio. Bon format pour la
-fréquence de publication (rapide à produire).
+**4. Débat / sondage**
+Poser la question ou la thèse centrale de l'article comme un choix tranché (*"Team A vs Team B, t'es
+où ?"*) ou en sticker sondage story. Objectif : faire réagir en commentaire.
 
-**5. Comparaison pop-culture**
-Si l'article contient une analogie (ex. "extension = saison 10 d'une série"), la sortir telle quelle en
-accroche de reel — fonctionne au-delà de l'audience jeux de société.
+**5. Comparaison / analogie**
+Si l'article contient une comparaison à autre chose (ex. extension = saison 10 d'une série, achat de jeu
+= tendre vers le bonheur), la sortir telle quelle en accroche de reel. Fonctionne au-delà de l'audience
+jeux de société.
 
-**6. Débat / prise de position**
-Poser la thèse de l'article comme un choix tranché en commentaire (*"Team X vs Team Y, t'es où ?"*),
-renvoyer vers l'article pour "notre avis complet".
+**6. Checklist / conseils actionnables**
+Liste de critères ou conseils pratiques tirés de l'article (ex. les 3 questions à se poser avant
+d'acheter une extension, les 3 techniques pour traîner sa moitié en magasin). Format qui s'enregistre et
+se partage bien.
 
-**7. Checklist actionnable**
-Si l'article contient des critères de décision (ex. "3 questions à se poser avant d'acheter une
-extension"), en faire un post/carrousel utilitaire, format qui s'enregistre et se partage bien.
+**7. Top / classement**
+Pour les articles listicle ("Les 3/5 jeux qui..."), un jeu ou un élément par slide de carrousel, avec
+l'accroche propre à chacun tirée de l'article.
 
-**8. Top / classement (listicle)**
-Pour les articles du type "Les 3/5 jeux qui...", un jeu par slide de carrousel, avec l'accroche propre à
-chaque jeu tirée de l'article.
+**8. Avantages / points de frustration**
+Quand l'article a une section avis contrastée (points forts vs points qui gâchent un peu), carrousel 2
+temps qui reprend ces deux blocs tels quels.
+
+**9. Immersion / récit de partie**
+Raconter un moment de partie précis déjà décrit dans l'article (ex. la répartition des personnages du
+Seigneur des Anneaux, la fuite finale de Sub Terra II). Bon format reel, ton narratif.
+
+**10. Zoom sur un détail**
+Un personnage, un objet de jeu ou un détail marquant mis en avant seul (ex. un personnage d'une compo
+type, la mangeoire à oiseaux de Wingspan). Bon format pour varier la fréquence sans épuiser tout
+l'article d'un coup — permet aussi de décliner plusieurs posts sur un seul article compo type (un
+personnage à la fois).
+
+**11. Le chiffre / fait qui surprend**
+Un chiffre ou un fait insolite tiré de l'article en accroche (prix, nombre d'extensions, "n+33"...).
+Format très court, efficace en story.
+
+**12. Repartage média existant**
+Si l'article/la fiche jeu référence une vidéo ou un reel déjà tourné (`video`, blocs `instagram`),
+nouvelle accroche pour republier sans retourner de contenu.
 
 ---
 
-## Comment déclencher un post
+## Exemple d'usage
 
-Donner : le type (ex. "Fit for / Not fit for") + le jeu ou l'article (ex. "Wingspan" ou
-"jeux-pour-lapero"). Claude relit le contenu réel dans `js/data.js`, rédige la caption complète
-(accroche + corps + CTA + hashtags + lien avec UTM) et propose, si pertinent, des notes de mise en page
-pour le carrousel/visuel.
+Pour l'article *"Les extensions sont-elles une arnaque ?"*, 5 idées avec des angles différents
+piocheraient par exemple dans : confession perso (#1, l'anecdote Catan), carrousel pédagogique (#3, thèse
++ les deux types d'extensions), comparaison/analogie (#5, la saison 10 d'une série), débat (#4, team
+"enrichissement" vs team "nouveau jeu déguisé"), checklist (#6, si l'article en contenait une explicite).
