@@ -89,10 +89,13 @@ Carrousel 2 temps qui reprend une section avis contrastée de l'article. Bon ter
 fermée de fin ("toi, c'est quoi ton point bloquant sur un jeu : le hasard ou la durée des parties ?").
 
 **10. Teaser app** — 🔗 trafic vers l'app (priorité 1)
-Contenu qui commence sur Instagram et se termine sur l'app (*"la suite de ce format est dispo sur
-l'app"*), avec lien vers `/app.html`. À utiliser dès qu'un post a bien marché sur le blog — republier le
-même sujet avec cet angle pour construire l'audience de lancement de l'app avant sa sortie sur les
-stores.
+Tant que l'app n'est pas sortie sur les stores, `/app.html` n'a aucun contenu exclusif — c'est une page
+"bientôt disponible" avec juste un formulaire newsletter. L'objectif réaliste de ce type de post n'est
+donc pas "va voir la suite sur l'app" (il n'y a rien à voir), mais de construire la liste d'attente avant
+lancement : relier un moment concret du sujet traité (ex. "en soirée, sans le blog sous la main...") à
+l'idée que l'app évitera ce problème, puis CTA vers `/app.html` pour s'inscrire et être prévenu·e. Une
+fois l'app publiée sur les stores, remplacer cette logique par "va voir la suite sur l'app" et mettre à
+jour les liens vers les vraies URLs de store (cf. `CLAUDE.md`).
 
 **11. Zoom sur un détail / chiffre qui surprend** — contenu de remplissage (fréquence, pas de priorité)
 Un personnage, un objet, une note (6/6), un chiffre insolite de l'article, en accroche courte. Utile pour
