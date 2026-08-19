@@ -8,7 +8,7 @@ import { CoverImage } from '@/components/cover-image';
 import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
+import { Brand, Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { isBggConfigured, searchBgg, type BggGame } from '@/lib/bgg';
 import { useContent } from '@/lib/content';
@@ -280,9 +280,11 @@ export default function LudothequeScreen() {
                           key={cat}
                           onPress={() => setCategoryFilter((c) => (c === cat ? null : cat))}>
                           <ThemedView
-                            type={categoryFilter === cat ? 'backgroundSelected' : 'backgroundElement'}
-                            style={styles.chip}>
-                            <ThemedText type="small">{cat}</ThemedText>
+                            type="backgroundElement"
+                            style={[styles.chip, categoryFilter === cat && styles.chipSelected]}>
+                            <ThemedText type={categoryFilter === cat ? 'smallBold' : 'small'}>
+                              {cat}
+                            </ThemedText>
                           </ThemedView>
                         </Pressable>
                       ))}
@@ -301,9 +303,11 @@ export default function LudothequeScreen() {
                         setPlayersFilter((cur) => (cur === p.range ? null : p.range))
                       }>
                       <ThemedView
-                        type={playersFilter === p.range ? 'backgroundSelected' : 'backgroundElement'}
-                        style={styles.chip}>
-                        <ThemedText type="small">{p.label}</ThemedText>
+                        type="backgroundElement"
+                        style={[styles.chip, playersFilter === p.range && styles.chipSelected]}>
+                        <ThemedText type={playersFilter === p.range ? 'smallBold' : 'small'}>
+                          {p.label}
+                        </ThemedText>
                       </ThemedView>
                     </Pressable>
                   ))}
@@ -315,16 +319,18 @@ export default function LudothequeScreen() {
                 <ThemedView style={styles.chipRow}>
                   <Pressable onPress={() => setSortBy('name')}>
                     <ThemedView
-                      type={sortBy === 'name' ? 'backgroundSelected' : 'backgroundElement'}
-                      style={styles.chip}>
-                      <ThemedText type="small">Nom</ThemedText>
+                      type="backgroundElement"
+                      style={[styles.chip, sortBy === 'name' && styles.chipSelected]}>
+                      <ThemedText type={sortBy === 'name' ? 'smallBold' : 'small'}>Nom</ThemedText>
                     </ThemedView>
                   </Pressable>
                   <Pressable onPress={() => setSortBy('addedAt')}>
                     <ThemedView
-                      type={sortBy === 'addedAt' ? 'backgroundSelected' : 'backgroundElement'}
-                      style={styles.chip}>
-                      <ThemedText type="small">Date d’ajout</ThemedText>
+                      type="backgroundElement"
+                      style={[styles.chip, sortBy === 'addedAt' && styles.chipSelected]}>
+                      <ThemedText type={sortBy === 'addedAt' ? 'smallBold' : 'small'}>
+                        Date d’ajout
+                      </ThemedText>
                     </ThemedView>
                   </Pressable>
                 </ThemedView>
@@ -385,7 +391,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
     borderRadius: Spacing.five,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
+  chipSelected: { borderColor: Brand.coral },
   bggBadge: {
     alignSelf: 'flex-start',
     backgroundColor: '#FFFFFF',

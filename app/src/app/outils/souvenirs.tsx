@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
+import { Brand, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import {
   addMemory,
@@ -222,9 +222,11 @@ export default function SouvenirsScreen() {
                         key={loc}
                         onPress={() => setLocationFilter((cur) => (cur === loc ? null : loc))}>
                         <ThemedView
-                          type={locationFilter === loc ? 'backgroundSelected' : 'backgroundElement'}
-                          style={styles.chip}>
-                          <ThemedText type="small">{loc}</ThemedText>
+                          type="backgroundElement"
+                          style={[styles.chip, locationFilter === loc && styles.chipSelected]}>
+                          <ThemedText type={locationFilter === loc ? 'smallBold' : 'small'}>
+                            {loc}
+                          </ThemedText>
                         </ThemedView>
                       </Pressable>
                     ))}
@@ -312,7 +314,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
-  chip: { paddingHorizontal: Spacing.three, paddingVertical: Spacing.two, borderRadius: Spacing.five },
+  chip: {
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+    borderRadius: Spacing.five,
+    borderWidth: 2,
+    borderColor: 'transparent',
+  },
+  chipSelected: { borderColor: Brand.coral },
   pressed: { opacity: 0.7 },
   memoryCard: {
     flexDirection: 'row',
