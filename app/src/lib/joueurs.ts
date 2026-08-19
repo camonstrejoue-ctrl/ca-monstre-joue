@@ -13,7 +13,11 @@ export async function searchPlayersByVille(
 ): Promise<PlayerResult[]> {
   if (!db) throw new Error('Firebase non configuré.');
   const villeLower = ville.trim().toLowerCase();
-  const q = query(collection(db, 'users'), where('villeLower', '==', villeLower));
+  const q = query(
+    collection(db, 'users'),
+    where('villeLower', '==', villeLower),
+    where('visibleToPlayers', '==', true)
+  );
   const snap = await getDocs(q);
   return snap.docs
     .map((d) => ({ uid: d.id, ...(d.data() as UserProfile) }))
@@ -22,7 +26,8 @@ export async function searchPlayersByVille(
 
 export async function listAllPlayers(excludeUid: string): Promise<PlayerResult[]> {
   if (!db) throw new Error('Firebase non configuré.');
-  const snap = await getDocs(collection(db, 'users'));
+  const q = query(collection(db, 'users'), where('visibleToPlayers', '==', true));
+  const snap = await getDocs(q);
   return snap.docs
     .map((d) => ({ uid: d.id, ...(d.data() as UserProfile) }))
     .filter((p) => p.uid !== excludeUid)

@@ -13,7 +13,6 @@ import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { getPlayer, getPlayerLudotheque, reportPlayer, type PlayerResult } from '@/lib/joueurs';
-import { MIN_CONTACT_AGE } from '@/lib/moderation';
 import { findCategory, findGame } from '@/lib/queries';
 
 export default function JoueurScreen() {
@@ -58,8 +57,8 @@ export default function JoueurScreen() {
 
   const games = content ? ludothequeSlugs.map((slug) => findGame(content, slug)).filter(Boolean) : [];
   const visibility = player.visibility;
-  const viewerCanContact = (profile?.age ?? 0) >= MIN_CONTACT_AGE;
-  const targetCanBeContacted = (player.age ?? 0) >= MIN_CONTACT_AGE;
+  const viewerCanContact = Boolean(profile?.visibleToPlayers);
+  const targetCanBeContacted = Boolean(player.visibleToPlayers);
   const contactAllowed = viewerCanContact && targetCanBeContacted;
   const categoryNames =
     content && visibility?.categoriesPreferees
@@ -103,7 +102,7 @@ export default function JoueurScreen() {
           <ThemedText type="small" themeColor="textSecondary" style={styles.contactUnavailable}>
             {viewerCanContact
               ? 'Le contact n’est pas disponible pour ce profil.'
-              : 'Réservé aux 18 ans et plus — indique ton âge dans ton profil pour accéder au contact.'}
+              : 'Active « Être visible par les autres joueurs » dans ton profil (réservé aux 18 ans et plus) pour pouvoir contacter d’autres joueurs.'}
           </ThemedText>
         )}
 

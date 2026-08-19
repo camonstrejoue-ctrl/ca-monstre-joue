@@ -14,6 +14,7 @@ import { deleteAccount, signIn, signOut, signUp } from '@/lib/auth';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { isFirebaseConfigured } from '@/lib/firebase';
+import { meetsContactAge } from '@/lib/moderation';
 import { submitSuggestion } from '@/lib/suggestions';
 
 function PrimaryButton({
@@ -184,6 +185,7 @@ function EditProfileForm() {
   const [visibility, setVisibility] = useState<ProfileVisibility>(
     profile?.visibility ?? DEFAULT_VISIBILITY
   );
+  const [visibleToPlayers, setVisibleToPlayers] = useState(profile?.visibleToPlayers ?? false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -193,7 +195,11 @@ function EditProfileForm() {
     setAge(profile?.age ? String(profile.age) : '');
     setCategories(profile?.categoriesPreferees ?? []);
     setVisibility(profile?.visibility ?? DEFAULT_VISIBILITY);
+    setVisibleToPlayers(profile?.visibleToPlayers ?? false);
   }, [profile]);
+
+  const parsedAgeForGate = age.trim() ? Number(age.trim()) : null;
+  const canBeVisible = meetsContactAge(parsedAgeForGate);
 
   function toggleCategory(slug: string) {
     setCategories((prev) =>
@@ -218,6 +224,7 @@ function EditProfileForm() {
         age: parsedAge,
         categoriesPreferees: categories,
         visibility,
+        visibleToPlayers: meetsContactAge(parsedAge) && visibleToPlayers,
       });
       await refreshProfile();
       setSaved(true);
@@ -251,6 +258,26 @@ function EditProfileForm() {
         checked={visibility.age}
         onToggle={() => setVisibility((v) => ({ ...v, age: !v.age }))}
       />
+
+      <ThemedText type="subtitle" style={styles.sectionTitle}>
+        Trouver des joueurs
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary">
+        Réservé aux 18 ans et plus. Si tu actives cette option, ton profil apparaît dans
+        l’annuaire « Joueurs » et tu peux contacter les autres joueurs visibles — et
+        réciproquement, tu ne peux contacter personne tant qu’elle est désactivée.
+      </ThemedText>
+      <CheckboxRow
+        label="Être visible par les autres joueurs"
+        checked={visibleToPlayers && canBeVisible}
+        onToggle={() => setVisibleToPlayers((v) => !v)}
+        disabled={!canBeVisible}
+      />
+      {!canBeVisible ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          Indique un âge de 18 ans ou plus ci-dessus pour pouvoir l’activer.
+        </ThemedText>
+      ) : null}
 
       <ThemedText type="small" themeColor="textSecondary">
         Catégories de jeux appréciées

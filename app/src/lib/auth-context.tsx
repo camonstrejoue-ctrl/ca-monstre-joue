@@ -32,6 +32,11 @@ export interface UserProfile {
   // une donnée personnelle) : 'haut-de-forme' | 'casquette' | 'melon' | 'bob'
   // | 'paille' | 'sombrero', ou absent pour aucun accessoire.
   avatarAccessory?: string;
+  // Visibilité dans l'annuaire "Joueurs" : décochée par défaut, ne peut être
+  // activée que si `age` est renseigné à 18 ans ou plus (voir MIN_CONTACT_AGE
+  // dans lib/moderation.ts). Contacter un autre joueur exige que SON PROPRE
+  // profil soit lui aussi visibleToPlayers.
+  visibleToPlayers?: boolean;
 }
 
 interface AuthContextValue {
@@ -101,6 +106,7 @@ export async function createUserProfile(
     ...data,
     villeLower: data.ville.trim().toLowerCase(),
     visibility: DEFAULT_VISIBILITY,
+    visibleToPlayers: false,
     createdAt: serverTimestamp(),
   });
 }
@@ -113,6 +119,7 @@ export async function updateUserProfile(
     categoriesPreferees?: string[];
     visibility?: ProfileVisibility;
     avatarAccessory?: string | null;
+    visibleToPlayers?: boolean;
   }
 ) {
   if (!db) throw new Error('Firebase non configuré.');
