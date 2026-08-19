@@ -133,6 +133,7 @@ function AuthForms() {
 function AvatarPicker() {
   const { user, profile, refreshProfile } = useAuth();
   const [saving, setSaving] = useState(false);
+  const [open, setOpen] = useState(false);
 
   async function handleSelect(accessory: string | null) {
     if (!user || saving) return;
@@ -150,27 +151,39 @@ function AvatarPicker() {
   return (
     <ThemedView style={styles.form}>
       <ThemedText type="subtitle">Mon avatar</ThemedText>
-      <AvatarMonster accessory={current} size={96} style={styles.avatarPreview} />
-      <ThemedView style={styles.chipRow}>
-        <Pressable onPress={() => handleSelect(null)} disabled={saving}>
-          <ThemedView
-            type={current === null ? 'backgroundSelected' : 'backgroundElement'}
-            style={styles.accessoryOption}>
-            <AvatarMonster accessory={null} size={40} />
-            <ThemedText type="small">Aucun</ThemedText>
-          </ThemedView>
-        </Pressable>
-        {AVATAR_ACCESSORIES.map((acc) => (
-          <Pressable key={acc.value} onPress={() => handleSelect(acc.value)} disabled={saving}>
+      <Pressable onPress={() => setOpen((v) => !v)} style={styles.avatarPreviewWrap}>
+        <AvatarMonster accessory={current} size={96} style={styles.avatarPreview} />
+        <ThemedText type="small" themeColor="textSecondary">
+          {open ? 'Touche l’avatar pour fermer' : 'Touche l’avatar pour changer de chapeau'}
+        </ThemedText>
+      </Pressable>
+      {open ? (
+        <ThemedView style={styles.chipRow}>
+          <Pressable onPress={() => handleSelect(null)} disabled={saving}>
             <ThemedView
-              type={current === acc.value ? 'backgroundSelected' : 'backgroundElement'}
-              style={styles.accessoryOption}>
-              <AvatarMonster accessory={acc.value} size={40} />
-              <ThemedText type="small">{acc.label}</ThemedText>
+              type="backgroundElement"
+              style={[styles.accessoryOption, current === null && styles.accessoryOptionSelected]}>
+              <AvatarMonster accessory={null} size={40} />
+              <ThemedText type={current === null ? 'smallBold' : 'small'}>Aucun</ThemedText>
             </ThemedView>
           </Pressable>
-        ))}
-      </ThemedView>
+          {AVATAR_ACCESSORIES.map((acc) => (
+            <Pressable key={acc.value} onPress={() => handleSelect(acc.value)} disabled={saving}>
+              <ThemedView
+                type="backgroundElement"
+                style={[
+                  styles.accessoryOption,
+                  current === acc.value && styles.accessoryOptionSelected,
+                ]}>
+                <AvatarMonster accessory={acc.value} size={40} />
+                <ThemedText type={current === acc.value ? 'smallBold' : 'small'}>
+                  {acc.label}
+                </ThemedText>
+              </ThemedView>
+            </Pressable>
+          ))}
+        </ThemedView>
+      ) : null}
     </ThemedView>
   );
 }
@@ -181,6 +194,7 @@ function EditProfileForm() {
 
   const [prenom, setPrenom] = useState(profile?.prenom ?? '');
   const [age, setAge] = useState(profile?.age ? String(profile.age) : '');
+  const [description, setDescription] = useState(profile?.description ?? '');
   const [categories, setCategories] = useState<string[]>(profile?.categoriesPreferees ?? []);
   const [visibility, setVisibility] = useState<ProfileVisibility>(
     profile?.visibility ?? DEFAULT_VISIBILITY
@@ -193,6 +207,7 @@ function EditProfileForm() {
   useEffect(() => {
     setPrenom(profile?.prenom ?? '');
     setAge(profile?.age ? String(profile.age) : '');
+    setDescription(profile?.description ?? '');
     setCategories(profile?.categoriesPreferees ?? []);
     setVisibility(profile?.visibility ?? DEFAULT_VISIBILITY);
     setVisibleToPlayers(profile?.visibleToPlayers ?? false);
@@ -222,6 +237,7 @@ function EditProfileForm() {
       await updateUserProfile(user.uid, {
         prenom: prenom.trim(),
         age: parsedAge,
+        description: description.trim(),
         categoriesPreferees: categories,
         visibility,
         visibleToPlayers: meetsContactAge(parsedAge) && visibleToPlayers,
@@ -259,6 +275,18 @@ function EditProfileForm() {
         onToggle={() => setVisibility((v) => ({ ...v, age: !v.age }))}
       />
 
+      <FormField
+        label="Décris ton profil de joueur en quelques mots et quel type de joueurs tu souhaiterais rencontrer et dans quel contexte"
+        value={description}
+        onChangeText={setDescription}
+        multiline
+      />
+      <CheckboxRow
+        label="Afficher ma description sur mon profil public"
+        checked={visibility.description}
+        onToggle={() => setVisibility((v) => ({ ...v, description: !v.description }))}
+      />
+
       <ThemedText type="subtitle" style={styles.sectionTitle}>
         Trouver des joueurs
       </ThemedText>
@@ -288,9 +316,9 @@ function EditProfileForm() {
           return (
             <Pressable key={cat.slug} onPress={() => toggleCategory(cat.slug)}>
               <ThemedView
-                type={selected ? 'backgroundSelected' : 'backgroundElement'}
-                style={styles.chip}>
-                <ThemedText type="small">{cat.name}</ThemedText>
+                type="backgroundElement"
+                style={[styles.chip, selected && styles.chipSelected]}>
+                <ThemedText type={selected ? 'smallBold' : 'small'}>{cat.name}</ThemedText>
               </ThemedView>
             </Pressable>
           );
@@ -495,17 +523,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.three,
     paddingVertical: Spacing.two,
     borderRadius: Spacing.five,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
+  chipSelected: { borderColor: Brand.coral },
   profileHeader: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
   profileHeaderText: { flex: 1, gap: 2 },
+  avatarPreviewWrap: { alignItems: 'center', gap: 4 },
   avatarPreview: { alignSelf: 'center' },
   accessoryOption: {
     alignItems: 'center',
     gap: 4,
     padding: Spacing.two,
     borderRadius: Spacing.two,
+    borderWidth: 2,
+    borderColor: 'transparent',
     width: 84,
   },
+  accessoryOptionSelected: { borderColor: Brand.coral },
   suggestionButton: {
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.three,

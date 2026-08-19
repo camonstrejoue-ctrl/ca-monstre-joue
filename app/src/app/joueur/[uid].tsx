@@ -92,6 +92,12 @@ export default function JoueurScreen() {
           </ThemedView>
         ) : null}
 
+        {visibility?.description && player.description ? (
+          <ThemedText type="small" style={styles.description}>
+            {player.description}
+          </ThemedText>
+        ) : null}
+
         {contactAllowed ? (
           <Pressable onPress={() => Linking.openURL(`mailto:${player.contactEmail}`)}>
             <ThemedView type="backgroundSelected" style={styles.contactButton}>
@@ -164,6 +170,7 @@ const styles = StyleSheet.create({
   avatar: { marginBottom: Spacing.two },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginTop: Spacing.two },
   chip: { paddingHorizontal: Spacing.three, paddingVertical: 4, borderRadius: Spacing.five },
+  description: { marginTop: Spacing.three },
   contactButton: {
     marginTop: Spacing.three,
     paddingVertical: Spacing.three,

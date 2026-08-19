@@ -8,12 +8,14 @@ export interface ProfileVisibility {
   prenom: boolean;
   age: boolean;
   categoriesPreferees: boolean;
+  description: boolean;
 }
 
 export const DEFAULT_VISIBILITY: ProfileVisibility = {
   prenom: false,
   age: false,
   categoriesPreferees: false,
+  description: false,
 };
 
 export interface UserProfile {
@@ -27,6 +29,10 @@ export interface UserProfile {
   prenom?: string;
   age?: number;
   categoriesPreferees?: string[];
+  // Description libre du profil de joueur : ce qu'on cherche, quel genre de
+  // partenaires de jeu, dans quel contexte. Visible publiquement seulement
+  // si `visibility.description` est coché.
+  description?: string;
   visibility?: ProfileVisibility;
   // Chapeau porté par l'avatar monstre, toujours visible publiquement (pas
   // une donnée personnelle) : 'haut-de-forme' | 'casquette' | 'melon' | 'bob'
@@ -117,6 +123,7 @@ export async function updateUserProfile(
     prenom?: string;
     age?: number | null;
     categoriesPreferees?: string[];
+    description?: string;
     visibility?: ProfileVisibility;
     avatarAccessory?: string | null;
     visibleToPlayers?: boolean;
