@@ -254,7 +254,7 @@ export default function SouvenirsScreen() {
 function MemoryRow({ memory }: { memory: Memory }) {
   return (
     <Link href={{ pathname: '/outils/souvenir/[id]', params: { id: memory.id } }} asChild>
-      <Pressable style={({ pressed }) => [styles.memoryCard, pressed && styles.pressed]}>
+      <Pressable style={styles.memoryCard}>
         {memory.photoUris[0] ? (
           <Image source={{ uri: memory.photoUris[0] }} style={styles.memoryImage} />
         ) : (

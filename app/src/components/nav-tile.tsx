@@ -15,7 +15,7 @@ export function NavTile({ href, label, image }: { href: Href; label: string; ima
   return (
     <View style={styles.wrap}>
       <Link href={href} asChild>
-        <Pressable style={({ pressed }) => [styles.touchable, pressed && styles.pressed]}>
+        <Pressable style={styles.touchable}>
           <StickerBox backgroundColor={Brand.white} radius={Radius.lg} style={styles.sticker}>
             <View style={styles.imageWrap}>
               <CoverImage path={image} style={styles.image} />

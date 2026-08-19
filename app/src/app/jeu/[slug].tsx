@@ -131,7 +131,7 @@ export default function JeuScreen() {
                   key={article!.slug}
                   href={{ pathname: '/article/[slug]', params: { slug: article!.slug } }}
                   asChild>
-                  <Pressable style={({ pressed }) => [styles.articleCard, pressed && styles.pressed]}>
+                  <Pressable style={styles.articleCard}>
                     <CoverImage path={article!.cover} style={styles.articleImage} />
                     <ThemedText type="smallBold" style={styles.articleTitle}>
                       {article!.title}

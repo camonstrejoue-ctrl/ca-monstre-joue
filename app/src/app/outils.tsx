@@ -23,7 +23,7 @@ function ToolCard({
   const theme = useTheme();
   return (
     <Link href={href} asChild>
-      <Pressable style={({ pressed }) => [pressed && styles.pressed]}>
+      <Pressable>
         <StickerBox backgroundColor={Brand.white} radius={Radius.md}>
           <View style={styles.cardInner}>
             <Ionicons name={icon} size={32} color={theme.text} />

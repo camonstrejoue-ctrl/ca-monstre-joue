@@ -70,7 +70,7 @@ export default function CatalogueScreen() {
                       key={game.slug}
                       href={{ pathname: '/jeu/[slug]', params: { slug: game.slug } }}
                       asChild>
-                      <Pressable style={({ pressed }) => [styles.searchRow, pressed && styles.pressed]}>
+                      <Pressable style={styles.searchRow}>
                         <CoverImage path={game.thumbnail || game.cover} style={styles.searchRowImage} />
                         <ThemedText type="smallBold">{game.name}</ThemedText>
                       </Pressable>
@@ -83,7 +83,7 @@ export default function CatalogueScreen() {
         }
         renderItem={({ item }) => (
           <Link href={{ pathname: '/jeu/[slug]', params: { slug: item.slug } }} asChild>
-            <Pressable style={({ pressed }) => [styles.gameCard, pressed && styles.pressed]}>
+            <Pressable style={styles.gameCard}>
               <CoverImage path={item.thumbnail || item.cover} style={styles.gameImage} />
               <ThemedView style={styles.gameInfo}>
                 <ThemedText type="smallBold">{item.name}</ThemedText>

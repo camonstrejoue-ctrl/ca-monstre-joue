@@ -47,6 +47,7 @@ export function StickerBox({
 
 const styles = StyleSheet.create({
   front: {
+    flex: 1,
     borderWidth: StickerBorder,
     overflow: 'hidden',
   },

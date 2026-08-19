@@ -113,7 +113,7 @@ export default function ArticleScreen() {
 
           {game ? (
             <Link href={{ pathname: '/jeu/[slug]', params: { slug: game.slug } }} asChild>
-              <Pressable style={({ pressed }) => [styles.gameLink, pressed && styles.pressed]}>
+              <Pressable style={styles.gameLink}>
                 <CoverImage path={game.thumbnail || game.cover} style={styles.gameLinkImage} />
                 <ThemedText type="link">Retour sur la page de {game.name}</ThemedText>
               </Pressable>

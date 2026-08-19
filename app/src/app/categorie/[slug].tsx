@@ -35,7 +35,7 @@ export default function CategorieScreen() {
         }
         renderItem={({ item }) => (
           <Link href={{ pathname: '/jeu/[slug]', params: { slug: item.slug } }} asChild>
-            <Pressable style={({ pressed }) => [styles.gameCard, pressed && styles.pressed]}>
+            <Pressable style={styles.gameCard}>
               <CoverImage path={item.thumbnail || item.cover} style={styles.gameImage} />
               <ThemedView style={styles.gameInfo}>
                 <ThemedText type="smallBold">{item.name}</ThemedText>

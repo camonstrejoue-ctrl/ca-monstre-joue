@@ -27,7 +27,7 @@ export default function AccueilScreen() {
         />
 
         <Link href="/ptit-monstre" asChild>
-          <Pressable style={({ pressed }) => [pressed && styles.pressed]}>
+          <Pressable>
             <StickerBox backgroundColor={Brand.white} radius={Radius.lg}>
               <View style={styles.ptitMonstreInner}>
                 <Image
