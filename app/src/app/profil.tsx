@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Alert, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AVATAR_ACCESSORIES, AvatarMonster } from '@/components/avatar-monster';
@@ -10,7 +10,7 @@ import { StickerBox } from '@/components/sticker';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
-import { signIn, signOut, signUp } from '@/lib/auth';
+import { deleteAccount, signIn, signOut, signUp } from '@/lib/auth';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { isFirebaseConfigured } from '@/lib/firebase';
@@ -349,6 +349,50 @@ function SuggestionForm() {
   );
 }
 
+function DeleteAccountSection() {
+  const [deleting, setDeleting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleDelete() {
+    setDeleting(true);
+    setError(null);
+    try {
+      await deleteAccount();
+    } catch (err) {
+      const code = (err as { code?: string }).code;
+      setError(
+        code === 'auth/requires-recent-login'
+          ? 'Pour ta sécurité, déconnecte-toi puis reconnecte-toi avant de supprimer ton compte.'
+          : (err as Error).message
+      );
+    } finally {
+      setDeleting(false);
+    }
+  }
+
+  function confirmDelete() {
+    Alert.alert(
+      'Supprimer ton compte ?',
+      'Ton profil et ta ludothèque seront définitivement supprimés. Cette action est irréversible.',
+      [
+        { text: 'Annuler', style: 'cancel' },
+        { text: 'Supprimer', style: 'destructive', onPress: handleDelete },
+      ]
+    );
+  }
+
+  return (
+    <ThemedView style={styles.deleteSection}>
+      <Pressable onPress={confirmDelete} disabled={deleting}>
+        <ThemedText type="small" style={styles.deleteLink}>
+          {deleting ? 'Suppression...' : 'Supprimer mon compte'}
+        </ThemedText>
+      </Pressable>
+      {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
+    </ThemedView>
+  );
+}
+
 function ProfileView() {
   const { user, profile } = useAuth();
 
@@ -370,12 +414,19 @@ function ProfileView() {
           <ThemedText type="link">Conditions d’utilisation</ThemedText>
         </Pressable>
       </Link>
+      <Link href="/politique-confidentialite" asChild>
+        <Pressable>
+          <ThemedText type="link">Politique de confidentialité</ThemedText>
+        </Pressable>
+      </Link>
 
       <PrimaryButton label="Se déconnecter" onPress={() => signOut()} />
 
       <AvatarPicker />
       <EditProfileForm />
       <SuggestionForm />
+
+      <DeleteAccountSection />
     </ThemedView>
   );
 }
@@ -410,6 +461,8 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.7 },
   switchMode: { textAlign: 'center', marginTop: Spacing.two },
   error: { color: '#D14343' },
+  deleteSection: { marginTop: Spacing.four, alignItems: 'center', gap: Spacing.two },
+  deleteLink: { color: '#D14343', textDecorationLine: 'underline' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
   chip: {
     paddingHorizontal: Spacing.three,

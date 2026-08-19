@@ -8,8 +8,9 @@ import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
-import { useAuth } from '@/lib/auth-context';
+import { updateUserProfile, useAuth } from '@/lib/auth-context';
 import { listAllPlayers, searchPlayersByVille, type PlayerResult } from '@/lib/joueurs';
+import { MIN_CONTACT_AGE } from '@/lib/moderation';
 
 function SignedOutPrompt() {
   return (
@@ -31,8 +32,55 @@ function SignedOutPrompt() {
   );
 }
 
+function AgeGate({ uid, onConfirmed }: { uid: string; onConfirmed: () => void }) {
+  const [age, setAge] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleConfirm() {
+    const parsed = Number(age.trim());
+    if (!age.trim() || !Number.isFinite(parsed) || parsed < 0 || parsed > 120) {
+      setError('Indique un âge valide.');
+      return;
+    }
+    setSaving(true);
+    setError(null);
+    try {
+      await updateUserProfile(uid, { age: parsed });
+      if (parsed >= MIN_CONTACT_AGE) {
+        onConfirmed();
+      } else {
+        setError('Cette fonctionnalité est réservée aux 18 ans et plus.');
+      }
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <ThemedView style={styles.center}>
+      <ThemedText type="subtitle" style={styles.centerText}>
+        Réservé aux 18 ans et plus
+      </ThemedText>
+      <ThemedText type="small" themeColor="textSecondary" style={styles.centerText}>
+        Pour mettre en relation des joueurs en toute sécurité, indique ton âge pour continuer.
+      </ThemedText>
+      <FormField label="Ton âge" value={age} onChangeText={setAge} keyboardType="number-pad" />
+      {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
+      <Pressable onPress={handleConfirm} disabled={saving}>
+        <ThemedView type="backgroundSelected" style={styles.loginButton}>
+          <ThemedText type="smallBold">Confirmer</ThemedText>
+        </ThemedView>
+      </Pressable>
+    </ThemedView>
+  );
+}
+
 export default function JoueursScreen() {
-  const { user, initializing } = useAuth();
+  const { user, profile, initializing, refreshProfile } = useAuth();
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [ville, setVille] = useState('');
   const [results, setResults] = useState<PlayerResult[]>([]);
   const [searching, setSearching] = useState(false);
@@ -76,6 +124,21 @@ export default function JoueursScreen() {
 
   if (initializing) return null;
   if (!user) return <SignedOutPrompt />;
+
+  const hasConfirmedAge = ageConfirmed || (profile?.age ?? 0) >= MIN_CONTACT_AGE;
+  if (!hasConfirmedAge) {
+    return (
+      <SafeAreaView style={styles.safeArea} edges={['top']}>
+        <AgeGate
+          uid={user.uid}
+          onConfirmed={() => {
+            setAgeConfirmed(true);
+            refreshProfile();
+          }}
+        />
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>

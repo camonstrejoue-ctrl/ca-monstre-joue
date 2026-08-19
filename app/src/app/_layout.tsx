@@ -72,6 +72,10 @@ export default function RootLayout() {
             <Stack.Screen name="joueur/[uid]" options={{ title: '' }} />
             <Stack.Screen name="ptit-monstre" />
             <Stack.Screen name="cgu" options={{ title: 'Conditions d’utilisation' }} />
+            <Stack.Screen
+              name="politique-confidentialite"
+              options={{ title: 'Confidentialité' }}
+            />
           </Stack>
           <BottomTabBar />
         </View>

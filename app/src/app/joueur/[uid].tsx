@@ -13,11 +13,12 @@ import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { getPlayer, getPlayerLudotheque, reportPlayer, type PlayerResult } from '@/lib/joueurs';
+import { MIN_CONTACT_AGE } from '@/lib/moderation';
 import { findCategory, findGame } from '@/lib/queries';
 
 export default function JoueurScreen() {
   const { uid } = useLocalSearchParams<{ uid: string }>();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { content } = useContent();
 
   const [player, setPlayer] = useState<PlayerResult | null | undefined>(undefined);
@@ -57,6 +58,9 @@ export default function JoueurScreen() {
 
   const games = content ? ludothequeSlugs.map((slug) => findGame(content, slug)).filter(Boolean) : [];
   const visibility = player.visibility;
+  const viewerCanContact = (profile?.age ?? 0) >= MIN_CONTACT_AGE;
+  const targetCanBeContacted = (player.age ?? 0) >= MIN_CONTACT_AGE;
+  const contactAllowed = viewerCanContact && targetCanBeContacted;
   const categoryNames =
     content && visibility?.categoriesPreferees
       ? (player.categoriesPreferees ?? [])
@@ -89,11 +93,19 @@ export default function JoueurScreen() {
           </ThemedView>
         ) : null}
 
-        <Pressable onPress={() => Linking.openURL(`mailto:${player.contactEmail}`)}>
-          <ThemedView type="backgroundSelected" style={styles.contactButton}>
-            <ThemedText type="smallBold">✉ Contacter {player.pseudo}</ThemedText>
-          </ThemedView>
-        </Pressable>
+        {contactAllowed ? (
+          <Pressable onPress={() => Linking.openURL(`mailto:${player.contactEmail}`)}>
+            <ThemedView type="backgroundSelected" style={styles.contactButton}>
+              <ThemedText type="smallBold">✉ Contacter {player.pseudo}</ThemedText>
+            </ThemedView>
+          </Pressable>
+        ) : (
+          <ThemedText type="small" themeColor="textSecondary" style={styles.contactUnavailable}>
+            {viewerCanContact
+              ? 'Le contact n’est pas disponible pour ce profil.'
+              : 'Réservé aux 18 ans et plus — indique ton âge dans ton profil pour accéder au contact.'}
+          </ThemedText>
+        )}
 
         <ThemedText type="subtitle" style={styles.sectionTitle}>
           Ludothèque
@@ -159,6 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.two,
     alignItems: 'center',
   },
+  contactUnavailable: { marginTop: Spacing.three },
   sectionTitle: { fontSize: 18, marginTop: Spacing.four, marginBottom: Spacing.two },
   gameRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, marginBottom: Spacing.two },
   gameImage: { width: 40, height: 40, borderRadius: Spacing.two },
