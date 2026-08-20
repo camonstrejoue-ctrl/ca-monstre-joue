@@ -574,10 +574,12 @@ window.GAMES = [
     slug: 'service-compris',
     name: 'Service Compris',
     categories: ['jeux-dambiance', 'jeux-famille', 'jeux-a-deux'],
-    // Pas encore d'images reçues : cover/thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
-    cover: '',
-    thumbnail: '',
-    heroImages: [],
+    thumbnail: 'assets/games/service-compris/service-compris-liste.JPG',
+    heroImages: [
+      'assets/games/service-compris/service-compris-fiche1.JPG',
+      'assets/games/service-compris/service-compris-fiche2.JPG',
+      'assets/games/service-compris/service-compris-fiche3.JPG',
+    ],
     intro: [
       "Service Compris c’est l’archétype du jeu simple et efficace !",
       "Dans ce jeu parfait pour animer vos soirées, votre objectif est de remporter la victoire face aux familles de vos adversaires. Vous êtes tous invités (contre votre gré) à la table du Géant Oscar Hamel. Votre objectif : être le dernier à passer sous sa dent en l’encourageant à manger les autres joueurs avant vous.",
