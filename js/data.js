@@ -584,7 +584,7 @@ window.GAMES = [
       "Service Compris c’est l’archétype du jeu simple et efficace !",
       "Dans ce jeu parfait pour animer vos soirées, votre objectif est de remporter la victoire face aux familles de vos adversaires. Vous êtes tous invités (contre votre gré) à la table du Géant Oscar Hamel. Votre objectif : être le dernier à passer sous sa dent en l’encourageant à manger les autres joueurs avant vous.",
       "À l’aide de votre main de cartes, jouez des tours les plus fourbes possibles à vos adversaires en poussant leurs personnages au plus près de l’assiette.",
-      "On espère que vous apprécierez comme nous les graphismes vintage assez bruts ainsi que les jeux de mots à mourir sur chaque personnage. Mention spéciale à Hector Telini !",
+      "On espère que vous apprécierez comme nous les graphismes vintage assez bruts ainsi que les jeux de mots à mourir de rire sur chaque personnage. Mention spéciale à Hector Telini !",
     ],
     identity: {
       players: '2-6',
