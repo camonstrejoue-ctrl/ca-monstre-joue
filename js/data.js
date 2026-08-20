@@ -140,8 +140,14 @@ window.GAMES = [
     slug: 'daybreak',
     name: 'Daybreak',
     categories: ['jeux-a-deux', 'jeux-cooperatifs', 'jeux-de-strategie'],
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    cover: 'assets/games/daybreak/daybreak-cover.JPG',
+    heroImages: [
+      'assets/games/daybreak/daybreak-fiche1.JPG',
+      'assets/games/daybreak/daybreak-fiche2.JPG',
+      'assets/games/daybreak/daybreak-fiche3.JPG',
+      'assets/games/daybreak/daybreak-fiche4.JPG',
+      'assets/games/daybreak/daybreak-fiche5.JPG',
+    ],
     intro: [
       "Quel jeu est plus dans l’ère du temps ? Sauvez la planète, ou regardez la brûler, dans ce jeu coopératif à base de combos de cartes.",
       "Chaque joueur incarne une zone économique (Europe, États-Unis, Chine, Monde majoritaire) et doit réussir à diminuer ses émissions tout en assurant son approvisionnement énergétique croissant.",
@@ -179,7 +185,7 @@ window.GAMES = [
     // Playlist à ajouter plus tard.
     spotify: '',
     gallery: [
-      { image: '', articleSlug: 'daybreak-critique' },
+      { image: 'assets/games/daybreak/daybreak-vignette.JPG', articleSlug: 'daybreak-critique' },
     ],
   },
   {
@@ -680,18 +686,20 @@ window.ARTICLES = [
     date: '2026-08-06',
     author: 'Alex',
     gameSlug: 'daybreak',
-    // Pas encore d'image reçue : placeholder logo affiché automatiquement.
-    cover: '',
+    cover: 'assets/games/daybreak/daybreak-vignette.JPG',
     excerpt: "Un jeu sur le réchauffement climatique, reposant ? On vous explique pourquoi Daybreak est devenu notre partie chill du soir.",
     blocks: [
       { type: 'p', text: "Aaaah Daybreak ! Si on nous avait dit, dans le magasin, que ce jeu qui ne payait pas de mine allait devenir un véritable coup de cœur, pas sûr qu’on y aurait cru !" },
       { type: 'p', text: "De prime abord, lutter contre le réchauffement climatique, en particulier dans le climat anxiogène actuel, ça fait pas super envie... on n’a pas vraiment l’impression qu’on va s’évader en jouant..." },
       { type: 'p', text: "Et pourtant, Daybreak est reposant !" },
       { type: 'p', text: "On joue ensemble donc, contre le réchauffement climatique." },
+      { type: 'image', src: 'assets/games/daybreak/daybreak-article.JPG', caption: 'Le plateau global : projets, crises et suivi du réchauffement, tout y passe.' },
       { type: 'p', text: "Durant chaque début de manche, on choisit un projet global qui donne un bonus à toute l’équipe, on révèle la première carte crise qui donne le ton pour ce tour, on discute et on fait le point sur sa stratégie." },
       { type: 'p', text: "Passé cette étape, on utilise chacun les cartes de sa main, sur son propre plateau de jeu, pour lancer des projets locaux, équilibrer la demande en énergie, réduire ses émissions. Le tout en utilisant à bon escient les combos de cartes présentant les mêmes icônes afin d’amplifier les effets des cartes de manière exponentielle." },
+      { type: 'image', src: 'assets/games/daybreak/daybrek-article2.JPG', caption: 'Les cartes projet et leurs combos, au cœur de la stratégie de chaque joueur.' },
       { type: 'p', text: "Au final, Daybreak est le jeu qu’on aime sortir quand on a envie de jouer malgré la fatigue. Un peu d’interaction, de la réflexion, des combos à faire dans son coin. On met en commun et on adapte sa stratégie pour le tour suivant." },
       { type: 'p', text: "Côté rejouabilité, on apprécie beaucoup le fait de pouvoir varier les zones économiques. Chacune a ses forces et ses faiblesses et l’association de zones différentes fera considérablement varier la difficulté." },
+      { type: 'image', src: 'assets/games/daybreak/daybreak-article3.JPG', caption: 'Fonte des glaces, dégel du pergélisol... les crises s’enchaînent et ne pardonnent pas.' },
       { type: 'list', items: [
         'Europe et États-Unis : partie facile',
         'Chine et Monde majoritaire : préparez-vous à perdre !',
