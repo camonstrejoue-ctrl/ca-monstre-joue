@@ -570,6 +570,49 @@ window.GAMES = [
       { image: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-vignette.JPG', articleSlug: 'seigneur-des-anneaux-critique' },
     ],
   },
+  {
+    slug: 'service-compris',
+    name: 'Service Compris',
+    categories: ['jeux-dambiance', 'jeux-famille', 'jeux-a-deux'],
+    // Pas encore d'images reçues : cover/thumbnail/heroImages vides, placeholder généré automatiquement en attendant.
+    cover: '',
+    thumbnail: '',
+    heroImages: [],
+    intro: [
+      "Service Compris c’est l’archétype du jeu simple et efficace !",
+      "Dans ce jeu parfait pour animer vos soirées, votre objectif est de remporter la victoire face aux familles de vos adversaires. Vous êtes tous invités (contre votre gré) à la table du Géant Oscar Hamel. Votre objectif : être le dernier à passer sous sa dent en l’encourageant à manger les autres joueurs avant vous.",
+      "À l’aide de votre main de cartes, jouez des tours les plus fourbes possibles à vos adversaires en poussant leurs personnages au plus près de l’assiette.",
+      "On espère que vous apprécierez comme nous les graphismes vintage assez bruts ainsi que les jeux de mots à mourir sur chaque personnage. Mention spéciale à Hector Telini !",
+    ],
+    identity: {
+      players: '2-6',
+      age: '10 ans et plus',
+      duration: '30-45 minutes',
+      year: '1998',
+      publisher: 'Zygomatic',
+      author: 'David B. Bromley',
+      illustrator: 'Franck Dion',
+      type: 'Compétitif',
+      difficulty: { stars: 3, label: 'Moyenne' },
+      note: { stars: 5, max: 6 },
+    },
+    fitIntro: "Service compris c’est le petit jeu à sortir à l’apéro. Fini les Uno, Skyjo et compagnie. Soyez fourbes et retors, brisez vos amitiés et n’hésitez pas à mettre des coups de fourchette dans le dos de vos adversaires (façon de parler hein…) !",
+    fitFor: [
+      'Tu veux un nouveau petit jeu à l’apéro pour épater les copains',
+      'T’aimes bien les jeux de mollets pour cerfs-volants',
+      'T’as envie d’un jeu où les coups bas sont permis et même chaudement recommandés',
+    ],
+    notFitFor: [
+      'Tu veux à la fois gagner et conserver tes amis',
+      'Tu soupires rien qu’à l’idée de voir écrit Nicolas Vabeau',
+    ],
+    // Pas de vidéo ni de playlist reçues pour l'instant.
+    video: '',
+    spotify: '',
+    gallery: [
+      { image: '', articleSlug: 'organiser-soiree-jeux-competitif-ou-cooperatif' },
+    ],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article
@@ -853,7 +896,7 @@ window.ARTICLES = [
       { type: 'p', text: "Sur le principe ça a tout l’air d’être l’idée de l’année. Mais plus la date se rapproche et plus vous doutez. À raison ? On va en discuter." },
       { type: 'h2', text: 'Le choix cornélien des jeux' },
       { type: 'p', text: "Plusieurs cas de figures. Si vous organisez une soirée jeux entre des amis qui sont déjà immergées jusqu’au cou dans le monde du jeu de société, vous n’avez pas besoin de vous cantonner aux simples « jeux d’ambiance » qui permettent d’animer facilement une soirée." },
-      { type: 'p', text: "En effet, avec des novices allergiques aux règles d’un jeu, pas de doute possible, partez directement vers des jeux faciles à apprendre et qui brisent la glace. Pourquoi pas l’excellent That’s not a hat, ou encore le classique Service Compris ?" },
+      { type: 'p', text: "En effet, avec des novices allergiques aux règles d’un jeu, pas de doute possible, partez directement vers des jeux faciles à apprendre et qui brisent la glace. Pourquoi pas l’excellent That’s not a hat, ou encore le classique <a href='/jeu.html?slug=service-compris'>Service Compris</a> ?" },
       { type: 'p', text: "Mais mettons que vous souhaitiez une soirée un peu plus conséquente au niveau ludique, avec des personnes qui sont d’accord d’apprendre des règles pendant plus de 5 minutes. Vous vous demandez alors mais quel jeu ?" },
       { type: 'p', text: "Mais avant de choisir les élus, il faut vous demander, compétitif ou coopératif ?" },
       { type: 'h2', text: 'Jeux compétitifs, l’assurance de briser une amitié qui n’existe pas encore' },
