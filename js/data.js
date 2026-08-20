@@ -686,6 +686,7 @@ window.ARTICLES = [
     date: '2026-08-06',
     author: 'Alex',
     gameSlug: 'daybreak',
+    hero: 'assets/games/daybreak/daybreak-bandeau.jpg',
     cover: 'assets/games/daybreak/daybreak-vignette.JPG',
     excerpt: "Un jeu sur le réchauffement climatique, reposant ? On vous explique pourquoi Daybreak est devenu notre partie chill du soir.",
     blocks: [
