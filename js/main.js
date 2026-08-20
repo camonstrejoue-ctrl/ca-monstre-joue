@@ -654,25 +654,26 @@ function renderGamePage() {
     tipSection.style.display = 'none';
   }
 
+  const videoSection = qs('#video-section');
   const videoWrap = qs('#video-wrap');
   const embed = youTubeEmbed(g.video);
   videoWrap.innerHTML = '';
-  if (isInstagramUrl(g.video)) {
-    videoWrap.appendChild(el('blockquote', {
-      class: 'instagram-media', 'data-instgrm-permalink': g.video, 'data-instgrm-version': '14',
-    }));
-    loadInstagramEmbedScript().then(() => window.instgrm && window.instgrm.Embeds.process());
-  } else if (embed) {
-    videoWrap.appendChild(el('iframe', {
-      src: embed, title: g.name,
-      allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
-      allowfullscreen: 'true',
-    }));
+  if (!g.video) {
+    videoSection.style.display = 'none';
   } else {
-    videoWrap.appendChild(el('div', { class: 'video-placeholder' }, [
-      el('div', { class: 'play', html: '&#9654;' }),
-      el('p', { text: 'Vidéo à venir' }),
-    ]));
+    videoSection.style.display = '';
+    if (isInstagramUrl(g.video)) {
+      videoWrap.appendChild(el('blockquote', {
+        class: 'instagram-media', 'data-instgrm-permalink': g.video, 'data-instgrm-version': '14',
+      }));
+      loadInstagramEmbedScript().then(() => window.instgrm && window.instgrm.Embeds.process());
+    } else if (embed) {
+      videoWrap.appendChild(el('iframe', {
+        src: embed, title: g.name,
+        allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+        allowfullscreen: 'true',
+      }));
+    }
   }
 
   const spotifyMount = qs('#spotify-embed');
