@@ -1,5 +1,5 @@
 param(
-  [string]$Root = "C:\Users\aqwel\OneDrive\Documents\Claude code Ca Monstre Joue",
+  [string]$Root = $PSScriptRoot,
   [int]$Port = 8752
 )
 
