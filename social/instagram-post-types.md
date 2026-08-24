@@ -125,6 +125,16 @@ sticker **Quiz** natif d'Instagram (question + bonne réponse, plus engageant qu
 Génère des commentaires uniques et variés (chacun répond avec SON propre profil) plutôt qu'un simple choix
 A/B, ce qui relance davantage l'algorithme.
 
+**16. Angle thème (sans jeu précis)** — 👥 abonnés (priorité 1) · 💬 interactions
+Au lieu de partir des exemples concrets de l'article (les jeux, le jeu précis), partir de la promesse ou
+de l'émotion qu'il vend (ex. pour "convertir un non-joueur" : les étapes de la conversion, un POV, les
+signes qui ne trompent pas, un vrai témoignage avant/après). Les jeux ne sont mentionnés qu'en fin de
+caption, comme payoff pour qui veut creuser. Touche beaucoup plus large qu'un contenu produit — n'importe
+qui se reconnaît dans "traîner un pote réfractaire à une soirée", même sans connaître les jeux cités — donc
+le meilleur levier pour la portée hors audience acquise. Bon réflexe : décliner chaque article guide en un
+post "produit" (les jeux/conseils concrets) ET un post "thème" (l'émotion/l'histoire derrière), plutôt que
+de s'en tenir à un seul angle.
+
 ---
 
 ## Comment prioriser sur un article donné
