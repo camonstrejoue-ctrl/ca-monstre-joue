@@ -108,6 +108,23 @@ Republier une vidéo/reel déjà tourné (`video`, blocs `instagram`) avec une n
 les 3 objectifs pris isolément (contenu déjà vu par les abonnés) mais peu coûteux à produire — à réserver
 aux semaines creuses plutôt qu'à la stratégie principale.
 
+**13. Avant / Après (meme visuel)** — 👥 abonnés (priorité 1) · 💬 interactions
+Contraste visuel pur entre deux moments tirés du même contenu (ex. "Jenga à jeun" vs "Jenga après 2
+verres"), quasi sans narration, juste du montage cut. Format identifiable dès la 1ère seconde, se partage
+facilement au-delà de l'audience jeux de société. Reel uniquement.
+
+**14. Mythe vs Réalité** — 👥 abonnés · 💬 interactions (sauvegardes)
+Carrousel qui liste des préjugés sur le sujet ("Jenga, c'est un jeu d'enfant") suivis de leur contradiction
+tirée de l'article. Très saveable, fonctionne comme le checklist (#4) mais avec un ressort plus
+polémique/surprenant qui donne davantage envie de partager en DM à quelqu'un qui a le préjugé en question.
+
+**15. Quiz de correspondance** — 💬 interactions (priorité 1) · 👥 abonnés
+Associe rapidement plusieurs profils/situations à un élément différent de l'article (un jeu, un
+personnage, un conseil), en Reel ("ton pote qui déteste lire des règles → Pictionary") ou en story via le
+sticker **Quiz** natif d'Instagram (question + bonne réponse, plus engageant qu'un sondage classique).
+Génère des commentaires uniques et variés (chacun répond avec SON propre profil) plutôt qu'un simple choix
+A/B, ce qui relance davantage l'algorithme.
+
 ---
 
 ## Comment prioriser sur un article donné
