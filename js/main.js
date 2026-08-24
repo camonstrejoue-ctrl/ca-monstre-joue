@@ -29,13 +29,18 @@ function formatDate(iso) {
 function findGame(slug) { return (window.GAMES || []).find(g => g.slug === slug); }
 function findArticle(slug) { return (window.ARTICLES || []).find(a => a.slug === slug); }
 function findCategory(slug) { return (window.CATEGORIES || []).find(c => c.slug === slug); }
+// Un article dont le champ `date` est dans le futur reste en ligne (sa page
+// existe déjà) mais n'apparaît dans aucune liste/recherche tant que cette
+// date n'est pas arrivée — permet d'écrire à l'avance et de programmer la
+// sortie sans repasser publier le jour J.
+function isPublished(article) { return !!article && article.date <= new Date().toISOString().slice(0, 10); }
 function gamesInCategory(catSlug) {
   return (window.GAMES || [])
     .filter(g => g.categories.includes(catSlug))
     .sort((a, b) => a.name.localeCompare(b.name, 'fr'));
 }
 function articlesForGame(slug) {
-  return (window.ARTICLES || []).filter(a => a.gameSlug === slug);
+  return (window.ARTICLES || []).filter(a => a.gameSlug === slug && isPublished(a));
 }
 function spotifyEmbed(url) {
   if (!url) return null;
@@ -197,7 +202,7 @@ function initSearch() {
       .filter((g) => normalizeSearch(g.name).includes(q))
       .map((g) => ({ type: 'Jeu', title: g.name, href: `/jeu.html?slug=${g.slug}`, image: g.thumbnail || g.cover }));
     const articleResults = (window.ARTICLES || [])
-      .filter((a) => normalizeSearch(a.title).includes(q) || normalizeSearch(a.excerpt || '').includes(q))
+      .filter((a) => isPublished(a) && (normalizeSearch(a.title).includes(q) || normalizeSearch(a.excerpt || '').includes(q)))
       .map((a) => ({ type: 'Article', title: a.title, href: `/article.html?slug=${a.slug}`, image: a.cover }));
     const results = [...gameResults, ...articleResults].slice(0, 8);
 
@@ -321,6 +326,7 @@ function renderHomeHero() {
   const prevBtn = qs('#carousel-prev');
   const nextBtn = qs('#carousel-next');
   const latest = [...(window.ARTICLES || [])]
+    .filter(isPublished)
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 5);
 
@@ -418,7 +424,7 @@ function renderGuidesPage() {
   const mount = qs('#guides-grid');
   if (!mount) return;
   const guides = (window.ARTICLES || [])
-    .filter(a => a.guide)
+    .filter(a => a.guide && isPublished(a))
     .sort((a, b) => new Date(b.date) - new Date(a.date));
   mount.innerHTML = '';
   if (guides.length === 0) {
@@ -694,7 +700,7 @@ function renderGamePage() {
   const gallerySection = qs('#gallery-section');
   const gallery = qs('#gallery-grid');
   gallery.innerHTML = '';
-  const resolvedGallery = (g.gallery || []).filter(item => findArticle(item.articleSlug));
+  const resolvedGallery = (g.gallery || []).filter(item => isPublished(findArticle(item.articleSlug)));
   gallerySection.style.display = resolvedGallery.length === 0 ? 'none' : '';
   resolvedGallery.forEach(item => {
     const article = findArticle(item.articleSlug);
@@ -793,7 +799,7 @@ function renderArticlePage() {
       body.appendChild(row);
     } else if (b.type === 'article') {
       const other = findArticle(b.slug);
-      if (other) {
+      if (other && isPublished(other)) {
         const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${other.slug}`, style: 'max-width:320px;margin:28px auto;display:block;' });
         card.appendChild(mediaElement(other.cover, other.title, other.slug));
         card.appendChild(el('div', { class: 'overlay' }, [
@@ -807,7 +813,7 @@ function renderArticlePage() {
       b.items.forEach(item => {
         const other = item.slug ? findArticle(item.slug) : null;
         const game = item.gameSlug ? findGame(item.gameSlug) : null;
-        if (other) {
+        if (other && isPublished(other)) {
           const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${other.slug}` });
           card.appendChild(mediaElement(other.cover, other.title, other.slug));
           card.appendChild(el('div', { class: 'overlay' }, [
@@ -859,7 +865,7 @@ function renderArticlePage() {
     ]));
     relatedGrid.appendChild(gameCard);
     (game.gallery || [])
-      .filter(item => item.articleSlug !== a.slug && findArticle(item.articleSlug))
+      .filter(item => item.articleSlug !== a.slug && isPublished(findArticle(item.articleSlug)))
       .forEach(item => {
         const other = findArticle(item.articleSlug);
         const card = el('a', { class: 'gallery-card', href: `/article.html?slug=${other.slug}` });

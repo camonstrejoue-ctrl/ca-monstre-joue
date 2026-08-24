@@ -162,6 +162,14 @@ function categoryJsonLd(c, url) {
   return [breadcrumb(crumbs), collection];
 }
 
+// Même règle de programmation que côté client (js/main.js) : un article dont
+// `date` est dans le futur garde sa page générée (prête dès que la date
+// arrive) mais reste absent du sitemap et de llms.txt tant que ce n'est pas
+// le cas, pour ne pas le faire indexer/découvrir en avance.
+function isPublished(article) {
+  return article.date <= new Date().toISOString().slice(0, 10);
+}
+
 function main() {
   const { GAMES = [], ARTICLES = [], CATEGORIES = [] } = loadContent();
 
@@ -201,7 +209,7 @@ function main() {
     const game = GAMES.find((g) => g.slug === a.gameSlug);
     html = injectJsonLd(html, articleJsonLd(a, game, url));
     writePage(path.join(rootDir, 'article', a.slug), html);
-    urls.push(url);
+    if (isPublished(a)) urls.push(url);
   });
 
   CATEGORIES.forEach((c) => {
@@ -229,8 +237,9 @@ function main() {
   ].join('\n');
   fs.writeFileSync(path.join(rootDir, 'sitemap.xml'), sitemap, 'utf8');
 
-  const guideArticles = ARTICLES.filter((a) => a.guide);
-  const otherArticles = ARTICLES.filter((a) => !a.guide);
+  const publishedArticles = ARTICLES.filter(isPublished);
+  const guideArticles = publishedArticles.filter((a) => a.guide);
+  const otherArticles = publishedArticles.filter((a) => !a.guide);
 
   const llmsTxt = [
     '# Ça Monstre Joue',

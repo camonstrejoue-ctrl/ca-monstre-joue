@@ -628,6 +628,14 @@ window.GAMES = [
 // de la page d'accueil, différente de sa vignette `cover` (utilisée ailleurs).
 // Ajoute aussi `hero: 'chemin/vers/image-32-9.jpg'` (suffixe -bandeau) pour
 // l'image tout en haut de la page de l'article (format 32:9, ultra-large).
+//
+// Publication programmée : un article dont le champ `date` est dans le futur
+// reste écrit et déployé normalement, mais n'apparaît dans aucune liste
+// (accueil, catégories, "pour aller plus loin", recherche, sitemap.xml,
+// llms.txt) tant que cette date n'est pas arrivée — il devient visible tout
+// seul, sans rien reposter ce jour-là. Sa page reste joignable par lien
+// direct avant la date (pas un brouillon confidentiel, juste "pas encore mis
+// en avant").
 window.ARTICLES = [
   {
     slug: 'sub-terra-ii-critique',
