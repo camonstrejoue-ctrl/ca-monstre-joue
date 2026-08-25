@@ -8,7 +8,8 @@
 // d'accueil. Plusieurs entrées = une bannière est tirée au hasard à chaque
 // chargement de la page.
 window.HOME_BANNERS = [
-  { image: 'assets/banner-exemple.png', href: '/app.html?utm_source=blog&utm_medium=nav&utm_campaign=lien_menu', alt: "Vers l'app Ça Monstre Joue" },
+  { image: 'assets/banniere-app.jpg', href: '/app.html?utm_source=blog&utm_medium=banniere&utm_campaign=teaser_app', alt: "L'app Ça Monstre Joue arrive bientôt" },
+  { image: 'assets/banniere-gazette.jpg', href: 'https://camonstrejoue.substack.com?utm_source=blog&utm_medium=banniere&utm_campaign=gazette_substack', alt: "La Gazette du Monstre, notre newsletter sur Substack", external: true },
 ];
 
 // Événements affichés sur /agenda.html. Chaque entrée est publiée à la main

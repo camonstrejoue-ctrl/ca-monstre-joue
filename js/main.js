@@ -308,6 +308,13 @@ function renderHomeBanner() {
   if (!link || banners.length === 0) return;
   const banner = banners[Math.floor(Math.random() * banners.length)];
   link.setAttribute('href', banner.href);
+  if (banner.external) {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener');
+  } else {
+    link.removeAttribute('target');
+    link.removeAttribute('rel');
+  }
   link.innerHTML = '';
   link.appendChild(el('img', { src: assetUrl(banner.image), alt: banner.alt || '' }));
 }
