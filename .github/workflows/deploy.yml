@@ -1,13 +1,13 @@
 name: Déployer le site
 
 on:
-  # Déclenchement manuel uniquement pour l'instant (Settings > Actions > ce
-  # workflow > "Run workflow") : le "push" automatique est désactivé tant que
-  # GitHub Pages n'est pas activé, sinon chaque commit fait échouer l'étape de
-  # publication et spamme des emails d'échec. Réactiver le déclencheur `push`
-  # (voir le bloc commenté ci-dessous) une fois le feu vert de lancement donné.
-  # push:
-  #   branches: [main]
+  # Chaque push sur main republie automatiquement le site (en plus du
+  # déclenchement manuel via Settings > Actions > ce workflow > "Run
+  # workflow"). Sans effet tant que GitHub Pages n'est pas activé dans les
+  # paramètres du dépôt (Settings > Pages) — ce déclencheur reste inerte
+  # jusque-là, il ne spamme rien.
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
