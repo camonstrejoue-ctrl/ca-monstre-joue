@@ -231,16 +231,10 @@ function initSearch() {
   });
 }
 
-// ---------- newsletter + contact forms ----------
+// ---------- contact + event forms ----------
+// (la newsletter est gérée par le widget d'inscription Substack embarqué
+// dans le footer — plus de formulaire ni de JS ici)
 function initForms() {
-  const nl = qs('#newsletter-form');
-  if (nl) {
-    nl.addEventListener('submit', (e) => {
-      e.preventDefault();
-      qs('.newsletter-success', nl.parentElement)?.classList.add('show');
-      nl.reset();
-    });
-  }
   const contact = qs('#contact-form');
   if (contact) {
     contact.addEventListener('submit', (e) => {

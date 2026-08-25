@@ -622,14 +622,7 @@ button{font-family:inherit;cursor:pointer;}
 .footer-contact .btn{border-color:var(--white);}
 .footer-monster{width:72px;height:auto;flex:none;margin-top:-25px;}
 .footer-brand h4, .footer-col h4{font-family:var(--font-display);color:var(--white);font-size:1rem;margin-bottom:16px;}
-.newsletter-form{display:flex;gap:8px;flex-wrap:wrap;}
-.newsletter-form input{
-  flex:1;min-width:180px;padding:12px 14px;border-radius:999px;border:2px solid var(--gray);
-  background:transparent;color:var(--white);font-family:var(--font-body);
-}
-.newsletter-form input::placeholder{color:var(--gray-light);}
-.newsletter-form .btn{border-color:var(--white);}
-.newsletter-note{font-size:.82rem;color:var(--gray-light);margin-top:10px;}
+.newsletter-note{font-size:.82rem;color:var(--gray-light);margin-bottom:12px;}
 .social-row{display:flex;gap:12px;}
 .social-row a{
   width:42px;height:42px;border-radius:50%;border:2px solid var(--white);
@@ -642,8 +635,6 @@ button{font-family:inherit;cursor:pointer;}
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   font-size:.85rem;color:var(--gray-light);
 }
-.newsletter-success{display:none;color:var(--coral);font-weight:700;margin-top:10px;font-size:.9rem;}
-.newsletter-success.show{display:block;}
 
 /* ---------- chatbot (P'tit Monstre) ---------- */
 .chatbot{position:fixed;right:20px;bottom:20px;z-index:200;}
