@@ -3,11 +3,12 @@ import { Link, type Href } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { CoverImage } from '@/components/cover-image';
+import { ShimmerGlow } from '@/components/shimmer-glow';
 import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 
-type IconTileColor = 'ice' | 'green' | 'cream';
+type IconTileColor = 'ice' | 'green' | 'cream' | 'gold';
 
 // Même logique que .shortcut-card sur le site (css/style.css) : grande carte
 // pleine couleur, gros pictogramme, petite étiquette en majuscules au-dessus
@@ -17,6 +18,7 @@ const ICON_TILE_COLORS: Record<IconTileColor, { bg: string; icon: string; tag: s
   ice: { bg: Brand.iceLight, icon: Brand.iceDark, tag: Brand.iceDark },
   green: { bg: Brand.greenLight, icon: Brand.greenDark, tag: Brand.greenDark },
   cream: { bg: Brand.creamDark, icon: Brand.black, tag: Brand.iceDark },
+  gold: { bg: Brand.goldLight, icon: Brand.goldDark, tag: Brand.goldDark },
 };
 
 /**
@@ -35,6 +37,7 @@ export function NavTile({
   icon,
   color = 'ice',
   image,
+  shimmer,
 }: {
   href: Href;
   label: string;
@@ -43,35 +46,42 @@ export function NavTile({
   icon?: React.ComponentProps<typeof Ionicons>['name'];
   color?: IconTileColor;
   image?: string;
+  // Contour doré qui scintille (cf. ShimmerGlow) — réservé aux blocs qu'on
+  // veut mettre en avant ponctuellement (ex: Agenda sur l'accueil), pas un
+  // état générique de NavTile.
+  shimmer?: boolean;
 }) {
   if (icon) {
     const palette = ICON_TILE_COLORS[color];
+    const card = (
+      <Link href={href} asChild>
+        <Pressable>
+          <SoftCard backgroundColor={palette.bg} radius={Radius.lg}>
+            <View style={styles.iconCardRow}>
+              <View style={styles.iconSpacer} />
+              <View style={styles.iconText}>
+                {eyebrow ? (
+                  <ThemedText type="smallBold" style={[styles.eyebrow, { color: palette.tag }]}>
+                    {eyebrow}
+                  </ThemedText>
+                ) : null}
+                <ThemedText type="subtitle" style={styles.iconTitle}>
+                  {label}
+                </ThemedText>
+                {description ? (
+                  <ThemedText type="small" themeColor="textSecondary">
+                    {description}
+                  </ThemedText>
+                ) : null}
+              </View>
+            </View>
+          </SoftCard>
+        </Pressable>
+      </Link>
+    );
     return (
       <View style={styles.iconTileWrap}>
-        <Link href={href} asChild>
-          <Pressable>
-            <SoftCard backgroundColor={palette.bg} radius={Radius.lg}>
-              <View style={styles.iconCardRow}>
-                <View style={styles.iconSpacer} />
-                <View style={styles.iconText}>
-                  {eyebrow ? (
-                    <ThemedText type="smallBold" style={[styles.eyebrow, { color: palette.tag }]}>
-                      {eyebrow}
-                    </ThemedText>
-                  ) : null}
-                  <ThemedText type="subtitle" style={styles.iconTitle}>
-                    {label}
-                  </ThemedText>
-                  {description ? (
-                    <ThemedText type="small" themeColor="textSecondary">
-                      {description}
-                    </ThemedText>
-                  ) : null}
-                </View>
-              </View>
-            </SoftCard>
-          </Pressable>
-        </Link>
+        {shimmer ? <ShimmerGlow radius={Radius.lg}>{card}</ShimmerGlow> : card}
         {/* Badge-icône rond qui déborde du coin de la carte, ombre douce
             plutôt que bordure noire — reprend directement l'esprit
             "illustration qui déborde" de la référence de design. */}
