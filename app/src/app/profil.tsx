@@ -49,6 +49,7 @@ function AuthForms() {
   const [pseudo, setPseudo] = useState('');
   const [ville, setVille] = useState('');
   const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [cguAccepted, setCguAccepted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -60,6 +61,10 @@ function AuthForms() {
     }
     if (mode === 'inscription' && (!pseudo || !ville || !ageConfirmed)) {
       setError('Renseigne un pseudo, une ville, et confirme que tu as 16 ans ou plus.');
+      return;
+    }
+    if (mode === 'inscription' && !cguAccepted) {
+      setError('Tu dois accepter les CGU et la politique de confidentialité pour créer un compte.');
       return;
     }
     setSubmitting(true);
@@ -105,6 +110,25 @@ function AuthForms() {
             label="J’ai 16 ans ou plus"
             checked={ageConfirmed}
             onToggle={() => setAgeConfirmed((value) => !value)}
+          />
+
+          <ThemedText type="small" themeColor="textSecondary">
+            En créant un compte, tu confirmes avoir lu et accepté :
+          </ThemedText>
+          <Link href="/cgu" asChild>
+            <Pressable>
+              <ThemedText type="link">Conditions d’utilisation</ThemedText>
+            </Pressable>
+          </Link>
+          <Link href="/politique-confidentialite" asChild>
+            <Pressable>
+              <ThemedText type="link">Politique de confidentialité</ThemedText>
+            </Pressable>
+          </Link>
+          <CheckboxRow
+            label="J’ai lu et j’accepte les CGU et la politique de confidentialité"
+            checked={cguAccepted}
+            onToggle={() => setCguAccepted((value) => !value)}
           />
         </>
       ) : null}
