@@ -3,7 +3,7 @@ import { Link, type Href } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { CoverImage } from '@/components/cover-image';
-import { ShimmerGlow } from '@/components/shimmer-glow';
+import { PopBounce, ShimmerGlow } from '@/components/shimmer-glow';
 import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
@@ -79,7 +79,7 @@ export function NavTile({
         </Pressable>
       </Link>
     );
-    return (
+    const tile = (
       <View style={styles.iconTileWrap}>
         {shimmer ? <ShimmerGlow radius={Radius.lg}>{card}</ShimmerGlow> : card}
         {/* Badge-icône rond qui déborde du coin de la carte, ombre douce
@@ -94,6 +94,10 @@ export function NavTile({
         </View>
       </View>
     );
+    // Le "pop" (carte + badge ensemble) toutes les 5s est réservé aux blocs
+    // `shimmer`, même logique que le contour doré : une mise en avant
+    // ponctuelle, pas un comportement par défaut de NavTile.
+    return shimmer ? <PopBounce>{tile}</PopBounce> : tile;
   }
 
   return (

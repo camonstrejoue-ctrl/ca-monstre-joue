@@ -107,6 +107,41 @@ export function ShimmerGlow({ children, radius }: { children: ReactNode; radius:
   );
 }
 
+/**
+ * Petit "pop" (léger agrandissement puis rebond) toutes les 5 secondes —
+ * demandé pour attirer l'œil sur le bloc Agenda. `delay` puis un aller
+ * (timing rapide) suivi d'un retour en ressort (spring, avec le petit
+ * rebond naturel que ça donne), en boucle. `opacity`/`transform`
+ * uniquement (native driver).
+ */
+export function PopBounce({ children }: { children: ReactNode }) {
+  const scale = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const loop = Animated.loop(
+      Animated.sequence([
+        Animated.delay(5000),
+        Animated.timing(scale, {
+          toValue: 1.07,
+          duration: 180,
+          easing: Easing.out(Easing.quad),
+          useNativeDriver: true,
+        }),
+        Animated.spring(scale, {
+          toValue: 1,
+          friction: 4,
+          tension: 140,
+          useNativeDriver: true,
+        }),
+      ])
+    );
+    loop.start();
+    return () => loop.stop();
+  }, [scale]);
+
+  return <Animated.View style={{ transform: [{ scale }] }}>{children}</Animated.View>;
+}
+
 const styles = StyleSheet.create({
   container: { position: 'relative' },
   ring: {
