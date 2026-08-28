@@ -1,34 +1,35 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, View } from 'react-native';
-import Svg, { Circle, Line, Path } from 'react-native-svg';
+import Svg, { Circle, Defs, Ellipse, G, Line, Path, RadialGradient, Stop } from 'react-native-svg';
 
 import { Brand } from '@/constants/theme';
 
-// Pastilles de "givre" décoratives, positions/tailles fixes (pas de
-// Math.random à chaque rendu, pour un rendu stable et reproductible) —
-// donne une texture de glace/neige plutôt qu'un simple fond uni, sans
-// dépendre d'une image externe.
-const FROST_DOTS: {
+// Boules de neige décoratives (remplacent d'anciennes pastilles plates) —
+// positions/tailles fixes (pas de Math.random à chaque rendu, pour un
+// rendu stable et reproductible). `shaded` alterne entre boules bien
+// blanches et boules légèrement teintées glace, pour suggérer du relief
+// plutôt qu'une texture uniforme.
+const SNOWBALLS: {
   top: `${number}%`;
   left: `${number}%`;
   size: number;
   opacity: number;
-  color: string;
+  shaded: boolean;
 }[] = [
-  { top: '4%', left: '78%', size: 90, opacity: 0.16, color: Brand.white },
-  { top: '2%', left: '8%', size: 50, opacity: 0.14, color: Brand.iceDark },
-  { top: '14%', left: '38%', size: 30, opacity: 0.12, color: Brand.white },
-  { top: '22%', left: '85%', size: 46, opacity: 0.15, color: Brand.white },
-  { top: '30%', left: '4%', size: 70, opacity: 0.1, color: Brand.iceDark },
-  { top: '38%', left: '55%', size: 26, opacity: 0.16, color: Brand.white },
-  { top: '46%', left: '20%', size: 40, opacity: 0.12, color: Brand.iceDark },
-  { top: '52%', left: '75%', size: 60, opacity: 0.13, color: Brand.white },
-  { top: '60%', left: '10%', size: 24, opacity: 0.14, color: Brand.white },
-  { top: '68%', left: '45%', size: 84, opacity: 0.09, color: Brand.iceDark },
-  { top: '76%', left: '88%', size: 34, opacity: 0.15, color: Brand.white },
-  { top: '84%', left: '25%', size: 48, opacity: 0.11, color: Brand.iceDark },
-  { top: '90%', left: '62%', size: 28, opacity: 0.16, color: Brand.white },
-  { top: '96%', left: '5%', size: 56, opacity: 0.1, color: Brand.white },
+  { top: '4%', left: '78%', size: 46, opacity: 0.55, shaded: false },
+  { top: '2%', left: '8%', size: 30, opacity: 0.45, shaded: true },
+  { top: '14%', left: '38%', size: 20, opacity: 0.4, shaded: false },
+  { top: '22%', left: '85%', size: 26, opacity: 0.5, shaded: false },
+  { top: '30%', left: '4%', size: 38, opacity: 0.38, shaded: true },
+  { top: '38%', left: '55%', size: 18, opacity: 0.48, shaded: false },
+  { top: '46%', left: '20%', size: 24, opacity: 0.42, shaded: true },
+  { top: '52%', left: '75%', size: 34, opacity: 0.44, shaded: false },
+  { top: '60%', left: '10%', size: 16, opacity: 0.46, shaded: false },
+  { top: '68%', left: '45%', size: 44, opacity: 0.34, shaded: true },
+  { top: '76%', left: '88%', size: 22, opacity: 0.48, shaded: false },
+  { top: '84%', left: '25%', size: 28, opacity: 0.38, shaded: true },
+  { top: '90%', left: '62%', size: 18, opacity: 0.5, shaded: false },
+  { top: '96%', left: '5%', size: 32, opacity: 0.36, shaded: false },
 ];
 
 // Glaçons suspendus au bord supérieur — pointe arrondie en haut, fine
@@ -97,6 +98,29 @@ function Icicle({ width, height, opacity, flip }: { width: number; height: numbe
   );
 }
 
+function Snowball({ size, opacity, shaded, gradientId }: { size: number; opacity: number; shaded: boolean; gradientId: string }) {
+  // Dégradé radial (highlight clair en haut à gauche, base plus foncée en
+  // bas à droite) + un léger cerne + une petite touche de brillance, pour
+  // lire comme une boule de neige en relief plutôt qu'une pastille plate.
+  const r = size / 2;
+  return (
+    <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <Defs>
+        <RadialGradient id={gradientId} cx="38%" cy="32%" r="75%">
+          <Stop offset="0%" stopColor={Brand.white} stopOpacity={1} />
+          <Stop offset="55%" stopColor={shaded ? Brand.iceLight : Brand.white} stopOpacity={1} />
+          <Stop offset="100%" stopColor={shaded ? Brand.ice : Brand.iceLight} stopOpacity={0.95} />
+        </RadialGradient>
+      </Defs>
+      <G opacity={opacity}>
+        <Circle cx={r} cy={r} r={r} fill={`url(#${gradientId})`} />
+        <Circle cx={r} cy={r} r={r - 0.5} fill="none" stroke={Brand.iceDark} strokeOpacity={0.3} strokeWidth={1} />
+        <Ellipse cx={r * 0.62} cy={r * 0.55} rx={r * 0.24} ry={r * 0.17} fill={Brand.white} opacity={0.75} />
+      </G>
+    </Svg>
+  );
+}
+
 function Snowflake({ size, opacity, rotate }: { size: number; opacity: number; rotate: number }) {
   const c = size / 2;
   return (
@@ -111,13 +135,13 @@ function Snowflake({ size, opacity, rotate }: { size: number; opacity: number; r
 }
 
 /**
- * Fond "glacé" texturé : dégradé bleu glace → blanc, pastilles de givre,
- * glaçons/stalagmites en bordure et flocons dispersés — demandé par
- * l'utilisateur après un premier essai en fond uni jugé trop plat, puis
- * en éléments visuels glacés (stalactites/stalagmites/flocons) pour
- * renforcer l'ambiance "grotte de glace" du monstre Yeti. Toujours
- * pointerEvents="none" pour ne jamais intercepter les interactions du
- * contenu posé par-dessus.
+ * Fond "glacé" texturé : dégradé bleu glace → blanc, boules de neige en
+ * relief, glaçons/stalagmites en bordure et flocons dispersés — demandé
+ * par l'utilisateur après un premier essai en fond uni jugé trop plat,
+ * puis en éléments visuels glacés (stalactites/stalagmites/flocons/boules
+ * de neige) pour renforcer l'ambiance "grotte de glace" du monstre Yeti.
+ * Toujours pointerEvents="none" pour ne jamais intercepter les
+ * interactions du contenu posé par-dessus.
  */
 export function IcyBackground() {
   return (
@@ -128,20 +152,10 @@ export function IcyBackground() {
         end={{ x: 0.9, y: 1 }}
         style={StyleSheet.absoluteFill}
       />
-      {FROST_DOTS.map((dot, i) => (
-        <View
-          key={`dot-${i}`}
-          style={{
-            position: 'absolute',
-            top: dot.top,
-            left: dot.left,
-            width: dot.size,
-            height: dot.size,
-            borderRadius: dot.size / 2,
-            backgroundColor: dot.color,
-            opacity: dot.opacity,
-          }}
-        />
+      {SNOWBALLS.map((ball, i) => (
+        <View key={`ball-${i}`} style={{ position: 'absolute', top: ball.top, left: ball.left }}>
+          <Snowball size={ball.size} opacity={ball.opacity} shaded={ball.shaded} gradientId={`snowball-grad-${i}`} />
+        </View>
       ))}
       {SNOWFLAKES.map((flake, i) => (
         <View key={`flake-${i}`} style={{ position: 'absolute', top: flake.top, left: flake.left }}>
