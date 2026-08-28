@@ -1,16 +1,36 @@
 import { useEffect, useRef } from 'react';
-import { Animated, Easing, StyleSheet, View } from 'react-native';
-import Svg, { Defs, LinearGradient, Stop, Text as SvgText } from 'react-native-svg';
+import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
 
 import { Brand, Fonts } from '@/constants/theme';
 
-const AnimatedSvgText = Animated.createAnimatedComponent(SvgText);
-
 const LINES = ["L'écosystème", 'ludique Suisse'];
-const VB_WIDTH = 380;
-const VB_HEIGHT = 160;
-const LINE_Y = [64, 136];
-const FONT_SIZE = 46;
+
+// Halo derrière le texte : copies décalées en anneau, opacité faible,
+// pour simuler un flou sans vrai filtre de flou (indisponible pour du
+// texte RN natif).
+const GLOW_OFFSETS: [number, number][] = [
+  [-3, -3],
+  [0, -4],
+  [3, -3],
+  [4, 0],
+  [3, 3],
+  [0, 4],
+  [-3, 3],
+  [-4, 0],
+];
+
+// Contour : copies décalées plus rapprochées, couleur animée (voir
+// useFlicker) — simule le trait qui "brûle" en vacillant.
+const OUTLINE_OFFSETS: [number, number][] = [
+  [-1.6, -1.6],
+  [0, -2],
+  [1.6, -1.6],
+  [2, 0],
+  [1.6, 1.6],
+  [0, 2],
+  [-1.6, 1.6],
+  [-2, 0],
+];
 
 // Séquence volontairement irrégulière (durées qui varient) plutôt qu'un
 // aller-retour régulier : donne un vacillement de flamme crédible plutôt
@@ -45,14 +65,15 @@ function useFlicker() {
 
 /**
  * Titre "feu glacé" : remplace les pastilles de catégories sur l'accueil.
- * Lettres en dégradé blanc → bleu glace ; le contour (demandé
- * explicitement par l'utilisateur) n'est plus statique — sa couleur et
- * son épaisseur vacillent en boucle comme une flamme, via
- * Animated.createAnimatedComponent (couleur/largeur de trait ne passent
- * pas par le native driver, donc animation JS — largement assez léger
- * pour un titre). Une lueur floutée (calques de traits superposés,
- * react-native-svg n'exposant pas <feGaussianBlur> côté JS) scintille en
- * plus derrière, en opacité (native driver).
+ * Reconstruit en Text RN natif (contour par copies décalées) au lieu de
+ * <Text> SVG — la version SVG (police personnalisée + fill dégradé +
+ * stroke animé) ne s'affichait pas du tout sur téléphone via Expo Go,
+ * alors qu'elle marchait dans l'aperçu web (react-native-svg gère mal
+ * les polices custom sur Text natif, contrairement au web qui délègue
+ * au vrai DOM SVG du navigateur). Le contour vacille toujours en couleur
+ * (comme une flamme) via des copies de texte superposées et légèrement
+ * décalées plutôt qu'un vrai stroke SVG — 100% Text natif, donc fiable
+ * sur les deux plateformes.
  */
 export function IceFireHeading() {
   const glow = useRef(new Animated.Value(0.7)).current;
@@ -75,75 +96,51 @@ export function IceFireHeading() {
     inputRange: [0, 0.5, 1],
     outputRange: [Brand.iceDark, Brand.ice, Brand.white],
   });
-  const contourWidth = flame.interpolate({ inputRange: [0, 1], outputRange: [1.4, 3.4] });
 
   return (
     <View style={styles.wrap}>
-      <Animated.View style={[StyleSheet.absoluteFill, { opacity: glow }]} pointerEvents="none">
-        <Svg width="100%" height="100%" viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`}>
-          {LINES.map((line, i) => (
-            <SvgText
-              key={`glow-outer-${i}`}
-              x="50%"
-              y={LINE_Y[i]}
-              fontSize={FONT_SIZE}
-              fontFamily={Fonts.displayExtraBold}
-              fill="none"
-              stroke={Brand.white}
-              strokeWidth={16}
-              strokeOpacity={0.16}
-              strokeLinejoin="round"
-              textAnchor="middle">
-              {line}
-            </SvgText>
-          ))}
-          {LINES.map((line, i) => (
-            <SvgText
-              key={`glow-inner-${i}`}
-              x="50%"
-              y={LINE_Y[i]}
-              fontSize={FONT_SIZE}
-              fontFamily={Fonts.displayExtraBold}
-              fill="none"
-              stroke={Brand.ice}
-              strokeWidth={8}
-              strokeOpacity={0.4}
-              strokeLinejoin="round"
-              textAnchor="middle">
-              {line}
-            </SvgText>
-          ))}
-        </Svg>
-      </Animated.View>
-
-      <Svg width="100%" height="100%" viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`} style={StyleSheet.absoluteFill}>
-        <Defs>
-          <LinearGradient id="iceFireFill" x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0%" stopColor={Brand.white} />
-            <Stop offset="50%" stopColor={Brand.iceLight} />
-            <Stop offset="100%" stopColor={Brand.ice} />
-          </LinearGradient>
-        </Defs>
-        {LINES.map((line, i) => (
-          <AnimatedSvgText
-            key={`fill-${i}`}
-            x="50%"
-            y={LINE_Y[i]}
-            fontSize={FONT_SIZE}
-            fontFamily={Fonts.displayExtraBold}
-            fill="url(#iceFireFill)"
-            stroke={contourColor}
-            strokeWidth={contourWidth}
-            strokeLinejoin="round"
-            textAnchor="middle">
-            {line}
-          </AnimatedSvgText>
-        ))}
-      </Svg>
+      {LINES.map((line, i) => (
+        <View key={i} style={styles.lineWrap}>
+          <Animated.View style={[styles.layer, { opacity: glow }]} pointerEvents="none">
+            {GLOW_OFFSETS.map(([dx, dy], j) => (
+              <Text
+                key={`glow-${j}`}
+                style={[styles.line, styles.glowText, { transform: [{ translateX: dx }, { translateY: dy }] }]}>
+                {line}
+              </Text>
+            ))}
+          </Animated.View>
+          <View style={styles.layer} pointerEvents="none">
+            {OUTLINE_OFFSETS.map(([dx, dy], j) => (
+              <Animated.Text
+                key={`outline-${j}`}
+                style={[
+                  styles.line,
+                  styles.outlineText,
+                  { color: contourColor, transform: [{ translateX: dx }, { translateY: dy }] },
+                ]}>
+                {line}
+              </Animated.Text>
+            ))}
+          </View>
+          <Text style={[styles.line, styles.fillText]}>{line}</Text>
+        </View>
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: { width: '100%', aspectRatio: VB_WIDTH / VB_HEIGHT },
+  wrap: { alignItems: 'center', gap: 2 },
+  lineWrap: { position: 'relative' },
+  layer: { position: 'absolute', top: 0, left: 0, right: 0, alignItems: 'center' },
+  line: {
+    fontFamily: Fonts.displayExtraBold,
+    fontSize: 32,
+    lineHeight: 40,
+    textAlign: 'center',
+  },
+  glowText: { position: 'absolute', top: 0, left: 0, right: 0, color: Brand.white, opacity: 0.14 },
+  outlineText: { position: 'absolute', top: 0, left: 0, right: 0, opacity: 0.9 },
+  fillText: { color: Brand.white },
 });
