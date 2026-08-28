@@ -7,9 +7,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ContentState } from '@/components/content-state';
 import { IceFireHeading } from '@/components/ice-fire-heading';
 import { NavTile } from '@/components/nav-tile';
-import { SoftCard } from '@/components/soft-card';
+import { SketchBubble } from '@/components/sketch-bubble';
 import { ThemedText } from '@/components/themed-text';
-import { Brand, Radius, Spacing } from '@/constants/theme';
+import { Brand, Spacing } from '@/constants/theme';
 import { useContent } from '@/lib/content';
 
 /**
@@ -112,12 +112,11 @@ function IntroPage() {
       <View style={styles.introSpacer} />
 
       <View style={styles.bubbleWrap}>
-        <SoftCard backgroundColor={Brand.white} radius={44} style={styles.bubble}>
+        <SketchBubble style={styles.bubble}>
           <ThemedText type="subtitle" style={styles.bubbleText}>
             Jouer, c’est bon pour la santé.
           </ThemedText>
-        </SoftCard>
-        <View style={styles.bubbleTail} />
+        </SketchBubble>
       </View>
 
       <Image
@@ -154,16 +153,8 @@ const styles = StyleSheet.create({
   },
   introSpacer: { flex: 1 },
   bubbleWrap: { alignItems: 'center', zIndex: 1 },
-  bubble: { paddingHorizontal: Spacing.five, paddingVertical: Spacing.four, maxWidth: 360 },
+  bubble: { maxWidth: 360 },
   bubbleText: { textAlign: 'center', fontSize: 25, lineHeight: 30 },
-  bubbleTail: {
-    width: 22,
-    height: 22,
-    backgroundColor: Brand.white,
-    borderRadius: 4,
-    transform: [{ rotate: '45deg' }],
-    marginTop: -12,
-  },
   // Réduit progressivement (72% → 48% → 40%) au fil des demandes, pour
   // laisser plus de place à la bulle.
   monster: {
