@@ -1,5 +1,6 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Link, Stack, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,6 +11,7 @@ import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
 import { useAuth } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import {
@@ -40,6 +42,49 @@ function GameEntryRow({ name, thumbnail, siteSlug }: { name: string; thumbnail?:
     <Link href={{ pathname: '/jeu/[slug]', params: { slug: siteSlug } }} asChild>
       <Pressable>{row}</Pressable>
     </Link>
+  );
+}
+
+// Accordéon fermé par défaut : avec une grosse ludothèque (50 jeux...) la
+// liste complète alourdirait visuellement la fiche joueur si elle était
+// toujours dépliée. Le nombre de jeux reste visible dans l'en-tête même
+// replié, pour donner l'info sans avoir à déplier.
+function AccordionSection({
+  title,
+  count,
+  emptyMessage,
+  children,
+}: {
+  title: string;
+  count: number;
+  emptyMessage: string;
+  children: ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+  const theme = useTheme();
+
+  return (
+    <View>
+      <Pressable
+        onPress={() => setOpen((v) => !v)}
+        style={styles.accordionHeader}
+        accessibilityRole="button"
+        accessibilityState={{ expanded: open }}>
+        <ThemedText type="subtitle" style={styles.sectionTitle}>
+          {title} {count > 0 ? `(${count})` : ''}
+        </ThemedText>
+        <Ionicons name={open ? 'chevron-up' : 'chevron-down'} size={20} color={theme.textSecondary} />
+      </Pressable>
+      {open ? (
+        count === 0 ? (
+          <ThemedText type="small" themeColor="textSecondary">
+            {emptyMessage}
+          </ThemedText>
+        ) : (
+          children
+        )
+      ) : null}
+    </View>
   );
 }
 
@@ -148,43 +193,35 @@ export default function JoueurScreen() {
           </ThemedText>
         )}
 
-        <ThemedText type="subtitle" style={styles.sectionTitle}>
-          Ludothèque
-        </ThemedText>
-        {ludotheque.length === 0 ? (
-          <ThemedText type="small" themeColor="textSecondary">
-            Aucun jeu enregistré pour l’instant.
-          </ThemedText>
-        ) : (
-          ludotheque.map((entry) => (
+        <AccordionSection
+          title="Ludothèque"
+          count={ludotheque.length}
+          emptyMessage="Aucun jeu enregistré pour l’instant.">
+          {ludotheque.map((entry) => (
             <GameEntryRow
               key={entry.bggId}
               name={entry.name}
               thumbnail={entry.thumbnail}
               siteSlug={content ? findGameByBggId(content, entry.bggId)?.slug : undefined}
             />
-          ))
-        )}
+          ))}
+        </AccordionSection>
 
-        <ThemedText type="subtitle" style={styles.sectionTitle}>
-          🎁 Liste au Père Noël
-        </ThemedText>
-        {pereNoel.length === 0 ? (
-          <ThemedText type="small" themeColor="textSecondary">
-            Aucun jeu dans la liste pour l’instant.
-          </ThemedText>
-        ) : (
-          pereNoel.map((entry) => (
+        <AccordionSection
+          title="🎁 Liste au Père Noël"
+          count={pereNoel.length}
+          emptyMessage="Aucun jeu dans la liste pour l’instant.">
+          {pereNoel.map((entry) => (
             <GameEntryRow
               key={entry.bggId}
               name={entry.name}
               thumbnail={entry.thumbnail}
               siteSlug={content ? findGameByBggId(content, entry.bggId)?.slug : undefined}
             />
-          ))
-        )}
+          ))}
+        </AccordionSection>
 
-        <ThemedText type="subtitle" style={styles.sectionTitle}>
+        <ThemedText type="subtitle" style={[styles.sectionTitle, styles.reportTitle]}>
           Signaler
         </ThemedText>
         {reportSent ? (
@@ -234,7 +271,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contactUnavailable: { marginTop: Spacing.three },
-  sectionTitle: { fontSize: 18, marginTop: Spacing.four, marginBottom: Spacing.two },
+  sectionTitle: { fontSize: 18, marginBottom: Spacing.two },
+  reportTitle: { marginTop: Spacing.four },
+  accordionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: Spacing.four,
+  },
   gameRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, marginBottom: Spacing.two },
   gameImage: { width: 40, height: 40, borderRadius: Spacing.two },
   reportLink: { color: '#D14343' },
