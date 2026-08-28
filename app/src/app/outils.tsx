@@ -26,7 +26,7 @@ export default function OutilsScreen() {
           eyebrow="Pendant la partie"
           label="Compteur de points"
           description="Suis les scores des joueurs pendant la partie"
-          color="green"
+          color="frost"
         />
         <NavTile
           href="/outils/souvenirs"

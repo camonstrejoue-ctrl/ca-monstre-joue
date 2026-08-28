@@ -344,7 +344,7 @@ function ProfileView() {
           eyebrow="Réglages"
           label="Trouver des joueurs"
           description="Visibilité dans l’annuaire, 18 ans et plus"
-          color="green"
+          color="frost"
         />
       </View>
 
