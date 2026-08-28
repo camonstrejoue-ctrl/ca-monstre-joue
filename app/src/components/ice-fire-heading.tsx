@@ -15,23 +15,26 @@ const FONT_SIZE = 46;
 // Séquence volontairement irrégulière (durées qui varient) plutôt qu'un
 // aller-retour régulier : donne un vacillement de flamme crédible plutôt
 // qu'un pouls mécanique. Chaque ligne tourne sur sa propre boucle
-// (décalée) pour ne pas scintiller parfaitement en synchro.
+// (décalée) pour ne pas scintiller parfaitement en synchro. Ralenti +
+// pause de quelques secondes entre deux passages, à la demande de
+// l'utilisateur (le premier essai vacillait trop vite, en continu).
 function useFlicker(startDelay: number) {
   const value = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    const steps = [0.9, 0.25, 1, 0.5, 0.75, 0.1, 0.95, 0.4];
-    const durations = [180, 240, 150, 260, 190, 220, 170, 230];
-    const sequence = Animated.sequence(
-      steps.map((toValue, i) =>
+    const steps = [0.9, 0.25, 1, 0.5, 0.75, 0.1, 0.95, 0.2];
+    const durations = [650, 800, 700, 850, 650, 750, 650, 700];
+    const sequence = Animated.sequence([
+      ...steps.map((toValue, i) =>
         Animated.timing(value, {
           toValue,
           duration: durations[i],
           easing: Easing.linear,
           useNativeDriver: false,
         })
-      )
-    );
+      ),
+      Animated.delay(3500),
+    ]);
     const loop = Animated.loop(sequence);
     const timer = setTimeout(() => loop.start(), startDelay);
     return () => {
@@ -57,7 +60,7 @@ function useFlicker(startDelay: number) {
 export function IceFireHeading() {
   const glow = useRef(new Animated.Value(0.7)).current;
   const flameA = useFlicker(0);
-  const flameB = useFlicker(90);
+  const flameB = useFlicker(1200);
 
   useEffect(() => {
     const loop = Animated.loop(
