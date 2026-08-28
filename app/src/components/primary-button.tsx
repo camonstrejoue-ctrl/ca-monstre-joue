@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet } from 'react-native';
 
-import { StickerBox } from '@/components/sticker';
+import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
-import { Brand, Radius, Spacing } from '@/constants/theme';
+import { Brand, Spacing } from '@/constants/theme';
 
 export function PrimaryButton({
   label,
@@ -16,14 +16,14 @@ export function PrimaryButton({
   return (
     <Pressable onPress={onPress} disabled={disabled}>
       {({ pressed }) => (
-        <StickerBox
+        <SoftCard
           backgroundColor={disabled ? Brand.grayLight : Brand.coral}
-          radius={Radius.md}
+          radius={999}
           style={pressed && styles.pressed}>
           <ThemedText type="smallBold" style={styles.text}>
             {label}
           </ThemedText>
-        </StickerBox>
+        </SoftCard>
       )}
     </Pressable>
   );

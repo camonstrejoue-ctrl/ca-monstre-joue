@@ -3,7 +3,7 @@ import { Link, type Href } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { CoverImage } from '@/components/cover-image';
-import { StickerBox } from '@/components/sticker';
+import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 
@@ -50,7 +50,7 @@ export function NavTile({
       <View style={styles.iconTileWrap}>
         <Link href={href} asChild>
           <Pressable>
-            <StickerBox backgroundColor={palette.bg} radius={Radius.lg}>
+            <SoftCard backgroundColor={palette.bg} radius={Radius.lg}>
               <View style={styles.iconCardRow}>
                 <View style={styles.iconSpacer} />
                 <View style={styles.iconText}>
@@ -69,20 +69,18 @@ export function NavTile({
                   ) : null}
                 </View>
               </View>
-            </StickerBox>
+            </SoftCard>
           </Pressable>
         </Link>
-        {/* Badge-icône façon sticker qui déborde du coin de la carte — idée
-            empruntée à une référence de design (illustrations qui débordent
-            des cartes), adaptée au look "autocollant" du site : au lieu
-            d'une photo qui déborde, un petit rond blanc à bordure noire,
-            comme un autocollant posé sur un autre. */}
+        {/* Badge-icône rond qui déborde du coin de la carte, ombre douce
+            plutôt que bordure noire — reprend directement l'esprit
+            "illustration qui déborde" de la référence de design. */}
         <View style={styles.iconBadge} pointerEvents="none">
-          <StickerBox backgroundColor={Brand.white} radius={999} shadowOffset={3}>
+          <SoftCard backgroundColor={Brand.white} radius={999} style={styles.iconBadgeCard}>
             <View style={styles.iconBadgeInner}>
               <Ionicons name={icon} size={30} color={palette.icon} />
             </View>
-          </StickerBox>
+          </SoftCard>
         </View>
       </View>
     );
@@ -92,7 +90,7 @@ export function NavTile({
     <View style={styles.wrap}>
       <Link href={href} asChild>
         <Pressable style={styles.touchable}>
-          <StickerBox backgroundColor={Brand.white} radius={Radius.lg} style={styles.sticker}>
+          <SoftCard backgroundColor={Brand.white} radius={Radius.lg} style={styles.sticker}>
             <View style={styles.imageWrap}>
               <CoverImage path={image!} style={styles.image} />
               <View style={styles.overlay}>
@@ -101,7 +99,7 @@ export function NavTile({
                 </ThemedText>
               </View>
             </View>
-          </StickerBox>
+          </SoftCard>
         </Pressable>
       </Link>
     </View>
@@ -151,11 +149,12 @@ const styles = StyleSheet.create({
   iconTitle: { fontSize: 19, lineHeight: 23 },
   iconBadge: {
     position: 'absolute',
-    top: -22,
+    top: -20,
     left: 24,
-    width: 68,
-    height: 68,
+    width: 62,
+    height: 62,
   },
+  iconBadgeCard: { width: 62, height: 62 },
   iconBadgeInner: {
     width: 62,
     height: 62,

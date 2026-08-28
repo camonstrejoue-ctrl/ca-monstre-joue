@@ -8,7 +8,7 @@ import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
 import { NavTile } from '@/components/nav-tile';
 import { PrimaryButton } from '@/components/primary-button';
-import { StickerBox } from '@/components/sticker';
+import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
@@ -159,7 +159,7 @@ function AvatarPicker() {
   const current = profile?.avatarAccessory ?? null;
 
   return (
-    <StickerBox backgroundColor={Brand.white} radius={Radius.lg}>
+    <SoftCard backgroundColor={Brand.white} radius={Radius.lg}>
       <View style={styles.avatarCard}>
         <ThemedText type="subtitle" style={styles.avatarCardTitle}>
           Mon avatar
@@ -198,7 +198,7 @@ function AvatarPicker() {
           </View>
         ) : null}
       </View>
-    </StickerBox>
+    </SoftCard>
   );
 }
 
@@ -308,7 +308,7 @@ function ProfileView() {
 
   return (
     <ThemedView style={styles.form}>
-      <StickerBox backgroundColor={Brand.coral} radius={Radius.lg}>
+      <SoftCard backgroundColor={Brand.coral} radius={Radius.lg}>
         <View style={styles.profileHeader}>
           <AvatarMonster accessory={profile?.avatarAccessory} size={56} ring={Brand.white} />
           <View style={styles.profileHeaderText}>
@@ -325,7 +325,7 @@ function ProfileView() {
             ) : null}
           </View>
         </View>
-      </StickerBox>
+      </SoftCard>
 
       <AvatarPicker />
 

@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentState } from '@/components/content-state';
 import { NavTile } from '@/components/nav-tile';
-import { StickerBox } from '@/components/sticker';
+import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { useContent } from '@/lib/content';
@@ -28,7 +28,7 @@ export default function AccueilScreen() {
 
         <Link href="/ptit-monstre" asChild>
           <Pressable>
-            <StickerBox backgroundColor={Brand.coral} radius={Radius.lg}>
+            <SoftCard backgroundColor={Brand.coral} radius={Radius.lg}>
               <View style={styles.ptitMonstreInner}>
                 <Image
                   source={require('@/assets/images/avatars/monstre-aucun.png')}
@@ -43,7 +43,7 @@ export default function AccueilScreen() {
                   </ThemedText>
                 </View>
               </View>
-            </StickerBox>
+            </SoftCard>
           </Pressable>
         </Link>
 

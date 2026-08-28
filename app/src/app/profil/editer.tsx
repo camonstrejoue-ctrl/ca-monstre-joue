@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
 import { PrimaryButton } from '@/components/primary-button';
-import { StickerBox } from '@/components/sticker';
+import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
@@ -36,7 +36,7 @@ function Section({
   error: string | null;
 }) {
   return (
-    <StickerBox backgroundColor={Brand.white} radius={Radius.lg}>
+    <SoftCard backgroundColor={Brand.white} radius={Radius.lg}>
       <View style={styles.section}>
         <ThemedText type="subtitle" style={styles.sectionTitle}>
           {title}
@@ -54,7 +54,7 @@ function Section({
           </ThemedText>
         ) : null}
       </View>
-    </StickerBox>
+    </SoftCard>
   );
 }
 
