@@ -32,40 +32,6 @@ const SNOWBALLS: {
   { top: '96%', left: '5%', size: 32, opacity: 0.36, shaded: false },
 ];
 
-// Glaçons suspendus au bord supérieur — pointe arrondie en haut, fine
-// pointe qui goutte en bas. Longueurs et largeurs variées pour un bord
-// irrégulier, plus crédible qu'une rangée de piques identiques.
-const ICICLES: { left: `${number}%`; width: number; height: number; opacity: number }[] = [
-  { left: '2%', width: 22, height: 46, opacity: 0.5 },
-  { left: '11%', width: 14, height: 26, opacity: 0.35 },
-  { left: '19%', width: 26, height: 60, opacity: 0.55 },
-  { left: '29%', width: 16, height: 32, opacity: 0.4 },
-  { left: '38%', width: 20, height: 42, opacity: 0.45 },
-  { left: '47%', width: 12, height: 24, opacity: 0.3 },
-  { left: '55%', width: 24, height: 54, opacity: 0.5 },
-  { left: '64%', width: 15, height: 30, opacity: 0.35 },
-  { left: '73%', width: 21, height: 44, opacity: 0.45 },
-  { left: '82%', width: 13, height: 26, opacity: 0.3 },
-  { left: '90%', width: 25, height: 58, opacity: 0.5 },
-  { left: '97%', width: 16, height: 34, opacity: 0.38 },
-];
-
-// Stalagmites au bord inférieur — même silhouette que les glaçons, mais
-// posée à l'endroit (base arrondie, pointe vers le haut), pour évoquer une
-// grotte de glace plutôt qu'un simple miroir décoratif.
-const STALAGMITES: { left: `${number}%`; width: number; height: number; opacity: number }[] = [
-  { left: '5%', width: 20, height: 38, opacity: 0.4 },
-  { left: '15%', width: 28, height: 56, opacity: 0.5 },
-  { left: '25%', width: 14, height: 24, opacity: 0.3 },
-  { left: '34%', width: 22, height: 46, opacity: 0.45 },
-  { left: '44%', width: 16, height: 28, opacity: 0.32 },
-  { left: '58%', width: 24, height: 50, opacity: 0.48 },
-  { left: '68%', width: 13, height: 22, opacity: 0.28 },
-  { left: '77%', width: 26, height: 52, opacity: 0.46 },
-  { left: '87%', width: 17, height: 30, opacity: 0.35 },
-  { left: '95%', width: 21, height: 40, opacity: 0.4 },
-];
-
 // Flocons de neige — petit astérisque à 3 branches (6 segments), plus
 // fidèle à un flocon qu'un simple point. Dispersés à des tailles/opacités
 // variées pour suggérer de la profondeur (les plus petits/pâles "plus
@@ -85,19 +51,72 @@ const SNOWFLAKES: { top: `${number}%`; left: `${number}%`; size: number; opacity
   { top: '88%', left: '68%', size: 13, opacity: 0.38, rotate: 12 },
 ];
 
-function Icicle({ width, height, opacity, flip }: { width: number; height: number; opacity: number; flip?: boolean }) {
-  // Base arrondie d'un côté, pointe fine de l'autre. `flip` retourne la
-  // forme verticalement pour obtenir une stalagmite à partir du même
-  // tracé qu'un glaçon. Contour noir épais et arrondi (au lieu d'un
-  // filet bleu glace fin) pour matcher le style de ligne du monstre et
-  // de la bulle — un seul Path fill+stroke plutôt que deux superposés.
-  const d = `M0,${height * 0.22} Q0,0 ${width * 0.2},0 L${width * 0.8},0 Q${width},0 ${width},${height * 0.22} L${width * 0.58},${height} Q${width / 2},${height * 1.06} ${width * 0.42},${height} Z`;
+// Bandeau de neige continu sur toute la largeur, avec des glaçons fins et
+// serrés tout du long (pas des amas isolés séparés par des trous) —
+// repris de la bande du milieu d'une référence illustrée partagée par
+// l'utilisateur (rangée dense de longs glaçons fins, ligne de neige
+// légèrement festonnée entre chaque). Construit dans un repère large
+// fixe (BAND_VB_W x BAND_VB_H) puis étiré en largeur à 100% de l'écran
+// via `preserveAspectRatio="none"` (la hauteur, elle, reste fixe en dp —
+// voir BAND_HEIGHT).
+const BAND_VB_W = 1000;
+const BAND_VB_H = 150;
+const BAND_TOP = 40; // hauteur du bandeau plein avant la ligne de neige
+const BAND_HEIGHT = 130; // hauteur réelle à l'écran (dp)
+
+// Longueurs de glaçons (au-delà de BAND_TOP) tirées à l'avance pour un
+// rendu stable — deux jeux différents pour le haut et le bas, pour ne
+// pas avoir l'air d'un simple miroir.
+const DRIP_LENGTHS_TOP = [55, 85, 40, 70, 95, 50, 75, 35, 90, 60, 45, 80, 65, 38, 72, 48];
+const DRIP_LENGTHS_BOTTOM = [70, 42, 88, 55, 35, 78, 92, 48, 65, 40, 85, 58, 72, 44, 60, 36];
+
+function buildIceBandPath(dripLengths: number[]): string {
+  const count = dripLengths.length;
+  const segW = BAND_VB_W / count;
+  const gap = segW * 0.1;
+  let d = `M0,0 L${BAND_VB_W},0 L${BAND_VB_W},${BAND_TOP} `;
+  for (let i = count - 1; i >= 0; i--) {
+    const xRight = (i + 1) * segW - gap / 2;
+    const xLeft = i * segW + gap / 2;
+    const xTip = i * segW + segW / 2;
+    const tipY = BAND_TOP + dripLengths[i];
+    d += `L${xRight},${BAND_TOP} L${xTip},${tipY} L${xLeft},${BAND_TOP} `;
+    // Petite bosse arrondie dans la ligne de neige entre deux glaçons
+    // adjacents, pour un bord festonné plutôt que des jointures plates.
+    if (i > 0) {
+      const xGap = i * segW;
+      d += `Q${xGap},${BAND_TOP - 9} ${xGap - gap / 2},${BAND_TOP} `;
+    }
+  }
+  d += 'Z';
+  return d;
+}
+
+const ICE_BAND_TOP_PATH = buildIceBandPath(DRIP_LENGTHS_TOP);
+const ICE_BAND_BOTTOM_PATH = buildIceBandPath(DRIP_LENGTHS_BOTTOM);
+
+function IceBand({ flip }: { flip?: boolean }) {
+  // Deux calques du même tracé : un bleu glace légèrement décalé (l'ombre
+  // qui dépasse sur les bords, comme sur la référence), et un blanc
+  // par-dessus sans décalage. `flip` retourne l'ensemble verticalement
+  // pour obtenir le bandeau du bas à partir du même tracé.
+  const d = flip ? ICE_BAND_BOTTOM_PATH : ICE_BAND_TOP_PATH;
   return (
-    <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={flip ? styles.flipped : undefined}>
-      <G opacity={opacity}>
-        <Path d={d} fill={Brand.white} stroke={Brand.black} strokeWidth={2.2} strokeLinejoin="round" strokeLinecap="round" />
-      </G>
-    </Svg>
+    <View style={[styles.band, flip ? styles.bandBottom : styles.bandTop]} pointerEvents="none">
+      <Svg
+        width="100%"
+        height={BAND_HEIGHT}
+        viewBox={`0 0 ${BAND_VB_W} ${BAND_VB_H}`}
+        preserveAspectRatio="none"
+        style={flip ? styles.flipped : undefined}>
+        <G opacity={0.5}>
+          <G transform="translate(6, 7)">
+            <Path d={d} fill={Brand.iceLight} />
+          </G>
+          <Path d={d} fill={Brand.white} />
+        </G>
+      </Svg>
+    </View>
   );
 }
 
@@ -139,10 +158,10 @@ function Snowflake({ size, opacity, rotate }: { size: number; opacity: number; r
 
 /**
  * Fond "glacé" texturé : dégradé bleu glace → blanc, boules de neige en
- * relief, glaçons/stalagmites en bordure et flocons dispersés — demandé
- * par l'utilisateur après un premier essai en fond uni jugé trop plat,
- * puis en éléments visuels glacés (stalactites/stalagmites/flocons/boules
- * de neige) pour renforcer l'ambiance "grotte de glace" du monstre Yeti.
+ * relief, bandeaux de neige avec glaçons/stalagmites sur toute la largeur
+ * en haut/bas, et flocons dispersés — demandé par l'utilisateur après un
+ * premier essai en fond uni jugé trop plat, puis en éléments visuels
+ * glacés pour renforcer l'ambiance "grotte de glace" du monstre Yeti.
  * Toujours pointerEvents="none" pour ne jamais intercepter les
  * interactions du contenu posé par-dessus.
  */
@@ -165,20 +184,15 @@ export function IcyBackground() {
           <Snowflake size={flake.size} opacity={flake.opacity} rotate={flake.rotate} />
         </View>
       ))}
-      {ICICLES.map((icicle, i) => (
-        <View key={`icicle-${i}`} style={{ position: 'absolute', top: 0, left: icicle.left }}>
-          <Icicle width={icicle.width} height={icicle.height} opacity={icicle.opacity} />
-        </View>
-      ))}
-      {STALAGMITES.map((stalagmite, i) => (
-        <View key={`stalagmite-${i}`} style={{ position: 'absolute', bottom: 0, left: stalagmite.left }}>
-          <Icicle width={stalagmite.width} height={stalagmite.height} opacity={stalagmite.opacity} flip />
-        </View>
-      ))}
+      <IceBand />
+      <IceBand flip />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   flipped: { transform: [{ scaleY: -1 }] },
+  band: { position: 'absolute', left: 0, right: 0 },
+  bandTop: { top: 0 },
+  bandBottom: { bottom: 0 },
 });
