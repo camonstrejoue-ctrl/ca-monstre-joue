@@ -17,7 +17,7 @@ export const Brand = {
   coral: '#E8392A',
   coralDark: '#C22C1F',
   coralLight: '#FBE3E0',
-  ice: '#2F8FCB',
+  ice: '#6DACEA',
   iceDark: '#1E6690',
   iceLight: '#D9EEFB',
   // "Blanc glacé" — blanc à peine teinté de bleu (pas un blanc pur), pour
