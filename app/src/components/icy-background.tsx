@@ -88,12 +88,15 @@ const SNOWFLAKES: { top: `${number}%`; left: `${number}%`; size: number; opacity
 function Icicle({ width, height, opacity, flip }: { width: number; height: number; opacity: number; flip?: boolean }) {
   // Base arrondie d'un côté, pointe fine de l'autre. `flip` retourne la
   // forme verticalement pour obtenir une stalagmite à partir du même
-  // tracé qu'un glaçon.
+  // tracé qu'un glaçon. Contour noir épais et arrondi (au lieu d'un
+  // filet bleu glace fin) pour matcher le style de ligne du monstre et
+  // de la bulle — un seul Path fill+stroke plutôt que deux superposés.
   const d = `M0,${height * 0.22} Q0,0 ${width * 0.2},0 L${width * 0.8},0 Q${width},0 ${width},${height * 0.22} L${width * 0.58},${height} Q${width / 2},${height * 1.06} ${width * 0.42},${height} Z`;
   return (
     <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={flip ? styles.flipped : undefined}>
-      <Path d={d} fill={Brand.white} opacity={opacity} />
-      <Path d={d} fill="none" stroke={Brand.iceDark} strokeOpacity={opacity * 0.5} strokeWidth={1} />
+      <G opacity={opacity}>
+        <Path d={d} fill={Brand.white} stroke={Brand.black} strokeWidth={2.2} strokeLinejoin="round" strokeLinecap="round" />
+      </G>
     </Svg>
   );
 }
@@ -114,7 +117,7 @@ function Snowball({ size, opacity, shaded, gradientId }: { size: number; opacity
       </Defs>
       <G opacity={opacity}>
         <Circle cx={r} cy={r} r={r} fill={`url(#${gradientId})`} />
-        <Circle cx={r} cy={r} r={r - 0.5} fill="none" stroke={Brand.iceDark} strokeOpacity={0.3} strokeWidth={1} />
+        <Circle cx={r} cy={r} r={r - 0.75} fill="none" stroke={Brand.black} strokeOpacity={0.55} strokeWidth={1.5} />
         <Ellipse cx={r * 0.62} cy={r * 0.55} rx={r * 0.24} ry={r * 0.17} fill={Brand.white} opacity={0.75} />
       </G>
     </Svg>
