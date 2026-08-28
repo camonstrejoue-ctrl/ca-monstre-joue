@@ -39,16 +39,28 @@ function PlayerRow({
         placeholderTextColor={theme.textSecondary}
         style={[styles.nameInput, { color: theme.text }]}
       />
-      <Pressable onPress={() => onChangeScore(-1)} hitSlop={8}>
+      <Pressable
+        onPress={() => onChangeScore(-1)}
+        hitSlop={8}
+        accessibilityLabel={`Retirer un point à ${player.name || 'ce joueur'}`}
+        accessibilityRole="button">
         <Ionicons name="remove-circle-outline" size={26} color={theme.text} />
       </Pressable>
       <ThemedText type="title" style={styles.score}>
         {player.score}
       </ThemedText>
-      <Pressable onPress={() => onChangeScore(1)} hitSlop={8}>
+      <Pressable
+        onPress={() => onChangeScore(1)}
+        hitSlop={8}
+        accessibilityLabel={`Ajouter un point à ${player.name || 'ce joueur'}`}
+        accessibilityRole="button">
         <Ionicons name="add-circle-outline" size={26} color={theme.text} />
       </Pressable>
-      <Pressable onPress={onRemove} hitSlop={8}>
+      <Pressable
+        onPress={onRemove}
+        hitSlop={8}
+        accessibilityLabel={`Retirer ${player.name || 'ce joueur'} de la partie`}
+        accessibilityRole="button">
         <Ionicons name="trash-outline" size={20} color={theme.textSecondary} />
       </Pressable>
     </ThemedView>

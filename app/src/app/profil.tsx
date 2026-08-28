@@ -1,52 +1,22 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AVATAR_ACCESSORIES, AvatarMonster } from '@/components/avatar-monster';
 import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
-import { StickerBox } from '@/components/sticker';
+import { PrimaryButton } from '@/components/primary-button';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Brand, Radius, Spacing } from '@/constants/theme';
+import { useTheme } from '@/hooks/use-theme';
+import { Brand, Spacing } from '@/constants/theme';
 import { deleteAccount, signIn, signOut, signUp } from '@/lib/auth';
-import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
-import { useContent } from '@/lib/content';
+import { updateUserProfile, useAuth } from '@/lib/auth-context';
 import { isFirebaseConfigured } from '@/lib/firebase';
-import {
-  computeAge,
-  formatBirthdateInput,
-  meetsMinAge,
-  MIN_CONTACT_AGE,
-  parseBirthdateInput,
-} from '@/lib/moderation';
+import { parseBirthdateInput, MIN_CONTACT_AGE } from '@/lib/moderation';
 import { submitSuggestion } from '@/lib/suggestions';
-
-function PrimaryButton({
-  label,
-  onPress,
-  disabled,
-}: {
-  label: string;
-  onPress: () => void;
-  disabled?: boolean;
-}) {
-  return (
-    <Pressable onPress={onPress} disabled={disabled}>
-      {({ pressed }) => (
-        <StickerBox
-          backgroundColor={disabled ? Brand.grayLight : Brand.coral}
-          radius={Radius.md}
-          style={pressed && styles.pressed}>
-          <ThemedText type="smallBold" style={styles.primaryButtonText}>
-            {label}
-          </ThemedText>
-        </StickerBox>
-      )}
-    </Pressable>
-  );
-}
 
 function AuthForms() {
   const [mode, setMode] = useState<'connexion' | 'inscription'>('connexion');
@@ -190,7 +160,6 @@ function AvatarPicker() {
 
   return (
     <ThemedView style={styles.form}>
-      <ThemedText type="subtitle">Mon avatar</ThemedText>
       <Pressable onPress={() => setOpen((v) => !v)} style={styles.avatarPreviewWrap}>
         <AvatarMonster accessory={current} size={96} style={styles.avatarPreview} />
         <ThemedText type="small" themeColor="textSecondary">
@@ -228,179 +197,28 @@ function AvatarPicker() {
   );
 }
 
-function EditProfileForm() {
-  const { user, profile, refreshProfile } = useAuth();
-  const { content } = useContent();
-
-  const [prenom, setPrenom] = useState(profile?.prenom ?? '');
-  const [birthdateInput, setBirthdateInput] = useState(
-    profile?.birthdate ? formatBirthdateInput(profile.birthdate.toDate()) : ''
-  );
-  const [description, setDescription] = useState(profile?.description ?? '');
-  const [categories, setCategories] = useState<string[]>(profile?.categoriesPreferees ?? []);
-  const [visibility, setVisibility] = useState<ProfileVisibility>(
-    profile?.visibility ?? DEFAULT_VISIBILITY
-  );
-  const [visibleToPlayers, setVisibleToPlayers] = useState(profile?.visibleToPlayers ?? false);
-  const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setPrenom(profile?.prenom ?? '');
-    setBirthdateInput(profile?.birthdate ? formatBirthdateInput(profile.birthdate.toDate()) : '');
-    setDescription(profile?.description ?? '');
-    setCategories(profile?.categoriesPreferees ?? []);
-    setVisibility(profile?.visibility ?? DEFAULT_VISIBILITY);
-    setVisibleToPlayers(profile?.visibleToPlayers ?? false);
-  }, [profile]);
-
-  const parsedBirthdateForGate = birthdateInput.trim() ? parseBirthdateInput(birthdateInput) : null;
-  const displayedAge = computeAge(parsedBirthdateForGate);
-  const canBeVisible = meetsMinAge(parsedBirthdateForGate, MIN_CONTACT_AGE);
-
-  function toggleCategory(slug: string) {
-    setCategories((prev) =>
-      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
-    );
-  }
-
-  async function handleSave() {
-    if (!user) return;
-    setSaving(true);
-    setSaved(false);
-    setError(null);
-    let birthdate: Date | undefined;
-    if (birthdateInput.trim()) {
-      const parsed = parseBirthdateInput(birthdateInput);
-      if (!parsed) {
-        setError('Date de naissance invalide (format JJ/MM/AAAA).');
-        setSaving(false);
-        return;
-      }
-      birthdate = parsed;
-    }
-    try {
-      await updateUserProfile(user.uid, {
-        prenom: prenom.trim(),
-        birthdate,
-        description: description.trim(),
-        categoriesPreferees: categories,
-        visibility,
-        visibleToPlayers: meetsMinAge(birthdate, MIN_CONTACT_AGE) && visibleToPlayers,
-      });
-      await refreshProfile();
-      setSaved(true);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setSaving(false);
-    }
-  }
-
+function ProfileNavRow({
+  href,
+  icon,
+  label,
+}: {
+  href: '/profil/editer' | '/profil/confidentialite';
+  icon: React.ComponentProps<typeof Ionicons>['name'];
+  label: string;
+}) {
+  const theme = useTheme();
   return (
-    <ThemedView style={styles.form}>
-      <ThemedText type="subtitle" style={styles.sectionTitle}>
-        Informations supplémentaires (optionnel)
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        Ces informations ne sont visibles par les autres joueurs que si tu coches la case
-        correspondante.
-      </ThemedText>
-
-      <FormField label="Prénom" value={prenom} onChangeText={setPrenom} />
-      <CheckboxRow
-        label="Afficher mon prénom sur mon profil public"
-        checked={visibility.prenom}
-        onToggle={() => setVisibility((v) => ({ ...v, prenom: !v.prenom }))}
-      />
-
-      <FormField
-        label="Date de naissance (JJ/MM/AAAA)"
-        value={birthdateInput}
-        onChangeText={setBirthdateInput}
-        placeholder="ex: 14/03/1995"
-        keyboardType="numbers-and-punctuation"
-      />
-      {displayedAge !== null ? (
-        <ThemedText type="small" themeColor="textSecondary">
-          Âge calculé : {displayedAge} ans
-        </ThemedText>
-      ) : null}
-      <CheckboxRow
-        label="Afficher mon âge sur mon profil public"
-        checked={visibility.age}
-        onToggle={() => setVisibility((v) => ({ ...v, age: !v.age }))}
-      />
-
-      <FormField
-        label="Décris ton profil de joueur en quelques mots et quel type de joueurs tu souhaiterais rencontrer et dans quel contexte"
-        value={description}
-        onChangeText={setDescription}
-        multiline
-      />
-      <CheckboxRow
-        label="Afficher ma description sur mon profil public"
-        checked={visibility.description}
-        onToggle={() => setVisibility((v) => ({ ...v, description: !v.description }))}
-      />
-
-      <ThemedText type="subtitle" style={styles.sectionTitle}>
-        Trouver des joueurs
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary">
-        Réservé aux 18 ans et plus. Si tu actives cette option, ton profil apparaît dans
-        l’annuaire « Joueurs » et tu peux contacter les autres joueurs visibles — et
-        réciproquement, tu ne peux contacter personne tant qu’elle est désactivée.
-      </ThemedText>
-      <CheckboxRow
-        label="Être visible par les autres joueurs"
-        checked={visibleToPlayers && canBeVisible}
-        onToggle={() => setVisibleToPlayers((v) => !v)}
-        disabled={!canBeVisible}
-      />
-      {!canBeVisible ? (
-        <ThemedText type="small" themeColor="textSecondary">
-          {parsedBirthdateForGate
-            ? `Désactivé car tu as moins de ${MIN_CONTACT_AGE} ans d’après ta date de naissance — ça se débloquera tout seul le jour de tes ${MIN_CONTACT_AGE} ans, sans rien avoir à refaire.`
-            : `Indique ta date de naissance ci-dessus pour savoir si tu peux l’activer (réservé aux ${MIN_CONTACT_AGE} ans et plus).`}
-        </ThemedText>
-      ) : null}
-
-      <ThemedText type="small" themeColor="textSecondary">
-        Catégories de jeux appréciées
-      </ThemedText>
-      <ThemedView style={styles.chipRow}>
-        {(content?.categories ?? []).map((cat) => {
-          const selected = categories.includes(cat.slug);
-          return (
-            <Pressable key={cat.slug} onPress={() => toggleCategory(cat.slug)}>
-              <ThemedView
-                type="backgroundElement"
-                style={[styles.chip, selected && styles.chipSelected]}>
-                <ThemedText type={selected ? 'smallBold' : 'small'}>{cat.name}</ThemedText>
-              </ThemedView>
-            </Pressable>
-          );
-        })}
-      </ThemedView>
-      <CheckboxRow
-        label="Afficher mes catégories préférées sur mon profil public"
-        checked={visibility.categoriesPreferees}
-        onToggle={() =>
-          setVisibility((v) => ({ ...v, categoriesPreferees: !v.categoriesPreferees }))
-        }
-      />
-
-      {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
-      {saved ? (
-        <ThemedText type="small" themeColor="textSecondary">
-          Enregistré.
-        </ThemedText>
-      ) : null}
-
-      <PrimaryButton label="Enregistrer" onPress={handleSave} disabled={saving} />
-    </ThemedView>
+    <Link href={href} asChild>
+      <Pressable>
+        <ThemedView type="backgroundElement" style={styles.navRow}>
+          <Ionicons name={icon} size={22} color={theme.text} />
+          <ThemedText type="smallBold" style={styles.navRowLabel}>
+            {label}
+          </ThemedText>
+          <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
+        </ThemedView>
+      </Pressable>
+    </Link>
   );
 }
 
@@ -430,9 +248,6 @@ function SuggestionForm() {
 
   return (
     <ThemedView style={styles.form}>
-      <ThemedText type="subtitle" style={styles.sectionTitle}>
-        Une idée pour l’app ?
-      </ThemedText>
       {sent ? (
         <ThemedText type="small" themeColor="textSecondary">
           Merci, ta suggestion a bien été envoyée !
@@ -520,9 +335,22 @@ function ProfileView() {
           <ThemedText type="small" themeColor="textSecondary">
             {user?.email}
           </ThemedText>
+          {profile?.ville ? (
+            <ThemedText type="small" themeColor="textSecondary">
+              {profile.ville}
+            </ThemedText>
+          ) : null}
         </ThemedView>
       </ThemedView>
-      {profile?.ville ? <ThemedText type="small">Ville : {profile.ville}</ThemedText> : null}
+
+      <AvatarPicker />
+
+      <ThemedView style={styles.navSection}>
+        <ProfileNavRow href="/profil/editer" icon="person" label="Éditer mon profil" />
+        <ProfileNavRow href="/profil/confidentialite" icon="people" label="Trouver des joueurs" />
+      </ThemedView>
+
+      <SuggestionForm />
 
       <Link href="/cgu" asChild>
         <Pressable>
@@ -536,10 +364,6 @@ function ProfileView() {
       </Link>
 
       <PrimaryButton label="Se déconnecter" onPress={() => signOut()} />
-
-      <AvatarPicker />
-      <EditProfileForm />
-      <SuggestionForm />
 
       <DeleteAccountSection />
     </ThemedView>
@@ -566,27 +390,11 @@ const styles = StyleSheet.create({
   scrollContent: { padding: Spacing.four, gap: Spacing.three },
   pageTitle: { fontSize: 32, marginBottom: Spacing.two },
   form: { gap: Spacing.three },
-  sectionTitle: { marginTop: Spacing.four },
-  primaryButtonText: {
-    color: Brand.white,
-    textAlign: 'center',
-    paddingVertical: Spacing.three,
-    paddingHorizontal: Spacing.four,
-  },
-  pressed: { opacity: 0.7 },
-  switchMode: { textAlign: 'center', marginTop: Spacing.two },
   error: { color: '#D14343' },
+  switchMode: { textAlign: 'center', marginTop: Spacing.two },
   deleteSection: { marginTop: Spacing.four, alignItems: 'center', gap: Spacing.two },
   deleteLink: { color: '#D14343', textDecorationLine: 'underline' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
-  chip: {
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.five,
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  chipSelected: { borderColor: Brand.coral },
   profileHeader: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
   profileHeaderText: { flex: 1, gap: 2 },
   avatarPreviewWrap: { alignItems: 'center', gap: 4 },
@@ -607,4 +415,13 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.two,
     alignItems: 'center',
   },
+  navSection: { gap: Spacing.two },
+  navRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    padding: Spacing.three,
+    borderRadius: Spacing.three,
+  },
+  navRowLabel: { flex: 1 },
 });

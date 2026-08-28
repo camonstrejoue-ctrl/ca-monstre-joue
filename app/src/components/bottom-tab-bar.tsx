@@ -10,29 +10,34 @@ import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TabHref = '/' | '/mon-univers' | '/agenda' | '/outils';
+type TabHref = '/' | '/ludotheque' | '/joueurs' | '/outils' | '/profil';
 
+// Cinq destinations directes, à plat — plus de sous-menu "Mon univers" à
+// traverser pour la ludothèque : chaque onglet mène droit à sa
+// destination, en 1 tap partout (voir la note dans AGENTS.md/CLAUDE.md de
+// la session : avant, Ludothèque/Souvenirs étaient à 2 taps derrière "Mon
+// univers", et Agenda/Joueurs étaient accessibles par deux chemins
+// différents selon qu'on passe par la barre du bas ou par l'accueil).
 const TABS: {
   href: TabHref;
   label: string;
   icon: ComponentProps<typeof Ionicons>['name'];
-  // Autres routes qui doivent aussi surligner cet onglet.
   matchAlso?: string[];
 }[] = [
   { href: '/', label: 'Accueil', icon: 'home' },
-  { href: '/mon-univers', label: 'Mon univers', icon: 'planet', matchAlso: ['/ludotheque', '/outils/souvenirs'] },
-  { href: '/agenda', label: 'Agenda', icon: 'calendar' },
-  { href: '/outils', label: 'Outils', icon: 'dice' },
+  { href: '/ludotheque', label: 'Ludothèque', icon: 'library' },
+  { href: '/joueurs', label: 'Joueurs', icon: 'people' },
+  { href: '/outils', label: 'Outils', icon: 'dice', matchAlso: ['/outils/souvenirs'] },
+  { href: '/profil', label: 'Profil', icon: 'person-circle' },
 ];
 
 const MENU_ITEMS: {
-  href: '/catalogue' | '/joueurs' | '/profil';
+  href: '/catalogue' | '/agenda';
   label: string;
   icon: ComponentProps<typeof Ionicons>['name'];
 }[] = [
+  { href: '/agenda', label: 'Agenda', icon: 'calendar' },
   { href: '/catalogue', label: 'Blog', icon: 'newspaper' },
-  { href: '/joueurs', label: 'Joueurs', icon: 'people' },
-  { href: '/profil', label: 'Profil', icon: 'person-circle' },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -55,7 +60,13 @@ export function BottomTabBar() {
           const active = isActive(pathname, tab.href) || tab.matchAlso?.some((h) => isActive(pathname, h));
           const color = active ? theme.text : theme.textSecondary;
           return (
-            <Pressable key={tab.href} style={styles.tab} onPress={() => router.push(tab.href)}>
+            <Pressable
+              key={tab.href}
+              style={styles.tab}
+              onPress={() => router.push(tab.href)}
+              accessibilityLabel={tab.label}
+              accessibilityRole="tab"
+              accessibilityState={{ selected: active }}>
               <Ionicons name={tab.icon} size={20} color={color} />
               <ThemedText type="small" style={[styles.label, { color }]} numberOfLines={1}>
                 {tab.label}
@@ -63,7 +74,11 @@ export function BottomTabBar() {
             </Pressable>
           );
         })}
-        <Pressable style={styles.tab} onPress={() => setMenuOpen(true)}>
+        <Pressable
+          style={styles.tab}
+          onPress={() => setMenuOpen(true)}
+          accessibilityLabel="Plus"
+          accessibilityRole="button">
           <Ionicons name="menu" size={20} color={menuActive ? theme.text : theme.textSecondary} />
           <ThemedText
             type="small"

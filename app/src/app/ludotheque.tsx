@@ -1,11 +1,12 @@
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CoverImage } from '@/components/cover-image';
 import { FormField } from '@/components/form-field';
+import { SignedOutPrompt } from '@/components/signed-out-prompt';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Spacing } from '@/constants/theme';
@@ -20,26 +21,6 @@ import {
   type LudothequeEntry,
 } from '@/lib/ludotheque';
 import { findGameByBggId } from '@/lib/queries';
-
-function SignedOutPrompt() {
-  return (
-    <ThemedView style={styles.center}>
-      <ThemedText type="subtitle" style={styles.centerText}>
-        Connecte-toi pour gérer ta ludothèque
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary" style={styles.centerText}>
-        Retrouve ici les jeux que tu possèdes, pour les partager avec les autres joueurs.
-      </ThemedText>
-      <Link href="/profil" asChild>
-        <Pressable>
-          <ThemedView type="backgroundSelected" style={styles.loginButton}>
-            <ThemedText type="smallBold">Aller à Profil</ThemedText>
-          </ThemedView>
-        </Pressable>
-      </Link>
-    </ThemedView>
-  );
-}
 
 function AddGameSearch({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   const [query, setQuery] = useState('');
@@ -147,6 +128,13 @@ function LudothequeRow({
     }
   }
 
+  function confirmRemove() {
+    Alert.alert('Retirer ce jeu ?', `« ${entry.name} » sera retiré de ta ludothèque.`, [
+      { text: 'Annuler', style: 'cancel' },
+      { text: 'Retirer', style: 'destructive', onPress: handleRemove },
+    ]);
+  }
+
   const content = (
     <ThemedView style={styles.gameLink}>
       <CoverImage path={entry.thumbnail} style={styles.gameImage} />
@@ -170,7 +158,7 @@ function LudothequeRow({
       ) : (
         content
       )}
-      <Pressable onPress={handleRemove} disabled={busy}>
+      <Pressable onPress={confirmRemove} disabled={busy}>
         <ThemedView type="backgroundElement" style={styles.removeButton}>
           <ThemedText type="small">Retirer</ThemedText>
         </ThemedView>
@@ -218,7 +206,11 @@ export default function LudothequeScreen() {
   }, [entries, user]);
 
   if (initializing) return null;
-  if (!user) return <SignedOutPrompt />;
+  if (!user) {
+    return (
+      <SignedOutPrompt text="Retrouve ici les jeux que tu possèdes, pour les partager avec les autres joueurs." />
+    );
+  }
 
   const availableCategories = Array.from(
     new Set(entries.flatMap((e) => e.categories ?? []))

@@ -54,13 +54,16 @@ export default function RootLayout() {
               contentStyle: { backgroundColor: theme.background },
             }}>
             <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="monde-du-jeu" />
-            <Stack.Screen name="mon-univers" />
             <Stack.Screen name="catalogue" options={{ headerShown: false }} />
             <Stack.Screen name="ludotheque" options={{ headerShown: false }} />
             <Stack.Screen name="joueurs" options={{ headerShown: false }} />
             <Stack.Screen name="agenda" options={{ headerShown: false }} />
             <Stack.Screen name="profil" options={{ headerShown: false }} />
+            <Stack.Screen name="profil/editer" options={{ title: 'Éditer mon profil' }} />
+            <Stack.Screen
+              name="profil/confidentialite"
+              options={{ title: 'Trouver des joueurs' }}
+            />
             <Stack.Screen name="outils" options={{ headerShown: false }} />
             <Stack.Screen name="outils/des" />
             <Stack.Screen name="outils/score" />

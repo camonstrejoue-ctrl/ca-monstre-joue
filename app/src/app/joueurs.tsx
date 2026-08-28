@@ -1,82 +1,58 @@
 import { Link } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { FlatList, Pressable, StyleSheet } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { FlatList, Pressable, RefreshControl, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AvatarMonster } from '@/components/avatar-monster';
 import { FormField } from '@/components/form-field';
+import { SignedOutPrompt } from '@/components/signed-out-prompt';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
+import { Brand, Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { listAllPlayers, searchPlayersByVille, type PlayerResult } from '@/lib/joueurs';
 import { computeAge, MIN_CONTACT_AGE } from '@/lib/moderation';
-
-function SignedOutPrompt() {
-  return (
-    <ThemedView style={styles.center}>
-      <ThemedText type="subtitle" style={styles.centerText}>
-        Connecte-toi pour trouver des joueurs
-      </ThemedText>
-      <ThemedText type="small" themeColor="textSecondary" style={styles.centerText}>
-        Cherche des joueurs dans ta ville pour organiser une partie ou échanger des jeux.
-      </ThemedText>
-      <Link href="/profil" asChild>
-        <Pressable>
-          <ThemedView type="backgroundSelected" style={styles.loginButton}>
-            <ThemedText type="smallBold">Aller à Profil</ThemedText>
-          </ThemedView>
-        </Pressable>
-      </Link>
-    </ThemedView>
-  );
-}
 
 export default function JoueursScreen() {
   const { user, profile, initializing } = useAuth();
   const [ville, setVille] = useState('');
   const [results, setResults] = useState<PlayerResult[]>([]);
   const [searching, setSearching] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function loadAll() {
-    if (!user) return;
-    setSearching(true);
-    setError(null);
-    try {
-      setResults(await listAllPlayers(user.uid));
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setSearching(false);
-    }
-  }
+  const runQuery = useCallback(
+    async (targetVille: string, { asRefresh = false } = {}) => {
+      if (!user) return;
+      if (asRefresh) setRefreshing(true);
+      else setSearching(true);
+      setError(null);
+      try {
+        const players = targetVille.trim()
+          ? await searchPlayersByVille(targetVille, user.uid)
+          : await listAllPlayers(user.uid);
+        setResults(players);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setSearching(false);
+        setRefreshing(false);
+      }
+    },
+    [user]
+  );
 
   useEffect(() => {
-    if (user) loadAll();
+    if (user) runQuery(ville);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.uid]);
 
-  async function handleSearch() {
-    if (!user) return;
-    if (!ville.trim()) {
-      await loadAll();
-      return;
-    }
-    setSearching(true);
-    setError(null);
-    try {
-      const players = await searchPlayersByVille(ville, user.uid);
-      setResults(players);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setSearching(false);
-    }
-  }
-
   if (initializing) return null;
-  if (!user) return <SignedOutPrompt />;
+  if (!user) {
+    return (
+      <SignedOutPrompt text="Cherche des joueurs dans ta ville pour organiser une partie ou échanger des jeux." />
+    );
+  }
 
   const ownProfileVisible = Boolean(profile?.visibleToPlayers);
   const ownAge = computeAge(profile?.birthdate);
@@ -88,6 +64,13 @@ export default function JoueursScreen() {
         data={results}
         keyExtractor={(item) => item.uid}
         contentContainerStyle={styles.list}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => runQuery(ville, { asRefresh: true })}
+            tintColor={Brand.coral}
+          />
+        }
         ListHeaderComponent={
           <ThemedView style={styles.header}>
             <ThemedText type="title" style={styles.pageTitle}>
@@ -118,9 +101,9 @@ export default function JoueursScreen() {
               value={ville}
               onChangeText={setVille}
               placeholder="ex: Genève"
-              onSubmitEditing={handleSearch}
+              onSubmitEditing={() => runQuery(ville)}
             />
-            <Pressable onPress={handleSearch} disabled={searching}>
+            <Pressable onPress={() => runQuery(ville)} disabled={searching}>
               <ThemedView type="backgroundSelected" style={styles.searchButton}>
                 <ThemedText type="smallBold">
                   {ville.trim() ? 'Rechercher' : 'Voir tous les joueurs'}
@@ -160,19 +143,6 @@ const styles = StyleSheet.create({
   list: { padding: Spacing.four, gap: Spacing.three },
   header: { gap: Spacing.three, marginBottom: Spacing.three },
   pageTitle: { fontSize: 32 },
-  center: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: Spacing.three,
-    padding: Spacing.four,
-  },
-  centerText: { textAlign: 'center' },
-  loginButton: {
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.five,
-  },
   visibilityHint: {
     padding: Spacing.three,
     borderRadius: Spacing.two,

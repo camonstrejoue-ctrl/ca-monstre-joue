@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Linking, Pressable, StyleSheet } from 'react-native';
+import { Alert, FlatList, Linking, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/components/form-field';
@@ -168,6 +168,13 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
   const isOwner = uid && event.createdBy === uid;
   const isLink = /^https?:\/\//.test(event.contact);
 
+  function confirmRemove() {
+    Alert.alert('Supprimer cet événement ?', `« ${event.title} » sera définitivement supprimé.`, [
+      { text: 'Annuler', style: 'cancel' },
+      { text: 'Supprimer', style: 'destructive', onPress: () => removeEvent(event.id) },
+    ]);
+  }
+
   return (
     <ThemedView type="backgroundElement" style={styles.card}>
       {event.poster ? <Image source={{ uri: event.poster }} style={styles.posterImage} /> : null}
@@ -187,7 +194,7 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
 
       <ThemedView style={styles.cardFooter}>
         {isOwner ? (
-          <Pressable onPress={() => removeEvent(event.id)}>
+          <Pressable onPress={confirmRemove}>
             <ThemedText type="small" style={styles.removeLink}>
               Supprimer
             </ThemedText>

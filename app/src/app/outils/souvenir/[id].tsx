@@ -77,7 +77,11 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
           renderItem={({ item }) => (
             <ThemedView style={styles.photoPreviewWrap}>
               <Image source={{ uri: item }} style={styles.photoPreview} />
-              <Pressable onPress={() => removePhoto(item)} style={styles.removePhotoBadge}>
+              <Pressable
+                onPress={() => removePhoto(item)}
+                style={styles.removePhotoBadge}
+                accessibilityLabel="Retirer cette photo"
+                accessibilityRole="button">
                 <Ionicons name="close-circle" size={20} color="#D14343" />
               </Pressable>
             </ThemedView>
@@ -233,7 +237,11 @@ export default function SouvenirDetailScreen() {
           {viewerUri ? (
             <Image source={{ uri: viewerUri }} style={styles.viewerImage} contentFit="contain" />
           ) : null}
-          <Pressable style={styles.viewerClose} onPress={() => setViewerUri(null)}>
+          <Pressable
+            style={styles.viewerClose}
+            onPress={() => setViewerUri(null)}
+            accessibilityLabel="Fermer la photo"
+            accessibilityRole="button">
             <Ionicons name="close" size={28} color="#FFFFFF" />
           </Pressable>
         </Pressable>

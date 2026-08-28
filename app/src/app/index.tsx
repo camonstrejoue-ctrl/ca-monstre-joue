@@ -43,19 +43,25 @@ export default function AccueilScreen() {
         </Link>
 
         <NavTile
-          href="/monde-du-jeu"
-          label="Le monde du jeu près de chez moi"
-          image="assets/categories/jeux-narratifs-categorie.JPG"
+          href="/joueurs"
+          label="Trouver des joueurs près de chez moi"
+          description="Organise une partie ou un échange de jeux"
+          icon="people"
+          color="coral"
         />
         <NavTile
-          href="/mon-univers"
-          label="Mon univers"
-          image="assets/categories/jeux-dambiance-categorie.jpg"
+          href="/agenda"
+          label="Agenda"
+          description="Festivals, tournois, soirées jeux..."
+          icon="calendar"
+          color="green"
         />
         <NavTile
-          href="/outils"
-          label="Mes outils pour jouer"
-          image="assets/categories/jeux-famille-categorie.JPG"
+          href="/catalogue"
+          label="Le blog"
+          description="Toutes nos fiches jeux et critiques"
+          icon="newspaper"
+          color="coral"
         />
       </ScrollView>
     </SafeAreaView>

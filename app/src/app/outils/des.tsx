@@ -37,7 +37,9 @@ export default function DesScreen() {
         <ThemedView style={styles.stepper}>
           <Pressable
             onPress={() => setNumDice((n) => Math.max(MIN_DICE, n - 1))}
-            disabled={numDice <= MIN_DICE}>
+            disabled={numDice <= MIN_DICE}
+            accessibilityLabel="Un dé de moins"
+            accessibilityRole="button">
             <ThemedView type="backgroundElement" style={styles.stepperButton}>
               <Ionicons name="remove" size={22} color={theme.text} />
             </ThemedView>
@@ -47,7 +49,9 @@ export default function DesScreen() {
           </ThemedText>
           <Pressable
             onPress={() => setNumDice((n) => Math.min(MAX_DICE, n + 1))}
-            disabled={numDice >= MAX_DICE}>
+            disabled={numDice >= MAX_DICE}
+            accessibilityLabel="Un dé de plus"
+            accessibilityRole="button">
             <ThemedView type="backgroundElement" style={styles.stepperButton}>
               <Ionicons name="add" size={22} color={theme.text} />
             </ThemedView>
