@@ -140,68 +140,6 @@ function AuthForms() {
   );
 }
 
-function AvatarPicker() {
-  const { user, profile, refreshProfile } = useAuth();
-  const [saving, setSaving] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  async function handleSelect(accessory: string | null) {
-    if (!user || saving) return;
-    setSaving(true);
-    try {
-      await updateUserProfile(user.uid, { avatarAccessory: accessory });
-      await refreshProfile();
-    } finally {
-      setSaving(false);
-    }
-  }
-
-  const current = profile?.avatarAccessory ?? null;
-
-  return (
-    <SoftCard backgroundColor={Brand.white} radius={Radius.lg}>
-      <View style={styles.avatarCard}>
-        <ThemedText type="subtitle" style={styles.avatarCardTitle}>
-          Mon avatar
-        </ThemedText>
-        <Pressable onPress={() => setOpen((v) => !v)} style={styles.avatarPreviewWrap}>
-          <AvatarMonster accessory={current} size={96} ring style={styles.avatarPreview} />
-          <ThemedText type="small" themeColor="textSecondary">
-            {open ? 'Touche l’avatar pour fermer' : 'Touche l’avatar pour changer de chapeau'}
-          </ThemedText>
-        </Pressable>
-        {open ? (
-          <View style={styles.chipRow}>
-            <Pressable onPress={() => handleSelect(null)} disabled={saving}>
-              <ThemedView
-                type="backgroundElement"
-                style={[styles.accessoryOption, current === null && styles.accessoryOptionSelected]}>
-                <AvatarMonster accessory={null} size={40} />
-                <ThemedText type={current === null ? 'smallBold' : 'small'}>Aucun</ThemedText>
-              </ThemedView>
-            </Pressable>
-            {AVATAR_ACCESSORIES.map((acc) => (
-              <Pressable key={acc.value} onPress={() => handleSelect(acc.value)} disabled={saving}>
-                <ThemedView
-                  type="backgroundElement"
-                  style={[
-                    styles.accessoryOption,
-                    current === acc.value && styles.accessoryOptionSelected,
-                  ]}>
-                  <AvatarMonster accessory={acc.value} size={40} />
-                  <ThemedText type={current === acc.value ? 'smallBold' : 'small'}>
-                    {acc.label}
-                  </ThemedText>
-                </ThemedView>
-              </Pressable>
-            ))}
-          </View>
-        ) : null}
-      </View>
-    </SoftCard>
-  );
-}
-
 function SuggestionForm() {
   const { user, profile } = useAuth();
   const [open, setOpen] = useState(false);
@@ -304,30 +242,79 @@ function DeleteAccountSection() {
 }
 
 function ProfileView() {
-  const { user, profile } = useAuth();
+  const { user, profile, refreshProfile } = useAuth();
+  const [avatarSaving, setAvatarSaving] = useState(false);
+  const [avatarOpen, setAvatarOpen] = useState(false);
+
+  async function handleSelectAvatar(accessory: string | null) {
+    if (!user || avatarSaving) return;
+    setAvatarSaving(true);
+    try {
+      await updateUserProfile(user.uid, { avatarAccessory: accessory });
+      await refreshProfile();
+    } finally {
+      setAvatarSaving(false);
+    }
+  }
+
+  const currentAccessory = profile?.avatarAccessory ?? null;
 
   return (
     <View style={styles.form}>
+      {/* Fusionné avec l'ancien bloc "Mon avatar" (qui suivait juste en
+          dessous et affichait un second avatar, redondant avec celui-ci) :
+          un seul avatar, celui-ci, à la fois identité et sélecteur de
+          chapeau. */}
       <SoftCard backgroundColor={Brand.ice} radius={Radius.lg}>
         <View style={styles.profileHeader}>
-          <AvatarMonster accessory={profile?.avatarAccessory} size={56} ring={Brand.white} />
-          <View style={styles.profileHeaderText}>
-            <ThemedText type="subtitle" style={styles.profileHeaderName}>
-              {profile?.pseudo ?? 'Mon profil'}
-            </ThemedText>
+          <Pressable onPress={() => setAvatarOpen((v) => !v)} style={styles.avatarPreviewWrap}>
+            <AvatarMonster accessory={currentAccessory} size={96} ring={Brand.white} />
             <ThemedText type="small" style={styles.profileHeaderMeta}>
-              {user?.email}
+              {avatarOpen ? 'Touche l’avatar pour fermer' : 'Touche l’avatar pour changer de chapeau'}
             </ThemedText>
-            {profile?.ville ? (
-              <ThemedText type="small" style={styles.profileHeaderMeta}>
-                {profile.ville}
-              </ThemedText>
-            ) : null}
-          </View>
+          </Pressable>
+
+          <ThemedText type="subtitle" style={styles.profileHeaderName}>
+            {profile?.pseudo ?? 'Mon profil'}
+          </ThemedText>
+          <ThemedText type="small" style={styles.profileHeaderMeta}>
+            {user?.email}
+          </ThemedText>
+          {profile?.ville ? (
+            <ThemedText type="small" style={styles.profileHeaderMeta}>
+              {profile.ville}
+            </ThemedText>
+          ) : null}
+
+          {avatarOpen ? (
+            <View style={styles.chipRow}>
+              <Pressable onPress={() => handleSelectAvatar(null)} disabled={avatarSaving}>
+                <ThemedView
+                  type="backgroundElement"
+                  style={[styles.accessoryOption, currentAccessory === null && styles.accessoryOptionSelected]}>
+                  <AvatarMonster accessory={null} size={40} />
+                  <ThemedText type={currentAccessory === null ? 'smallBold' : 'small'}>Aucun</ThemedText>
+                </ThemedView>
+              </Pressable>
+              {AVATAR_ACCESSORIES.map((acc) => (
+                <Pressable key={acc.value} onPress={() => handleSelectAvatar(acc.value)} disabled={avatarSaving}>
+                  <ThemedView
+                    type="backgroundElement"
+                    style={[
+                      styles.accessoryOption,
+                      currentAccessory === acc.value && styles.accessoryOptionSelected,
+                    ]}>
+                    <AvatarMonster accessory={acc.value} size={40} />
+                    <ThemedText type={currentAccessory === acc.value ? 'smallBold' : 'small'}>
+                      {acc.label}
+                    </ThemedText>
+                  </ThemedView>
+                </Pressable>
+              ))}
+            </View>
+          ) : null}
         </View>
       </SoftCard>
-
-      <AvatarPicker />
 
       <View style={styles.navSection}>
         <NavTile
@@ -392,20 +379,15 @@ const styles = StyleSheet.create({
   switchMode: { textAlign: 'center', marginTop: Spacing.two },
   deleteSection: { marginTop: Spacing.four, alignItems: 'center', gap: Spacing.two },
   deleteLink: { color: '#D14343', textDecorationLine: 'underline' },
-  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
+  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, justifyContent: 'center' },
   profileHeader: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.three,
+    gap: 4,
     padding: Spacing.four,
   },
-  profileHeaderText: { flex: 1, gap: 2 },
-  profileHeaderName: { color: Brand.white },
-  profileHeaderMeta: { color: 'rgba(255,255,255,0.85)' },
-  avatarCard: { padding: Spacing.four, gap: Spacing.two },
-  avatarCardTitle: { fontSize: 19, marginBottom: 2 },
+  profileHeaderName: { color: Brand.white, marginTop: Spacing.two, textAlign: 'center' },
+  profileHeaderMeta: { color: 'rgba(255,255,255,0.85)', textAlign: 'center' },
   avatarPreviewWrap: { alignItems: 'center', gap: 4 },
-  avatarPreview: { alignSelf: 'center' },
   accessoryOption: {
     alignItems: 'center',
     gap: 4,
