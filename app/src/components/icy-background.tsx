@@ -16,9 +16,6 @@ const SNOWBALLS: {
   opacity: number;
   shaded: boolean;
 }[] = [
-  { top: '4%', left: '78%', size: 46, opacity: 0.55, shaded: false },
-  { top: '2%', left: '8%', size: 30, opacity: 0.45, shaded: true },
-  { top: '14%', left: '38%', size: 20, opacity: 0.4, shaded: false },
   { top: '22%', left: '85%', size: 26, opacity: 0.5, shaded: false },
   { top: '30%', left: '4%', size: 38, opacity: 0.38, shaded: true },
   { top: '38%', left: '55%', size: 18, opacity: 0.48, shaded: false },
