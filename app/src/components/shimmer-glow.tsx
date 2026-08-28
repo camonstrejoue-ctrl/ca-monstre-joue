@@ -4,10 +4,10 @@ import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
 
 import { Brand } from '@/constants/theme';
 
-// Petites étincelles positionnées à cheval sur les bords de la carte,
-// chacune avec son propre délai/durée pour scintiller de façon décalée
+// Petites flammes positionnées à cheval sur les bords de la carte,
+// chacune avec son propre délai/durée pour crépiter de façon décalée
 // plutôt que toutes en même temps (effet plus naturel).
-const SPARKLE_SPOTS: { top: `${number}%`; left: `${number}%`; size: number; delay: number; duration: number }[] = [
+const EMBER_SPOTS: { top: `${number}%`; left: `${number}%`; size: number; delay: number; duration: number }[] = [
   { top: '-8%', left: '12%', size: 15, delay: 0, duration: 1900 },
   { top: '18%', left: '97%', size: 11, delay: 500, duration: 1600 },
   { top: '55%', left: '-4%', size: 10, delay: 950, duration: 2100 },
@@ -15,7 +15,7 @@ const SPARKLE_SPOTS: { top: `${number}%`; left: `${number}%`; size: number; dela
   { top: '96%', left: '22%', size: 9, delay: 1300, duration: 1700 },
 ];
 
-function Sparkle({
+function Ember({
   top,
   left,
   size,
@@ -65,43 +65,61 @@ function Sparkle({
     <Animated.View
       style={{ position: 'absolute', top, left, opacity: anim, transform: [{ scale }] }}
       pointerEvents="none">
-      <Ionicons name="sparkles" size={size} color={Brand.gold} />
+      <Ionicons name="flame" size={size} color={Brand.flameBright} />
     </Animated.View>
   );
 }
 
 /**
- * Contour doré qui "respire" (opacité animée en boucle) + étincelles qui
- * scintillent tout autour — demandé pour mettre en avant le bloc Agenda
- * sur l'accueil. Générique : n'importe quel enfant peut être enveloppé,
- * l'anneau colle au `radius` fourni. `opacity`/`transform` uniquement
- * (native driver), pour rester fluide même sur un appareil modeste.
+ * Bordure "qui se consume" : couleur (braise sombre → flamme → pointe
+ * brûlante) et épaisseur du contour vacillent en boucle sur une séquence
+ * de durées irrégulières, façon feu réel plutôt qu'un pouls mécanique —
+ * même principe que le contour du titre "feu glacé" de l'accueil.
+ * `borderColor`/`borderWidth` ne passent pas par le native driver (donc
+ * animation JS, largement assez léger pour un seul contour). Petites
+ * flammes qui crépitent tout autour en plus. Remplace l'ancien contour
+ * doré fixe, à la demande de l'utilisateur.
  */
 export function ShimmerGlow({ children, radius }: { children: ReactNode; radius: number }) {
-  const pulse = useRef(new Animated.Value(0)).current;
+  const burn = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    const loop = Animated.loop(
-      Animated.sequence([
-        Animated.timing(pulse, { toValue: 1, duration: 1100, easing: Easing.inOut(Easing.sin), useNativeDriver: true }),
-        Animated.timing(pulse, { toValue: 0, duration: 1100, easing: Easing.inOut(Easing.sin), useNativeDriver: true }),
-      ])
+    const steps = [0.9, 0.25, 1, 0.5, 0.75, 0.1, 0.95, 0.2];
+    const durations = [420, 520, 460, 560, 430, 500, 440, 480];
+    const sequence = Animated.sequence(
+      steps.map((toValue, i) =>
+        Animated.timing(burn, {
+          toValue,
+          duration: durations[i],
+          easing: Easing.linear,
+          useNativeDriver: false,
+        })
+      )
     );
+    const loop = Animated.loop(sequence);
     loop.start();
     return () => loop.stop();
-  }, [pulse]);
+  }, [burn]);
 
-  const ringOpacity = pulse.interpolate({ inputRange: [0, 1], outputRange: [0.4, 1] });
+  const ringColor = burn.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [Brand.flameDark, Brand.flame, Brand.flameBright],
+  });
+  const ringWidth = burn.interpolate({ inputRange: [0, 1], outputRange: [2, 4] });
+  const ringOpacity = burn.interpolate({ inputRange: [0, 1], outputRange: [0.6, 1] });
 
   return (
     <View style={styles.container}>
       {children}
       <Animated.View
         pointerEvents="none"
-        style={[styles.ring, { borderRadius: radius, opacity: ringOpacity }]}
+        style={[
+          styles.ring,
+          { borderRadius: radius, borderColor: ringColor, borderWidth: ringWidth, opacity: ringOpacity },
+        ]}
       />
-      {SPARKLE_SPOTS.map((spot, i) => (
-        <Sparkle key={i} {...spot} />
+      {EMBER_SPOTS.map((spot, i) => (
+        <Ember key={i} {...spot} />
       ))}
     </View>
   );
@@ -150,15 +168,13 @@ const styles = StyleSheet.create({
     left: -2,
     right: -2,
     bottom: -2,
-    borderWidth: 2,
-    borderColor: Brand.gold,
     ...Platform.select({
-      web: { boxShadow: `0 0 12px ${Brand.gold}` },
+      web: { boxShadow: `0 0 14px ${Brand.flame}` },
       default: {
-        shadowColor: Brand.gold,
+        shadowColor: Brand.flame,
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.8,
-        shadowRadius: 10,
+        shadowOpacity: 0.85,
+        shadowRadius: 12,
         elevation: 6,
       },
     }),

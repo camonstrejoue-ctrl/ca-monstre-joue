@@ -71,7 +71,7 @@ export default function AccueilScreen() {
                   eyebrow="Ne rate rien"
                   description="Festivals, tournois, soirées jeux..."
                   icon="calendar"
-                  color="gold"
+                  color="flame"
                   shimmer
                 />
                 <NavTile

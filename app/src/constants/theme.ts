@@ -27,13 +27,14 @@ export const Brand = {
   green: '#2F9E52',
   greenDark: '#227A3F',
   greenLight: '#E4F5E9',
-  // Doré pour le bloc Agenda (carte "en vedette" avec un contour qui
-  // scintille, cf. NavTile `shimmer`) — à part du reste de la palette,
-  // volontairement, pour rester un accent ponctuel plutôt qu'une couleur
-  // de fond récurrente.
-  gold: '#E8B923',
-  goldDark: '#8A6D1B',
-  goldLight: '#FCEFC7',
+  // Rouge flamme pour le bloc Agenda (carte "en vedette" avec une bordure
+  // qui se consume, cf. NavTile `shimmer` / ShimmerGlow) — à part du reste
+  // de la palette, volontairement, pour rester un accent ponctuel plutôt
+  // qu'une couleur de fond récurrente. Remplace l'ancien doré.
+  flame: '#E8432A',
+  flameDark: '#8A220A',
+  flameBright: '#FFB347',
+  flameLight: '#FDE4DA',
   black: '#1A1A1A',
   cream: '#F5F5F5',
   creamDark: '#E7E7E7',
