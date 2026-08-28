@@ -47,32 +47,44 @@ export function NavTile({
   if (icon) {
     const palette = ICON_TILE_COLORS[color];
     return (
-      <Link href={href} asChild>
-        <Pressable>
-          <StickerBox backgroundColor={palette.bg} radius={Radius.lg}>
-            <View style={styles.iconCardRow}>
-              <View style={styles.iconWrap}>
-                <Ionicons name={icon} size={40} color={palette.icon} />
-              </View>
-              <View style={styles.iconText}>
-                {eyebrow ? (
-                  <ThemedText type="smallBold" style={[styles.eyebrow, { color: palette.tag }]}>
-                    {eyebrow}
+      <View style={styles.iconTileWrap}>
+        <Link href={href} asChild>
+          <Pressable>
+            <StickerBox backgroundColor={palette.bg} radius={Radius.lg}>
+              <View style={styles.iconCardRow}>
+                <View style={styles.iconSpacer} />
+                <View style={styles.iconText}>
+                  {eyebrow ? (
+                    <ThemedText type="smallBold" style={[styles.eyebrow, { color: palette.tag }]}>
+                      {eyebrow}
+                    </ThemedText>
+                  ) : null}
+                  <ThemedText type="subtitle" style={styles.iconTitle}>
+                    {label}
                   </ThemedText>
-                ) : null}
-                <ThemedText type="subtitle" style={styles.iconTitle}>
-                  {label}
-                </ThemedText>
-                {description ? (
-                  <ThemedText type="small" themeColor="textSecondary">
-                    {description}
-                  </ThemedText>
-                ) : null}
+                  {description ? (
+                    <ThemedText type="small" themeColor="textSecondary">
+                      {description}
+                    </ThemedText>
+                  ) : null}
+                </View>
               </View>
+            </StickerBox>
+          </Pressable>
+        </Link>
+        {/* Badge-icône façon sticker qui déborde du coin de la carte — idée
+            empruntée à une référence de design (illustrations qui débordent
+            des cartes), adaptée au look "autocollant" du site : au lieu
+            d'une photo qui déborde, un petit rond blanc à bordure noire,
+            comme un autocollant posé sur un autre. */}
+        <View style={styles.iconBadge} pointerEvents="none">
+          <StickerBox backgroundColor={Brand.white} radius={999} shadowOffset={3}>
+            <View style={styles.iconBadgeInner}>
+              <Ionicons name={icon} size={30} color={palette.icon} />
             </View>
           </StickerBox>
-        </Pressable>
-      </Link>
+        </View>
+      </View>
     );
   }
 
@@ -120,6 +132,7 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: Brand.white,
   },
+  iconTileWrap: { position: 'relative', marginTop: 22 },
   iconCardRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -127,7 +140,7 @@ const styles = StyleSheet.create({
     padding: Spacing.four,
     minHeight: 108,
   },
-  iconWrap: { width: 40, alignItems: 'center' },
+  iconSpacer: { width: 40 },
   iconText: { flex: 1, gap: 2 },
   eyebrow: {
     fontSize: 11,
@@ -136,4 +149,18 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   iconTitle: { fontSize: 19, lineHeight: 23 },
+  iconBadge: {
+    position: 'absolute',
+    top: -22,
+    left: 24,
+    width: 68,
+    height: 68,
+  },
+  iconBadgeInner: {
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

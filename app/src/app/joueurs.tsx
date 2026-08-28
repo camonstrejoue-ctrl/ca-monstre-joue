@@ -123,7 +123,7 @@ export default function JoueursScreen() {
         renderItem={({ item }) => (
           <Link href={{ pathname: '/joueur/[uid]', params: { uid: item.uid } }} asChild>
             <Pressable style={styles.playerCard}>
-              <AvatarMonster accessory={item.avatarAccessory} size={48} />
+              <AvatarMonster accessory={item.avatarAccessory} size={48} ring />
               <ThemedView style={styles.playerInfo}>
                 <ThemedText type="smallBold">{item.pseudo}</ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">

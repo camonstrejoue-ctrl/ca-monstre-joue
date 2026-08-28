@@ -75,7 +75,7 @@ export default function JoueurScreen() {
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
       <Stack.Screen options={{ title: player.pseudo }} />
       <ScrollView contentContainerStyle={styles.body}>
-        <AvatarMonster accessory={player.avatarAccessory} size={96} style={styles.avatar} />
+        <AvatarMonster accessory={player.avatarAccessory} size={96} ring style={styles.avatar} />
         <ThemedText type="title" style={styles.title}>
           {player.pseudo}
         </ThemedText>

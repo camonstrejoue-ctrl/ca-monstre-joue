@@ -1,6 +1,8 @@
 import { Image, type ImageSource } from 'expo-image';
 import { StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 
+import { Brand } from '@/constants/theme';
+
 export const AVATAR_ACCESSORIES = [
   { value: 'haut-de-forme', label: 'Chapeau haut de forme' },
   { value: 'casquette', label: 'Casquette' },
@@ -25,16 +27,36 @@ const SOURCES: Record<string, ImageSource> = {
 export function AvatarMonster({
   accessory,
   size = 48,
+  ring,
   style,
 }: {
   accessory?: string | null;
   size?: number;
+  // Anneau coloré autour de l'avatar (idée empruntée à une référence de
+  // design partagée par l'utilisateur — avatars cerclés) : `true` pour le
+  // corail de marque, ou une couleur précise. Réservé aux avatars mis en
+  // avant (liste Joueurs, fiche joueur, en-tête Profil) — pas utilisé pour
+  // les petites vignettes de sélection d'accessoire, qui n'en ont pas besoin.
+  ring?: boolean | string;
   style?: StyleProp<ViewStyle>;
 }) {
   const source = SOURCES[accessory ?? 'aucun'] ?? SOURCES.aucun;
+  const ringColor = ring === true ? Brand.coral : ring || undefined;
+  const ringWidth = ringColor ? Math.max(3, Math.round(size * 0.06)) : 0;
 
   return (
-    <View style={[styles.wrap, { width: size, height: size, borderRadius: size / 2 }, style]}>
+    <View
+      style={[
+        styles.wrap,
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          borderWidth: ringWidth,
+          borderColor: ringColor ?? 'transparent',
+        },
+        style,
+      ]}>
       <Image source={source} style={StyleSheet.absoluteFill} contentFit="cover" />
     </View>
   );

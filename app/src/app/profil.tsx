@@ -165,7 +165,7 @@ function AvatarPicker() {
           Mon avatar
         </ThemedText>
         <Pressable onPress={() => setOpen((v) => !v)} style={styles.avatarPreviewWrap}>
-          <AvatarMonster accessory={current} size={96} style={styles.avatarPreview} />
+          <AvatarMonster accessory={current} size={96} ring style={styles.avatarPreview} />
           <ThemedText type="small" themeColor="textSecondary">
             {open ? 'Touche l’avatar pour fermer' : 'Touche l’avatar pour changer de chapeau'}
           </ThemedText>
@@ -310,7 +310,7 @@ function ProfileView() {
     <ThemedView style={styles.form}>
       <StickerBox backgroundColor={Brand.coral} radius={Radius.lg}>
         <View style={styles.profileHeader}>
-          <AvatarMonster accessory={profile?.avatarAccessory} size={56} />
+          <AvatarMonster accessory={profile?.avatarAccessory} size={56} ring={Brand.white} />
           <View style={styles.profileHeaderText}>
             <ThemedText type="subtitle" style={styles.profileHeaderName}>
               {profile?.pseudo ?? 'Mon profil'}
