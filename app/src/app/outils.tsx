@@ -34,7 +34,8 @@ export default function OutilsScreen() {
           eyebrow="Après la partie"
           label="Mes souvenirs"
           description="Garde une trace des événements auxquels tu as participé"
-          color="cream"
+          color="flame"
+          shimmer
         />
       </View>
     </SafeAreaView>
