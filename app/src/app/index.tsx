@@ -5,8 +5,8 @@ import { Animated, Easing, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentState } from '@/components/content-state';
+import { IceFireHeading } from '@/components/ice-fire-heading';
 import { NavTile } from '@/components/nav-tile';
-import { ScatteredTags } from '@/components/scattered-tags';
 import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
@@ -55,7 +55,7 @@ export default function AccueilScreen() {
                   contentFit="contain"
                 />
 
-                <ScatteredTags labels={content.categories.slice(0, 6).map((c) => c.name)} />
+                <IceFireHeading />
 
                 <NavTile
                   href="/joueurs"
