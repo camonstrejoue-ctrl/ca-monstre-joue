@@ -14,11 +14,11 @@ const FONT_SIZE = 46;
 
 // Séquence volontairement irrégulière (durées qui varient) plutôt qu'un
 // aller-retour régulier : donne un vacillement de flamme crédible plutôt
-// qu'un pouls mécanique. Chaque ligne tourne sur sa propre boucle
-// (décalée) pour ne pas scintiller parfaitement en synchro. Ralenti +
-// pause de quelques secondes entre deux passages, à la demande de
-// l'utilisateur (le premier essai vacillait trop vite, en continu).
-function useFlicker(startDelay: number) {
+// qu'un pouls mécanique. Les deux lignes partagent la même valeur animée
+// (même vacillement, au même moment) — à la demande de l'utilisateur.
+// Ralenti + pause de quelques secondes entre deux passages (le premier
+// réglage vacillait trop vite, en continu).
+function useFlicker() {
   const value = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -36,12 +36,9 @@ function useFlicker(startDelay: number) {
       Animated.delay(3500),
     ]);
     const loop = Animated.loop(sequence);
-    const timer = setTimeout(() => loop.start(), startDelay);
-    return () => {
-      clearTimeout(timer);
-      loop.stop();
-    };
-  }, [value, startDelay]);
+    loop.start();
+    return () => loop.stop();
+  }, [value]);
 
   return value;
 }
@@ -59,8 +56,7 @@ function useFlicker(startDelay: number) {
  */
 export function IceFireHeading() {
   const glow = useRef(new Animated.Value(0.7)).current;
-  const flameA = useFlicker(0);
-  const flameB = useFlicker(1200);
+  const flame = useFlicker();
 
   useEffect(() => {
     const loop = Animated.loop(
@@ -75,7 +71,11 @@ export function IceFireHeading() {
     return () => loop.stop();
   }, [glow]);
 
-  const flames = [flameA, flameB];
+  const contourColor = flame.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [Brand.iceDark, Brand.ice, Brand.white],
+  });
+  const contourWidth = flame.interpolate({ inputRange: [0, 1], outputRange: [1.4, 3.4] });
 
   return (
     <View style={styles.wrap}>
@@ -124,29 +124,21 @@ export function IceFireHeading() {
             <Stop offset="100%" stopColor={Brand.ice} />
           </LinearGradient>
         </Defs>
-        {LINES.map((line, i) => {
-          const flame = flames[i];
-          const contourColor = flame.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [Brand.iceDark, Brand.ice, Brand.white],
-          });
-          const contourWidth = flame.interpolate({ inputRange: [0, 1], outputRange: [1.4, 3.4] });
-          return (
-            <AnimatedSvgText
-              key={`fill-${i}`}
-              x="50%"
-              y={LINE_Y[i]}
-              fontSize={FONT_SIZE}
-              fontFamily={Fonts.displayExtraBold}
-              fill="url(#iceFireFill)"
-              stroke={contourColor}
-              strokeWidth={contourWidth}
-              strokeLinejoin="round"
-              textAnchor="middle">
-              {line}
-            </AnimatedSvgText>
-          );
-        })}
+        {LINES.map((line, i) => (
+          <AnimatedSvgText
+            key={`fill-${i}`}
+            x="50%"
+            y={LINE_Y[i]}
+            fontSize={FONT_SIZE}
+            fontFamily={Fonts.displayExtraBold}
+            fill="url(#iceFireFill)"
+            stroke={contourColor}
+            strokeWidth={contourWidth}
+            strokeLinejoin="round"
+            textAnchor="middle">
+            {line}
+          </AnimatedSvgText>
+        ))}
       </Svg>
     </View>
   );
