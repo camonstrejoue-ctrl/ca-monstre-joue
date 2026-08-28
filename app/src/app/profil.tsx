@@ -281,7 +281,7 @@ function ProfileView() {
                 {profile?.pseudo ?? 'Mon profil'}
               </ThemedText>
               <ThemedText type="small" style={styles.profileMeta}>
-                {profile?.ville ? `${user?.email} · ${profile.ville}` : user?.email}
+                {user?.email}
               </ThemedText>
             </View>
           </View>
@@ -336,7 +336,6 @@ function ProfileView() {
           icon="person"
           eyebrow="Réglages"
           label="Éditer mon profil"
-          description="Prénom, date de naissance, description, catégories"
           color="ice"
         />
         <NavTile
@@ -344,7 +343,6 @@ function ProfileView() {
           icon="people"
           eyebrow="Réglages"
           label="Trouver des joueurs"
-          description="Visibilité dans l’annuaire, 18 ans et plus"
           color="frost"
         />
       </View>
