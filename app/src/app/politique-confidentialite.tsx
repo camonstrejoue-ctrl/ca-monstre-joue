@@ -30,12 +30,12 @@ export default function PolitiqueConfidentialiteScreen() {
 
         <Paragraph
           title="Données collectées"
-          text="Compte : e-mail, mot de passe et date de naissance (sert uniquement à calculer ton âge — voir « Mineurs » ci-dessous — jamais affichée telle quelle). Profil : pseudo, ville, e-mail de contact affiché aux autres utilisateurs. Optionnel : prénom, âge calculé, description de ton profil de joueur, catégories de jeux préférées, accessoire d'avatar — chacun visible publiquement uniquement si tu l'autorises explicitement. Ludothèque : liste des jeux que tu ajoutes (via la recherche BoardGameGeek). Les photos et informations de la section « Mes souvenirs » restent uniquement sur ton téléphone et ne sont jamais envoyées à nos serveurs."
+          text="Compte : e-mail, mot de passe et date de naissance (sert uniquement à calculer ton âge — voir « Mineurs » ci-dessous — jamais affichée telle quelle). Profil : pseudo, ville, e-mail de contact affiché aux autres utilisateurs. Optionnel : prénom, âge calculé, description de ton profil de joueur, catégories de jeux préférées, accessoire d'avatar — chacun visible publiquement uniquement si tu l'autorises explicitement. Ludothèque : liste des jeux que tu ajoutes (via la recherche BoardGameGeek). Agenda : si tu proposes un événement, son titre, lieu, date, prix, un contact (e-mail, téléphone ou lien) et une éventuelle affiche sont publics et visibles par tout le monde, y compris sans compte. Signalements et suggestions : si tu signales un profil ou proposes une idée, ton identifiant et le texte envoyé sont conservés pour être consultés manuellement par l'équipe — jamais lisibles depuis l'application elle-même. Les photos et informations de la section « Mes souvenirs » restent uniquement sur ton téléphone et ne sont jamais envoyées à nos serveurs."
         />
 
         <Paragraph
           title="Pourquoi on les utilise"
-          text="Ces données servent uniquement à faire fonctionner l'application : te permettre de te connecter, afficher ton profil aux autres joueurs, te faire trouver des joueurs près de chez toi et gérer ta ludothèque. On ne les utilise pas à des fins publicitaires et on ne les vend à personne."
+          text="Ces données servent uniquement à faire fonctionner l'application : te permettre de te connecter, afficher ton profil aux autres joueurs, te faire trouver des joueurs près de chez toi, gérer ta ludothèque, publier tes événements dans l'agenda et traiter les signalements/suggestions envoyés. On ne les utilise pas à des fins publicitaires et on ne les vend à personne."
         />
 
         <Paragraph
@@ -55,7 +55,7 @@ export default function PolitiqueConfidentialiteScreen() {
 
         <Paragraph
           title="Durée de conservation"
-          text="Tes données sont conservées tant que ton compte existe. Elles sont supprimées définitivement dès que tu supprimes ton compte, depuis l'onglet Profil."
+          text="Ton profil et ta ludothèque sont conservés tant que ton compte existe, et supprimés définitivement dès que tu supprimes ton compte depuis l'onglet Profil. Un événement que tu publies dans l'agenda reste visible jusqu'à ce que tu le supprimes toi-même ; s'il n'est plus rattaché à un compte existant (compte supprimé), il n'est pas effacé automatiquement — contacte-nous pour en demander le retrait. Les signalements et suggestions sont conservés 12 mois, le temps d'être traités, puis supprimés."
         />
 
         <Paragraph

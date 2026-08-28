@@ -635,6 +635,8 @@ button{font-family:inherit;cursor:pointer;}
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
   font-size:.85rem;color:var(--gray-light);
 }
+.footer-bottom a{text-decoration:underline;}
+.footer-bottom a:hover{color:var(--white);}
 
 /* ---------- chatbot (P'tit Monstre) ---------- */
 .chatbot{position:fixed;right:20px;bottom:20px;z-index:200;}
