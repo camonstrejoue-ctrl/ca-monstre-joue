@@ -28,6 +28,20 @@ export interface CommunityEvent {
   createdAt: unknown;
 }
 
+// Supprime pour de bon (pas juste "cache") les événements dont la date de
+// fin est passée. N'importe quel client connecté peut le faire (voir
+// firestore.rules : la suppression d'un événement expiré n'est pas réservée
+// à son auteur) — c'est un simple ménage de données publiques déjà
+// invisibles, sans rien de sensible. Best-effort : une erreur (ex. hors
+// ligne) est ignorée silencieusement, le prochain client qui ouvre l'Agenda
+// réessaiera.
+async function cleanupExpiredEvents(events: CommunityEvent[]) {
+  if (!db) return;
+  const today = new Date().toISOString().slice(0, 10);
+  const expired = events.filter((e) => (e.endDate || e.date) < today);
+  await Promise.allSettled(expired.map((e) => deleteDoc(doc(db!, 'events', e.id))));
+}
+
 export function useUpcomingEvents() {
   const [events, setEvents] = useState<CommunityEvent[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,13 +54,13 @@ export function useUpcomingEvents() {
     const q = query(collection(db, 'events'), orderBy('date', 'asc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const today = new Date().toISOString().slice(0, 10);
-      const upcoming = snapshot.docs
-        .map((d) => ({ id: d.id, ...d.data() }) as CommunityEvent)
-        // Reste affiché tant que l'événement n'est pas terminé (utile pour
-        // les événements sur plusieurs jours, ex: un festival).
-        .filter((e) => (e.endDate || e.date) >= today);
+      const all = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as CommunityEvent);
+      // Reste affiché tant que l'événement n'est pas terminé (utile pour
+      // les événements sur plusieurs jours, ex: un festival).
+      const upcoming = all.filter((e) => (e.endDate || e.date) >= today);
       setEvents(upcoming);
       setLoading(false);
+      cleanupExpiredEvents(all).catch(() => {});
     });
     return unsubscribe;
   }, []);

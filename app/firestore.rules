@@ -6,6 +6,19 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // Un événement d'agenda est considéré expiré une fois sa date de fin
+    // (ou sa date de début si pas de fin) entièrement passée — même seuil
+    // que le filtre d'affichage côté app (voir useUpcomingEvents dans
+    // app/src/lib/events.ts). `date`/`endDate` sont des chaînes 'AAAA-MM-JJ',
+    // reconstruites en Timestamp pour comparer avec request.time.
+    function eventEndMillis(data) {
+      let parts = data.get('endDate', data.date).split('-');
+      return timestamp.date(int(parts[0]), int(parts[1]), int(parts[2])).toMillis();
+    }
+    function isExpiredEvent(data) {
+      return eventEndMillis(data) + 24 * 60 * 60 * 1000 <= request.time.toMillis();
+    }
+
     // `visibleToPlayers` ne peut être activé (true) que si `birthdate`
     // (Timestamp) correspond à 18 ans ou plus — reflète côté base de données
     // la règle déjà appliquée côté app (voir MIN_CONTACT_AGE et computeAge
@@ -53,14 +66,19 @@ service cloud.firestore {
 
     // Agenda : événements publics (festivals, tournois en boutique, soirées
     // jeux entre particuliers, etc.), lisibles par tout le monde, y compris
-    // sans compte. Création réservée aux connectés, modification/suppression
-    // réservées à l'auteur.
+    // sans compte. Création/modification réservées à l'auteur. Suppression :
+    // réservée à l'auteur, SAUF un événement expiré que n'importe quel
+    // client connecté peut nettoyer (voir cleanupExpiredEvents côté app) —
+    // sans ça, les événements passés resteraient en base indéfiniment,
+    // simplement cachés côté affichage.
     match /events/{eventId} {
       allow read: if true;
       allow create: if request.auth != null
         && request.resource.data.createdBy == request.auth.uid;
-      allow update, delete: if request.auth != null
+      allow update: if request.auth != null
         && resource.data.createdBy == request.auth.uid;
+      allow delete: if request.auth != null
+        && (resource.data.createdBy == request.auth.uid || isExpiredEvent(resource.data));
     }
 
     // Signalements : n'importe quel utilisateur connecté peut en créer un,
