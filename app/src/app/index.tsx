@@ -112,7 +112,7 @@ function IntroPage() {
       <View style={styles.introSpacer} />
 
       <View style={styles.bubbleWrap}>
-        <SoftCard backgroundColor={Brand.white} radius={Radius.lg} style={styles.bubble}>
+        <SoftCard backgroundColor={Brand.white} radius={44} style={styles.bubble}>
           <ThemedText type="subtitle" style={styles.bubbleText}>
             Jouer, c’est bon pour la santé.
           </ThemedText>
@@ -164,10 +164,10 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '45deg' }],
     marginTop: -12,
   },
-  // Réduit d'un tiers (72% → 48%) pour laisser plus de place à la bulle,
-  // agrandie en retour, à la demande de l'utilisateur.
+  // Réduit progressivement (72% → 48% → 40%) au fil des demandes, pour
+  // laisser plus de place à la bulle.
   monster: {
-    width: '48%',
+    width: '40%',
     aspectRatio: 193 / 279,
     marginTop: Spacing.two,
   },
