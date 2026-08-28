@@ -80,7 +80,7 @@ export default function AccueilScreen() {
                   eyebrow="À lire"
                   description="Toutes nos fiches jeux et critiques"
                   icon="newspaper"
-                  color="cream"
+                  color="frost"
                 />
               </ScrollView>
             </View>

@@ -8,7 +8,7 @@ import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 
-type IconTileColor = 'ice' | 'green' | 'cream' | 'gold';
+type IconTileColor = 'ice' | 'green' | 'cream' | 'gold' | 'frost';
 
 // Même logique que .shortcut-card sur le site (css/style.css) : grande carte
 // pleine couleur, gros pictogramme, petite étiquette en majuscules au-dessus
@@ -19,6 +19,7 @@ const ICON_TILE_COLORS: Record<IconTileColor, { bg: string; icon: string; tag: s
   green: { bg: Brand.greenLight, icon: Brand.greenDark, tag: Brand.greenDark },
   cream: { bg: Brand.creamDark, icon: Brand.black, tag: Brand.iceDark },
   gold: { bg: Brand.goldLight, icon: Brand.goldDark, tag: Brand.goldDark },
+  frost: { bg: Brand.iceWhite, icon: Brand.iceDark, tag: Brand.iceDark },
 };
 
 /**

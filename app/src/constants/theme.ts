@@ -20,6 +20,10 @@ export const Brand = {
   ice: '#2F8FCB',
   iceDark: '#1E6690',
   iceLight: '#D9EEFB',
+  // "Blanc glacé" — blanc à peine teinté de bleu (pas un blanc pur), pour
+  // le bloc Blog notamment : distinct du blanc franc utilisé ailleurs
+  // (bulle d'intro, cartes) tout en restant cohérent avec la palette glace.
+  iceWhite: '#F4FAFE',
   green: '#2F9E52',
   greenDark: '#227A3F',
   greenLight: '#E4F5E9',
