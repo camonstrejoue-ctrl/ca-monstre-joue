@@ -1,13 +1,10 @@
 import { Image } from 'expo-image';
-import { Link } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentState } from '@/components/content-state';
 import { NavTile } from '@/components/nav-tile';
-import { SoftCard } from '@/components/soft-card';
-import { ThemedText } from '@/components/themed-text';
-import { Brand, Radius, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useContent } from '@/lib/content';
 
 export default function AccueilScreen() {
@@ -25,27 +22,6 @@ export default function AccueilScreen() {
           style={styles.logo}
           contentFit="contain"
         />
-
-        <Link href="/ptit-monstre" asChild>
-          <Pressable>
-            <SoftCard backgroundColor={Brand.coral} radius={Radius.lg}>
-              <View style={styles.ptitMonstreInner}>
-                <Image
-                  source={require('@/assets/images/avatars/monstre-aucun.png')}
-                  style={styles.ptitMonstreAvatar}
-                />
-                <View style={styles.ptitMonstreTextWrap}>
-                  <ThemedText type="smallBold" style={styles.ptitMonstreEyebrow}>
-                    Ton guide jeux
-                  </ThemedText>
-                  <ThemedText type="subtitle" style={styles.ptitMonstreText}>
-                    P’tit Monstre trouve ton prochain jeu
-                  </ThemedText>
-                </View>
-              </View>
-            </SoftCard>
-          </Pressable>
-        </Link>
 
         <NavTile
           href="/joueurs"
@@ -85,21 +61,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: Spacing.two,
   },
-  ptitMonstreInner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingVertical: Spacing.four,
-    paddingHorizontal: Spacing.four,
-  },
-  ptitMonstreAvatar: { width: 64, height: 64 },
-  ptitMonstreTextWrap: { flex: 1, gap: 2 },
-  ptitMonstreEyebrow: {
-    fontSize: 11,
-    letterSpacing: 0.6,
-    textTransform: 'uppercase',
-    color: 'rgba(255,255,255,0.85)',
-  },
-  ptitMonstreText: { color: Brand.white, fontSize: 19, lineHeight: 23 },
-  pressed: { opacity: 0.85 },
 });
