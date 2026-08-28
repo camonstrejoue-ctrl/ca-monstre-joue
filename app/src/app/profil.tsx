@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
@@ -261,60 +262,73 @@ function ProfileView() {
 
   return (
     <View style={styles.form}>
-      {/* Fusionné avec l'ancien bloc "Mon avatar" (qui suivait juste en
-          dessous et affichait un second avatar, redondant avec celui-ci) :
-          un seul avatar, celui-ci, à la fois identité et sélecteur de
-          chapeau. */}
-      <SoftCard backgroundColor={Brand.ice} radius={Radius.lg}>
-        <View style={styles.profileHeader}>
-          <Pressable onPress={() => setAvatarOpen((v) => !v)} style={styles.avatarPreviewWrap}>
-            <AvatarMonster accessory={currentAccessory} size={96} ring={Brand.white} />
-            <ThemedText type="small" style={styles.profileHeaderMeta}>
-              {avatarOpen ? 'Touche l’avatar pour fermer' : 'Touche l’avatar pour changer de chapeau'}
-            </ThemedText>
-          </Pressable>
+      {/* Même gabarit que les NavTile en dessous (badge qui déborde en haut
+          à gauche, même hauteur de carte) plutôt qu'un bloc à part plus
+          grand — l'avatar tient lieu d'icône, avec un petit crayon dessus
+          pour signaler qu'on peut taper dessus pour le modifier (remplace
+          le texte "Touche l'avatar..." retiré). Seul l'avatar est
+          cliquable : la carte elle-même n'est qu'un affichage, elle ne
+          mène nulle part. */}
+      <View style={styles.profileTileWrap}>
+        <SoftCard backgroundColor={Brand.ice} radius={Radius.lg}>
+          <View style={styles.iconCardRow}>
+            <View style={styles.iconSpacer} />
+            <View style={styles.iconText}>
+              <ThemedText type="smallBold" style={[styles.eyebrow, styles.profileEyebrow]}>
+                Mon compte
+              </ThemedText>
+              <ThemedText type="subtitle" style={styles.profileTitle}>
+                {profile?.pseudo ?? 'Mon profil'}
+              </ThemedText>
+              <ThemedText type="small" style={styles.profileMeta}>
+                {profile?.ville ? `${user?.email} · ${profile.ville}` : user?.email}
+              </ThemedText>
+            </View>
+          </View>
+        </SoftCard>
+        <Pressable
+          onPress={() => setAvatarOpen((v) => !v)}
+          style={styles.profileBadge}
+          accessibilityLabel="Modifier mon avatar"
+          accessibilityRole="button">
+          <SoftCard backgroundColor={Brand.white} radius={999} style={styles.profileBadgeCard}>
+            <AvatarMonster accessory={currentAccessory} size={62} />
+          </SoftCard>
+          <View style={styles.profilePencilBadge}>
+            <Ionicons name="pencil" size={12} color={Brand.white} />
+          </View>
+        </Pressable>
+      </View>
 
-          <ThemedText type="subtitle" style={styles.profileHeaderName}>
-            {profile?.pseudo ?? 'Mon profil'}
-          </ThemedText>
-          <ThemedText type="small" style={styles.profileHeaderMeta}>
-            {user?.email}
-          </ThemedText>
-          {profile?.ville ? (
-            <ThemedText type="small" style={styles.profileHeaderMeta}>
-              {profile.ville}
-            </ThemedText>
-          ) : null}
-
-          {avatarOpen ? (
-            <View style={styles.chipRow}>
-              <Pressable onPress={() => handleSelectAvatar(null)} disabled={avatarSaving}>
+      {avatarOpen ? (
+        <SoftCard backgroundColor={Brand.white} radius={Radius.lg} style={styles.avatarPickerCard}>
+          <View style={styles.chipRow}>
+            <Pressable onPress={() => handleSelectAvatar(null)} disabled={avatarSaving}>
+              <ThemedView
+                type="backgroundElement"
+                style={[styles.accessoryOption, currentAccessory === null && styles.accessoryOptionSelected]}>
+                <AvatarMonster accessory={null} size={40} />
+                <ThemedText type={currentAccessory === null ? 'smallBold' : 'small'}>Aucun</ThemedText>
+              </ThemedView>
+            </Pressable>
+            {AVATAR_ACCESSORIES.map((acc) => (
+              <Pressable key={acc.value} onPress={() => handleSelectAvatar(acc.value)} disabled={avatarSaving}>
                 <ThemedView
                   type="backgroundElement"
-                  style={[styles.accessoryOption, currentAccessory === null && styles.accessoryOptionSelected]}>
-                  <AvatarMonster accessory={null} size={40} />
-                  <ThemedText type={currentAccessory === null ? 'smallBold' : 'small'}>Aucun</ThemedText>
+                  style={[
+                    styles.accessoryOption,
+                    currentAccessory === acc.value && styles.accessoryOptionSelected,
+                  ]}>
+                  <AvatarMonster accessory={acc.value} size={40} />
+                  <ThemedText type={currentAccessory === acc.value ? 'smallBold' : 'small'}>
+                    {acc.label}
+                  </ThemedText>
                 </ThemedView>
               </Pressable>
-              {AVATAR_ACCESSORIES.map((acc) => (
-                <Pressable key={acc.value} onPress={() => handleSelectAvatar(acc.value)} disabled={avatarSaving}>
-                  <ThemedView
-                    type="backgroundElement"
-                    style={[
-                      styles.accessoryOption,
-                      currentAccessory === acc.value && styles.accessoryOptionSelected,
-                    ]}>
-                    <AvatarMonster accessory={acc.value} size={40} />
-                    <ThemedText type={currentAccessory === acc.value ? 'smallBold' : 'small'}>
-                      {acc.label}
-                    </ThemedText>
-                  </ThemedView>
-                </Pressable>
-              ))}
-            </View>
-          ) : null}
-        </View>
-      </SoftCard>
+            ))}
+          </View>
+        </SoftCard>
+      ) : null}
 
       <View style={styles.navSection}>
         <NavTile
@@ -379,15 +393,51 @@ const styles = StyleSheet.create({
   switchMode: { textAlign: 'center', marginTop: Spacing.two },
   deleteSection: { marginTop: Spacing.four, alignItems: 'center', gap: Spacing.two },
   deleteLink: { color: '#D14343', textDecorationLine: 'underline' },
-  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, justifyContent: 'center' },
-  profileHeader: {
+  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
+  avatarPickerCard: { padding: Spacing.four },
+  // Repris tel quel du gabarit NavTile (icon variant) pour que ce bloc
+  // fasse exactement la même taille que "Éditer mon profil" /
+  // "Trouver des joueurs" juste en dessous.
+  profileTileWrap: { position: 'relative', marginTop: 22 },
+  iconCardRow: {
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
+    gap: Spacing.four,
     padding: Spacing.four,
+    minHeight: 108,
   },
-  profileHeaderName: { color: Brand.white, marginTop: Spacing.two, textAlign: 'center' },
-  profileHeaderMeta: { color: 'rgba(255,255,255,0.85)', textAlign: 'center' },
-  avatarPreviewWrap: { alignItems: 'center', gap: 4 },
+  iconSpacer: { width: 40 },
+  iconText: { flex: 1, gap: 2 },
+  eyebrow: {
+    fontSize: 11,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    marginBottom: 2,
+  },
+  profileEyebrow: { color: 'rgba(255,255,255,0.85)' },
+  profileTitle: { fontSize: 19, lineHeight: 23, color: Brand.white },
+  profileMeta: { color: 'rgba(255,255,255,0.85)' },
+  profileBadge: {
+    position: 'absolute',
+    top: -20,
+    left: 24,
+    width: 62,
+    height: 62,
+  },
+  profileBadgeCard: { width: 62, height: 62, alignItems: 'center', justifyContent: 'center' },
+  profilePencilBadge: {
+    position: 'absolute',
+    bottom: -4,
+    right: -4,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: Brand.iceDark,
+    borderWidth: 2,
+    borderColor: Brand.white,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   accessoryOption: {
     alignItems: 'center',
     gap: 4,
