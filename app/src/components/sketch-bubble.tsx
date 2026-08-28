@@ -7,24 +7,21 @@ import { Brand } from '@/constants/theme';
 const VB_W = 400;
 const VB_H = 260;
 
-// Deux tracés légèrement décalés/irréguliers (coins arrondis via Q,
-// pointe centrée en bas) — imite le contour "dessiné au stylo, repassé
-// deux fois" d'une référence partagée par l'utilisateur (bulle façon
-// croquis à la main, avec des hachures et une pointe irrégulière).
+// Un seul tracé, contour épais et arrondi — harmonisé avec le style du
+// monstre (assets/images/monstre.png) : trait plein, régulier, jointures
+// arrondies, plutôt que le double-trait "croquis" du premier essai.
 // `preserveAspectRatio="none"` : le SVG épouse exactement les dimensions
 // du conteneur (hauteur pilotée par le texte), donc pas de vrai
-// rectangle géométrique — l'irrégularité du tracé masque l'étirement.
-const OUTLINE_A =
+// rectangle géométrique.
+const OUTLINE =
   'M44,8 L360,6 Q392,4 390,36 L392,166 Q394,198 360,200 L222,202 L202,244 L178,204 L54,206 Q14,204 16,174 L12,42 Q10,10 44,8 Z';
-const OUTLINE_B =
-  'M38,16 L366,2 Q396,8 388,42 L394,160 Q398,192 356,206 L226,208 L200,248 L174,210 L48,200 Q8,196 20,168 L8,36 Q14,6 38,16 Z';
 
 /**
- * Bulle façon croquis à la main : contour noir irrégulier (deux tracés
- * superposés) et pointe centrée en bas — remplace SoftCard pour la bulle
- * de l'accueil, sur demande explicite avec une image de référence. Le
- * texte se place dans `content`, avec un `paddingBottom` généreux pour
- * laisser la place à la pointe dessinée en dessous.
+ * Bulle avec un contour noir épais façon dessin animé, harmonisé avec le
+ * trait du monstre — remplace SoftCard pour la bulle de l'accueil. Pointe
+ * centrée en bas. Le texte se place dans `content`, avec un
+ * `paddingBottom` généreux pour laisser la place à la pointe dessinée
+ * en dessous.
  */
 export function SketchBubble({ children, style }: { children: ReactNode; style?: StyleProp<ViewStyle> }) {
   return (
@@ -37,18 +34,10 @@ export function SketchBubble({ children, style }: { children: ReactNode; style?:
         style={StyleSheet.absoluteFill}
         pointerEvents="none">
         <Path
-          d={OUTLINE_A}
+          d={OUTLINE}
           fill={Brand.white}
           stroke={Brand.black}
-          strokeWidth={3}
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        />
-        <Path
-          d={OUTLINE_B}
-          fill="none"
-          stroke={Brand.black}
-          strokeWidth={2}
+          strokeWidth={7}
           strokeLinejoin="round"
           strokeLinecap="round"
         />
