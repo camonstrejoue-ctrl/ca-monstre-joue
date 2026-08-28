@@ -45,7 +45,7 @@ export default function PolitiqueConfidentialiteScreen() {
 
         <Paragraph
           title="Hébergement et sécurité"
-          text="Les données sont hébergées par Firebase (Google), sur des serveurs situés en Europe. Les mots de passe sont gérés de façon sécurisée par Firebase Authentication — nous n'y avons jamais accès en clair. Des règles d'accès strictes garantissent que seul toi peux modifier ton profil et ta ludothèque."
+          text="Les données sont hébergées par Firebase (Google Cloud), dans la région multi-régionale « nam5 », c'est-à-dire aux États-Unis. Ce transfert hors Suisse/Europe est encadré par le Swiss-U.S. Data Privacy Framework, auquel Google est certifié — un mécanisme reconnu offrant un niveau de protection adéquat pour ce type de transfert. Les mots de passe sont gérés de façon sécurisée par Firebase Authentication — nous n'y avons jamais accès en clair. Des règles d'accès strictes garantissent que seul toi peux modifier ton profil et ta ludothèque."
         />
 
         <Paragraph
