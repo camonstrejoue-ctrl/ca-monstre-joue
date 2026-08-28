@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Linking, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AvatarMonster } from '@/components/avatar-monster';
@@ -50,9 +50,9 @@ export default function JoueurScreen() {
   }
   if (player === null) {
     return (
-      <ThemedView style={styles.notFound}>
+      <View style={styles.notFound}>
         <ThemedText>Ce profil est introuvable.</ThemedText>
-      </ThemedView>
+      </View>
     );
   }
 
@@ -89,13 +89,13 @@ export default function JoueurScreen() {
           {player.ville}
         </ThemedText>
         {categoryNames.length ? (
-          <ThemedView style={styles.chipRow}>
+          <View style={styles.chipRow}>
             {categoryNames.map((name) => (
               <ThemedView key={name} type="backgroundElement" style={styles.chip}>
                 <ThemedText type="small">{name}</ThemedText>
               </ThemedView>
             ))}
-          </ThemedView>
+          </View>
         ) : null}
 
         {visibility?.description && player.description ? (
@@ -129,10 +129,10 @@ export default function JoueurScreen() {
           </ThemedText>
         ) : (
           games.map((game) => (
-            <ThemedView key={game!.slug} style={styles.gameRow}>
+            <View key={game!.slug} style={styles.gameRow}>
               <CoverImage path={game!.thumbnail || game!.cover} style={styles.gameImage} />
               <ThemedText type="small">{game!.name}</ThemedText>
-            </ThemedView>
+            </View>
           ))
         )}
 
@@ -144,7 +144,7 @@ export default function JoueurScreen() {
             Signalement envoyé, merci.
           </ThemedText>
         ) : showReportForm ? (
-          <ThemedView style={styles.reportForm}>
+          <View style={styles.reportForm}>
             <FormField
               label="Raison du signalement"
               value={reportReason}
@@ -157,7 +157,7 @@ export default function JoueurScreen() {
                 <ThemedText type="small">Envoyer le signalement</ThemedText>
               </ThemedView>
             </Pressable>
-          </ThemedView>
+          </View>
         ) : (
           <Pressable onPress={() => setShowReportForm(true)}>
             <ThemedText type="link" style={styles.reportLink}>

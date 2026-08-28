@@ -3,7 +3,7 @@ import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, Modal, Pressable, StyleSheet } from 'react-native';
+import { FlatList, Modal, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/components/form-field';
@@ -63,7 +63,7 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
   }
 
   return (
-    <ThemedView style={styles.form}>
+    <View style={styles.form}>
       <FormField label="Nom de l’événement" value={title} onChangeText={setTitle} />
       <FormField label="Date (AAAA-MM-JJ)" value={date} onChangeText={setDate} />
       <FormField label="Lieu" value={location} onChangeText={setLocation} />
@@ -75,7 +75,7 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
           keyExtractor={(uri) => uri}
           contentContainerStyle={styles.photoPreviewRow}
           renderItem={({ item }) => (
-            <ThemedView style={styles.photoPreviewWrap}>
+            <View style={styles.photoPreviewWrap}>
               <Image source={{ uri: item }} style={styles.photoPreview} />
               <Pressable
                 onPress={() => removePhoto(item)}
@@ -84,7 +84,7 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
                 accessibilityRole="button">
                 <Ionicons name="close-circle" size={20} color="#D14343" />
               </Pressable>
-            </ThemedView>
+            </View>
           )}
         />
       ) : null}
@@ -95,7 +95,7 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
       </Pressable>
 
       {error ? <ThemedText style={styles.deleteText}>{error}</ThemedText> : null}
-      <ThemedView style={styles.confirmButtons}>
+      <View style={styles.confirmButtons}>
         <Pressable onPress={handleSave} disabled={saving}>
           <ThemedView type="backgroundSelected" style={styles.saveButton}>
             <ThemedText type="smallBold">{saving ? 'Enregistrement...' : 'Enregistrer les modifications'}</ThemedText>
@@ -106,8 +106,8 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
             <ThemedText type="small">Annuler</ThemedText>
           </ThemedView>
         </Pressable>
-      </ThemedView>
-    </ThemedView>
+      </View>
+    </View>
   );
 }
 
@@ -143,9 +143,9 @@ export default function SouvenirDetailScreen() {
   if (memory === undefined) return null;
   if (memory === null) {
     return (
-      <ThemedView style={styles.notFound}>
+      <View style={styles.notFound}>
         <ThemedText>Ce souvenir est introuvable.</ThemedText>
-      </ThemedView>
+      </View>
     );
   }
 
@@ -153,7 +153,7 @@ export default function SouvenirDetailScreen() {
     return (
       <SafeAreaView style={styles.safeArea} edges={['bottom']}>
         <Stack.Screen options={{ title: memory.title }} />
-        <ThemedView style={styles.list}>
+        <View style={styles.list}>
           <EditForm
             memory={memory}
             onCancel={() => setEditing(false)}
@@ -162,7 +162,7 @@ export default function SouvenirDetailScreen() {
               reload();
             }}
           />
-        </ThemedView>
+        </View>
       </SafeAreaView>
     );
   }
@@ -175,7 +175,7 @@ export default function SouvenirDetailScreen() {
         keyExtractor={(uri) => uri}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
-          <ThemedView style={styles.header}>
+          <View style={styles.header}>
             <ThemedText type="title" style={styles.title}>
               {memory.title}
             </ThemedText>
@@ -184,18 +184,18 @@ export default function SouvenirDetailScreen() {
               {memory.location ? ` · ${memory.location}` : ''}
             </ThemedText>
 
-            <ThemedView style={styles.actionsRow}>
+            <View style={styles.actionsRow}>
               <Pressable onPress={() => setEditing(true)}>
                 <ThemedView type="backgroundElement" style={styles.confirmButton}>
                   <ThemedText type="small">✎ Modifier</ThemedText>
                 </ThemedView>
               </Pressable>
-            </ThemedView>
+            </View>
 
             {confirmingDelete ? (
-              <ThemedView style={styles.confirmRow}>
+              <View style={styles.confirmRow}>
                 <ThemedText type="small">Supprimer ce souvenir ?</ThemedText>
-                <ThemedView style={styles.confirmButtons}>
+                <View style={styles.confirmButtons}>
                   <Pressable onPress={handleDelete} disabled={deleting}>
                     <ThemedView type="backgroundElement" style={styles.confirmButton}>
                       <ThemedText type="small" style={styles.deleteText}>
@@ -208,8 +208,8 @@ export default function SouvenirDetailScreen() {
                       <ThemedText type="small">Annuler</ThemedText>
                     </ThemedView>
                   </Pressable>
-                </ThemedView>
-              </ThemedView>
+                </View>
+              </View>
             ) : (
               <Pressable onPress={() => setConfirmingDelete(true)}>
                 <ThemedText type="link" style={styles.deleteText}>
@@ -223,7 +223,7 @@ export default function SouvenirDetailScreen() {
                 Aucune photo pour ce souvenir.
               </ThemedText>
             ) : null}
-          </ThemedView>
+          </View>
         }
         renderItem={({ item }) => (
           <Pressable onPress={() => setViewerUri(item)}>

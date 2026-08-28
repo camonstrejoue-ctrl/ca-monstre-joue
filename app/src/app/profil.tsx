@@ -66,7 +66,7 @@ function AuthForms() {
   }
 
   return (
-    <ThemedView style={styles.form}>
+    <View style={styles.form}>
       <ThemedText type="subtitle">
         {mode === 'connexion' ? 'Se connecter' : 'Créer un compte'}
       </ThemedText>
@@ -136,7 +136,7 @@ function AuthForms() {
           {mode === 'connexion' ? 'Pas de compte ? Inscris-toi' : 'Déjà un compte ? Connecte-toi'}
         </ThemedText>
       </Pressable>
-    </ThemedView>
+    </View>
   );
 }
 
@@ -227,7 +227,7 @@ function SuggestionForm() {
   }
 
   return (
-    <ThemedView style={styles.form}>
+    <View style={styles.form}>
       {sent ? (
         <ThemedText type="small" themeColor="textSecondary">
           Merci, ta suggestion a bien été envoyée !
@@ -255,7 +255,7 @@ function SuggestionForm() {
           </ThemedView>
         </Pressable>
       )}
-    </ThemedView>
+    </View>
   );
 }
 
@@ -292,14 +292,14 @@ function DeleteAccountSection() {
   }
 
   return (
-    <ThemedView style={styles.deleteSection}>
+    <View style={styles.deleteSection}>
       <Pressable onPress={confirmDelete} disabled={deleting}>
         <ThemedText type="small" style={styles.deleteLink}>
           {deleting ? 'Suppression...' : 'Supprimer mon compte'}
         </ThemedText>
       </Pressable>
       {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
-    </ThemedView>
+    </View>
   );
 }
 
@@ -307,8 +307,8 @@ function ProfileView() {
   const { user, profile } = useAuth();
 
   return (
-    <ThemedView style={styles.form}>
-      <SoftCard backgroundColor={Brand.coral} radius={Radius.lg}>
+    <View style={styles.form}>
+      <SoftCard backgroundColor={Brand.ice} radius={Radius.lg}>
         <View style={styles.profileHeader}>
           <AvatarMonster accessory={profile?.avatarAccessory} size={56} ring={Brand.white} />
           <View style={styles.profileHeaderText}>
@@ -329,14 +329,14 @@ function ProfileView() {
 
       <AvatarPicker />
 
-      <ThemedView style={styles.navSection}>
+      <View style={styles.navSection}>
         <NavTile
           href="/profil/editer"
           icon="person"
           eyebrow="Réglages"
           label="Éditer mon profil"
           description="Prénom, date de naissance, description, catégories"
-          color="coral"
+          color="ice"
         />
         <NavTile
           href="/profil/confidentialite"
@@ -346,7 +346,7 @@ function ProfileView() {
           description="Visibilité dans l’annuaire, 18 ans et plus"
           color="green"
         />
-      </ThemedView>
+      </View>
 
       <SuggestionForm />
 
@@ -364,7 +364,7 @@ function ProfileView() {
       <PrimaryButton label="Se déconnecter" onPress={() => signOut()} />
 
       <DeleteAccountSection />
-    </ThemedView>
+    </View>
   );
 }
 
@@ -415,7 +415,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     width: 84,
   },
-  accessoryOptionSelected: { borderColor: Brand.coral },
+  accessoryOptionSelected: { borderColor: Brand.ice },
   suggestionButton: {
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.three,

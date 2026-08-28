@@ -6,11 +6,20 @@
 
 import '@/global.css';
 
-// Palette de marque, identique à :root dans css/style.css
+// Palette de marque, identique à :root dans css/style.css — SAUF coral/
+// coralDark/coralLight sur cette branche de test, remplacés par une variante
+// "glacée" (bleu glace) qui colle mieux à l'identité Yeti de la mascotte,
+// à la demande de l'utilisateur. coral/coralDark/coralLight restent définis
+// (les cornes de l'avatar sont peintes en rouge dans les images, donc ce
+// rouge reste visible quoi qu'il arrive) mais ice/iceDark/iceLight
+// remplacent leur rôle d'accent principal dans l'UI sur cette branche.
 export const Brand = {
   coral: '#E8392A',
   coralDark: '#C22C1F',
   coralLight: '#FBE3E0',
+  ice: '#2F8FCB',
+  iceDark: '#1E6690',
+  iceLight: '#D9EEFB',
   green: '#2F9E52',
   greenDark: '#227A3F',
   greenLight: '#E4F5E9',
@@ -27,7 +36,7 @@ export const Brand = {
 export const Colors = {
   light: {
     text: Brand.black,
-    background: Brand.coralLight,
+    background: Brand.iceLight,
     backgroundElement: Brand.white,
     // Reste blanc (pas corail plein) : beaucoup d'endroits affichent du texte
     // noir par-dessus cette couleur, qui serait peu lisible sur un corail

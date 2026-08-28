@@ -17,7 +17,7 @@ export function PrimaryButton({
     <Pressable onPress={onPress} disabled={disabled}>
       {({ pressed }) => (
         <SoftCard
-          backgroundColor={disabled ? Brand.grayLight : Brand.coral}
+          backgroundColor={disabled ? Brand.grayLight : Brand.ice}
           radius={999}
           style={pressed && styles.pressed}>
           <ThemedText type="smallBold" style={styles.text}>

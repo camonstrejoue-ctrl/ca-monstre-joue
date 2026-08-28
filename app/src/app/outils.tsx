@@ -1,15 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { NavTile } from '@/components/nav-tile';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 
 export default function OutilsScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      <ThemedView style={styles.content}>
+      <View style={styles.content}>
         <ThemedText type="title" style={styles.pageTitle}>
           Outils
         </ThemedText>
@@ -19,7 +18,7 @@ export default function OutilsScreen() {
           eyebrow="Pendant la partie"
           label="Lanceur de dés"
           description="Choisis le nombre de dés et lance-les"
-          color="coral"
+          color="ice"
         />
         <NavTile
           href="/outils/score"
@@ -37,7 +36,7 @@ export default function OutilsScreen() {
           description="Garde une trace des événements auxquels tu as participé"
           color="cream"
         />
-      </ThemedView>
+      </View>
     </SafeAreaView>
   );
 }

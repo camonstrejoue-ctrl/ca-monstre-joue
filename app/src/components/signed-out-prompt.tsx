@@ -1,5 +1,5 @@
 import { Link } from 'expo-router';
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -12,7 +12,7 @@ import { Spacing } from '@/constants/theme';
  */
 export function SignedOutPrompt({ text }: { text: string }) {
   return (
-    <ThemedView style={styles.center}>
+    <View style={styles.center}>
       <ThemedText type="subtitle" style={styles.centerText}>
         Connecte-toi
       </ThemedText>
@@ -26,7 +26,7 @@ export function SignedOutPrompt({ text }: { text: string }) {
           </ThemedView>
         </Pressable>
       </Link>
-    </ThemedView>
+    </View>
   );
 }
 

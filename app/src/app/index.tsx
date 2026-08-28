@@ -32,7 +32,7 @@ export default function AccueilScreen() {
           eyebrow="Communauté"
           description="Organise une partie ou un échange près de chez toi"
           icon="people"
-          color="coral"
+          color="ice"
         />
         <NavTile
           href="/agenda"

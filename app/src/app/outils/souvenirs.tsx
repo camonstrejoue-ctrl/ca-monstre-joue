@@ -3,7 +3,7 @@ import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { Link, Stack } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, TextInput } from 'react-native';
+import { FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/components/form-field';
@@ -67,7 +67,7 @@ function AddMemoryForm({ onAdded }: { onAdded: () => void }) {
   }
 
   return (
-    <ThemedView style={styles.form}>
+    <View style={styles.form}>
       <FormField label="Nom de l’événement" value={title} onChangeText={setTitle} placeholder="ex: Ludopathique 2026" />
       <FormField label="Date (AAAA-MM-JJ)" value={date} onChangeText={setDate} placeholder="2026-09-15" />
       <FormField label="Lieu" value={location} onChangeText={setLocation} placeholder="ex: Genève" />
@@ -93,7 +93,7 @@ function AddMemoryForm({ onAdded }: { onAdded: () => void }) {
           <ThemedText type="smallBold">{saving ? 'Enregistrement...' : 'Enregistrer le souvenir'}</ThemedText>
         </ThemedView>
       </Pressable>
-    </ThemedView>
+    </View>
   );
 }
 
@@ -155,14 +155,14 @@ export default function SouvenirsScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
-          <ThemedView style={styles.header}>
+          <View style={styles.header}>
             <ThemedText type="small" themeColor="textSecondary">
               Garde une trace des événements auxquels tu as participé, avec tes photos. Tout reste
               sur ce téléphone — utilise "Exporter" pour sauvegarder ou transférer vers un autre
               appareil.
             </ThemedText>
 
-            <ThemedView style={styles.exportRow}>
+            <View style={styles.exportRow}>
               <Pressable onPress={handleExport} disabled={exporting || memories.length === 0}>
                 <ThemedView type="backgroundElement" style={styles.smallButton}>
                   <ThemedText type="small">{exporting ? '...' : '⬆ Exporter'}</ThemedText>
@@ -173,7 +173,7 @@ export default function SouvenirsScreen() {
                   <ThemedText type="small">{importing ? '...' : '⬇ Importer'}</ThemedText>
                 </ThemedView>
               </Pressable>
-            </ThemedView>
+            </View>
             {message ? (
               <ThemedText type="small" themeColor="textSecondary">
                 {message}
@@ -197,8 +197,8 @@ export default function SouvenirsScreen() {
             ) : null}
 
             {!showAdd && memories.length > 0 ? (
-              <ThemedView style={styles.filters}>
-                <ThemedView style={styles.searchBar}>
+              <View style={styles.filters}>
+                <View style={styles.searchBar}>
                   <Ionicons name="search" size={16} color={theme.textSecondary} />
                   <TextInput
                     value={query}
@@ -207,7 +207,7 @@ export default function SouvenirsScreen() {
                     placeholderTextColor={theme.textSecondary}
                     style={[styles.searchInput, { color: theme.text }]}
                   />
-                </ThemedView>
+                </View>
                 <TextInput
                   value={dateFilter}
                   onChangeText={setDateFilter}
@@ -216,7 +216,7 @@ export default function SouvenirsScreen() {
                   style={[styles.dateFilterInput, { color: theme.text, borderColor: theme.backgroundSelected }]}
                 />
                 {locations.length > 0 ? (
-                  <ThemedView style={styles.chipRow}>
+                  <View style={styles.chipRow}>
                     {locations.map((loc) => (
                       <Pressable
                         key={loc}
@@ -230,9 +230,9 @@ export default function SouvenirsScreen() {
                         </ThemedView>
                       </Pressable>
                     ))}
-                  </ThemedView>
+                  </View>
                 ) : null}
-              </ThemedView>
+              </View>
             ) : null}
 
             {!loading && memories.length === 0 ? (
@@ -245,7 +245,7 @@ export default function SouvenirsScreen() {
                 Aucun souvenir ne correspond à ta recherche.
               </ThemedText>
             ) : null}
-          </ThemedView>
+          </View>
         }
         renderItem={({ item }) => <MemoryRow memory={item} />}
       />
@@ -262,13 +262,13 @@ function MemoryRow({ memory }: { memory: Memory }) {
         ) : (
           <ThemedView type="backgroundElement" style={styles.memoryImage} />
         )}
-        <ThemedView style={styles.memoryInfo}>
+        <View style={styles.memoryInfo}>
           <ThemedText type="smallBold">{memory.title}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
             {memory.date}
             {memory.location ? ` · ${memory.location}` : ''}
           </ThemedText>
-        </ThemedView>
+        </View>
       </Pressable>
     </Link>
   );
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'transparent',
   },
-  chipSelected: { borderColor: Brand.coral },
+  chipSelected: { borderColor: Brand.ice },
   pressed: { opacity: 0.7 },
   memoryCard: {
     flexDirection: 'row',

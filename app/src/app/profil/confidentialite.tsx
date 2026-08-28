@@ -1,12 +1,11 @@
 import { Link, Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CheckboxRow } from '@/components/checkbox-row';
 import { PrimaryButton } from '@/components/primary-button';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { updateUserProfile, useAuth } from '@/lib/auth-context';
 import { computeAge, meetsMinAge, MIN_CONTACT_AGE } from '@/lib/moderation';
@@ -62,7 +61,7 @@ export default function ConfidentialiteScreen() {
           </ThemedText>
         ) : null}
         {!canBeVisible && age === null ? (
-          <ThemedView style={styles.missingBirthdate}>
+          <View style={styles.missingBirthdate}>
             <ThemedText type="small" themeColor="textSecondary">
               Indique ta date de naissance pour savoir si tu peux l’activer.
             </ThemedText>
@@ -71,10 +70,10 @@ export default function ConfidentialiteScreen() {
                 <ThemedText type="link">Éditer mon profil</ThemedText>
               </Pressable>
             </Link>
-          </ThemedView>
+          </View>
         ) : null}
 
-        <ThemedView style={styles.saveWrap}>
+        <View style={styles.saveWrap}>
           <PrimaryButton
             label={saving ? 'Enregistrement...' : 'Enregistrer'}
             onPress={handleSave}
@@ -85,7 +84,7 @@ export default function ConfidentialiteScreen() {
               Enregistré.
             </ThemedText>
           ) : null}
-        </ThemedView>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

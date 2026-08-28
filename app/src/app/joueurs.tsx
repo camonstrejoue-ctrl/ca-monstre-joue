@@ -1,6 +1,6 @@
 import { Link } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { FlatList, Pressable, RefreshControl, StyleSheet } from 'react-native';
+import { FlatList, Pressable, RefreshControl, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AvatarMonster } from '@/components/avatar-monster';
@@ -68,11 +68,11 @@ export default function JoueursScreen() {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={() => runQuery(ville, { asRefresh: true })}
-            tintColor={Brand.coral}
+            tintColor={Brand.ice}
           />
         }
         ListHeaderComponent={
-          <ThemedView style={styles.header}>
+          <View style={styles.header}>
             <ThemedText type="title" style={styles.pageTitle}>
               Joueurs
             </ThemedText>
@@ -118,18 +118,18 @@ export default function JoueursScreen() {
                   : 'Aucun autre joueur visible pour l’instant.'}
               </ThemedText>
             ) : null}
-          </ThemedView>
+          </View>
         }
         renderItem={({ item }) => (
           <Link href={{ pathname: '/joueur/[uid]', params: { uid: item.uid } }} asChild>
             <Pressable style={styles.playerCard}>
               <AvatarMonster accessory={item.avatarAccessory} size={48} ring />
-              <ThemedView style={styles.playerInfo}>
+              <View style={styles.playerInfo}>
                 <ThemedText type="smallBold">{item.pseudo}</ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
                   {item.ville}
                 </ThemedText>
-              </ThemedView>
+              </View>
             </Pressable>
           </Link>
         )}

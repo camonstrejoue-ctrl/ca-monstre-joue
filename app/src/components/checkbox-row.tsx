@@ -1,8 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { Brand, Spacing } from '@/constants/theme';
 
 export function CheckboxRow({
@@ -22,9 +21,9 @@ export function CheckboxRow({
       onPress={disabled ? undefined : onToggle}
       accessibilityRole="checkbox"
       accessibilityState={{ checked, disabled }}>
-      <ThemedView style={[styles.checkbox, checked && styles.checkboxChecked]}>
+      <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
         {checked ? <Ionicons name="checkmark" size={14} color={Brand.white} /> : null}
-      </ThemedView>
+      </View>
       <ThemedText type="small" style={styles.label}>
         {label}
       </ThemedText>
@@ -44,6 +43,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checkboxChecked: { backgroundColor: Brand.coral, borderColor: Brand.coral },
+  checkboxChecked: { backgroundColor: Brand.ice, borderColor: Brand.ice },
   label: { flex: 1 },
 });

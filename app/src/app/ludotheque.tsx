@@ -62,7 +62,7 @@ function AddGameSearch({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   }
 
   return (
-    <ThemedView style={styles.searchBox}>
+    <View style={styles.searchBox}>
       <View style={styles.bggBadge}>
         <Image
           source={require('@/assets/images/powered-by-bgg.jpeg')}
@@ -92,19 +92,19 @@ function AddGameSearch({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         <Pressable key={game.bggId} onPress={() => handleAdd(game)} disabled={addingId !== null}>
           <ThemedView type="backgroundElement" style={styles.resultRow}>
             <CoverImage path={game.thumbnail} style={styles.resultImage} />
-            <ThemedView style={styles.resultInfo}>
+            <View style={styles.resultInfo}>
               <ThemedText type="smallBold">{game.name}</ThemedText>
               {game.yearPublished ? (
                 <ThemedText type="small" themeColor="textSecondary">
                   {game.yearPublished}
                 </ThemedText>
               ) : null}
-            </ThemedView>
+            </View>
             <ThemedText type="small">{addingId === game.bggId ? '...' : '+ Ajouter'}</ThemedText>
           </ThemedView>
         </Pressable>
       ))}
-    </ThemedView>
+    </View>
   );
 }
 
@@ -136,21 +136,21 @@ function LudothequeRow({
   }
 
   const content = (
-    <ThemedView style={styles.gameLink}>
+    <View style={styles.gameLink}>
       <CoverImage path={entry.thumbnail} style={styles.gameImage} />
-      <ThemedView style={styles.gameInfo}>
+      <View style={styles.gameInfo}>
         <ThemedText type="smallBold">{entry.name}</ThemedText>
         {entry.yearPublished ? (
           <ThemedText type="small" themeColor="textSecondary">
             {entry.yearPublished}
           </ThemedText>
         ) : null}
-      </ThemedView>
-    </ThemedView>
+      </View>
+    </View>
   );
 
   return (
-    <ThemedView style={styles.gameCard}>
+    <View style={styles.gameCard}>
       {siteSlug ? (
         <Link href={{ pathname: '/jeu/[slug]', params: { slug: siteSlug } }} asChild>
           <Pressable style={styles.gameLinkTouchable}>{content}</Pressable>
@@ -163,7 +163,7 @@ function LudothequeRow({
           <ThemedText type="small">Retirer</ThemedText>
         </ThemedView>
       </Pressable>
-    </ThemedView>
+    </View>
   );
 }
 
@@ -244,7 +244,7 @@ export default function LudothequeScreen() {
         keyExtractor={(item) => item.bggId}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
-          <ThemedView style={styles.header}>
+          <View style={styles.header}>
             <ThemedText type="title" style={styles.pageTitle}>
               Ma ludothèque
             </ThemedText>
@@ -260,13 +260,13 @@ export default function LudothequeScreen() {
             ) : null}
 
             {!showSearch && entries.length > 0 ? (
-              <ThemedView style={styles.filters}>
+              <View style={styles.filters}>
                 {availableCategories.length > 0 ? (
                   <>
                     <ThemedText type="small" themeColor="textSecondary">
                       Catégorie
                     </ThemedText>
-                    <ThemedView style={styles.chipRow}>
+                    <View style={styles.chipRow}>
                       {availableCategories.map((cat) => (
                         <Pressable
                           key={cat}
@@ -280,14 +280,14 @@ export default function LudothequeScreen() {
                           </ThemedView>
                         </Pressable>
                       ))}
-                    </ThemedView>
+                    </View>
                   </>
                 ) : null}
 
                 <ThemedText type="small" themeColor="textSecondary">
                   Nombre de joueurs
                 </ThemedText>
-                <ThemedView style={styles.chipRow}>
+                <View style={styles.chipRow}>
                   {PLAYER_RANGES.map((p) => (
                     <Pressable
                       key={p.label}
@@ -303,12 +303,12 @@ export default function LudothequeScreen() {
                       </ThemedView>
                     </Pressable>
                   ))}
-                </ThemedView>
+                </View>
 
                 <ThemedText type="small" themeColor="textSecondary">
                   Trier par
                 </ThemedText>
-                <ThemedView style={styles.chipRow}>
+                <View style={styles.chipRow}>
                   <Pressable onPress={() => setSortBy('name')}>
                     <ThemedView
                       type="backgroundElement"
@@ -325,8 +325,8 @@ export default function LudothequeScreen() {
                       </ThemedText>
                     </ThemedView>
                   </Pressable>
-                </ThemedView>
-              </ThemedView>
+                </View>
+              </View>
             ) : null}
 
             {!loading && entries.length === 0 && !showSearch ? (
@@ -339,7 +339,7 @@ export default function LudothequeScreen() {
                 Aucun jeu ne correspond à ces filtres.
               </ThemedText>
             ) : null}
-          </ThemedView>
+          </View>
         }
         renderItem={({ item }) => (
           <LudothequeRow
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'transparent',
   },
-  chipSelected: { borderColor: Brand.coral },
+  chipSelected: { borderColor: Brand.ice },
   bggBadge: {
     alignSelf: 'flex-start',
     backgroundColor: '#FFFFFF',

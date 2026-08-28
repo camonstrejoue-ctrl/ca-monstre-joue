@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  iconWrapActive: { backgroundColor: Brand.coral },
+  iconWrapActive: { backgroundColor: Brand.ice },
   backdrop: {
     flex: 1,
     backgroundColor: 'rgba(26,26,26,0.4)',

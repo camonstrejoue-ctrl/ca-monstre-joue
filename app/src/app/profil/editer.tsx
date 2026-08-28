@@ -299,5 +299,5 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     backgroundColor: Brand.creamDark,
   },
-  chipSelected: { borderColor: Brand.coral },
+  chipSelected: { borderColor: Brand.ice },
 });

@@ -4,7 +4,7 @@ import { ThemedText } from '@/components/themed-text';
 import { Brand, Spacing } from '@/constants/theme';
 
 const PALETTE = [
-  { bg: Brand.coral, text: Brand.white },
+  { bg: Brand.ice, text: Brand.white },
   { bg: Brand.black, text: Brand.white },
   { bg: Brand.green, text: Brand.white },
   { bg: Brand.creamDark, text: Brand.black },

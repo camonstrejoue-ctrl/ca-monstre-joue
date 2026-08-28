@@ -30,11 +30,11 @@ export default function DesScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
       <Stack.Screen options={{ title: 'Lanceur de dés' }} />
-      <ThemedView style={styles.content}>
+      <View style={styles.content}>
         <ThemedText type="small" themeColor="textSecondary">
           Nombre de dés
         </ThemedText>
-        <ThemedView style={styles.stepper}>
+        <View style={styles.stepper}>
           <Pressable
             onPress={() => setNumDice((n) => Math.max(MIN_DICE, n - 1))}
             disabled={numDice <= MIN_DICE}
@@ -56,7 +56,7 @@ export default function DesScreen() {
               <Ionicons name="add" size={22} color={theme.text} />
             </ThemedView>
           </Pressable>
-        </ThemedView>
+        </View>
 
         <Pressable onPress={handleRoll}>
           <ThemedView type="backgroundSelected" style={styles.rollButton}>
@@ -78,7 +78,7 @@ export default function DesScreen() {
             </ThemedText>
           </>
         ) : null}
-      </ThemedView>
+      </View>
     </SafeAreaView>
   );
 }

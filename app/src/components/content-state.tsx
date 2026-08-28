@@ -1,4 +1,4 @@
-import { ActivityIndicator, Pressable, StyleSheet } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -15,14 +15,14 @@ export function ContentState({
 }) {
   if (loading) {
     return (
-      <ThemedView style={styles.center}>
+      <View style={styles.center}>
         <ActivityIndicator size="large" />
-      </ThemedView>
+      </View>
     );
   }
 
   return (
-    <ThemedView style={styles.center}>
+    <View style={styles.center}>
       <ThemedText type="subtitle" style={styles.centerText}>
         Impossible de charger le contenu
       </ThemedText>
@@ -34,7 +34,7 @@ export function ContentState({
           <ThemedText type="link">Réessayer</ThemedText>
         </ThemedView>
       </Pressable>
-    </ThemedView>
+    </View>
   );
 }
 

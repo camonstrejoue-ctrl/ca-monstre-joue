@@ -7,16 +7,16 @@ import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 
-type IconTileColor = 'coral' | 'green' | 'cream';
+type IconTileColor = 'ice' | 'green' | 'cream';
 
 // Même logique que .shortcut-card sur le site (css/style.css) : grande carte
 // pleine couleur, gros pictogramme, petite étiquette en majuscules au-dessus
 // du titre — plutôt qu'une simple ligne blanche avec une icône minuscule
 // (look "réglages système" jugé trop plat).
 const ICON_TILE_COLORS: Record<IconTileColor, { bg: string; icon: string; tag: string }> = {
-  coral: { bg: Brand.coralLight, icon: Brand.coralDark, tag: Brand.coralDark },
+  ice: { bg: Brand.iceLight, icon: Brand.iceDark, tag: Brand.iceDark },
   green: { bg: Brand.greenLight, icon: Brand.greenDark, tag: Brand.greenDark },
-  cream: { bg: Brand.creamDark, icon: Brand.black, tag: Brand.coralDark },
+  cream: { bg: Brand.creamDark, icon: Brand.black, tag: Brand.iceDark },
 };
 
 /**
@@ -33,7 +33,7 @@ export function NavTile({
   description,
   eyebrow,
   icon,
-  color = 'coral',
+  color = 'ice',
   image,
 }: {
   href: Href;

@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Pressable, StyleSheet, TextInput } from 'react-native';
+import { FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
@@ -111,7 +111,7 @@ export default function ScoreScreen() {
           />
         )}
         ListFooterComponent={
-          <ThemedView style={styles.footer}>
+          <View style={styles.footer}>
             <Pressable onPress={addPlayer}>
               <ThemedView type="backgroundSelected" style={styles.addButton}>
                 <ThemedText type="smallBold">+ Ajouter un joueur</ThemedText>
@@ -124,7 +124,7 @@ export default function ScoreScreen() {
                 </ThemedText>
               </Pressable>
             ) : null}
-          </ThemedView>
+          </View>
         }
       />
     </SafeAreaView>

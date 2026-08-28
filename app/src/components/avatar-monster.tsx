@@ -41,7 +41,7 @@ export function AvatarMonster({
   style?: StyleProp<ViewStyle>;
 }) {
   const source = SOURCES[accessory ?? 'aucun'] ?? SOURCES.aucun;
-  const ringColor = ring === true ? Brand.coral : ring || undefined;
+  const ringColor = ring === true ? Brand.ice : ring || undefined;
   const ringWidth = ringColor ? Math.max(3, Math.round(size * 0.06)) : 0;
 
   return (
