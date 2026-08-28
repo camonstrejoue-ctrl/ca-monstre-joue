@@ -1,4 +1,4 @@
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,9 +12,36 @@ import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
-import { getPlayer, getPlayerLudotheque, reportPlayer, type PlayerResult } from '@/lib/joueurs';
+import {
+  getPlayer,
+  getPlayerListePereNoel,
+  getPlayerLudotheque,
+  reportPlayer,
+  type PlayerResult,
+} from '@/lib/joueurs';
+import type { PereNoelEntry } from '@/lib/liste-pere-noel';
+import type { LudothequeEntry } from '@/lib/ludotheque';
 import { computeAge, MIN_CONTACT_AGE } from '@/lib/moderation';
-import { findCategory, findGame } from '@/lib/queries';
+import { findCategory, findGameByBggId } from '@/lib/queries';
+
+// Utilisé pour la Ludothèque ET la Liste au Père Noël d'un profil public :
+// même rendu (vignette + nom), lien vers la fiche jeu du site quand elle
+// existe (findGameByBggId), sinon juste affiché tel quel — un jeu ajouté
+// par recherche BGG libre n'est pas forcément dans le catalogue du site.
+function GameEntryRow({ name, thumbnail, siteSlug }: { name: string; thumbnail?: string; siteSlug: string | undefined }) {
+  const row = (
+    <View style={styles.gameRow}>
+      <CoverImage path={thumbnail} style={styles.gameImage} />
+      <ThemedText type="small">{name}</ThemedText>
+    </View>
+  );
+  if (!siteSlug) return row;
+  return (
+    <Link href={{ pathname: '/jeu/[slug]', params: { slug: siteSlug } }} asChild>
+      <Pressable>{row}</Pressable>
+    </Link>
+  );
+}
 
 export default function JoueurScreen() {
   const { uid } = useLocalSearchParams<{ uid: string }>();
@@ -22,7 +49,8 @@ export default function JoueurScreen() {
   const { content } = useContent();
 
   const [player, setPlayer] = useState<PlayerResult | null | undefined>(undefined);
-  const [ludothequeSlugs, setLudothequeSlugs] = useState<string[]>([]);
+  const [ludotheque, setLudotheque] = useState<LudothequeEntry[]>([]);
+  const [pereNoel, setPereNoel] = useState<PereNoelEntry[]>([]);
   const [showReportForm, setShowReportForm] = useState(false);
   const [reportReason, setReportReason] = useState('');
   const [reportSent, setReportSent] = useState(false);
@@ -30,7 +58,8 @@ export default function JoueurScreen() {
 
   useEffect(() => {
     getPlayer(uid).then(setPlayer);
-    getPlayerLudotheque(uid).then(setLudothequeSlugs);
+    getPlayerLudotheque(uid).then(setLudotheque);
+    getPlayerListePereNoel(uid).then(setPereNoel);
   }, [uid]);
 
   async function handleReport() {
@@ -56,7 +85,6 @@ export default function JoueurScreen() {
     );
   }
 
-  const games = content ? ludothequeSlugs.map((slug) => findGame(content, slug)).filter(Boolean) : [];
   const visibility = player.visibility;
   const viewerCanContact = Boolean(profile?.visibleToPlayers);
   const targetCanBeContacted = Boolean(player.visibleToPlayers);
@@ -123,16 +151,36 @@ export default function JoueurScreen() {
         <ThemedText type="subtitle" style={styles.sectionTitle}>
           Ludothèque
         </ThemedText>
-        {games.length === 0 ? (
+        {ludotheque.length === 0 ? (
           <ThemedText type="small" themeColor="textSecondary">
             Aucun jeu enregistré pour l’instant.
           </ThemedText>
         ) : (
-          games.map((game) => (
-            <View key={game!.slug} style={styles.gameRow}>
-              <CoverImage path={game!.thumbnail || game!.cover} style={styles.gameImage} />
-              <ThemedText type="small">{game!.name}</ThemedText>
-            </View>
+          ludotheque.map((entry) => (
+            <GameEntryRow
+              key={entry.bggId}
+              name={entry.name}
+              thumbnail={entry.thumbnail}
+              siteSlug={content ? findGameByBggId(content, entry.bggId)?.slug : undefined}
+            />
+          ))
+        )}
+
+        <ThemedText type="subtitle" style={styles.sectionTitle}>
+          🎁 Liste au Père Noël
+        </ThemedText>
+        {pereNoel.length === 0 ? (
+          <ThemedText type="small" themeColor="textSecondary">
+            Aucun jeu dans la liste pour l’instant.
+          </ThemedText>
+        ) : (
+          pereNoel.map((entry) => (
+            <GameEntryRow
+              key={entry.bggId}
+              name={entry.name}
+              thumbnail={entry.thumbnail}
+              siteSlug={content ? findGameByBggId(content, entry.bggId)?.slug : undefined}
+            />
           ))
         )}
 

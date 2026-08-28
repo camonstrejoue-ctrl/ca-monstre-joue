@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
-import { Link } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { Link, Stack } from 'expo-router';
+import { useState } from 'react';
 import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,17 +9,16 @@ import { FormField } from '@/components/form-field';
 import { SignedOutPrompt } from '@/components/signed-out-prompt';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Brand, Spacing } from '@/constants/theme';
+import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { isBggConfigured, searchBgg, type BggGame } from '@/lib/bgg';
 import { useContent } from '@/lib/content';
 import {
-  addGameToLudotheque,
-  backfillEntryDetails,
-  removeGameFromLudotheque,
-  useLudotheque,
-  type LudothequeEntry,
-} from '@/lib/ludotheque';
+  addGameToListePereNoel,
+  removeGameFromListePereNoel,
+  useListePereNoel,
+  type PereNoelEntry,
+} from '@/lib/liste-pere-noel';
 import { findGameByBggId } from '@/lib/queries';
 
 function AddGameSearch({ uid, onAdded }: { uid: string; onAdded: () => void }) {
@@ -45,7 +44,7 @@ function AddGameSearch({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   async function handleAdd(game: BggGame) {
     setAddingId(game.bggId);
     try {
-      await addGameToLudotheque(uid, game);
+      await addGameToListePereNoel(uid, game);
       onAdded();
     } finally {
       setAddingId(null);
@@ -108,12 +107,12 @@ function AddGameSearch({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   );
 }
 
-function LudothequeRow({
+function PereNoelRow({
   entry,
   siteSlug,
   uid,
 }: {
-  entry: LudothequeEntry;
+  entry: PereNoelEntry;
   siteSlug: string | undefined;
   uid: string;
 }) {
@@ -122,14 +121,14 @@ function LudothequeRow({
   async function handleRemove() {
     setBusy(true);
     try {
-      await removeGameFromLudotheque(uid, entry.bggId);
+      await removeGameFromListePereNoel(uid, entry.bggId);
     } finally {
       setBusy(false);
     }
   }
 
   function confirmRemove() {
-    Alert.alert('Retirer ce jeu ?', `« ${entry.name} » sera retiré de ta ludothèque.`, [
+    Alert.alert('Retirer ce jeu ?', `« ${entry.name} » sera retiré de ta liste au Père Noël.`, [
       { text: 'Annuler', style: 'cancel' },
       { text: 'Retirer', style: 'destructive', onPress: handleRemove },
     ]);
@@ -167,171 +166,54 @@ function LudothequeRow({
   );
 }
 
-const PLAYER_RANGES: { label: string; range: [number, number] }[] = [
-  { label: '1-2', range: [1, 2] },
-  { label: '3-4', range: [3, 4] },
-  { label: '5-6', range: [5, 6] },
-  { label: '7+', range: [7, Infinity] },
-];
-
-type SortMode = 'name' | 'addedAt';
-
-export default function LudothequeScreen() {
+export default function ListePereNoelScreen() {
   const { user, initializing } = useAuth();
   const { content } = useContent();
-  const { entries, loading } = useLudotheque(user?.uid);
+  const { entries, loading } = useListePereNoel(user?.uid);
   const [showSearch, setShowSearch] = useState(false);
-  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
-  const [playersFilter, setPlayersFilter] = useState<[number, number] | null>(null);
-  const [sortBy, setSortBy] = useState<SortMode>('name');
-  const backfilled = useRef(new Set<string>());
-
-  // Complète en tâche de fond les entrées ajoutées avant qu'on récupère
-  // catégories/nombre de joueurs depuis BGG, sinon elles restent invisibles
-  // dans les filtres (qui ignorent les entrées sans cette donnée).
-  useEffect(() => {
-    if (!user) return;
-    for (const entry of entries) {
-      // `categories` vaut toujours au moins [] pour une entrée ajoutée avec
-      // le code actuel : `undefined` signale donc à coup sûr une ancienne
-      // entrée (avant qu'on récupère ces infos depuis BGG).
-      const incomplete = entry.categories === undefined;
-      if (incomplete && !backfilled.current.has(entry.bggId)) {
-        backfilled.current.add(entry.bggId);
-        backfillEntryDetails(user.uid, entry).catch(() => {
-          backfilled.current.delete(entry.bggId);
-        });
-      }
-    }
-  }, [entries, user]);
 
   if (initializing) return null;
   if (!user) {
     return (
-      <SignedOutPrompt text="Retrouve ici les jeux que tu possèdes, pour les partager avec les autres joueurs." />
+      <SignedOutPrompt text="Note ici les jeux que tu ne possèdes pas encore mais que tu aimerais recevoir." />
     );
   }
 
-  const availableCategories = Array.from(
-    new Set(entries.flatMap((e) => e.categories ?? []))
-  ).sort((a, b) => a.localeCompare(b, 'fr'));
-
-  let filtered = entries;
-  if (categoryFilter) {
-    filtered = filtered.filter((e) => e.categories?.includes(categoryFilter));
-  }
-  if (playersFilter) {
-    filtered = filtered.filter(
-      (e) =>
-        e.minPlayers != null &&
-        e.maxPlayers != null &&
-        e.minPlayers <= playersFilter[1] &&
-        e.maxPlayers >= playersFilter[0]
-    );
-  }
-
-  const sorted = [...filtered].sort((a, b) => {
-    if (sortBy === 'addedAt') {
-      return (b.addedAt?.toMillis() ?? 0) - (a.addedAt?.toMillis() ?? 0);
-    }
-    return a.name.localeCompare(b.name, 'fr');
-  });
+  const sorted = [...entries].sort((a, b) => a.name.localeCompare(b.name, 'fr'));
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={['top']}>
+    <SafeAreaView style={styles.safeArea} edges={['bottom']}>
+      <Stack.Screen options={{ title: 'Liste au Père Noël' }} />
       <FlatList
         data={sorted}
         keyExtractor={(item) => item.bggId}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
           <View style={styles.header}>
-            <ThemedText type="title" style={styles.pageTitle}>
-              Ma ludothèque
+            <ThemedText type="small" themeColor="textSecondary">
+              Les jeux que tu ne possèdes pas encore, mais que tu aimerais recevoir — visible sur
+              ton profil public comme ta ludothèque.
             </ThemedText>
             <Pressable onPress={() => setShowSearch((v) => !v)}>
               <ThemedView type="backgroundSelected" style={styles.addButton}>
                 <ThemedText type="smallBold">
-                  {showSearch ? 'Fermer la recherche' : '+ Ajouter un jeu à ma ludothèque'}
+                  {showSearch ? 'Fermer la recherche' : '+ Ajouter un jeu à ma liste'}
                 </ThemedText>
               </ThemedView>
             </Pressable>
-            <Link href="/liste-pere-noel" asChild>
-              <Pressable>
-                <ThemedView type="backgroundElement" style={styles.addButton}>
-                  <ThemedText type="smallBold">🎁 Vers ma liste au Père Noël</ThemedText>
-                </ThemedView>
-              </Pressable>
-            </Link>
             {showSearch ? (
               <AddGameSearch uid={user.uid} onAdded={() => setShowSearch(false)} />
             ) : null}
 
-            {!showSearch && entries.length > 0 ? (
-              <View style={styles.filters}>
-                {/* Filtre "Catégorie" masqué à la demande de l'utilisateur —
-                    state/logique de filtrage conservés (categoryFilter,
-                    availableCategories) pour pouvoir le réafficher
-                    facilement plus tard. */}
-
-                <ThemedText type="small" themeColor="textSecondary">
-                  Nombre de joueurs
-                </ThemedText>
-                <View style={styles.chipRow}>
-                  {PLAYER_RANGES.map((p) => (
-                    <Pressable
-                      key={p.label}
-                      onPress={() =>
-                        setPlayersFilter((cur) => (cur === p.range ? null : p.range))
-                      }>
-                      <ThemedView
-                        type="backgroundElement"
-                        style={[styles.chip, playersFilter === p.range && styles.chipSelected]}>
-                        <ThemedText type={playersFilter === p.range ? 'smallBold' : 'small'}>
-                          {p.label}
-                        </ThemedText>
-                      </ThemedView>
-                    </Pressable>
-                  ))}
-                </View>
-
-                <ThemedText type="small" themeColor="textSecondary">
-                  Trier par
-                </ThemedText>
-                <View style={styles.chipRow}>
-                  <Pressable onPress={() => setSortBy('name')}>
-                    <ThemedView
-                      type="backgroundElement"
-                      style={[styles.chip, sortBy === 'name' && styles.chipSelected]}>
-                      <ThemedText type={sortBy === 'name' ? 'smallBold' : 'small'}>Nom</ThemedText>
-                    </ThemedView>
-                  </Pressable>
-                  <Pressable onPress={() => setSortBy('addedAt')}>
-                    <ThemedView
-                      type="backgroundElement"
-                      style={[styles.chip, sortBy === 'addedAt' && styles.chipSelected]}>
-                      <ThemedText type={sortBy === 'addedAt' ? 'smallBold' : 'small'}>
-                        Date d’ajout
-                      </ThemedText>
-                    </ThemedView>
-                  </Pressable>
-                </View>
-              </View>
-            ) : null}
-
-            {!loading && entries.length === 0 && !showSearch ? (
+            {!loading && entries.length === 0 ? (
               <ThemedText type="small" themeColor="textSecondary">
-                Aucun jeu dans ta ludothèque pour l’instant.
-              </ThemedText>
-            ) : null}
-            {!loading && entries.length > 0 && sorted.length === 0 && !showSearch ? (
-              <ThemedText type="small" themeColor="textSecondary">
-                Aucun jeu ne correspond à ces filtres.
+                Aucun jeu dans ta liste pour l’instant.
               </ThemedText>
             ) : null}
           </View>
         }
         renderItem={({ item }) => (
-          <LudothequeRow
+          <PereNoelRow
             entry={item}
             siteSlug={content ? findGameByBggId(content, item.bggId)?.slug : undefined}
             uid={user.uid}
@@ -346,36 +228,12 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   list: { padding: Spacing.four, gap: Spacing.three },
   header: { gap: Spacing.three, marginBottom: Spacing.three },
-  pageTitle: { fontSize: 32 },
-  center: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: Spacing.three,
-    padding: Spacing.four,
-  },
-  centerText: { textAlign: 'center' },
-  loginButton: {
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.five,
-  },
   addButton: {
     paddingVertical: Spacing.three,
     borderRadius: Spacing.two,
     alignItems: 'center',
   },
   searchBox: { gap: Spacing.two },
-  filters: { gap: Spacing.two },
-  chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two, marginBottom: Spacing.two },
-  chip: {
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.five,
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  chipSelected: { borderColor: Brand.ice },
   bggBadge: {
     alignSelf: 'flex-start',
     backgroundColor: '#FFFFFF',

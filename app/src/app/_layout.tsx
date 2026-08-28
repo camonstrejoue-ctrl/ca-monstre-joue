@@ -69,6 +69,7 @@ export default function RootLayout() {
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="catalogue" options={{ headerShown: false }} />
             <Stack.Screen name="ludotheque" options={{ headerShown: false }} />
+            <Stack.Screen name="liste-pere-noel" options={{ title: '' }} />
             <Stack.Screen name="joueurs" options={{ headerShown: false }} />
             <Stack.Screen name="agenda" options={{ headerShown: false }} />
             <Stack.Screen name="profil" options={{ headerShown: false }} />
