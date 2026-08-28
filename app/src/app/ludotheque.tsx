@@ -261,28 +261,10 @@ export default function LudothequeScreen() {
 
             {!showSearch && entries.length > 0 ? (
               <View style={styles.filters}>
-                {availableCategories.length > 0 ? (
-                  <>
-                    <ThemedText type="small" themeColor="textSecondary">
-                      Catégorie
-                    </ThemedText>
-                    <View style={styles.chipRow}>
-                      {availableCategories.map((cat) => (
-                        <Pressable
-                          key={cat}
-                          onPress={() => setCategoryFilter((c) => (c === cat ? null : cat))}>
-                          <ThemedView
-                            type="backgroundElement"
-                            style={[styles.chip, categoryFilter === cat && styles.chipSelected]}>
-                            <ThemedText type={categoryFilter === cat ? 'smallBold' : 'small'}>
-                              {cat}
-                            </ThemedText>
-                          </ThemedView>
-                        </Pressable>
-                      ))}
-                    </View>
-                  </>
-                ) : null}
+                {/* Filtre "Catégorie" masqué à la demande de l'utilisateur —
+                    state/logique de filtrage conservés (categoryFilter,
+                    availableCategories) pour pouvoir le réafficher
+                    facilement plus tard. */}
 
                 <ThemedText type="small" themeColor="textSecondary">
                   Nombre de joueurs
