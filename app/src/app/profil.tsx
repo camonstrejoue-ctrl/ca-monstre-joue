@@ -1,17 +1,17 @@
-import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AVATAR_ACCESSORIES, AvatarMonster } from '@/components/avatar-monster';
 import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
+import { NavTile } from '@/components/nav-tile';
 import { PrimaryButton } from '@/components/primary-button';
+import { StickerBox } from '@/components/sticker';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { useTheme } from '@/hooks/use-theme';
-import { Brand, Spacing } from '@/constants/theme';
+import { Brand, Radius, Spacing } from '@/constants/theme';
 import { deleteAccount, signIn, signOut, signUp } from '@/lib/auth';
 import { updateUserProfile, useAuth } from '@/lib/auth-context';
 import { isFirebaseConfigured } from '@/lib/firebase';
@@ -159,66 +159,46 @@ function AvatarPicker() {
   const current = profile?.avatarAccessory ?? null;
 
   return (
-    <ThemedView style={styles.form}>
-      <Pressable onPress={() => setOpen((v) => !v)} style={styles.avatarPreviewWrap}>
-        <AvatarMonster accessory={current} size={96} style={styles.avatarPreview} />
-        <ThemedText type="small" themeColor="textSecondary">
-          {open ? 'Touche l’avatar pour fermer' : 'Touche l’avatar pour changer de chapeau'}
+    <StickerBox backgroundColor={Brand.white} radius={Radius.lg}>
+      <View style={styles.avatarCard}>
+        <ThemedText type="subtitle" style={styles.avatarCardTitle}>
+          Mon avatar
         </ThemedText>
-      </Pressable>
-      {open ? (
-        <ThemedView style={styles.chipRow}>
-          <Pressable onPress={() => handleSelect(null)} disabled={saving}>
-            <ThemedView
-              type="backgroundElement"
-              style={[styles.accessoryOption, current === null && styles.accessoryOptionSelected]}>
-              <AvatarMonster accessory={null} size={40} />
-              <ThemedText type={current === null ? 'smallBold' : 'small'}>Aucun</ThemedText>
-            </ThemedView>
-          </Pressable>
-          {AVATAR_ACCESSORIES.map((acc) => (
-            <Pressable key={acc.value} onPress={() => handleSelect(acc.value)} disabled={saving}>
+        <Pressable onPress={() => setOpen((v) => !v)} style={styles.avatarPreviewWrap}>
+          <AvatarMonster accessory={current} size={96} style={styles.avatarPreview} />
+          <ThemedText type="small" themeColor="textSecondary">
+            {open ? 'Touche l’avatar pour fermer' : 'Touche l’avatar pour changer de chapeau'}
+          </ThemedText>
+        </Pressable>
+        {open ? (
+          <View style={styles.chipRow}>
+            <Pressable onPress={() => handleSelect(null)} disabled={saving}>
               <ThemedView
                 type="backgroundElement"
-                style={[
-                  styles.accessoryOption,
-                  current === acc.value && styles.accessoryOptionSelected,
-                ]}>
-                <AvatarMonster accessory={acc.value} size={40} />
-                <ThemedText type={current === acc.value ? 'smallBold' : 'small'}>
-                  {acc.label}
-                </ThemedText>
+                style={[styles.accessoryOption, current === null && styles.accessoryOptionSelected]}>
+                <AvatarMonster accessory={null} size={40} />
+                <ThemedText type={current === null ? 'smallBold' : 'small'}>Aucun</ThemedText>
               </ThemedView>
             </Pressable>
-          ))}
-        </ThemedView>
-      ) : null}
-    </ThemedView>
-  );
-}
-
-function ProfileNavRow({
-  href,
-  icon,
-  label,
-}: {
-  href: '/profil/editer' | '/profil/confidentialite';
-  icon: React.ComponentProps<typeof Ionicons>['name'];
-  label: string;
-}) {
-  const theme = useTheme();
-  return (
-    <Link href={href} asChild>
-      <Pressable>
-        <ThemedView type="backgroundElement" style={styles.navRow}>
-          <Ionicons name={icon} size={22} color={theme.text} />
-          <ThemedText type="smallBold" style={styles.navRowLabel}>
-            {label}
-          </ThemedText>
-          <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
-        </ThemedView>
-      </Pressable>
-    </Link>
+            {AVATAR_ACCESSORIES.map((acc) => (
+              <Pressable key={acc.value} onPress={() => handleSelect(acc.value)} disabled={saving}>
+                <ThemedView
+                  type="backgroundElement"
+                  style={[
+                    styles.accessoryOption,
+                    current === acc.value && styles.accessoryOptionSelected,
+                  ]}>
+                  <AvatarMonster accessory={acc.value} size={40} />
+                  <ThemedText type={current === acc.value ? 'smallBold' : 'small'}>
+                    {acc.label}
+                  </ThemedText>
+                </ThemedView>
+              </Pressable>
+            ))}
+          </View>
+        ) : null}
+      </View>
+    </StickerBox>
   );
 }
 
@@ -328,26 +308,44 @@ function ProfileView() {
 
   return (
     <ThemedView style={styles.form}>
-      <ThemedView style={styles.profileHeader}>
-        <AvatarMonster accessory={profile?.avatarAccessory} size={56} />
-        <ThemedView style={styles.profileHeaderText}>
-          <ThemedText type="subtitle">{profile?.pseudo ?? 'Mon profil'}</ThemedText>
-          <ThemedText type="small" themeColor="textSecondary">
-            {user?.email}
-          </ThemedText>
-          {profile?.ville ? (
-            <ThemedText type="small" themeColor="textSecondary">
-              {profile.ville}
+      <StickerBox backgroundColor={Brand.coral} radius={Radius.lg}>
+        <View style={styles.profileHeader}>
+          <AvatarMonster accessory={profile?.avatarAccessory} size={56} />
+          <View style={styles.profileHeaderText}>
+            <ThemedText type="subtitle" style={styles.profileHeaderName}>
+              {profile?.pseudo ?? 'Mon profil'}
             </ThemedText>
-          ) : null}
-        </ThemedView>
-      </ThemedView>
+            <ThemedText type="small" style={styles.profileHeaderMeta}>
+              {user?.email}
+            </ThemedText>
+            {profile?.ville ? (
+              <ThemedText type="small" style={styles.profileHeaderMeta}>
+                {profile.ville}
+              </ThemedText>
+            ) : null}
+          </View>
+        </View>
+      </StickerBox>
 
       <AvatarPicker />
 
       <ThemedView style={styles.navSection}>
-        <ProfileNavRow href="/profil/editer" icon="person" label="Éditer mon profil" />
-        <ProfileNavRow href="/profil/confidentialite" icon="people" label="Trouver des joueurs" />
+        <NavTile
+          href="/profil/editer"
+          icon="person"
+          eyebrow="Réglages"
+          label="Éditer mon profil"
+          description="Prénom, date de naissance, description, catégories"
+          color="coral"
+        />
+        <NavTile
+          href="/profil/confidentialite"
+          icon="people"
+          eyebrow="Réglages"
+          label="Trouver des joueurs"
+          description="Visibilité dans l’annuaire, 18 ans et plus"
+          color="green"
+        />
       </ThemedView>
 
       <SuggestionForm />
@@ -395,8 +393,17 @@ const styles = StyleSheet.create({
   deleteSection: { marginTop: Spacing.four, alignItems: 'center', gap: Spacing.two },
   deleteLink: { color: '#D14343', textDecorationLine: 'underline' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
-  profileHeader: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three },
+  profileHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+    padding: Spacing.four,
+  },
   profileHeaderText: { flex: 1, gap: 2 },
+  profileHeaderName: { color: Brand.white },
+  profileHeaderMeta: { color: 'rgba(255,255,255,0.85)' },
+  avatarCard: { padding: Spacing.four, gap: Spacing.two },
+  avatarCardTitle: { fontSize: 19, marginBottom: 2 },
   avatarPreviewWrap: { alignItems: 'center', gap: 4 },
   avatarPreview: { alignSelf: 'center' },
   accessoryOption: {
@@ -416,12 +423,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   navSection: { gap: Spacing.two },
-  navRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-    padding: Spacing.three,
-    borderRadius: Spacing.three,
-  },
-  navRowLabel: { flex: 1 },
 });

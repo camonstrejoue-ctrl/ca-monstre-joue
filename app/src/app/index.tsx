@@ -28,15 +28,20 @@ export default function AccueilScreen() {
 
         <Link href="/ptit-monstre" asChild>
           <Pressable>
-            <StickerBox backgroundColor={Brand.white} radius={Radius.lg}>
+            <StickerBox backgroundColor={Brand.coral} radius={Radius.lg}>
               <View style={styles.ptitMonstreInner}>
                 <Image
                   source={require('@/assets/images/avatars/monstre-aucun.png')}
                   style={styles.ptitMonstreAvatar}
                 />
-                <ThemedText type="smallBold" style={styles.ptitMonstreText}>
-                  P’tit Monstre, trouve mon prochain jeu
-                </ThemedText>
+                <View style={styles.ptitMonstreTextWrap}>
+                  <ThemedText type="smallBold" style={styles.ptitMonstreEyebrow}>
+                    Ton guide jeux
+                  </ThemedText>
+                  <ThemedText type="subtitle" style={styles.ptitMonstreText}>
+                    P’tit Monstre trouve ton prochain jeu
+                  </ThemedText>
+                </View>
               </View>
             </StickerBox>
           </Pressable>
@@ -44,14 +49,16 @@ export default function AccueilScreen() {
 
         <NavTile
           href="/joueurs"
-          label="Trouver des joueurs près de chez moi"
-          description="Organise une partie ou un échange de jeux"
+          label="Trouver des joueurs"
+          eyebrow="Communauté"
+          description="Organise une partie ou un échange près de chez toi"
           icon="people"
           color="coral"
         />
         <NavTile
           href="/agenda"
           label="Agenda"
+          eyebrow="Ne rate rien"
           description="Festivals, tournois, soirées jeux..."
           icon="calendar"
           color="green"
@@ -59,9 +66,10 @@ export default function AccueilScreen() {
         <NavTile
           href="/catalogue"
           label="Le blog"
+          eyebrow="À lire"
           description="Toutes nos fiches jeux et critiques"
           icon="newspaper"
-          color="coral"
+          color="cream"
         />
       </ScrollView>
     </SafeAreaView>
@@ -81,10 +89,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    paddingVertical: Spacing.two,
-    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.four,
+    paddingHorizontal: Spacing.four,
   },
-  ptitMonstreAvatar: { width: 40, height: 40 },
-  ptitMonstreText: { flex: 1, color: Brand.black },
+  ptitMonstreAvatar: { width: 64, height: 64 },
+  ptitMonstreTextWrap: { flex: 1, gap: 2 },
+  ptitMonstreEyebrow: {
+    fontSize: 11,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    color: 'rgba(255,255,255,0.85)',
+  },
+  ptitMonstreText: { color: Brand.white, fontSize: 19, lineHeight: 23 },
   pressed: { opacity: 0.85 },
 });

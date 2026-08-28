@@ -1,8 +1,9 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Spacing } from '@/constants/theme';
+import { Brand, Spacing } from '@/constants/theme';
 
 export function CheckboxRow({
   label,
@@ -18,8 +19,12 @@ export function CheckboxRow({
   return (
     <Pressable
       style={[styles.row, disabled && styles.rowDisabled]}
-      onPress={disabled ? undefined : onToggle}>
-      <ThemedView style={[styles.checkbox, checked && styles.checkboxChecked]} />
+      onPress={disabled ? undefined : onToggle}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked, disabled }}>
+      <ThemedView style={[styles.checkbox, checked && styles.checkboxChecked]}>
+        {checked ? <Ionicons name="checkmark" size={14} color={Brand.white} /> : null}
+      </ThemedView>
       <ThemedText type="small" style={styles.label}>
         {label}
       </ThemedText>
@@ -30,7 +35,15 @@ export function CheckboxRow({
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
   rowDisabled: { opacity: 0.5 },
-  checkbox: { width: 20, height: 20, borderRadius: 4, borderWidth: 1, borderColor: '#999' },
-  checkboxChecked: { backgroundColor: '#3c87f7', borderColor: '#3c87f7' },
+  checkbox: {
+    width: 22,
+    height: 22,
+    borderRadius: 6,
+    borderWidth: 2,
+    borderColor: Brand.grayLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  checkboxChecked: { backgroundColor: Brand.coral, borderColor: Brand.coral },
   label: { flex: 1 },
 });

@@ -7,17 +7,22 @@ import { StickerBox } from '@/components/sticker';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 
-type IconTileColor = 'coral' | 'green';
+type IconTileColor = 'coral' | 'green' | 'cream';
 
-const ICON_TILE_COLORS: Record<IconTileColor, { bg: string; icon: string }> = {
-  coral: { bg: Brand.coralLight, icon: Brand.coralDark },
-  green: { bg: Brand.greenLight, icon: Brand.greenDark },
+// Même logique que .shortcut-card sur le site (css/style.css) : grande carte
+// pleine couleur, gros pictogramme, petite étiquette en majuscules au-dessus
+// du titre — plutôt qu'une simple ligne blanche avec une icône minuscule
+// (look "réglages système" jugé trop plat).
+const ICON_TILE_COLORS: Record<IconTileColor, { bg: string; icon: string; tag: string }> = {
+  coral: { bg: Brand.coralLight, icon: Brand.coralDark, tag: Brand.coralDark },
+  green: { bg: Brand.greenLight, icon: Brand.greenDark, tag: Brand.greenDark },
+  cream: { bg: Brand.creamDark, icon: Brand.black, tag: Brand.coralDark },
 };
 
 /**
  * Gros bouton de navigation façon carte. Deux variantes :
- * - `icon` (recommandée) : icône dans un rond de couleur + libellé, façon
- *   ToolCard — ne dépend d'aucune illustration dédiée.
+ * - `icon` (recommandée) : grande carte de couleur, pictogramme, étiquette +
+ *   titre — ne dépend d'aucune illustration dédiée.
  * - `image` (ancienne variante, conservée pour compat) : photo de fond avec
  *   voile sombre — évite de recycler une photo de jeu sans rapport avec la
  *   destination, à réserver aux cas où une vraie image illustrative existe.
@@ -26,6 +31,7 @@ export function NavTile({
   href,
   label,
   description,
+  eyebrow,
   icon,
   color = 'coral',
   image,
@@ -33,6 +39,7 @@ export function NavTile({
   href: Href;
   label: string;
   description?: string;
+  eyebrow?: string;
   icon?: React.ComponentProps<typeof Ionicons>['name'];
   color?: IconTileColor;
   image?: string;
@@ -42,20 +49,26 @@ export function NavTile({
     return (
       <Link href={href} asChild>
         <Pressable>
-          <StickerBox backgroundColor={Brand.white} radius={Radius.md}>
-            <View style={styles.iconRow}>
-              <View style={[styles.iconCircle, { backgroundColor: palette.bg }]}>
-                <Ionicons name={icon} size={26} color={palette.icon} />
+          <StickerBox backgroundColor={palette.bg} radius={Radius.lg}>
+            <View style={styles.iconCardRow}>
+              <View style={styles.iconWrap}>
+                <Ionicons name={icon} size={40} color={palette.icon} />
               </View>
               <View style={styles.iconText}>
-                <ThemedText type="smallBold">{label}</ThemedText>
+                {eyebrow ? (
+                  <ThemedText type="smallBold" style={[styles.eyebrow, { color: palette.tag }]}>
+                    {eyebrow}
+                  </ThemedText>
+                ) : null}
+                <ThemedText type="subtitle" style={styles.iconTitle}>
+                  {label}
+                </ThemedText>
                 {description ? (
                   <ThemedText type="small" themeColor="textSecondary">
                     {description}
                   </ThemedText>
                 ) : null}
               </View>
-              <Ionicons name="chevron-forward" size={20} color={Brand.gray} />
             </View>
           </StickerBox>
         </Pressable>
@@ -107,18 +120,20 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     color: Brand.white,
   },
-  iconRow: {
+  iconCardRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.three,
-    padding: Spacing.three,
+    gap: Spacing.four,
+    padding: Spacing.four,
+    minHeight: 108,
   },
-  iconCircle: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  iconWrap: { width: 40, alignItems: 'center' },
   iconText: { flex: 1, gap: 2 },
+  eyebrow: {
+    fontSize: 11,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    marginBottom: 2,
+  },
+  iconTitle: { fontSize: 19, lineHeight: 23 },
 });

@@ -1,13 +1,14 @@
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CheckboxRow } from '@/components/checkbox-row';
 import { FormField } from '@/components/form-field';
+import { PrimaryButton } from '@/components/primary-button';
+import { StickerBox } from '@/components/sticker';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Brand, Spacing } from '@/constants/theme';
+import { Brand, Radius, Spacing } from '@/constants/theme';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { computeAge, formatBirthdateInput, parseBirthdateInput } from '@/lib/moderation';
@@ -35,23 +36,25 @@ function Section({
   error: string | null;
 }) {
   return (
-    <ThemedView type="backgroundElement" style={styles.section}>
-      <ThemedText type="subtitle" style={styles.sectionTitle}>
-        {title}
-      </ThemedText>
-      {children}
-      {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
-      <Pressable onPress={onSave} disabled={saving}>
-        <ThemedView type="backgroundSelected" style={styles.saveButton}>
-          <ThemedText type="smallBold">{saving ? 'Enregistrement...' : 'Enregistrer'}</ThemedText>
-        </ThemedView>
-      </Pressable>
-      {saved ? (
-        <ThemedText type="small" themeColor="textSecondary">
-          Enregistré.
+    <StickerBox backgroundColor={Brand.white} radius={Radius.lg}>
+      <View style={styles.section}>
+        <ThemedText type="subtitle" style={styles.sectionTitle}>
+          {title}
         </ThemedText>
-      ) : null}
-    </ThemedView>
+        {children}
+        {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
+        <PrimaryButton
+          label={saving ? 'Enregistrement...' : 'Enregistrer'}
+          onPress={onSave}
+          disabled={saving}
+        />
+        {saved ? (
+          <ThemedText type="small" themeColor="textSecondary">
+            Enregistré.
+          </ThemedText>
+        ) : null}
+      </View>
+    </StickerBox>
   );
 }
 
@@ -242,18 +245,18 @@ function CategoriesSection() {
       saving={saving}
       saved={saved}
       error={null}>
-      <ThemedView style={styles.chipRow}>
+      <View style={styles.chipRow}>
         {(content?.categories ?? []).map((cat) => {
           const selected = categories.includes(cat.slug);
           return (
             <Pressable key={cat.slug} onPress={() => toggleCategory(cat.slug)}>
-              <ThemedView type="backgroundElement" style={[styles.chip, selected && styles.chipSelected]}>
+              <View style={[styles.chip, selected && styles.chipSelected]}>
                 <ThemedText type={selected ? 'smallBold' : 'small'}>{cat.name}</ThemedText>
-              </ThemedView>
+              </View>
             </Pressable>
           );
         })}
-      </ThemedView>
+      </View>
       <CheckboxRow
         label="Afficher mes catégories préférées sur mon profil public"
         checked={visible}
@@ -284,9 +287,8 @@ export default function EditerProfilScreen() {
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   content: { padding: Spacing.four, gap: Spacing.three },
-  section: { gap: Spacing.two, padding: Spacing.three, borderRadius: Spacing.three },
-  sectionTitle: { fontSize: 18 },
-  saveButton: { paddingVertical: Spacing.two, borderRadius: Spacing.two, alignItems: 'center' },
+  section: { gap: Spacing.two, padding: Spacing.four },
+  sectionTitle: { fontSize: 19 },
   error: { color: '#D14343' },
   chipRow: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
   chip: {
@@ -295,6 +297,7 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.five,
     borderWidth: 2,
     borderColor: 'transparent',
+    backgroundColor: Brand.creamDark,
   },
   chipSelected: { borderColor: Brand.coral },
 });
