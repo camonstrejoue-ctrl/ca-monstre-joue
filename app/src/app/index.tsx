@@ -154,8 +154,8 @@ const styles = StyleSheet.create({
   },
   introSpacer: { flex: 1 },
   bubbleWrap: { alignItems: 'center', zIndex: 1 },
-  bubble: { paddingHorizontal: Spacing.four, paddingVertical: Spacing.three, maxWidth: 320 },
-  bubbleText: { textAlign: 'center', fontSize: 19 },
+  bubble: { paddingHorizontal: Spacing.five, paddingVertical: Spacing.four, maxWidth: 360 },
+  bubbleText: { textAlign: 'center', fontSize: 25, lineHeight: 30 },
   bubbleTail: {
     width: 22,
     height: 22,
@@ -164,8 +164,10 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '45deg' }],
     marginTop: -12,
   },
+  // Réduit d'un tiers (72% → 48%) pour laisser plus de place à la bulle,
+  // agrandie en retour, à la demande de l'utilisateur.
   monster: {
-    width: '72%',
+    width: '48%',
     aspectRatio: 193 / 279,
     marginTop: Spacing.two,
   },
