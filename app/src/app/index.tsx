@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentState } from '@/components/content-state';
 import { NavTile } from '@/components/nav-tile';
+import { ScatteredTags } from '@/components/scattered-tags';
 import { Spacing } from '@/constants/theme';
 import { useContent } from '@/lib/content';
 
@@ -22,6 +23,8 @@ export default function AccueilScreen() {
           style={styles.logo}
           contentFit="contain"
         />
+
+        <ScatteredTags labels={content.categories.slice(0, 6).map((c) => c.name)} />
 
         <NavTile
           href="/joueurs"
