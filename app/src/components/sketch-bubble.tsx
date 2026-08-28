@@ -7,23 +7,25 @@ import { Brand } from '@/constants/theme';
 const VB_W = 400;
 const VB_H = 260;
 
-// Deux tracés légèrement décalés/irréguliers (pas un rectangle parfait) —
-// imite le contour "dessiné au stylo, repassé deux fois" d'une référence
-// partagée par l'utilisateur (bulle façon croquis à la main, avec des
-// hachures dans un coin et une pointe irrégulière en bas à gauche).
+// Deux tracés légèrement décalés/irréguliers (coins arrondis via Q,
+// pointe centrée en bas) — imite le contour "dessiné au stylo, repassé
+// deux fois" d'une référence partagée par l'utilisateur (bulle façon
+// croquis à la main, avec des hachures et une pointe irrégulière).
 // `preserveAspectRatio="none"` : le SVG épouse exactement les dimensions
 // du conteneur (hauteur pilotée par le texte), donc pas de vrai
 // rectangle géométrique — l'irrégularité du tracé masque l'étirement.
-const OUTLINE_A = 'M16,18 L384,10 L390,196 L60,206 L42,236 L34,204 L20,200 Z';
-const OUTLINE_B = 'M10,26 L388,4 L396,190 L54,214 L38,244 L28,208 L14,192 Z';
+const OUTLINE_A =
+  'M44,8 L360,6 Q392,4 390,36 L392,166 Q394,198 360,200 L222,202 L202,244 L178,204 L54,206 Q14,204 16,174 L12,42 Q10,10 44,8 Z';
+const OUTLINE_B =
+  'M38,16 L366,2 Q396,8 388,42 L394,160 Q398,192 356,206 L226,208 L200,248 L174,210 L48,200 Q8,196 20,168 L8,36 Q14,6 38,16 Z';
 
 const HATCH_LINES: [number, number, number, number][] = [
-  [20, 208, 29, 231],
-  [24, 200, 34, 225],
-  [28, 192, 40, 219],
-  [32, 184, 45, 213],
-  [36, 176, 49, 207],
-  [40, 170, 53, 201],
+  [140, 205, 149, 225],
+  [144, 197, 154, 219],
+  [148, 189, 159, 213],
+  [152, 181, 164, 207],
+  [156, 173, 169, 201],
+  [160, 167, 173, 195],
 ];
 
 /**
