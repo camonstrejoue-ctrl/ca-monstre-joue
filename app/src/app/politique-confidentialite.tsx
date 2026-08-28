@@ -30,7 +30,7 @@ export default function PolitiqueConfidentialiteScreen() {
 
         <Paragraph
           title="Données collectées"
-          text="Compte : e-mail et mot de passe. Profil : pseudo, ville, e-mail de contact affiché aux autres utilisateurs. Optionnel : prénom, âge, catégories de jeux préférées, accessoire d'avatar — chacun visible publiquement uniquement si tu l'autorises explicitement. Ludothèque : liste des jeux que tu ajoutes (via la recherche BoardGameGeek). Les photos et informations de la section « Mes souvenirs » restent uniquement sur ton téléphone et ne sont jamais envoyées à nos serveurs."
+          text="Compte : e-mail, mot de passe et date de naissance (sert uniquement à calculer ton âge — voir « Mineurs » ci-dessous — jamais affichée telle quelle). Profil : pseudo, ville, e-mail de contact affiché aux autres utilisateurs. Optionnel : prénom, âge calculé, description de ton profil de joueur, catégories de jeux préférées, accessoire d'avatar — chacun visible publiquement uniquement si tu l'autorises explicitement. Ludothèque : liste des jeux que tu ajoutes (via la recherche BoardGameGeek). Les photos et informations de la section « Mes souvenirs » restent uniquement sur ton téléphone et ne sont jamais envoyées à nos serveurs."
         />
 
         <Paragraph
@@ -65,7 +65,7 @@ export default function PolitiqueConfidentialiteScreen() {
 
         <Paragraph
           title="Mineurs"
-          text="L'application est réservée aux personnes de 16 ans ou plus, sur la base d'une déclaration à l'inscription."
+          text="L'application elle-même n'a pas d'âge minimum pour créer un compte : ta date de naissance nous sert uniquement à calculer ton âge. La fonctionnalité « Trouver des joueurs » (annuaire, mise en relation, contact) est en revanche réservée aux personnes de 18 ans ou plus — elle se débloque automatiquement le jour de tes 18 ans, sans rien avoir à refaire."
         />
       </ScrollView>
     </SafeAreaView>

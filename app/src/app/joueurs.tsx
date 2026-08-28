@@ -10,6 +10,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { listAllPlayers, searchPlayersByVille, type PlayerResult } from '@/lib/joueurs';
+import { computeAge, MIN_CONTACT_AGE } from '@/lib/moderation';
 
 function SignedOutPrompt() {
   return (
@@ -78,6 +79,8 @@ export default function JoueursScreen() {
   if (!user) return <SignedOutPrompt />;
 
   const ownProfileVisible = Boolean(profile?.visibleToPlayers);
+  const ownAge = computeAge(profile?.birthdate);
+  const isMinor = ownAge !== null && ownAge < MIN_CONTACT_AGE;
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -90,7 +93,15 @@ export default function JoueursScreen() {
             <ThemedText type="title" style={styles.pageTitle}>
               Joueurs
             </ThemedText>
-            {!ownProfileVisible ? (
+            {!ownProfileVisible && isMinor ? (
+              <ThemedView type="backgroundElement" style={styles.visibilityHint}>
+                <ThemedText type="small">
+                  Réservé aux {MIN_CONTACT_AGE} ans et plus — tu ne peux pas encore être vu(e) ni
+                  contacter d’autres joueurs. Ça se débloquera automatiquement le jour de tes{' '}
+                  {MIN_CONTACT_AGE} ans.
+                </ThemedText>
+              </ThemedView>
+            ) : !ownProfileVisible ? (
               <Link href="/profil" asChild>
                 <Pressable>
                   <ThemedView type="backgroundElement" style={styles.visibilityHint}>

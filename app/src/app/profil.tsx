@@ -14,7 +14,13 @@ import { deleteAccount, signIn, signOut, signUp } from '@/lib/auth';
 import { DEFAULT_VISIBILITY, updateUserProfile, useAuth, type ProfileVisibility } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { isFirebaseConfigured } from '@/lib/firebase';
-import { meetsContactAge } from '@/lib/moderation';
+import {
+  computeAge,
+  formatBirthdateInput,
+  meetsMinAge,
+  MIN_CONTACT_AGE,
+  parseBirthdateInput,
+} from '@/lib/moderation';
 import { submitSuggestion } from '@/lib/suggestions';
 
 function PrimaryButton({
@@ -48,7 +54,7 @@ function AuthForms() {
   const [password, setPassword] = useState('');
   const [pseudo, setPseudo] = useState('');
   const [ville, setVille] = useState('');
-  const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [birthdateInput, setBirthdateInput] = useState('');
   const [cguAccepted, setCguAccepted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -59,9 +65,17 @@ function AuthForms() {
       setError('Renseigne ton e-mail et ton mot de passe.');
       return;
     }
-    if (mode === 'inscription' && (!pseudo || !ville || !ageConfirmed)) {
-      setError('Renseigne un pseudo, une ville, et confirme que tu as 16 ans ou plus.');
+    if (mode === 'inscription' && (!pseudo || !ville)) {
+      setError('Renseigne un pseudo et une ville.');
       return;
+    }
+    let birthdate: Date | null = null;
+    if (mode === 'inscription') {
+      birthdate = parseBirthdateInput(birthdateInput);
+      if (!birthdate) {
+        setError('Indique ta date de naissance au format JJ/MM/AAAA.');
+        return;
+      }
     }
     if (mode === 'inscription' && !cguAccepted) {
       setError('Tu dois accepter les CGU et la politique de confidentialité pour créer un compte.');
@@ -70,7 +84,7 @@ function AuthForms() {
     setSubmitting(true);
     try {
       if (mode === 'inscription') {
-        await signUp({ email, password, pseudo, ville, ageConfirmed });
+        await signUp({ email, password, pseudo, ville, birthdate: birthdate! });
       } else {
         await signIn(email, password);
       }
@@ -106,10 +120,12 @@ function AuthForms() {
         <>
           <FormField label="Pseudo" value={pseudo} onChangeText={setPseudo} />
           <FormField label="Ville" value={ville} onChangeText={setVille} />
-          <CheckboxRow
-            label="J’ai 16 ans ou plus"
-            checked={ageConfirmed}
-            onToggle={() => setAgeConfirmed((value) => !value)}
+          <FormField
+            label={`Date de naissance (JJ/MM/AAAA) — sert uniquement à débloquer "Trouver des joueurs" à partir de ${MIN_CONTACT_AGE} ans`}
+            value={birthdateInput}
+            onChangeText={setBirthdateInput}
+            placeholder="ex: 14/03/1995"
+            keyboardType="numbers-and-punctuation"
           />
 
           <ThemedText type="small" themeColor="textSecondary">
@@ -217,7 +233,9 @@ function EditProfileForm() {
   const { content } = useContent();
 
   const [prenom, setPrenom] = useState(profile?.prenom ?? '');
-  const [age, setAge] = useState(profile?.age ? String(profile.age) : '');
+  const [birthdateInput, setBirthdateInput] = useState(
+    profile?.birthdate ? formatBirthdateInput(profile.birthdate.toDate()) : ''
+  );
   const [description, setDescription] = useState(profile?.description ?? '');
   const [categories, setCategories] = useState<string[]>(profile?.categoriesPreferees ?? []);
   const [visibility, setVisibility] = useState<ProfileVisibility>(
@@ -230,15 +248,16 @@ function EditProfileForm() {
 
   useEffect(() => {
     setPrenom(profile?.prenom ?? '');
-    setAge(profile?.age ? String(profile.age) : '');
+    setBirthdateInput(profile?.birthdate ? formatBirthdateInput(profile.birthdate.toDate()) : '');
     setDescription(profile?.description ?? '');
     setCategories(profile?.categoriesPreferees ?? []);
     setVisibility(profile?.visibility ?? DEFAULT_VISIBILITY);
     setVisibleToPlayers(profile?.visibleToPlayers ?? false);
   }, [profile]);
 
-  const parsedAgeForGate = age.trim() ? Number(age.trim()) : null;
-  const canBeVisible = meetsContactAge(parsedAgeForGate);
+  const parsedBirthdateForGate = birthdateInput.trim() ? parseBirthdateInput(birthdateInput) : null;
+  const displayedAge = computeAge(parsedBirthdateForGate);
+  const canBeVisible = meetsMinAge(parsedBirthdateForGate, MIN_CONTACT_AGE);
 
   function toggleCategory(slug: string) {
     setCategories((prev) =>
@@ -251,20 +270,24 @@ function EditProfileForm() {
     setSaving(true);
     setSaved(false);
     setError(null);
-    const parsedAge = age.trim() ? Number(age.trim()) : null;
-    if (age.trim() && (!Number.isFinite(parsedAge) || parsedAge! < 0 || parsedAge! > 120)) {
-      setError('Âge invalide.');
-      setSaving(false);
-      return;
+    let birthdate: Date | undefined;
+    if (birthdateInput.trim()) {
+      const parsed = parseBirthdateInput(birthdateInput);
+      if (!parsed) {
+        setError('Date de naissance invalide (format JJ/MM/AAAA).');
+        setSaving(false);
+        return;
+      }
+      birthdate = parsed;
     }
     try {
       await updateUserProfile(user.uid, {
         prenom: prenom.trim(),
-        age: parsedAge,
+        birthdate,
         description: description.trim(),
         categoriesPreferees: categories,
         visibility,
-        visibleToPlayers: meetsContactAge(parsedAge) && visibleToPlayers,
+        visibleToPlayers: meetsMinAge(birthdate, MIN_CONTACT_AGE) && visibleToPlayers,
       });
       await refreshProfile();
       setSaved(true);
@@ -292,7 +315,18 @@ function EditProfileForm() {
         onToggle={() => setVisibility((v) => ({ ...v, prenom: !v.prenom }))}
       />
 
-      <FormField label="Âge" value={age} onChangeText={setAge} keyboardType="number-pad" />
+      <FormField
+        label="Date de naissance (JJ/MM/AAAA)"
+        value={birthdateInput}
+        onChangeText={setBirthdateInput}
+        placeholder="ex: 14/03/1995"
+        keyboardType="numbers-and-punctuation"
+      />
+      {displayedAge !== null ? (
+        <ThemedText type="small" themeColor="textSecondary">
+          Âge calculé : {displayedAge} ans
+        </ThemedText>
+      ) : null}
       <CheckboxRow
         label="Afficher mon âge sur mon profil public"
         checked={visibility.age}
@@ -327,7 +361,9 @@ function EditProfileForm() {
       />
       {!canBeVisible ? (
         <ThemedText type="small" themeColor="textSecondary">
-          Indique un âge de 18 ans ou plus ci-dessus pour pouvoir l’activer.
+          {parsedBirthdateForGate
+            ? `Désactivé car tu as moins de ${MIN_CONTACT_AGE} ans d’après ta date de naissance — ça se débloquera tout seul le jour de tes ${MIN_CONTACT_AGE} ans, sans rien avoir à refaire.`
+            : `Indique ta date de naissance ci-dessus pour savoir si tu peux l’activer (réservé aux ${MIN_CONTACT_AGE} ans et plus).`}
         </ThemedText>
       ) : null}
 

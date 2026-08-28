@@ -13,6 +13,7 @@ import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
 import { useContent } from '@/lib/content';
 import { getPlayer, getPlayerLudotheque, reportPlayer, type PlayerResult } from '@/lib/joueurs';
+import { computeAge, MIN_CONTACT_AGE } from '@/lib/moderation';
 import { findCategory, findGame } from '@/lib/queries';
 
 export default function JoueurScreen() {
@@ -60,6 +61,9 @@ export default function JoueurScreen() {
   const viewerCanContact = Boolean(profile?.visibleToPlayers);
   const targetCanBeContacted = Boolean(player.visibleToPlayers);
   const contactAllowed = viewerCanContact && targetCanBeContacted;
+  const viewerAge = computeAge(profile?.birthdate);
+  const viewerIsMinor = viewerAge !== null && viewerAge < MIN_CONTACT_AGE;
+  const playerAge = computeAge(player.birthdate);
   const categoryNames =
     content && visibility?.categoriesPreferees
       ? (player.categoriesPreferees ?? [])
@@ -78,7 +82,9 @@ export default function JoueurScreen() {
         {visibility?.prenom && player.prenom ? (
           <ThemedText type="small">Prénom : {player.prenom}</ThemedText>
         ) : null}
-        {visibility?.age && player.age ? <ThemedText type="small">Âge : {player.age}</ThemedText> : null}
+        {visibility?.age && playerAge !== null ? (
+          <ThemedText type="small">Âge : {playerAge}</ThemedText>
+        ) : null}
         <ThemedText type="small" themeColor="textSecondary">
           {player.ville}
         </ThemedText>
@@ -108,7 +114,9 @@ export default function JoueurScreen() {
           <ThemedText type="small" themeColor="textSecondary" style={styles.contactUnavailable}>
             {viewerCanContact
               ? 'Le contact n’est pas disponible pour ce profil.'
-              : 'Active « Être visible par les autres joueurs » dans ton profil (réservé aux 18 ans et plus) pour pouvoir contacter d’autres joueurs.'}
+              : viewerIsMinor
+                ? `Réservé aux ${MIN_CONTACT_AGE} ans et plus — ça se débloquera automatiquement le jour de tes ${MIN_CONTACT_AGE} ans.`
+                : 'Active « Être visible par les autres joueurs » dans ton profil pour pouvoir contacter d’autres joueurs.'}
           </ThemedText>
         )}
 

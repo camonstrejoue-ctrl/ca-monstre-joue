@@ -9,12 +9,19 @@ import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import { createUserProfile } from '@/lib/auth-context';
 import { auth, db } from '@/lib/firebase';
 
+// Pas de restriction d'âge à l'inscription : la date de naissance est
+// collectée pour tout le monde (utile plus tard, ex: rappel d'anniversaire),
+// mais SEULE la mise en relation entre joueurs ("Trouver des joueurs") est
+// réservée aux 18 ans et plus — voir MIN_CONTACT_AGE dans lib/moderation.ts,
+// appliqué dans profil.tsx (case "Être visible par les autres joueurs") et
+// dans les règles Firestore. Le reste de l'app (ludothèque, agenda, outils,
+// blog...) reste accessible quel que soit l'âge déclaré.
 export async function signUp(params: {
   email: string;
   password: string;
   pseudo: string;
   ville: string;
-  ageConfirmed: boolean;
+  birthdate: Date;
 }) {
   if (!auth) throw new Error('Firebase non configuré.');
   const credentials = await createUserWithEmailAndPassword(auth, params.email, params.password);
@@ -22,7 +29,7 @@ export async function signUp(params: {
     pseudo: params.pseudo,
     ville: params.ville,
     contactEmail: params.email,
-    ageConfirmed: params.ageConfirmed,
+    birthdate: params.birthdate,
   });
 }
 

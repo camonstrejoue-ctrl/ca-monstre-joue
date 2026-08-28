@@ -1,5 +1,5 @@
 import { onAuthStateChanged, type User } from 'firebase/auth';
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { doc, getDoc, serverTimestamp, setDoc, Timestamp } from 'firebase/firestore';
 import { createContext, useContext, useEffect, useState, type PropsWithChildren } from 'react';
 
 import { auth, db } from '@/lib/firebase';
@@ -23,11 +23,15 @@ export interface UserProfile {
   ville: string;
   villeLower: string;
   contactEmail: string;
-  ageConfirmed: boolean;
+  // Date de naissance, collectée obligatoirement à l'inscription (Firestore
+  // Timestamp). Sert à calculer l'âge à la volée (voir computeAge dans
+  // lib/moderation.ts) plutôt que de stocker un âge qui deviendrait obsolète
+  // — utilisé à la fois pour le seuil général de l'app (18 ans) et pour la
+  // visibilité dans "Trouver des joueurs".
+  birthdate: Timestamp;
   createdAt: unknown;
   // Champs optionnels, visibles sur le profil public seulement si autorisé via `visibility`.
   prenom?: string;
-  age?: number;
   categoriesPreferees?: string[];
   // Description libre du profil de joueur : ce qu'on cherche, quel genre de
   // partenaires de jeu, dans quel contexte. Visible publiquement seulement
@@ -39,9 +43,9 @@ export interface UserProfile {
   // | 'paille' | 'sombrero', ou absent pour aucun accessoire.
   avatarAccessory?: string;
   // Visibilité dans l'annuaire "Joueurs" : décochée par défaut, ne peut être
-  // activée que si `age` est renseigné à 18 ans ou plus (voir MIN_CONTACT_AGE
-  // dans lib/moderation.ts). Contacter un autre joueur exige que SON PROPRE
-  // profil soit lui aussi visibleToPlayers.
+  // activée que si l'âge calculé depuis `birthdate` est de 18 ans ou plus
+  // (voir MIN_CONTACT_AGE dans lib/moderation.ts). Contacter un autre joueur
+  // exige que SON PROPRE profil soit lui aussi visibleToPlayers.
   visibleToPlayers?: boolean;
 }
 
@@ -105,7 +109,7 @@ export function useAuth() {
 
 export async function createUserProfile(
   uid: string,
-  data: { pseudo: string; ville: string; contactEmail: string; ageConfirmed: boolean }
+  data: { pseudo: string; ville: string; contactEmail: string; birthdate: Date }
 ) {
   if (!db) throw new Error('Firebase non configuré.');
   await setDoc(doc(db, 'users', uid), {
@@ -121,7 +125,7 @@ export async function updateUserProfile(
   uid: string,
   data: {
     prenom?: string;
-    age?: number | null;
+    birthdate?: Date;
     categoriesPreferees?: string[];
     description?: string;
     visibility?: ProfileVisibility;

@@ -25,7 +25,7 @@ export default function CguScreen() {
 
         <Paragraph
           title="Âge minimum"
-          text="L’application met en relation des joueurs pour organiser des parties ou des prêts/échanges de jeux. Elle est réservée aux personnes de 16 ans ou plus, sur la base d’une déclaration à l’inscription."
+          text="L’application met en relation des joueurs pour organiser des parties ou des prêts/échanges de jeux. Elle est réservée aux personnes de 18 ans ou plus, sur la base d’une déclaration à l’inscription."
         />
         <Paragraph
           title="Tes données"

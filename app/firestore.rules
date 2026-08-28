@@ -6,14 +6,18 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // `visibleToPlayers` ne peut être activé (true) que si l'âge déclaré
-    // dans le même document est un nombre >= 18 — reflète côté base de
-    // données la règle déjà appliquée côté app (voir MIN_CONTACT_AGE dans
-    // app/src/lib/moderation.ts), pour qu'un client modifié ne puisse pas
-    // se rendre visible sans avoir déclaré 18 ans ou plus.
+    // `visibleToPlayers` ne peut être activé (true) que si `birthdate`
+    // (Timestamp) correspond à 18 ans ou plus — reflète côté base de données
+    // la règle déjà appliquée côté app (voir MIN_CONTACT_AGE et computeAge
+    // dans app/src/lib/moderation.ts), pour qu'un client modifié ne puisse
+    // pas se rendre visible sans être réellement majeur. Approximation par
+    // millisecondes (365.25 j/an, comme une année moyenne avec bissextiles) :
+    // à quelques heures près autour de l'anniversaire exact, ce qui est
+    // largement suffisant pour ce garde-fou.
     function isValidVisibility(data) {
       return data.visibleToPlayers != true
-        || (data.age is number && data.age >= 18);
+        || (data.birthdate is timestamp
+          && data.birthdate.toMillis() <= request.time.toMillis() - 18 * 365.25 * 24 * 60 * 60 * 1000);
     }
 
     // Profil + ludothèque : un utilisateur connecté peut toujours lire son
