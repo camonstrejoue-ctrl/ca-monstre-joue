@@ -62,6 +62,16 @@ service cloud.firestore {
             || get(/databases/$(database)/documents/users/$(userId)).data.visibleToPlayers == true);
         allow write: if request.auth != null && request.auth.uid == userId;
       }
+
+      // Liste au Père Noël : même principe que la ludothèque (jeux qu'on ne
+      // possède pas mais qu'on aimerait recevoir), visible publiquement dans
+      // les mêmes conditions.
+      match /pereNoel/{gameSlug} {
+        allow read: if request.auth != null
+          && (request.auth.uid == userId
+            || get(/databases/$(database)/documents/users/$(userId)).data.visibleToPlayers == true);
+        allow write: if request.auth != null && request.auth.uid == userId;
+      }
     }
 
     // Agenda : événements publics (festivals, tournois en boutique, soirées
@@ -98,8 +108,8 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
-    // Formulaires du site (js/firebase-forms.js) : contact.html et
-    // "Proposer un événement" sur agenda.html. Écriture ouverte à tous
+    // Formulaires du site (js/firebase-forms.js, pas l'app) : contact.html
+    // et "Proposer un événement" sur agenda.html. Écriture ouverte à tous
     // (y compris sans compte, comme le reste du site) mais validée contre
     // la forme exacte attendue par le formulaire ; lecture réservée à la
     // console Firebase, comme reports/suggestions ci-dessus.

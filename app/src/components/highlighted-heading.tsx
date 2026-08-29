@@ -14,7 +14,7 @@ export function HighlightedHeading({
 }) {
   return (
     <StickerBox
-      backgroundColor={Brand.coral}
+      backgroundColor={Brand.ice}
       radius={Radius.sm}
       shadowOffset={4}
       style={[styles.wrap, style]}>

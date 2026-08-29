@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router, usePathname } from 'expo-router';
 import type { ComponentProps } from 'react';
 import { useState } from 'react';
-import { Modal, Pressable, StyleSheet } from 'react-native';
+import { Modal, Platform, Pressable, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
@@ -10,29 +10,31 @@ import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TabHref = '/' | '/mon-univers' | '/agenda' | '/outils';
+type TabHref = '/' | '/ludotheque' | '/joueurs' | '/outils' | '/profil';
 
+// Cinq destinations directes, à plat — plus de sous-menu "Mon univers" à
+// traverser pour la ludothèque : chaque onglet mène droit à sa
+// destination, en 1 tap partout.
 const TABS: {
   href: TabHref;
   label: string;
   icon: ComponentProps<typeof Ionicons>['name'];
-  // Autres routes qui doivent aussi surligner cet onglet.
   matchAlso?: string[];
 }[] = [
   { href: '/', label: 'Accueil', icon: 'home' },
-  { href: '/mon-univers', label: 'Mon univers', icon: 'planet', matchAlso: ['/ludotheque', '/outils/souvenirs'] },
-  { href: '/agenda', label: 'Agenda', icon: 'calendar' },
-  { href: '/outils', label: 'Outils', icon: 'dice' },
+  { href: '/ludotheque', label: 'Ludothèque', icon: 'library' },
+  { href: '/joueurs', label: 'Joueurs', icon: 'people' },
+  { href: '/outils', label: 'Outils', icon: 'dice', matchAlso: ['/outils/souvenirs'] },
+  { href: '/profil', label: 'Profil', icon: 'person-circle' },
 ];
 
 const MENU_ITEMS: {
-  href: '/catalogue' | '/joueurs' | '/profil';
+  href: '/catalogue' | '/agenda';
   label: string;
   icon: ComponentProps<typeof Ionicons>['name'];
 }[] = [
+  { href: '/agenda', label: 'Agenda', icon: 'calendar' },
   { href: '/catalogue', label: 'Blog', icon: 'newspaper' },
-  { href: '/joueurs', label: 'Joueurs', icon: 'people' },
-  { href: '/profil', label: 'Profil', icon: 'person-circle' },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -40,6 +42,12 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+// Barre flottante en pilule noire, icônes seules — idée empruntée à une
+// référence de design partagée par l'utilisateur (nav du bas en pilule
+// sombre flottante). Reste en flux normal (pas de position absolute) :
+// simplement une bordure/marge tout autour qui laisse voir le fond crème
+// de la page, donnant l'effet "flottant" sans devoir ajouter du padding
+// bas partout ailleurs dans l'app.
 export function BottomTabBar() {
   const pathname = usePathname();
   const theme = useTheme();
@@ -50,29 +58,43 @@ export function BottomTabBar() {
 
   return (
     <>
-      <ThemedView style={[styles.bar, { paddingBottom: insets.bottom || Spacing.two }]}>
-        {TABS.map((tab) => {
-          const active = isActive(pathname, tab.href) || tab.matchAlso?.some((h) => isActive(pathname, h));
-          const color = active ? theme.text : theme.textSecondary;
-          return (
-            <Pressable key={tab.href} style={styles.tab} onPress={() => router.push(tab.href)}>
-              <Ionicons name={tab.icon} size={20} color={color} />
-              <ThemedText type="small" style={[styles.label, { color }]} numberOfLines={1}>
-                {tab.label}
-              </ThemedText>
-            </Pressable>
-          );
-        })}
-        <Pressable style={styles.tab} onPress={() => setMenuOpen(true)}>
-          <Ionicons name="menu" size={20} color={menuActive ? theme.text : theme.textSecondary} />
-          <ThemedText
-            type="small"
-            style={[styles.label, { color: menuActive ? theme.text : theme.textSecondary }]}
-            numberOfLines={1}>
-            Plus
-          </ThemedText>
-        </Pressable>
-      </ThemedView>
+      <View style={[styles.wrap, { paddingBottom: insets.bottom || Spacing.two }]}>
+        <View style={styles.pill}>
+          {TABS.map((tab) => {
+            const active = isActive(pathname, tab.href) || tab.matchAlso?.some((h) => isActive(pathname, h));
+            return (
+              <Pressable
+                key={tab.href}
+                style={styles.tab}
+                onPress={() => router.push(tab.href)}
+                accessibilityLabel={tab.label}
+                accessibilityRole="tab"
+                accessibilityState={{ selected: active }}>
+                <View style={[styles.iconWrap, active && styles.iconWrapActive]}>
+                  <Ionicons
+                    name={tab.icon}
+                    size={20}
+                    color={active ? Brand.black : 'rgba(255,255,255,0.6)'}
+                  />
+                </View>
+              </Pressable>
+            );
+          })}
+          <Pressable
+            style={styles.tab}
+            onPress={() => setMenuOpen(true)}
+            accessibilityLabel="Plus"
+            accessibilityRole="button">
+            <View style={[styles.iconWrap, menuActive && styles.iconWrapActive]}>
+              <Ionicons
+                name="menu"
+                size={20}
+                color={menuActive ? Brand.black : 'rgba(255,255,255,0.6)'}
+              />
+            </View>
+          </Pressable>
+        </View>
+      </View>
 
       <Modal visible={menuOpen} transparent animationType="fade" onRequestClose={() => setMenuOpen(false)}>
         <Pressable style={styles.backdrop} onPress={() => setMenuOpen(false)}>
@@ -98,14 +120,33 @@ export function BottomTabBar() {
 }
 
 const styles = StyleSheet.create({
-  bar: {
+  wrap: { paddingHorizontal: Spacing.four, paddingTop: Spacing.two },
+  pill: {
     flexDirection: 'row',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: 'rgba(128,128,128,0.3)',
-    paddingTop: Spacing.two,
+    backgroundColor: Brand.black,
+    borderRadius: 999,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    ...Platform.select({
+      web: { boxShadow: '0 10px 24px rgba(26,26,26,0.35)' },
+      default: {
+        shadowColor: '#1A1A1A',
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.3,
+        shadowRadius: 16,
+        elevation: 8,
+      },
+    }),
   },
-  tab: { flex: 1, alignItems: 'center', gap: 2, paddingHorizontal: 2 },
-  label: { fontSize: 9.5 },
+  tab: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  iconWrap: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconWrapActive: { backgroundColor: Brand.ice },
   backdrop: {
     flex: 1,
     backgroundColor: 'rgba(26,26,26,0.4)',
@@ -114,9 +155,6 @@ const styles = StyleSheet.create({
   sheet: {
     borderTopLeftRadius: Radius.lg,
     borderTopRightRadius: Radius.lg,
-    borderWidth: 3,
-    borderColor: Brand.black,
-    borderBottomWidth: 0,
     padding: Spacing.four,
     gap: Spacing.two,
   },

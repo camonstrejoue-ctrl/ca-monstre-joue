@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, TextInput } from 'react-native';
+import { FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ContentState } from '@/components/content-state';
@@ -37,7 +37,7 @@ export default function CatalogueScreen() {
         contentContainerStyle={styles.list}
         keyboardShouldPersistTaps="handled"
         ListHeaderComponent={
-          <ThemedView style={styles.header}>
+          <View style={styles.header}>
             <ThemedText type="title" style={styles.pageTitle}>
               Blog
             </ThemedText>
@@ -59,7 +59,7 @@ export default function CatalogueScreen() {
             </ThemedView>
 
             {query.trim() ? (
-              <ThemedView style={styles.searchResults}>
+              <View style={styles.searchResults}>
                 {matches.length === 0 ? (
                   <ThemedText type="small" themeColor="textSecondary" style={styles.noResults}>
                     Aucun jeu ne correspond à « {query.trim()} ».
@@ -77,20 +77,20 @@ export default function CatalogueScreen() {
                     </Link>
                   ))
                 )}
-              </ThemedView>
+              </View>
             ) : null}
-          </ThemedView>
+          </View>
         }
         renderItem={({ item }) => (
           <Link href={{ pathname: '/jeu/[slug]', params: { slug: item.slug } }} asChild>
             <Pressable style={styles.gameCard}>
               <CoverImage path={item.thumbnail || item.cover} style={styles.gameImage} />
-              <ThemedView style={styles.gameInfo}>
+              <View style={styles.gameInfo}>
                 <ThemedText type="smallBold">{item.name}</ThemedText>
                 <ThemedText type="small" themeColor="textSecondary">
                   {item.identity.players} joueurs · {item.identity.duration}
                 </ThemedText>
-              </ThemedView>
+              </View>
             </Pressable>
           </Link>
         )}

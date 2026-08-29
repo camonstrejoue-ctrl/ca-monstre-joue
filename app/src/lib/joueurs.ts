@@ -2,6 +2,8 @@ import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where
 
 import type { UserProfile } from '@/lib/auth-context';
 import { db } from '@/lib/firebase';
+import type { PereNoelEntry } from '@/lib/liste-pere-noel';
+import type { LudothequeEntry } from '@/lib/ludotheque';
 
 export interface PlayerResult extends UserProfile {
   uid: string;
@@ -49,11 +51,31 @@ export async function getPlayer(uid: string): Promise<PlayerResult | null> {
   }
 }
 
-export async function getPlayerLudotheque(uid: string): Promise<string[]> {
+// Renvoie les entrées complètes (nom, vignette, année...) plutôt que
+// juste les bggId : ça permet d'afficher la ludothèque/liste au Père Noël
+// d'un profil public même pour des jeux qui ne font pas partie du
+// catalogue du site (recherche BGG libre), sans dépendre d'un
+// rapprochement avec content.games.
+export async function getPlayerLudotheque(uid: string): Promise<LudothequeEntry[]> {
   if (!db) throw new Error('Firebase non configuré.');
   try {
     const snap = await getDocs(collection(db, 'users', uid, 'ludotheque'));
-    return snap.docs.map((d) => d.id);
+    return snap.docs
+      .map((d) => d.data() as Partial<LudothequeEntry>)
+      .filter((e): e is LudothequeEntry => Boolean(e.bggId && e.name));
+  } catch (err) {
+    if ((err as { code?: string }).code === 'permission-denied') return [];
+    throw err;
+  }
+}
+
+export async function getPlayerListePereNoel(uid: string): Promise<PereNoelEntry[]> {
+  if (!db) throw new Error('Firebase non configuré.');
+  try {
+    const snap = await getDocs(collection(db, 'users', uid, 'pereNoel'));
+    return snap.docs
+      .map((d) => d.data() as Partial<PereNoelEntry>)
+      .filter((e): e is PereNoelEntry => Boolean(e.bggId && e.name));
   } catch (err) {
     if ((err as { code?: string }).code === 'permission-denied') return [];
     throw err;

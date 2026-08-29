@@ -6,14 +6,35 @@
 
 import '@/global.css';
 
-// Palette de marque, identique à :root dans css/style.css
+// Palette de marque, identique à :root dans css/style.css — SAUF coral/
+// coralDark/coralLight sur cette branche de test, remplacés par une variante
+// "glacée" (bleu glace) qui colle mieux à l'identité Yeti de la mascotte,
+// à la demande de l'utilisateur. coral/coralDark/coralLight restent définis
+// (les cornes de l'avatar sont peintes en rouge dans les images, donc ce
+// rouge reste visible quoi qu'il arrive) mais ice/iceDark/iceLight
+// remplacent leur rôle d'accent principal dans l'UI sur cette branche.
 export const Brand = {
   coral: '#E8392A',
   coralDark: '#C22C1F',
   coralLight: '#FBE3E0',
+  ice: '#6DACEA',
+  iceDark: '#1E6690',
+  iceLight: '#D9EEFB',
+  // "Blanc glacé" — blanc à peine teinté de bleu (pas un blanc pur), pour
+  // le bloc Blog notamment : distinct du blanc franc utilisé ailleurs
+  // (bulle d'intro, cartes) tout en restant cohérent avec la palette glace.
+  iceWhite: '#F4FAFE',
   green: '#2F9E52',
   greenDark: '#227A3F',
   greenLight: '#E4F5E9',
+  // Rouge flamme pour le bloc Agenda (carte "en vedette" avec une bordure
+  // qui se consume, cf. NavTile `shimmer` / ShimmerGlow) — à part du reste
+  // de la palette, volontairement, pour rester un accent ponctuel plutôt
+  // qu'une couleur de fond récurrente. Remplace l'ancien doré.
+  flame: '#E8432A',
+  flameDark: '#8A220A',
+  flameBright: '#FFB347',
+  flameLight: '#FDE4DA',
   black: '#1A1A1A',
   cream: '#F5F5F5',
   creamDark: '#E7E7E7',
@@ -27,7 +48,7 @@ export const Brand = {
 export const Colors = {
   light: {
     text: Brand.black,
-    background: Brand.coralLight,
+    background: Brand.iceLight,
     backgroundElement: Brand.white,
     // Reste blanc (pas corail plein) : beaucoup d'endroits affichent du texte
     // noir par-dessus cette couleur, qui serait peu lisible sur un corail

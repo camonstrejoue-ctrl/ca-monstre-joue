@@ -16,11 +16,18 @@ import { useEffect } from 'react';
 import { View } from 'react-native';
 
 import { BottomTabBar } from '@/components/bottom-tab-bar';
+import { IcyBackground } from '@/components/icy-background';
 import { Fonts } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { AuthProvider } from '@/lib/auth-context';
 
 SplashScreen.preventAutoHideAsync();
+
+// DefaultTheme (React Navigation) peint son propre fond opaque
+// (rgb(242,242,242)) derrière chaque écran, par-dessus l'<IcyBackground />
+// posé juste en dessous du Stack — sans ce correctif le dégradé/texture
+// glacée reste invisible malgré un contentStyle transparent sur le Stack.
+const NAV_THEME = { ...DefaultTheme, colors: { ...DefaultTheme.colors, background: 'transparent' } };
 
 export default function RootLayout() {
   const theme = useTheme();
@@ -43,24 +50,34 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <ThemeProvider value={DefaultTheme}>
+    <ThemeProvider value={NAV_THEME}>
       <AuthProvider>
-        <View style={{ flex: 1, backgroundColor: theme.background }}>
+        <View style={{ flex: 1 }}>
+          <IcyBackground />
           <Stack
             screenOptions={{
+              // Pas de headerTransparent : plusieurs écrans (ex. profil/editer,
+              // jeu/[slug]) supposent un header opaque qui pousse leur contenu
+              // vers le bas plutôt que de passer dessous. On garde juste une
+              // teinte glace unie proche du dégradé pour rester cohérent, sans
+              // toucher au comportement de mise en page de chaque écran.
               headerStyle: { backgroundColor: theme.background },
               headerTintColor: theme.text,
               headerTitleStyle: { color: theme.text, fontFamily: Fonts.display },
-              contentStyle: { backgroundColor: theme.background },
+              contentStyle: { backgroundColor: 'transparent' },
             }}>
             <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="monde-du-jeu" />
-            <Stack.Screen name="mon-univers" />
             <Stack.Screen name="catalogue" options={{ headerShown: false }} />
             <Stack.Screen name="ludotheque" options={{ headerShown: false }} />
+            <Stack.Screen name="liste-pere-noel" options={{ title: '' }} />
             <Stack.Screen name="joueurs" options={{ headerShown: false }} />
             <Stack.Screen name="agenda" options={{ headerShown: false }} />
             <Stack.Screen name="profil" options={{ headerShown: false }} />
+            <Stack.Screen name="profil/editer" options={{ title: 'Éditer mon profil' }} />
+            <Stack.Screen
+              name="profil/confidentialite"
+              options={{ title: 'Trouver des joueurs' }}
+            />
             <Stack.Screen name="outils" options={{ headerShown: false }} />
             <Stack.Screen name="outils/des" />
             <Stack.Screen name="outils/score" />

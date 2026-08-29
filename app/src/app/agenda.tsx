@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Linking, Pressable, StyleSheet } from 'react-native';
+import { Alert, FlatList, Linking, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/components/form-field';
@@ -29,7 +29,7 @@ function formatEventDateTime(event: CommunityEvent) {
 
 function SignedOutHint() {
   return (
-    <ThemedView style={styles.hintBox}>
+    <View style={styles.hintBox}>
       <ThemedText type="small" themeColor="textSecondary">
         Connecte-toi pour publier un événement.
       </ThemedText>
@@ -38,7 +38,7 @@ function SignedOutHint() {
           <ThemedText type="link">Aller à Profil</ThemedText>
         </Pressable>
       </Link>
-    </ThemedView>
+    </View>
   );
 }
 
@@ -107,7 +107,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   }
 
   return (
-    <ThemedView style={styles.form}>
+    <View style={styles.form}>
       <FormField label="Nom de l'événement" value={title} onChangeText={setTitle} />
       <FormField label="Lieu" value={location} onChangeText={setLocation} />
       <FormField
@@ -157,7 +157,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
           <ThemedText type="smallBold">Publier l’événement</ThemedText>
         </ThemedView>
       </Pressable>
-    </ThemedView>
+    </View>
   );
 }
 
@@ -167,6 +167,13 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
   const [reportSent, setReportSent] = useState(false);
   const isOwner = uid && event.createdBy === uid;
   const isLink = /^https?:\/\//.test(event.contact);
+
+  function confirmRemove() {
+    Alert.alert('Supprimer cet événement ?', `« ${event.title} » sera définitivement supprimé.`, [
+      { text: 'Annuler', style: 'cancel' },
+      { text: 'Supprimer', style: 'destructive', onPress: () => removeEvent(event.id) },
+    ]);
+  }
 
   return (
     <ThemedView type="backgroundElement" style={styles.card}>
@@ -185,9 +192,9 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
         <ThemedText type="small">Contact : {event.contact}</ThemedText>
       )}
 
-      <ThemedView style={styles.cardFooter}>
+      <View style={styles.cardFooter}>
         {isOwner ? (
-          <Pressable onPress={() => removeEvent(event.id)}>
+          <Pressable onPress={confirmRemove}>
             <ThemedText type="small" style={styles.removeLink}>
               Supprimer
             </ThemedText>
@@ -205,10 +212,10 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
             </Pressable>
           )
         ) : null}
-      </ThemedView>
+      </View>
 
       {showReport ? (
-        <ThemedView style={styles.reportForm}>
+        <View style={styles.reportForm}>
           <FormField label="Raison du signalement" value={reportReason} onChangeText={setReportReason} />
           <Pressable
             onPress={async () => {
@@ -222,7 +229,7 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
               <ThemedText type="small">Envoyer</ThemedText>
             </ThemedView>
           </Pressable>
-        </ThemedView>
+        </View>
       ) : null}
     </ThemedView>
   );
@@ -240,7 +247,7 @@ export default function AgendaScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         ListHeaderComponent={
-          <ThemedView style={styles.header}>
+          <View style={styles.header}>
             <ThemedText type="title" style={styles.pageTitle}>
               Agenda
             </ThemedText>
@@ -269,7 +276,7 @@ export default function AgendaScreen() {
                 Aucun événement à venir pour l’instant.
               </ThemedText>
             ) : null}
-          </ThemedView>
+          </View>
         }
         renderItem={({ item }) => <EventCard event={item} uid={user?.uid} />}
       />

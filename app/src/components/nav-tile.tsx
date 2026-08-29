@@ -1,31 +1,120 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Link, type Href } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { CoverImage } from '@/components/cover-image';
-import { StickerBox } from '@/components/sticker';
+import { PopBounce, ShimmerGlow } from '@/components/shimmer-glow';
+import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 
+type IconTileColor = 'ice' | 'green' | 'cream' | 'flame' | 'frost';
+
+// Même logique que .shortcut-card sur le site (css/style.css) : grande carte
+// pleine couleur, gros pictogramme, petite étiquette en majuscules au-dessus
+// du titre — plutôt qu'une simple ligne blanche avec une icône minuscule
+// (look "réglages système" jugé trop plat).
+const ICON_TILE_COLORS: Record<IconTileColor, { bg: string; icon: string; tag: string }> = {
+  ice: { bg: Brand.iceLight, icon: Brand.iceDark, tag: Brand.iceDark },
+  green: { bg: Brand.greenLight, icon: Brand.greenDark, tag: Brand.greenDark },
+  cream: { bg: Brand.creamDark, icon: Brand.black, tag: Brand.iceDark },
+  flame: { bg: Brand.flameLight, icon: Brand.flameDark, tag: Brand.flameDark },
+  frost: { bg: Brand.iceWhite, icon: Brand.iceDark, tag: Brand.iceDark },
+};
+
 /**
- * Gros bouton de navigation façon carte : image de fond (test en attendant
- * une illustration dédiée), voile sombre, libellé centré en gros — même
- * style que "Trouver des joueurs près de chez moi" sur l'accueil.
+ * Gros bouton de navigation façon carte. Deux variantes :
+ * - `icon` (recommandée) : grande carte de couleur, pictogramme, étiquette +
+ *   titre — ne dépend d'aucune illustration dédiée.
+ * - `image` (ancienne variante, conservée pour compat) : photo de fond avec
+ *   voile sombre — évite de recycler une photo de jeu sans rapport avec la
+ *   destination, à réserver aux cas où une vraie image illustrative existe.
  */
-export function NavTile({ href, label, image }: { href: Href; label: string; image: string }) {
+export function NavTile({
+  href,
+  label,
+  description,
+  eyebrow,
+  icon,
+  color = 'ice',
+  image,
+  shimmer,
+}: {
+  href: Href;
+  label: string;
+  description?: string;
+  eyebrow?: string;
+  icon?: React.ComponentProps<typeof Ionicons>['name'];
+  color?: IconTileColor;
+  image?: string;
+  // Contour doré qui scintille (cf. ShimmerGlow) — réservé aux blocs qu'on
+  // veut mettre en avant ponctuellement (ex: Agenda sur l'accueil), pas un
+  // état générique de NavTile.
+  shimmer?: boolean;
+}) {
+  if (icon) {
+    const palette = ICON_TILE_COLORS[color];
+    const card = (
+      <Link href={href} asChild>
+        <Pressable>
+          <SoftCard backgroundColor={palette.bg} radius={Radius.lg}>
+            <View style={styles.iconCardRow}>
+              <View style={styles.iconSpacer} />
+              <View style={styles.iconText}>
+                {eyebrow ? (
+                  <ThemedText type="smallBold" style={[styles.eyebrow, { color: palette.tag }]}>
+                    {eyebrow}
+                  </ThemedText>
+                ) : null}
+                <ThemedText type="subtitle" style={styles.iconTitle}>
+                  {label}
+                </ThemedText>
+                {description ? (
+                  <ThemedText type="small" themeColor="textSecondary">
+                    {description}
+                  </ThemedText>
+                ) : null}
+              </View>
+            </View>
+          </SoftCard>
+        </Pressable>
+      </Link>
+    );
+    const tile = (
+      <View style={styles.iconTileWrap}>
+        {shimmer ? <ShimmerGlow radius={Radius.lg}>{card}</ShimmerGlow> : card}
+        {/* Badge-icône rond qui déborde du coin de la carte, ombre douce
+            plutôt que bordure noire — reprend directement l'esprit
+            "illustration qui déborde" de la référence de design. */}
+        <View style={styles.iconBadge} pointerEvents="none">
+          <SoftCard backgroundColor={Brand.white} radius={999} style={styles.iconBadgeCard}>
+            <View style={styles.iconBadgeInner}>
+              <Ionicons name={icon} size={30} color={palette.icon} />
+            </View>
+          </SoftCard>
+        </View>
+      </View>
+    );
+    // Le "pop" (carte + badge ensemble) toutes les 5s est réservé aux blocs
+    // `shimmer`, même logique que le contour doré : une mise en avant
+    // ponctuelle, pas un comportement par défaut de NavTile.
+    return shimmer ? <PopBounce>{tile}</PopBounce> : tile;
+  }
+
   return (
     <View style={styles.wrap}>
       <Link href={href} asChild>
         <Pressable style={styles.touchable}>
-          <StickerBox backgroundColor={Brand.white} radius={Radius.lg} style={styles.sticker}>
+          <SoftCard backgroundColor={Brand.white} radius={Radius.lg} style={styles.sticker}>
             <View style={styles.imageWrap}>
-              <CoverImage path={image} style={styles.image} />
+              <CoverImage path={image!} style={styles.image} />
               <View style={styles.overlay}>
                 <ThemedText type="smallBold" style={styles.label}>
                   {label}
                 </ThemedText>
               </View>
             </View>
-          </StickerBox>
+          </SoftCard>
         </Pressable>
       </Link>
     </View>
@@ -55,5 +144,37 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 26,
     color: Brand.white,
+  },
+  iconTileWrap: { position: 'relative', marginTop: 22 },
+  iconCardRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.four,
+    padding: Spacing.four,
+    minHeight: 108,
+  },
+  iconSpacer: { width: 40 },
+  iconText: { flex: 1, gap: 2 },
+  eyebrow: {
+    fontSize: 11,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
+    marginBottom: 2,
+  },
+  iconTitle: { fontSize: 19, lineHeight: 23 },
+  iconBadge: {
+    position: 'absolute',
+    top: -20,
+    left: 24,
+    width: 62,
+    height: 62,
+  },
+  iconBadgeCard: { width: 62, height: 62 },
+  iconBadgeInner: {
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

@@ -1,66 +1,43 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { StickerBox } from '@/components/sticker';
+import { NavTile } from '@/components/nav-tile';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Brand, Radius, Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
-
-function ToolCard({
-  href,
-  icon,
-  title,
-  description,
-}: {
-  href: '/outils/des' | '/outils/score';
-  icon: React.ComponentProps<typeof Ionicons>['name'];
-  title: string;
-  description: string;
-}) {
-  const theme = useTheme();
-  return (
-    <Link href={href} asChild>
-      <Pressable>
-        <StickerBox backgroundColor={Brand.white} radius={Radius.md}>
-          <View style={styles.cardInner}>
-            <Ionicons name={icon} size={32} color={theme.text} />
-            <View style={styles.cardText}>
-              <ThemedText type="smallBold">{title}</ThemedText>
-              <ThemedText type="small" themeColor="textSecondary">
-                {description}
-              </ThemedText>
-            </View>
-            <Ionicons name="chevron-forward" size={20} color={theme.textSecondary} />
-          </View>
-        </StickerBox>
-      </Pressable>
-    </Link>
-  );
-}
+import { Spacing } from '@/constants/theme';
 
 export default function OutilsScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      <ThemedView style={styles.content}>
+      <View style={styles.content}>
         <ThemedText type="title" style={styles.pageTitle}>
           Outils
         </ThemedText>
-        <ToolCard
+        <NavTile
           href="/outils/des"
           icon="dice"
-          title="Lanceur de dés"
+          eyebrow="Pendant la partie"
+          label="Lanceur de dés"
           description="Choisis le nombre de dés et lance-les"
+          color="ice"
         />
-        <ToolCard
+        <NavTile
           href="/outils/score"
           icon="trophy"
-          title="Compteur de points"
+          eyebrow="Pendant la partie"
+          label="Compteur de points"
           description="Suis les scores des joueurs pendant la partie"
+          color="frost"
         />
-      </ThemedView>
+        <NavTile
+          href="/outils/souvenirs"
+          icon="images"
+          eyebrow="Après la partie"
+          label="Mes souvenirs"
+          description="Garde une trace des événements auxquels tu as participé"
+          color="flame"
+          shimmer
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -69,12 +46,4 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   content: { padding: Spacing.four, gap: Spacing.four },
   pageTitle: { fontSize: 32, marginBottom: Spacing.two },
-  pressed: { opacity: 0.85 },
-  cardInner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: Spacing.three,
-    padding: Spacing.four,
-  },
-  cardText: { flex: 1, gap: 2 },
 });
