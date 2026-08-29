@@ -108,6 +108,13 @@ export function useUpcomingEvents() {
   return { events, loading };
 }
 
+// Firestore refuse une valeur de champ explicitement `undefined` (contrairement
+// à une clé absente) et fait échouer tout le setDoc — utilisé pour ne garder
+// que les champs optionnels réellement renseignés (endDate, endTime, poster...).
+function stripUndefined<T extends Record<string, unknown>>(data: T): Partial<T> {
+  return Object.fromEntries(Object.entries(data).filter(([, value]) => value !== undefined)) as Partial<T>;
+}
+
 export async function addEvent(
   uid: string,
   data: {
@@ -125,7 +132,12 @@ export async function addEvent(
 ) {
   if (!db) throw new Error('Firebase non configuré.');
   const ref = doc(collection(db, 'events'));
-  await setDoc(ref, { ...data, createdBy: uid, status: 'pending', createdAt: serverTimestamp() });
+  await setDoc(ref, {
+    ...stripUndefined(data),
+    createdBy: uid,
+    status: 'pending',
+    createdAt: serverTimestamp(),
+  });
 }
 
 export async function removeEvent(eventId: string) {
@@ -220,14 +232,16 @@ export async function publishEventSubmission(adminUid: string, submission: Event
     : submission.description;
   const ref = doc(collection(db, 'events'));
   await setDoc(ref, {
-    title: submission.title,
-    location: submission.location,
-    date: submission.date,
-    time: submission.time,
-    price: submission.price,
-    contact: submission.contact,
-    description,
-    poster: submission.imageUrl ?? undefined,
+    ...stripUndefined({
+      title: submission.title,
+      location: submission.location,
+      date: submission.date,
+      time: submission.time,
+      price: submission.price,
+      contact: submission.contact,
+      description,
+      poster: submission.imageUrl ?? undefined,
+    }),
     createdBy: adminUid,
     status: 'published',
     createdAt: serverTimestamp(),
