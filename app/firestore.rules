@@ -107,5 +107,26 @@ service cloud.firestore {
         && request.resource.data.userId == request.auth.uid;
       allow read, update, delete: if false;
     }
+
+    // Formulaires du site (js/firebase-forms.js, pas l'app) : contact.html
+    // et "Proposer un événement" sur agenda.html. Écriture ouverte à tous
+    // (y compris sans compte, comme le reste du site) mais validée contre
+    // la forme exacte attendue par le formulaire ; lecture réservée à la
+    // console Firebase, comme reports/suggestions ci-dessus.
+    match /contactSubmissions/{doc} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'message'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0
+        && request.resource.data.email is string && request.resource.data.email.size() > 0
+        && request.resource.data.message is string && request.resource.data.message.size() > 0
+        && request.resource.data.status == 'new';
+      allow read, update, delete: if false;
+    }
+
+    match /eventSubmissions/{doc} {
+      allow create: if request.resource.data.keys().hasAll(['title', 'date', 'time', 'location', 'description', 'price', 'contact'])
+        && request.resource.data.title is string && request.resource.data.title.size() > 0
+        && request.resource.data.status == 'pending';
+      allow read, update, delete: if false;
+    }
   }
 }
