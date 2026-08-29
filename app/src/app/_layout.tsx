@@ -72,6 +72,7 @@ export default function RootLayout() {
             <Stack.Screen name="liste-pere-noel" options={{ title: '' }} />
             <Stack.Screen name="joueurs" options={{ headerShown: false }} />
             <Stack.Screen name="agenda" options={{ headerShown: false }} />
+            <Stack.Screen name="admin/evenements" options={{ title: 'Modération — Agenda' }} />
             <Stack.Screen name="profil" options={{ headerShown: false }} />
             <Stack.Screen name="profil/editer" options={{ title: 'Éditer mon profil' }} />
             <Stack.Screen

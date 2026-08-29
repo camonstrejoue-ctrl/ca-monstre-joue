@@ -45,9 +45,9 @@ export async function signOut() {
 
 /**
  * Supprime le compte et les données personnelles de l'utilisateur (profil +
- * ludothèque). Les contenus publics qu'il a créés (événements, signalements,
- * suggestions) ne sont pas effacés en cascade — ils restent, mais ne sont
- * plus rattachés à un compte existant.
+ * ludothèque + liste au Père Noël). Les contenus publics qu'il a créés
+ * (événements, signalements, suggestions) ne sont pas effacés en cascade —
+ * ils restent, mais ne sont plus rattachés à un compte existant.
  *
  * Peut échouer avec "auth/requires-recent-login" si la connexion date de
  * trop longtemps : dans ce cas, l'appelant doit inviter l'utilisateur à se
@@ -58,8 +58,14 @@ export async function deleteAccount() {
   const user = auth.currentUser;
   if (!user) throw new Error('Aucun utilisateur connecté.');
 
-  const ludothequeSnap = await getDocs(collection(db, 'users', user.uid, 'ludotheque'));
-  await Promise.all(ludothequeSnap.docs.map((d) => deleteDoc(d.ref)));
+  const [ludothequeSnap, pereNoelSnap] = await Promise.all([
+    getDocs(collection(db, 'users', user.uid, 'ludotheque')),
+    getDocs(collection(db, 'users', user.uid, 'pereNoel')),
+  ]);
+  await Promise.all([
+    ...ludothequeSnap.docs.map((d) => deleteDoc(d.ref)),
+    ...pereNoelSnap.docs.map((d) => deleteDoc(d.ref)),
+  ]);
   await deleteDoc(doc(db, 'users', user.uid));
   await deleteUser(user);
 }

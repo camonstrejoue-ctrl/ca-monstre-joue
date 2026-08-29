@@ -19,6 +19,16 @@ service cloud.firestore {
       return eventEndMillis(data) + 24 * 60 * 60 * 1000 <= request.time.toMillis();
     }
 
+    // Uid du compte "administrateur" (le propriétaire de l'app/du site) —
+    // seul ce compte peut faire passer un événement de "pending" à
+    // "published" et voir/traiter les soumissions du site (eventSubmissions).
+    // Codé en dur plutôt qu'un champ "role" sur users/{uid} : plus simple à
+    // auditer pour un site à un seul propriétaire, et ça évite d'avoir à
+    // protéger ce champ contre une auto-modification par l'utilisateur.
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == 'Y2pQOvv87aPZrazoU1PPlNbaLdo1';
+    }
+
     // `visibleToPlayers` ne peut être activé (true) que si `birthdate`
     // (Timestamp) correspond à 18 ans ou plus — reflète côté base de données
     // la règle déjà appliquée côté app (voir MIN_CONTACT_AGE et computeAge
@@ -75,20 +85,31 @@ service cloud.firestore {
     }
 
     // Agenda : événements publics (festivals, tournois en boutique, soirées
-    // jeux entre particuliers, etc.), lisibles par tout le monde, y compris
-    // sans compte. Création/modification réservées à l'auteur. Suppression :
-    // réservée à l'auteur, SAUF un événement expiré que n'importe quel
+    // jeux entre particuliers, etc.). "pending" à la création (que ce soit
+    // depuis l'app, ou via l'écran de modération pour une soumission du
+    // site validée) — lisibles par tout le monde, y compris sans compte
+    // (pour le site statique), seulement une fois "published" par l'admin.
+    // Tant qu'un événement est "pending", seuls son auteur et l'admin le
+    // voient. Création/modification réservées à l'auteur, qui ne peut
+    // jamais changer le statut lui-même (sinon il pourrait s'auto-publier) ;
+    // l'admin peut tout modifier, y compris publier. Suppression : réservée
+    // à l'auteur ou à l'admin, SAUF un événement expiré que n'importe quel
     // client connecté peut nettoyer (voir cleanupExpiredEvents côté app) —
     // sans ça, les événements passés resteraient en base indéfiniment,
     // simplement cachés côté affichage.
     match /events/{eventId} {
-      allow read: if true;
+      allow read: if resource.data.status == 'published'
+        || (request.auth != null
+          && (request.auth.uid == resource.data.createdBy || isAdmin()));
       allow create: if request.auth != null
-        && request.resource.data.createdBy == request.auth.uid;
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.status == 'pending';
       allow update: if request.auth != null
-        && resource.data.createdBy == request.auth.uid;
+        && ((resource.data.createdBy == request.auth.uid
+              && request.resource.data.status == resource.data.status)
+            || isAdmin());
       allow delete: if request.auth != null
-        && (resource.data.createdBy == request.auth.uid || isExpiredEvent(resource.data));
+        && (resource.data.createdBy == request.auth.uid || isExpiredEvent(resource.data) || isAdmin());
     }
 
     // Signalements : n'importe quel utilisateur connecté peut en créer un,
@@ -126,7 +147,11 @@ service cloud.firestore {
       allow create: if request.resource.data.keys().hasAll(['title', 'date', 'time', 'location', 'description', 'price', 'contact'])
         && request.resource.data.title is string && request.resource.data.title.size() > 0
         && request.resource.data.status == 'pending';
-      allow read, update, delete: if false;
+      // Lecture/modification/suppression réservées à l'admin (voir isAdmin
+      // plus haut) : c'est l'écran de modération de l'app qui liste ces
+      // soumissions et les publie dans /events, plutôt qu'une lecture
+      // manuelle depuis la console Firebase comme avant.
+      allow read, update, delete: if isAdmin();
     }
   }
 }

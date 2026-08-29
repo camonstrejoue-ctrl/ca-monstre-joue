@@ -7,10 +7,20 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  updateDoc,
+  where,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 import { db } from '@/lib/firebase';
+
+// Uid du compte "administrateur" — voir firestore.rules (isAdmin). Utilisé
+// côté app uniquement pour l'affichage (afficher/cacher l'écran de
+// modération) : la vraie sécurité est appliquée par les règles Firestore,
+// pas par ce contrôle client.
+export const ADMIN_UID = 'Y2pQOvv87aPZrazoU1PPlNbaLdo1';
+
+export type EventStatus = 'pending' | 'published';
 
 export interface CommunityEvent {
   id: string;
@@ -23,8 +33,27 @@ export interface CommunityEvent {
   price: string; // texte libre, ex: "Gratuit", "5 CHF"
   contact: string; // e-mail, téléphone ou lien
   description?: string;
-  poster?: string; // data URI base64 (pas de Firebase Storage, voir lib/image-base64.ts)
+  poster?: string; // data URI base64, ou URL (événements publiés depuis le site)
+  status: EventStatus;
   createdBy: string;
+  createdAt: unknown;
+}
+
+// Soumission du formulaire "Proposer un événement" du site statique (voir
+// js/firebase-forms.js) — collection à part, distincte de `events`, tant
+// qu'un admin ne l'a pas publiée (voir publishEventSubmission ci-dessous).
+export interface EventSubmission {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+  price: string;
+  registrationLink?: string;
+  contact: string;
+  imageUrl?: string | null;
+  status: 'pending' | 'approved' | 'rejected';
   createdAt: unknown;
 }
 
@@ -42,6 +71,9 @@ async function cleanupExpiredEvents(events: CommunityEvent[]) {
   await Promise.allSettled(expired.map((e) => deleteDoc(doc(db!, 'events', e.id))));
 }
 
+// Liste publique : uniquement les événements "published" (voir
+// firestore.rules — un "pending" n'est de toute façon lisible que par son
+// auteur ou l'admin, cette requête ne les recevrait pas).
 export function useUpcomingEvents() {
   const [events, setEvents] = useState<CommunityEvent[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,17 +83,25 @@ export function useUpcomingEvents() {
       setLoading(false);
       return;
     }
-    const q = query(collection(db, 'events'), orderBy('date', 'asc'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const today = new Date().toISOString().slice(0, 10);
-      const all = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as CommunityEvent);
-      // Reste affiché tant que l'événement n'est pas terminé (utile pour
-      // les événements sur plusieurs jours, ex: un festival).
-      const upcoming = all.filter((e) => (e.endDate || e.date) >= today);
-      setEvents(upcoming);
-      setLoading(false);
-      cleanupExpiredEvents(all).catch(() => {});
-    });
+    const q = query(collection(db, 'events'), where('status', '==', 'published'), orderBy('date', 'asc'));
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const today = new Date().toISOString().slice(0, 10);
+        const all = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as CommunityEvent);
+        // Reste affiché tant que l'événement n'est pas terminé (utile pour
+        // les événements sur plusieurs jours, ex: un festival).
+        const upcoming = all.filter((e) => (e.endDate || e.date) >= today);
+        setEvents(upcoming);
+        setLoading(false);
+        cleanupExpiredEvents(all).catch(() => {});
+      },
+      // Cette requête (status == 'published' + orderBy('date')) demande un
+      // index composite Firestore — sans lui la requête échoue silencieusement
+      // (failed-precondition) tant que l'index n'est pas créé côté console. On
+      // évite au moins que l'écran reste bloqué en chargement indéfiniment.
+      () => setLoading(false)
+    );
     return unsubscribe;
   }, []);
 
@@ -85,7 +125,7 @@ export async function addEvent(
 ) {
   if (!db) throw new Error('Firebase non configuré.');
   const ref = doc(collection(db, 'events'));
-  await setDoc(ref, { ...data, createdBy: uid, createdAt: serverTimestamp() });
+  await setDoc(ref, { ...data, createdBy: uid, status: 'pending', createdAt: serverTimestamp() });
 }
 
 export async function removeEvent(eventId: string) {
@@ -103,4 +143,99 @@ export async function reportEvent(reporterUid: string, eventId: string, reason: 
     reason,
     createdAt: serverTimestamp(),
   });
+}
+
+// ---------- Modération (admin uniquement — voir firestore.rules) ----------
+
+// Événements créés depuis l'app, encore en attente de publication.
+export function usePendingEvents() {
+  const [events, setEvents] = useState<CommunityEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!db) {
+      setLoading(false);
+      return;
+    }
+    const q = query(collection(db, 'events'), where('status', '==', 'pending'));
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        setEvents(snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as CommunityEvent));
+        setLoading(false);
+      },
+      () => setLoading(false)
+    );
+    return unsubscribe;
+  }, []);
+
+  return { events, loading };
+}
+
+// Soumissions du site (formulaire "Proposer un événement"), en attente.
+export function usePendingEventSubmissions() {
+  const [submissions, setSubmissions] = useState<EventSubmission[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!db) {
+      setLoading(false);
+      return;
+    }
+    const q = query(collection(db, 'eventSubmissions'), where('status', '==', 'pending'));
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        setSubmissions(snapshot.docs.map((d) => ({ id: d.id, ...d.data() }) as EventSubmission));
+        setLoading(false);
+      },
+      () => setLoading(false)
+    );
+    return unsubscribe;
+  }, []);
+
+  return { submissions, loading };
+}
+
+export async function publishEvent(eventId: string) {
+  if (!db) throw new Error('Firebase non configuré.');
+  await updateDoc(doc(db, 'events', eventId), { status: 'published' });
+}
+
+export async function rejectEvent(eventId: string) {
+  if (!db) throw new Error('Firebase non configuré.');
+  await deleteDoc(doc(db, 'events', eventId));
+}
+
+// Publie une soumission du site : crée un événement "published" dans
+// `events` (createdBy = l'admin qui publie, puisque la soumission n'a pas
+// de compte app associé) à partir des champs de la soumission, puis marque
+// la soumission "approved" pour ne pas la retraiter. `registrationLink`
+// n'a pas d'équivalent dans le schéma `events` : ajouté à la fin de la
+// description plutôt que perdu.
+export async function publishEventSubmission(adminUid: string, submission: EventSubmission) {
+  if (!db) throw new Error('Firebase non configuré.');
+  const description = submission.registrationLink
+    ? `${submission.description}\n\nInscription : ${submission.registrationLink}`.trim()
+    : submission.description;
+  const ref = doc(collection(db, 'events'));
+  await setDoc(ref, {
+    title: submission.title,
+    location: submission.location,
+    date: submission.date,
+    time: submission.time,
+    price: submission.price,
+    contact: submission.contact,
+    description,
+    poster: submission.imageUrl ?? undefined,
+    createdBy: adminUid,
+    status: 'published',
+    createdAt: serverTimestamp(),
+  });
+  await updateDoc(doc(db, 'eventSubmissions', submission.id), { status: 'approved' });
+}
+
+export async function rejectEventSubmission(submissionId: string) {
+  if (!db) throw new Error('Firebase non configuré.');
+  await updateDoc(doc(db, 'eventSubmissions', submissionId), { status: 'rejected' });
 }

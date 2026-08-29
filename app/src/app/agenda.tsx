@@ -98,6 +98,10 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         description: description.trim(),
         poster: poster ?? undefined,
       });
+      Alert.alert(
+        'Événement envoyé',
+        'Il sera visible dans l’Agenda une fois validé par l’équipe.'
+      );
       onAdded();
     } catch (err) {
       setError((err as Error).message);
@@ -154,7 +158,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
       {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
       <Pressable onPress={handleSubmit} disabled={submitting}>
         <ThemedView type="backgroundSelected" style={styles.submitButton}>
-          <ThemedText type="smallBold">Publier l’événement</ThemedText>
+          <ThemedText type="smallBold">Proposer l’événement</ThemedText>
         </ThemedView>
       </Pressable>
     </View>

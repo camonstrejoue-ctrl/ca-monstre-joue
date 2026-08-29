@@ -15,6 +15,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { deleteAccount, signIn, signOut, signUp } from '@/lib/auth';
 import { updateUserProfile, useAuth } from '@/lib/auth-context';
+import { ADMIN_UID } from '@/lib/events';
 import { isFirebaseConfigured } from '@/lib/firebase';
 import { parseBirthdateInput, MIN_CONTACT_AGE } from '@/lib/moderation';
 import { submitSuggestion } from '@/lib/suggestions';
@@ -345,6 +346,15 @@ function ProfileView() {
           label="Trouver des joueurs"
           color="frost"
         />
+        {user?.uid === ADMIN_UID ? (
+          <NavTile
+            href="/admin/evenements"
+            icon="shield-checkmark"
+            eyebrow="Admin"
+            label="Modération — Agenda"
+            color="ice"
+          />
+        ) : null}
       </View>
 
       <SuggestionForm />
