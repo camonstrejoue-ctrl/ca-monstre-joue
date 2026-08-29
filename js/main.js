@@ -233,25 +233,9 @@ function initSearch() {
 
 // ---------- contact + event forms ----------
 // (la newsletter est gérée par le widget d'inscription Substack embarqué
-// dans le footer — plus de formulaire ni de JS ici)
-function initForms() {
-  const contact = qs('#contact-form');
-  if (contact) {
-    contact.addEventListener('submit', (e) => {
-      e.preventDefault();
-      qs('.form-success').classList.add('show');
-      contact.reset();
-    });
-  }
-  const eventForm = qs('#event-form');
-  if (eventForm) {
-    eventForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      qs('.form-success', eventForm.parentElement)?.classList.add('show');
-      eventForm.reset();
-    });
-  }
-}
+// dans le footer ; le contact et l'agenda sont gérés par js/firebase-forms.js
+// — plus rien à faire ici)
+function initForms() {}
 
 // ---------- AGENDA page ----------
 function renderAgendaPage() {
