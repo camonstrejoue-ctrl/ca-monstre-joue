@@ -1,0 +1,28 @@
+rules_version = '2';
+
+// À coller dans la console Firebase : Storage > Rules.
+// Terrain exclusif du site statique (js/firebase-forms.js) : l'app ne fait
+// aucun upload vers Storage (les affiches d'événements y sont stockées en
+// base64 directement dans le document Firestore, pas via Storage) — voir
+// la coordination entre les deux sessions de travail (site / app) sur ce
+// point, 2026-08-28.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+
+    // Affiches jointes au formulaire "Proposer un événement" (agenda.html,
+    // blog). Écriture publique (pas de compte requis côté site statique),
+    // limitée à des images de 5 Mo max — même esprit que les blocs
+    // contactSubmissions/eventSubmissions dans firestore.rules : on laisse
+    // entrer la demande, on la vérifie à la main avant publication. Lecture
+    // publique : ces affiches sont destinées à devenir publiques une fois
+    // l'événement validé et publié sur /agenda.html.
+    match /event-submissions/{fileName} {
+      allow read: if true;
+      allow write: if request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
