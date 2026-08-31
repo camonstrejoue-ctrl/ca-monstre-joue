@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AVATAR_ACCESSORIES, AvatarMonster } from '@/components/avatar-monster';
@@ -14,6 +14,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { deleteAccount, resetPassword, signIn, signOut, signUp } from '@/lib/auth';
+import { confirmAction } from '@/lib/confirm';
 import { updateUserProfile, useAuth } from '@/lib/auth-context';
 import { ADMIN_UID } from '@/lib/events';
 import { isFirebaseConfigured } from '@/lib/firebase';
@@ -255,13 +256,11 @@ function DeleteAccountSection() {
   }
 
   function confirmDelete() {
-    Alert.alert(
+    confirmAction(
       'Supprimer ton compte ?',
       'Ton profil et ta ludothèque seront définitivement supprimés. Cette action est irréversible.',
-      [
-        { text: 'Annuler', style: 'cancel' },
-        { text: 'Supprimer', style: 'destructive', onPress: handleDelete },
-      ]
+      handleDelete,
+      'Supprimer'
     );
   }
 

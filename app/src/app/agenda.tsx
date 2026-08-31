@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { Alert, FlatList, Linking, Pressable, StyleSheet, View } from 'react-native';
+import { FlatList, Linking, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/components/form-field';
@@ -9,6 +9,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
+import { confirmAction, notifyAction } from '@/lib/confirm';
 import { displayToIsoDate } from '@/lib/date-format';
 import { addEvent, removeEvent, reportEvent, useUpcomingEvents, type CommunityEvent } from '@/lib/events';
 import { pickImageAsBase64 } from '@/lib/image-base64';
@@ -99,10 +100,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         description: description.trim(),
         poster: poster ?? undefined,
       });
-      Alert.alert(
-        'Événement envoyé',
-        'Il sera visible dans l’Agenda une fois validé par l’équipe.'
-      );
+      notifyAction('Événement envoyé', 'Il sera visible dans l’Agenda une fois validé par l’équipe.');
       onAdded();
     } catch (err) {
       setError((err as Error).message);
@@ -176,10 +174,12 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
   const isLink = /^https?:\/\//.test(event.contact);
 
   function confirmRemove() {
-    Alert.alert('Supprimer cet événement ?', `« ${event.title} » sera définitivement supprimé.`, [
-      { text: 'Annuler', style: 'cancel' },
-      { text: 'Supprimer', style: 'destructive', onPress: () => removeEvent(event.id) },
-    ]);
+    confirmAction(
+      'Supprimer cet événement ?',
+      `« ${event.title} » sera définitivement supprimé.`,
+      () => removeEvent(event.id),
+      'Supprimer'
+    );
   }
 
   return (

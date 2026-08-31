@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
-import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CoverImage } from '@/components/cover-image';
@@ -11,6 +11,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
+import { confirmAction } from '@/lib/confirm';
 import { isBggConfigured, searchBgg, type BggGame } from '@/lib/bgg';
 import { useContent } from '@/lib/content';
 import {
@@ -129,10 +130,12 @@ function LudothequeRow({
   }
 
   function confirmRemove() {
-    Alert.alert('Retirer ce jeu ?', `« ${entry.name} » sera retiré de ta ludothèque.`, [
-      { text: 'Annuler', style: 'cancel' },
-      { text: 'Retirer', style: 'destructive', onPress: handleRemove },
-    ]);
+    confirmAction(
+      'Retirer ce jeu ?',
+      `« ${entry.name} » sera retiré de ta ludothèque.`,
+      handleRemove,
+      'Retirer'
+    );
   }
 
   const content = (

@@ -1,12 +1,13 @@
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
+import { confirmAction } from '@/lib/confirm';
 import { isoToDisplayDate } from '@/lib/date-format';
 import {
   ADMIN_UID,
@@ -94,10 +95,12 @@ function PendingEventCard({ event }: { event: CommunityEvent }) {
   }
 
   function confirmReject() {
-    Alert.alert('Rejeter cet événement ?', `« ${event.title} » sera définitivement supprimé.`, [
-      { text: 'Annuler', style: 'cancel' },
-      { text: 'Rejeter', style: 'destructive', onPress: () => rejectEvent(event.id) },
-    ]);
+    confirmAction(
+      'Rejeter cet événement ?',
+      `« ${event.title} » sera définitivement supprimé.`,
+      () => rejectEvent(event.id),
+      'Rejeter'
+    );
   }
 
   return (
@@ -145,10 +148,12 @@ function PendingSubmissionCard({
   }
 
   function confirmReject() {
-    Alert.alert('Rejeter cette soumission ?', `« ${submission.title} » ne sera pas publiée.`, [
-      { text: 'Annuler', style: 'cancel' },
-      { text: 'Rejeter', style: 'destructive', onPress: () => rejectEventSubmission(submission.id) },
-    ]);
+    confirmAction(
+      'Rejeter cette soumission ?',
+      `« ${submission.title} » ne sera pas publiée.`,
+      () => rejectEventSubmission(submission.id),
+      'Rejeter'
+    );
   }
 
   return (
