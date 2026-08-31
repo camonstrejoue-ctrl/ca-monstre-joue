@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   deleteUser,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
 } from 'firebase/auth';
@@ -41,6 +42,14 @@ export async function signIn(email: string, password: string) {
 export async function signOut() {
   if (!auth) return;
   await firebaseSignOut(auth);
+}
+
+// Envoie l'e-mail de réinitialisation de mot de passe géré par Firebase
+// (lien vers une page hébergée par Firebase, hors app — pas de configuration
+// supplémentaire nécessaire côté nous).
+export async function resetPassword(email: string) {
+  if (!auth) throw new Error('Firebase non configuré.');
+  await sendPasswordResetEmail(auth, email);
 }
 
 /**

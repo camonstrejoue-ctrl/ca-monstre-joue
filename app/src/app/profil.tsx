@@ -13,7 +13,7 @@ import { SoftCard } from '@/components/soft-card';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
-import { deleteAccount, signIn, signOut, signUp } from '@/lib/auth';
+import { deleteAccount, resetPassword, signIn, signOut, signUp } from '@/lib/auth';
 import { updateUserProfile, useAuth } from '@/lib/auth-context';
 import { ADMIN_UID } from '@/lib/events';
 import { isFirebaseConfigured } from '@/lib/firebase';
@@ -30,6 +30,26 @@ function AuthForms() {
   const [cguAccepted, setCguAccepted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [resetSending, setResetSending] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
+
+  async function handleResetPassword() {
+    setError(null);
+    setResetSent(false);
+    if (!email) {
+      setError('Renseigne ton e-mail pour recevoir le lien de réinitialisation.');
+      return;
+    }
+    setResetSending(true);
+    try {
+      await resetPassword(email);
+      setResetSent(true);
+    } catch (err) {
+      setError((err as Error).message.replace(/^Firebase:\s*/, ''));
+    } finally {
+      setResetSending(false);
+    }
+  }
 
   async function handleSubmit() {
     setError(null);
@@ -87,6 +107,20 @@ function AuthForms() {
         keyboardType="email-address"
       />
       <FormField label="Mot de passe" value={password} onChangeText={setPassword} secureTextEntry />
+
+      {mode === 'connexion' ? (
+        resetSent ? (
+          <ThemedText type="small" themeColor="textSecondary">
+            E-mail envoyé (si ce compte existe) — vérifie ta boîte de réception (et les spams).
+          </ThemedText>
+        ) : (
+          <Pressable onPress={handleResetPassword} disabled={resetSending}>
+            <ThemedText type="link" style={styles.switchMode}>
+              {resetSending ? 'Envoi...' : 'Mot de passe oublié ?'}
+            </ThemedText>
+          </Pressable>
+        )
+      ) : null}
 
       {mode === 'inscription' ? (
         <>
