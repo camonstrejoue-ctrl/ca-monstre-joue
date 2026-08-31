@@ -31,7 +31,8 @@ export interface CommunityEvent {
   endDate?: string; // 'YYYY-MM-DD' — optionnel, pour un événement sur plusieurs jours
   endTime?: string; // 'HH:MM'
   price: string; // texte libre, ex: "Gratuit", "5 CHF"
-  contact: string; // e-mail, téléphone ou lien
+  contact: string; // e-mail ou téléphone
+  website?: string; // adresse d'un site web (affiché comme "Informations", cliquable)
   description?: string;
   poster?: string; // data URI base64, ou URL (événements publiés depuis le site)
   status: EventStatus;
@@ -126,6 +127,7 @@ export async function addEvent(
     endTime?: string;
     price: string;
     contact: string;
+    website?: string;
     description?: string;
     poster?: string;
   }
@@ -222,14 +224,10 @@ export async function rejectEvent(eventId: string) {
 // Publie une soumission du site : crée un événement "published" dans
 // `events` (createdBy = l'admin qui publie, puisque la soumission n'a pas
 // de compte app associé) à partir des champs de la soumission, puis marque
-// la soumission "approved" pour ne pas la retraiter. `registrationLink`
-// n'a pas d'équivalent dans le schéma `events` : ajouté à la fin de la
-// description plutôt que perdu.
+// la soumission "approved" pour ne pas la retraiter. `registrationLink` est
+// repris tel quel dans `website` (affiché comme "Informations", cliquable).
 export async function publishEventSubmission(adminUid: string, submission: EventSubmission) {
   if (!db) throw new Error('Firebase non configuré.');
-  const description = submission.registrationLink
-    ? `${submission.description}\n\nInscription : ${submission.registrationLink}`.trim()
-    : submission.description;
   const ref = doc(collection(db, 'events'));
   await setDoc(ref, {
     ...stripUndefined({
@@ -239,7 +237,8 @@ export async function publishEventSubmission(adminUid: string, submission: Event
       time: submission.time,
       price: submission.price,
       contact: submission.contact,
-      description,
+      website: submission.registrationLink ?? undefined,
+      description: submission.description,
       poster: submission.imageUrl ?? undefined,
     }),
     createdBy: adminUid,

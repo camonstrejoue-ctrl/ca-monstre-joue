@@ -114,6 +114,7 @@ function PendingEventCard({ event }: { event: CommunityEvent }) {
       <ThemedText type="small">{event.price}</ThemedText>
       {event.description ? <ThemedText type="small">{event.description}</ThemedText> : null}
       <ThemedText type="small">Contact : {event.contact}</ThemedText>
+      {event.website ? <ThemedText type="small">Informations : {event.website}</ThemedText> : null}
       {confirming ? (
         <ConfirmRow
           message={`Rejeter « ${event.title} » ? Il sera définitivement supprimé.`}

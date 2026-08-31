@@ -13,6 +13,7 @@ import { useAuth } from '@/lib/auth-context';
 import { displayToIsoDate } from '@/lib/date-format';
 import { addEvent, removeEvent, reportEvent, useUpcomingEvents, type CommunityEvent } from '@/lib/events';
 import { pickImageAsBase64 } from '@/lib/image-base64';
+import { isUrlLike, normalizeUrl } from '@/lib/links';
 
 function formatDate(date: string) {
   const d = new Date(`${date}T00:00:00`);
@@ -51,6 +52,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   const [endTime, setEndTime] = useState('');
   const [price, setPrice] = useState('');
   const [contact, setContact] = useState('');
+  const [website, setWebsite] = useState('');
   const [description, setDescription] = useState('');
   const [poster, setPoster] = useState<string | null>(null);
   const [pickingPoster, setPickingPoster] = useState(false);
@@ -98,6 +100,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         endTime: endTime.trim() || undefined,
         price: price.trim() || 'Gratuit',
         contact: contact.trim(),
+        website: website.trim() || undefined,
         description: description.trim(),
         poster: poster ?? undefined,
       });
@@ -151,9 +154,17 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         placeholder="Gratuit, 5 CHF, ..."
       />
       <FormField
-        label="Contact (e-mail, téléphone ou lien)"
+        label="Contact (e-mail ou téléphone)"
         value={contact}
         onChangeText={setContact}
+      />
+      <FormField
+        label="Informations (site web, optionnel)"
+        value={website}
+        onChangeText={setWebsite}
+        placeholder="www.exemple.ch"
+        autoCapitalize="none"
+        keyboardType="url"
       />
       <FormField
         label="Description (optionnel)"
@@ -188,7 +199,10 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
   const [confirmingRemove, setConfirmingRemove] = useState(false);
   const [removing, setRemoving] = useState(false);
   const isOwner = uid && event.createdBy === uid;
-  const isLink = /^https?:\/\//.test(event.contact);
+  // Compatibilité avec des événements existants créés avant l'ajout du champ
+  // "Informations" dédié : si "Contact" contient en fait un lien (ex:
+  // "www.exemple.ch"), on le rend quand même cliquable.
+  const contactIsLink = isUrlLike(event.contact);
 
   async function handleRemove() {
     setRemoving(true);
@@ -208,13 +222,18 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
       </ThemedText>
       <ThemedText type="small">{event.price}</ThemedText>
       {event.description ? <ThemedText type="small">{event.description}</ThemedText> : null}
-      {isLink ? (
-        <Pressable onPress={() => Linking.openURL(event.contact)}>
+      {contactIsLink ? (
+        <Pressable onPress={() => Linking.openURL(normalizeUrl(event.contact))}>
           <ThemedText type="link">{event.contact}</ThemedText>
         </Pressable>
       ) : (
         <ThemedText type="small">Contact : {event.contact}</ThemedText>
       )}
+      {event.website ? (
+        <Pressable onPress={() => Linking.openURL(normalizeUrl(event.website!))}>
+          <ThemedText type="link">🔗 Informations : {event.website}</ThemedText>
+        </Pressable>
+      ) : null}
 
       {confirmingRemove ? (
         <ConfirmRow
