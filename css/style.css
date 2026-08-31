@@ -598,6 +598,7 @@ button{font-family:inherit;cursor:pointer;}
 .agenda-section{padding:20px 0 40px;}
 .agenda-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;}
 .agenda-empty{grid-column:1/-1;text-align:center;color:var(--gray);padding:20px 0;}
+.agenda-loading{grid-column:1/-1;text-align:center;color:var(--gray);padding:20px 0;}
 .agenda-card{
   border:3px solid var(--black);border-radius:var(--radius-lg);overflow:hidden;
   background:var(--white);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;

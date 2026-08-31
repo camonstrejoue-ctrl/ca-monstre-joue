@@ -12,24 +12,13 @@ window.HOME_BANNERS = [
   { image: 'assets/banniere-gazette.jpg', href: 'https://camonstrejoue.substack.com?utm_source=blog&utm_medium=banniere&utm_campaign=gazette_substack', alt: "La Gazette du Monstre, notre newsletter sur Substack", external: true },
 ];
 
-// Événements affichés sur /agenda.html. Chaque entrée est publiée à la main
-// après vérification (voir le formulaire "Proposer un événement" de la page) :
-// { title, date: 'YYYY-MM-DD', time: 'HH:MM', location, description, price,
-//   registrationLink?, image?, contact }
-window.EVENTS = [
-  // Événement de test, à retirer une fois la mise en page validée.
-  {
-    title: 'Soirée jeux Ça Monstre Joue',
-    date: '2026-09-12',
-    time: '19:00',
-    location: 'Genève',
-    description: "Une soirée conviviale pour découvrir nos jeux coups de cœur du moment, entre amateurs et curieux.",
-    price: 'Gratuit',
-    registrationLink: 'https://www.camonstrejoue.ch/contact.html',
-    image: 'assets/logo.png',
-    contact: 'camonstrejoue@gmail.com',
-  },
-];
+// Les événements affichés sur /agenda.html ne viennent plus d'ici : depuis
+// le 2026-08-28, la page lit en direct la collection Firestore `events` du
+// projet partagé avec l'app (voir fetchPublishedEvents dans js/main.js) —
+// modération faite côté app, le site est en lecture seule. Le formulaire
+// "Proposer un événement" du site écrit lui dans `eventSubmissions`
+// (js/firebase-forms.js), en attente de validation avant de devenir un vrai
+// événement `events` publié.
 
 window.CATEGORIES = [
   { slug: 'jeux-a-deux',        name: 'Jeux à deux',        image: 'assets/categories/jeux-adeux-categorie.JPG' },

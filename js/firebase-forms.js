@@ -5,10 +5,12 @@
 // après le parsing du HTML, donc les formulaires existent déjà au moment où
 // ce code tourne.
 //
-// Les soumissions arrivent dans Firestore avec status: 'pending' — elles ne
-// sont PAS publiées automatiquement sur /agenda.html (qui reste éditée à la
-// main dans js/data.js après vérification, voir le commentaire au-dessus de
-// window.EVENTS). Ce script ne fait que collecter la demande.
+// Les soumissions arrivent dans Firestore avec status: 'pending' dans la
+// collection `eventSubmissions` — elles ne sont PAS publiées automatiquement
+// sur /agenda.html. La modération (validation + passage au statut
+// 'published' dans la collection `events`, lue en direct par le site — voir
+// fetchPublishedEvents dans js/main.js) se fait côté app. Ce script ne fait
+// que collecter la demande.
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';

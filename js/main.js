@@ -238,11 +238,71 @@ function initSearch() {
 function initForms() {}
 
 // ---------- AGENDA page ----------
-function renderAgendaPage() {
+// Événements : source de vérité unique partagée avec l'app, collection
+// Firestore `events` (projet ca-monstre-joue) — un événement n'y apparaît
+// qu'après modération (status: 'published'), que ce soit créé depuis l'app
+// ou approuvé depuis une soumission du site (voir js/firebase-forms.js pour
+// la soumission côté site, qui atterrit elle dans `eventSubmissions` en
+// attente de validation). Le site est en lecture seule sur `events` — la
+// modération se fait uniquement depuis l'app.
+//
+// Config dupliquée depuis js/firebase-forms.js à dessein : main.js n'est pas
+// un module, et les deux scripts doivent pouvoir s'exécuter indépendamment
+// de leur ordre de chargement sur agenda.html.
+const AGENDA_FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyDDttOJiQtScP2PDVrK3vJAOexg-OPQx6U',
+  authDomain: 'ca-monstre-joue.firebaseapp.com',
+  projectId: 'ca-monstre-joue',
+  storageBucket: 'ca-monstre-joue.firebasestorage.app',
+  messagingSenderId: '229832018399',
+  appId: '1:229832018399:web:c90e815ab714a1f5799c6a',
+};
+
+async function fetchPublishedEvents() {
+  const [{ initializeApp, getApps, getApp }, { getFirestore, collection, query, where, getDocs }] = await Promise.all([
+    import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'),
+    import('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js'),
+  ]);
+  // firebase-forms.js peut avoir déjà initialisé la même app (même config) —
+  // on réutilise l'instance existante plutôt que d'en recréer une, sinon
+  // initializeApp() lève une erreur "already exists".
+  const app = getApps().length ? getApp() : initializeApp(AGENDA_FIREBASE_CONFIG);
+  const db = getFirestore(app);
+  const q = query(collection(db, 'events'), where('status', '==', 'published'));
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => d.data());
+}
+
+function agendaDateLabel(ev) {
+  let label = formatDate(ev.date) + (ev.time ? ` · ${ev.time}` : '');
+  if (ev.endDate && ev.endDate !== ev.date) {
+    label += ` → ${formatDate(ev.endDate)}` + (ev.endTime ? ` · ${ev.endTime}` : '');
+  }
+  return label;
+}
+
+async function renderAgendaPage() {
   const list = qs('#agenda-list');
   if (!list) return;
-  const events = [...(window.EVENTS || [])]
-    .filter((ev) => ev.date >= new Date().toISOString().slice(0, 10))
+  list.innerHTML = '';
+  list.appendChild(el('p', { class: 'agenda-loading', text: 'Chargement des événements...' }));
+
+  let events;
+  try {
+    events = await fetchPublishedEvents();
+  } catch (err) {
+    console.error('Agenda: échec du chargement des événements', err);
+    list.innerHTML = '';
+    list.appendChild(el('p', {
+      class: 'agenda-empty',
+      text: "Impossible de charger l'agenda pour le moment — réessaie dans un instant.",
+    }));
+    return;
+  }
+
+  const todayISO = new Date().toISOString().slice(0, 10);
+  events = events
+    .filter((ev) => (ev.endDate || ev.date) >= todayISO)
     .sort((a, b) => a.date.localeCompare(b.date));
 
   list.innerHTML = '';
@@ -255,16 +315,16 @@ function renderAgendaPage() {
   }
   events.forEach((ev) => {
     const card = el('div', { class: 'agenda-card' });
-    card.appendChild(mediaElement(ev.image, ev.title, ev.title));
+    card.appendChild(mediaElement(ev.poster, ev.title, ev.title));
     const body = el('div', { class: 'agenda-card-body' }, [
-      el('span', { class: 'agenda-date', text: formatDate(ev.date) + (ev.time ? ` · ${ev.time}` : '') }),
+      el('span', { class: 'agenda-date', text: agendaDateLabel(ev) }),
       el('h3', { text: ev.title }),
       el('p', { class: 'agenda-location', text: ev.location }),
       el('p', { text: ev.description }),
       el('span', { class: 'agenda-price', text: ev.price }),
     ]);
-    if (ev.registrationLink) {
-      body.appendChild(el('a', { href: ev.registrationLink, class: 'btn', target: '_blank', rel: 'noopener', text: "S'inscrire" }));
+    if (ev.website) {
+      body.appendChild(el('a', { href: ev.website, class: 'btn', target: '_blank', rel: 'noopener', text: "Plus d'infos" }));
     }
     card.appendChild(body);
     list.appendChild(card);
