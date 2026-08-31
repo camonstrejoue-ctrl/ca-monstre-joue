@@ -10,9 +10,9 @@ import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-type TabHref = '/' | '/ludotheque' | '/joueurs' | '/outils' | '/profil';
+type TabHref = '/' | '/agenda' | '/ludotheque' | '/joueurs' | '/outils' | '/profil';
 
-// Cinq destinations directes, à plat — plus de sous-menu "Mon univers" à
+// Six destinations directes, à plat — plus de sous-menu "Mon univers" à
 // traverser pour la ludothèque : chaque onglet mène droit à sa
 // destination, en 1 tap partout.
 const TABS: {
@@ -22,6 +22,7 @@ const TABS: {
   matchAlso?: string[];
 }[] = [
   { href: '/', label: 'Accueil', icon: 'home' },
+  { href: '/agenda', label: 'Agenda', icon: 'calendar' },
   { href: '/ludotheque', label: 'Ludothèque', icon: 'library' },
   { href: '/joueurs', label: 'Joueurs', icon: 'people' },
   { href: '/outils', label: 'Outils', icon: 'dice', matchAlso: ['/outils/souvenirs'] },
@@ -29,13 +30,10 @@ const TABS: {
 ];
 
 const MENU_ITEMS: {
-  href: '/catalogue' | '/agenda';
+  href: '/catalogue';
   label: string;
   icon: ComponentProps<typeof Ionicons>['name'];
-}[] = [
-  { href: '/agenda', label: 'Agenda', icon: 'calendar' },
-  { href: '/catalogue', label: 'Blog', icon: 'newspaper' },
-];
+}[] = [{ href: '/catalogue', label: 'Blog', icon: 'newspaper' }];
 
 function isActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/';
