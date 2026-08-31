@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ConfirmRow } from '@/components/confirm-row';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
-import { confirmAction } from '@/lib/confirm';
 import { isoToDisplayDate } from '@/lib/date-format';
 import {
   ADMIN_UID,
@@ -84,6 +84,7 @@ export default function ModerationEvenementsScreen() {
 
 function PendingEventCard({ event }: { event: CommunityEvent }) {
   const [busy, setBusy] = useState(false);
+  const [confirming, setConfirming] = useState(false);
 
   async function handlePublish() {
     setBusy(true);
@@ -94,13 +95,13 @@ function PendingEventCard({ event }: { event: CommunityEvent }) {
     }
   }
 
-  function confirmReject() {
-    confirmAction(
-      'Rejeter cet événement ?',
-      `« ${event.title} » sera définitivement supprimé.`,
-      () => rejectEvent(event.id),
-      'Rejeter'
-    );
+  async function handleReject() {
+    setBusy(true);
+    try {
+      await rejectEvent(event.id);
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -113,18 +114,28 @@ function PendingEventCard({ event }: { event: CommunityEvent }) {
       <ThemedText type="small">{event.price}</ThemedText>
       {event.description ? <ThemedText type="small">{event.description}</ThemedText> : null}
       <ThemedText type="small">Contact : {event.contact}</ThemedText>
-      <View style={styles.actionsRow}>
-        <Pressable onPress={handlePublish} disabled={busy}>
-          <ThemedView type="backgroundSelected" style={styles.actionButton}>
-            <ThemedText type="smallBold">Publier</ThemedText>
-          </ThemedView>
-        </Pressable>
-        <Pressable onPress={confirmReject} disabled={busy}>
-          <ThemedText type="small" style={styles.rejectLink}>
-            Rejeter
-          </ThemedText>
-        </Pressable>
-      </View>
+      {confirming ? (
+        <ConfirmRow
+          message={`Rejeter « ${event.title} » ? Il sera définitivement supprimé.`}
+          confirmLabel="Rejeter"
+          busy={busy}
+          onConfirm={handleReject}
+          onCancel={() => setConfirming(false)}
+        />
+      ) : (
+        <View style={styles.actionsRow}>
+          <Pressable onPress={handlePublish} disabled={busy}>
+            <ThemedView type="backgroundSelected" style={styles.actionButton}>
+              <ThemedText type="smallBold">Publier</ThemedText>
+            </ThemedView>
+          </Pressable>
+          <Pressable onPress={() => setConfirming(true)} disabled={busy}>
+            <ThemedText type="small" style={styles.rejectLink}>
+              Rejeter
+            </ThemedText>
+          </Pressable>
+        </View>
+      )}
     </ThemedView>
   );
 }
@@ -137,6 +148,7 @@ function PendingSubmissionCard({
   adminUid: string;
 }) {
   const [busy, setBusy] = useState(false);
+  const [confirming, setConfirming] = useState(false);
 
   async function handlePublish() {
     setBusy(true);
@@ -147,13 +159,13 @@ function PendingSubmissionCard({
     }
   }
 
-  function confirmReject() {
-    confirmAction(
-      'Rejeter cette soumission ?',
-      `« ${submission.title} » ne sera pas publiée.`,
-      () => rejectEventSubmission(submission.id),
-      'Rejeter'
-    );
+  async function handleReject() {
+    setBusy(true);
+    try {
+      await rejectEventSubmission(submission.id);
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -171,18 +183,28 @@ function PendingSubmissionCard({
       {submission.registrationLink ? (
         <ThemedText type="small">Inscription : {submission.registrationLink}</ThemedText>
       ) : null}
-      <View style={styles.actionsRow}>
-        <Pressable onPress={handlePublish} disabled={busy}>
-          <ThemedView type="backgroundSelected" style={styles.actionButton}>
-            <ThemedText type="smallBold">Publier</ThemedText>
-          </ThemedView>
-        </Pressable>
-        <Pressable onPress={confirmReject} disabled={busy}>
-          <ThemedText type="small" style={styles.rejectLink}>
-            Rejeter
-          </ThemedText>
-        </Pressable>
-      </View>
+      {confirming ? (
+        <ConfirmRow
+          message={`Rejeter « ${submission.title} » ? Elle ne sera pas publiée.`}
+          confirmLabel="Rejeter"
+          busy={busy}
+          onConfirm={handleReject}
+          onCancel={() => setConfirming(false)}
+        />
+      ) : (
+        <View style={styles.actionsRow}>
+          <Pressable onPress={handlePublish} disabled={busy}>
+            <ThemedView type="backgroundSelected" style={styles.actionButton}>
+              <ThemedText type="smallBold">Publier</ThemedText>
+            </ThemedView>
+          </Pressable>
+          <Pressable onPress={() => setConfirming(true)} disabled={busy}>
+            <ThemedText type="small" style={styles.rejectLink}>
+              Rejeter
+            </ThemedText>
+          </Pressable>
+        </View>
+      )}
     </ThemedView>
   );
 }

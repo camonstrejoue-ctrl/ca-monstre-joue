@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AVATAR_ACCESSORIES, AvatarMonster } from '@/components/avatar-monster';
 import { CheckboxRow } from '@/components/checkbox-row';
+import { ConfirmRow } from '@/components/confirm-row';
 import { FormField } from '@/components/form-field';
 import { NavTile } from '@/components/nav-tile';
 import { PrimaryButton } from '@/components/primary-button';
@@ -14,7 +15,6 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Radius, Spacing } from '@/constants/theme';
 import { deleteAccount, resetPassword, signIn, signOut, signUp } from '@/lib/auth';
-import { confirmAction } from '@/lib/confirm';
 import { updateUserProfile, useAuth } from '@/lib/auth-context';
 import { ADMIN_UID } from '@/lib/events';
 import { isFirebaseConfigured } from '@/lib/firebase';
@@ -236,6 +236,7 @@ function SuggestionForm() {
 
 function DeleteAccountSection() {
   const [deleting, setDeleting] = useState(false);
+  const [confirming, setConfirming] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleDelete() {
@@ -250,27 +251,29 @@ function DeleteAccountSection() {
           ? 'Pour ta sécurité, déconnecte-toi puis reconnecte-toi avant de supprimer ton compte.'
           : (err as Error).message
       );
+      setConfirming(false);
     } finally {
       setDeleting(false);
     }
   }
 
-  function confirmDelete() {
-    confirmAction(
-      'Supprimer ton compte ?',
-      'Ton profil et ta ludothèque seront définitivement supprimés. Cette action est irréversible.',
-      handleDelete,
-      'Supprimer'
-    );
-  }
-
   return (
     <View style={styles.deleteSection}>
-      <Pressable onPress={confirmDelete} disabled={deleting}>
-        <ThemedText type="small" style={styles.deleteLink}>
-          {deleting ? 'Suppression...' : 'Supprimer mon compte'}
-        </ThemedText>
-      </Pressable>
+      {confirming ? (
+        <ConfirmRow
+          message="Ton profil et ta ludothèque seront définitivement supprimés. Cette action est irréversible."
+          confirmLabel="Supprimer"
+          busy={deleting}
+          onConfirm={handleDelete}
+          onCancel={() => setConfirming(false)}
+        />
+      ) : (
+        <Pressable onPress={() => setConfirming(true)}>
+          <ThemedText type="small" style={styles.deleteLink}>
+            Supprimer mon compte
+          </ThemedText>
+        </Pressable>
+      )}
       {error ? <ThemedText style={styles.error}>{error}</ThemedText> : null}
     </View>
   );

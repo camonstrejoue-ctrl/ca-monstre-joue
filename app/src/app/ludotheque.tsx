@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ConfirmRow } from '@/components/confirm-row';
 import { CoverImage } from '@/components/cover-image';
 import { FormField } from '@/components/form-field';
 import { SignedOutPrompt } from '@/components/signed-out-prompt';
@@ -11,7 +12,6 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
-import { confirmAction } from '@/lib/confirm';
 import { isBggConfigured, searchBgg, type BggGame } from '@/lib/bgg';
 import { useContent } from '@/lib/content';
 import {
@@ -119,6 +119,7 @@ function LudothequeRow({
   uid: string;
 }) {
   const [busy, setBusy] = useState(false);
+  const [confirming, setConfirming] = useState(false);
 
   async function handleRemove() {
     setBusy(true);
@@ -127,15 +128,6 @@ function LudothequeRow({
     } finally {
       setBusy(false);
     }
-  }
-
-  function confirmRemove() {
-    confirmAction(
-      'Retirer ce jeu ?',
-      `« ${entry.name} » sera retiré de ta ludothèque.`,
-      handleRemove,
-      'Retirer'
-    );
   }
 
   const content = (
@@ -161,11 +153,21 @@ function LudothequeRow({
       ) : (
         content
       )}
-      <Pressable onPress={confirmRemove} disabled={busy}>
-        <ThemedView type="backgroundElement" style={styles.removeButton}>
-          <ThemedText type="small">Retirer</ThemedText>
-        </ThemedView>
-      </Pressable>
+      {confirming ? (
+        <ConfirmRow
+          message={`Retirer « ${entry.name} » de ta ludothèque ?`}
+          confirmLabel="Retirer"
+          busy={busy}
+          onConfirm={handleRemove}
+          onCancel={() => setConfirming(false)}
+        />
+      ) : (
+        <Pressable onPress={() => setConfirming(true)} disabled={busy}>
+          <ThemedView type="backgroundElement" style={styles.removeButton}>
+            <ThemedText type="small">Retirer</ThemedText>
+          </ThemedView>
+        </Pressable>
+      )}
     </View>
   );
 }

@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { FlatList, Linking, Pressable, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { ConfirmRow } from '@/components/confirm-row';
 import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
-import { confirmAction, notifyAction } from '@/lib/confirm';
 import { displayToIsoDate } from '@/lib/date-format';
 import { addEvent, removeEvent, reportEvent, useUpcomingEvents, type CommunityEvent } from '@/lib/events';
 import { pickImageAsBase64 } from '@/lib/image-base64';
@@ -56,6 +56,7 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
   const [pickingPoster, setPickingPoster] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
 
   async function handlePickPoster() {
     setError(null);
@@ -100,13 +101,27 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
         description: description.trim(),
         poster: poster ?? undefined,
       });
-      notifyAction('Événement envoyé', 'Il sera visible dans l’Agenda une fois validé par l’équipe.');
-      onAdded();
+      setSent(true);
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setSubmitting(false);
     }
+  }
+
+  if (sent) {
+    return (
+      <View style={styles.form}>
+        <ThemedText type="small" themeColor="textSecondary">
+          Événement envoyé ! Il sera visible dans l’Agenda une fois validé par l’équipe.
+        </ThemedText>
+        <Pressable onPress={onAdded}>
+          <ThemedView type="backgroundElement" style={styles.posterButton}>
+            <ThemedText type="small">Fermer</ThemedText>
+          </ThemedView>
+        </Pressable>
+      </View>
+    );
   }
 
   return (
@@ -170,16 +185,18 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
   const [showReport, setShowReport] = useState(false);
   const [reportReason, setReportReason] = useState('');
   const [reportSent, setReportSent] = useState(false);
+  const [confirmingRemove, setConfirmingRemove] = useState(false);
+  const [removing, setRemoving] = useState(false);
   const isOwner = uid && event.createdBy === uid;
   const isLink = /^https?:\/\//.test(event.contact);
 
-  function confirmRemove() {
-    confirmAction(
-      'Supprimer cet événement ?',
-      `« ${event.title} » sera définitivement supprimé.`,
-      () => removeEvent(event.id),
-      'Supprimer'
-    );
+  async function handleRemove() {
+    setRemoving(true);
+    try {
+      await removeEvent(event.id);
+    } finally {
+      setRemoving(false);
+    }
   }
 
   return (
@@ -199,9 +216,18 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
         <ThemedText type="small">Contact : {event.contact}</ThemedText>
       )}
 
+      {confirmingRemove ? (
+        <ConfirmRow
+          message={`Supprimer « ${event.title} » ? Cette action est définitive.`}
+          confirmLabel="Supprimer"
+          busy={removing}
+          onConfirm={handleRemove}
+          onCancel={() => setConfirmingRemove(false)}
+        />
+      ) : (
       <View style={styles.cardFooter}>
         {isOwner ? (
-          <Pressable onPress={confirmRemove}>
+          <Pressable onPress={() => setConfirmingRemove(true)}>
             <ThemedText type="small" style={styles.removeLink}>
               Supprimer
             </ThemedText>
@@ -220,6 +246,7 @@ function EventCard({ event, uid }: { event: CommunityEvent; uid: string | undefi
           )
         ) : null}
       </View>
+      )}
 
       {showReport ? (
         <View style={styles.reportForm}>
