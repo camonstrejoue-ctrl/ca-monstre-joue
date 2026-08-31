@@ -11,6 +11,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Brand, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { displayToIsoDate, isoToDisplayDate } from '@/lib/date-format';
 import {
   addMemory,
   copyPhotoToPersistentStorage,
@@ -48,13 +49,18 @@ function AddMemoryForm({ onAdded }: { onAdded: () => void }) {
       setError('Renseigne au moins un nom et une date.');
       return;
     }
+    const isoDate = displayToIsoDate(date.trim());
+    if (!isoDate) {
+      setError('La date doit être au format JJ-MM-AAAA (ex: 15-09-2026).');
+      return;
+    }
     setSaving(true);
     setError(null);
     try {
       const persistedUris = await Promise.all(photoUris.map(copyPhotoToPersistentStorage));
       await addMemory({
         title: title.trim(),
-        date: date.trim(),
+        date: isoDate,
         location: location.trim(),
         photoUris: persistedUris,
       });
@@ -69,7 +75,13 @@ function AddMemoryForm({ onAdded }: { onAdded: () => void }) {
   return (
     <View style={styles.form}>
       <FormField label="Nom de l’événement" value={title} onChangeText={setTitle} placeholder="ex: Ludopathique 2026" />
-      <FormField label="Date (AAAA-MM-JJ)" value={date} onChangeText={setDate} placeholder="2026-09-15" />
+      <FormField
+        label="Date (JJ-MM-AAAA)"
+        value={date}
+        onChangeText={setDate}
+        placeholder="15-09-2026"
+        keyboardType="numbers-and-punctuation"
+      />
       <FormField label="Lieu" value={location} onChangeText={setLocation} placeholder="ex: Genève" />
 
       <Pressable onPress={handlePickPhotos}>
@@ -115,7 +127,7 @@ export default function SouvenirsScreen() {
 
   const filtered = memories.filter((m) => {
     if (query.trim() && !m.title.toLowerCase().includes(query.trim().toLowerCase())) return false;
-    if (dateFilter.trim() && !m.date.includes(dateFilter.trim())) return false;
+    if (dateFilter.trim() && !isoToDisplayDate(m.date).includes(dateFilter.trim())) return false;
     if (locationFilter && m.location !== locationFilter) return false;
     return true;
   });
@@ -211,7 +223,7 @@ export default function SouvenirsScreen() {
                 <TextInput
                   value={dateFilter}
                   onChangeText={setDateFilter}
-                  placeholder="Filtrer par date (ex: 2026 ou 2026-09)"
+                  placeholder="Filtrer par date (ex: 2026 ou 09-2026)"
                   placeholderTextColor={theme.textSecondary}
                   style={[styles.dateFilterInput, { color: theme.text, borderColor: theme.backgroundSelected }]}
                 />
@@ -265,7 +277,7 @@ function MemoryRow({ memory }: { memory: Memory }) {
         <View style={styles.memoryInfo}>
           <ThemedText type="smallBold">{memory.title}</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            {memory.date}
+            {isoToDisplayDate(memory.date)}
             {memory.location ? ` · ${memory.location}` : ''}
           </ThemedText>
         </View>

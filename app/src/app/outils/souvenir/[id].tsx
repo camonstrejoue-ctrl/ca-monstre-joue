@@ -10,11 +10,12 @@ import { FormField } from '@/components/form-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
+import { displayToIsoDate, isoToDisplayDate } from '@/lib/date-format';
 import { copyPhotoToPersistentStorage, deleteMemory, listMemories, updateMemory, type Memory } from '@/lib/souvenirs';
 
 function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () => void; onCancel: () => void }) {
   const [title, setTitle] = useState(memory.title);
-  const [date, setDate] = useState(memory.date);
+  const [date, setDate] = useState(isoToDisplayDate(memory.date));
   const [location, setLocation] = useState(memory.location);
   const [photoUris, setPhotoUris] = useState<string[]>(memory.photoUris);
   const [saving, setSaving] = useState(false);
@@ -45,12 +46,17 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
       setError('Renseigne au moins un nom et une date.');
       return;
     }
+    const isoDate = displayToIsoDate(date.trim());
+    if (!isoDate) {
+      setError('La date doit être au format JJ-MM-AAAA (ex: 15-09-2026).');
+      return;
+    }
     setSaving(true);
     setError(null);
     try {
       await updateMemory(memory.id, {
         title: title.trim(),
-        date: date.trim(),
+        date: isoDate,
         location: location.trim(),
         photoUris,
       });
@@ -65,7 +71,12 @@ function EditForm({ memory, onSaved, onCancel }: { memory: Memory; onSaved: () =
   return (
     <View style={styles.form}>
       <FormField label="Nom de l’événement" value={title} onChangeText={setTitle} />
-      <FormField label="Date (AAAA-MM-JJ)" value={date} onChangeText={setDate} />
+      <FormField
+        label="Date (JJ-MM-AAAA)"
+        value={date}
+        onChangeText={setDate}
+        keyboardType="numbers-and-punctuation"
+      />
       <FormField label="Lieu" value={location} onChangeText={setLocation} />
 
       {photoUris.length > 0 ? (
@@ -180,7 +191,7 @@ export default function SouvenirDetailScreen() {
               {memory.title}
             </ThemedText>
             <ThemedText type="small" themeColor="textSecondary">
-              {memory.date}
+              {isoToDisplayDate(memory.date)}
               {memory.location ? ` · ${memory.location}` : ''}
             </ThemedText>
 

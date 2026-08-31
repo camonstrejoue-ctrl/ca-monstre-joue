@@ -7,6 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
+import { isoToDisplayDate } from '@/lib/date-format';
 import {
   ADMIN_UID,
   publishEvent,
@@ -104,7 +105,7 @@ function PendingEventCard({ event }: { event: CommunityEvent }) {
       {event.poster ? <Image source={{ uri: event.poster }} style={styles.posterImage} /> : null}
       <ThemedText type="smallBold">{event.title}</ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
-        {event.date} {event.time} · {event.location}
+        {isoToDisplayDate(event.date)} {event.time} · {event.location}
       </ThemedText>
       <ThemedText type="small">{event.price}</ThemedText>
       {event.description ? <ThemedText type="small">{event.description}</ThemedText> : null}
@@ -157,7 +158,7 @@ function PendingSubmissionCard({
       ) : null}
       <ThemedText type="smallBold">{submission.title}</ThemedText>
       <ThemedText type="small" themeColor="textSecondary">
-        {submission.date} {submission.time} · {submission.location}
+        {isoToDisplayDate(submission.date)} {submission.time} · {submission.location}
       </ThemedText>
       <ThemedText type="small">{submission.price}</ThemedText>
       {submission.description ? <ThemedText type="small">{submission.description}</ThemedText> : null}

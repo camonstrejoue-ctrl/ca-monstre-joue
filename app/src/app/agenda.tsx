@@ -9,10 +9,9 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
 import { useAuth } from '@/lib/auth-context';
+import { displayToIsoDate } from '@/lib/date-format';
 import { addEvent, removeEvent, reportEvent, useUpcomingEvents, type CommunityEvent } from '@/lib/events';
 import { pickImageAsBase64 } from '@/lib/image-base64';
-
-const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 function formatDate(date: string) {
   const d = new Date(`${date}T00:00:00`);
@@ -76,12 +75,14 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
       setError('Renseigne au moins le nom, le lieu, la date et un contact.');
       return;
     }
-    if (!DATE_RE.test(date.trim())) {
-      setError('La date doit être au format AAAA-MM-JJ (ex: 2026-09-15).');
+    const isoDate = displayToIsoDate(date.trim());
+    if (!isoDate) {
+      setError('La date doit être au format JJ-MM-AAAA (ex: 15-09-2026).');
       return;
     }
-    if (endDate.trim() && !DATE_RE.test(endDate.trim())) {
-      setError('La date de fin doit être au format AAAA-MM-JJ (ex: 2026-09-17).');
+    const isoEndDate = endDate.trim() ? displayToIsoDate(endDate.trim()) : undefined;
+    if (endDate.trim() && !isoEndDate) {
+      setError('La date de fin doit être au format JJ-MM-AAAA (ex: 17-09-2026).');
       return;
     }
     setSubmitting(true);
@@ -89,9 +90,9 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
       await addEvent(uid, {
         title: title.trim(),
         location: location.trim(),
-        date: date.trim(),
+        date: isoDate,
         time: time.trim(),
-        endDate: endDate.trim() || undefined,
+        endDate: isoEndDate ?? undefined,
         endTime: endTime.trim() || undefined,
         price: price.trim() || 'Gratuit',
         contact: contact.trim(),
@@ -115,17 +116,19 @@ function AddEventForm({ uid, onAdded }: { uid: string; onAdded: () => void }) {
       <FormField label="Nom de l'événement" value={title} onChangeText={setTitle} />
       <FormField label="Lieu" value={location} onChangeText={setLocation} />
       <FormField
-        label="Date (AAAA-MM-JJ)"
+        label="Date (JJ-MM-AAAA)"
         value={date}
         onChangeText={setDate}
-        placeholder="2026-09-15"
+        placeholder="15-09-2026"
+        keyboardType="numbers-and-punctuation"
       />
       <FormField label="Heure" value={time} onChangeText={setTime} placeholder="19:00" />
       <FormField
         label="Date de fin (optionnel, si l'événement dure plusieurs jours)"
         value={endDate}
         onChangeText={setEndDate}
-        placeholder="2026-09-17"
+        placeholder="17-09-2026"
+        keyboardType="numbers-and-punctuation"
       />
       <FormField label="Heure de fin" value={endTime} onChangeText={setEndTime} placeholder="20:00" />
       <FormField
