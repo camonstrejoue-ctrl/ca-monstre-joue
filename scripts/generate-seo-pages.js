@@ -244,7 +244,7 @@ function main() {
   const llmsTxt = [
     '# Ça Monstre Joue',
     '',
-    '> Blog suisse de jeux de société tenu par quatre passionnés : critiques honnêtes, fiches jeux',
+    '> Blog suisse de jeux de société tenu par une bande de passionnés : critiques honnêtes, fiches jeux',
     '> détaillées (nombre de joueurs, âge, durée, complexité, note sur 6) et conseils pour choisir',
     '> sa prochaine partie.',
     '',

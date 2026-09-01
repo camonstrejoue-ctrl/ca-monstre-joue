@@ -1018,12 +1018,13 @@ window.ARTICLES = [
   },
 ];
 
-// À compléter : noms, rôles, bios et photos des 4 membres de la team.
+// À compléter : noms, rôles, bios et photos des membres de la team.
+// Mylène (retirée le 2026-09-01, revient dans le projet plus tard) :
+// { name: 'Mylène', linkedin: 'https://www.linkedin.com/in/mylenepoinard/', role: 'La mauvaise perdante aux Aventuriers du Rail', bio: 'Bio à compléter.', favoriteGame: 'Forêt mixte', photo: 'assets/team/member-4.jpg' },
 window.TEAM = [
   { name: 'Alex', linkedin: 'https://www.linkedin.com/in/alexandre-marchionini-b9500960/', role: "L'insupportable chanceux", bio: "Fan inconditionnel de jeux en tous genres ! En un mot, j’ai besoin de jouer pour être heureux. Que ce soit des jeux de société entre amis, en couple, en soirée ; des jeux vidéos avec Camille ; des jeux en extérieurs comme le Kubb ou encore des sports ludiques comme le tennis, j’ai besoin constamment du jeu pour créer du lien et du liant. Côté jeux de société, je suis un aficionado des jeux coopératifs et des jeux narratifs. Quoi de mieux que gagner ensemble ?", favoriteGame: 'Mysterium', photo: 'assets/team/photo-alex.jpg' },
   { name: 'Camille', role: 'La poisseuse', bio: 'Orthophoniste de métier, le jeu est pour moi essentiel, que ce soit dans mon quotidien professionnel ou personnel. Allergique aux "livres de règles" (type "Kingdom Rush"), j’aime les jeux faciles à apprendre (ou alors j’attends qu’Alex apprenne les règles pour me les expliquer). Dotée d’une très grande poisse, je préfère les jeux coopératifs qui m’épargneront une trop grande frustration...', favoriteGame: "Eila et l'Éclat de la Montagne", photo: 'assets/team/photo-camille.jpg' },
   { name: 'Guillaume', linkedin: 'https://www.linkedin.com/in/guillaume-laborie-32096191/', role: 'Le maître des règles', bio: 'Bio à compléter.', favoriteGame: 'Ark Nova', photo: 'assets/team/member-3.jpg' },
-  { name: 'Mylène', linkedin: 'https://www.linkedin.com/in/mylenepoinard/', role: 'La mauvaise perdante aux Aventuriers du Rail', bio: 'Bio à compléter.', favoriteGame: 'Forêt mixte', photo: 'assets/team/member-4.jpg' },
 ];
 
 // À compléter : URLs réelles des réseaux sociaux.
