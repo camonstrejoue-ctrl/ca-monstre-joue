@@ -263,7 +263,9 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ---------- home shortcuts (guides / agenda) ---------- */
 .shortcuts-section{padding:10px 0 20px;}
-.shortcuts-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+/* 1 colonne le temps du lancement réduit (carte Agenda masquée, voir
+   index.html) — remettre "1fr 1fr" au lancement complet du 1er novembre. */
+.shortcuts-grid{display:grid;grid-template-columns:1fr;gap:24px;}
 .shortcut-card{
   position:relative;display:flex;align-items:center;gap:22px;
   padding:32px;border-radius:var(--radius-lg);border:3px solid var(--black);
