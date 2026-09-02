@@ -76,13 +76,19 @@ button{font-family:inherit;cursor:pointer;}
 .main-nav{display:flex;align-items:center;gap:6px;}
 .main-nav > ul{display:flex;align-items:center;gap:4px;}
 .nav-link{
-  font-family:var(--font-display);font-weight:700;font-size:.98rem;
+  font-family:var(--font-display);font-weight:700;
+  /* Taille fluide : .98rem (taille d'origine, garantie de tenir) à 880px de
+     large jusqu'à 1.47rem (×1.5) à 1600px — rétrécit en continu au lieu de
+     casser brutalement sur les largeurs intermédiaires (tablette/laptop). */
+  font-size:clamp(0.98rem, 0.38rem + 1.09vw, 1.47rem);
   padding:10px 16px;border-radius:999px;
   display:inline-flex;align-items:center;gap:6px;
+  white-space:nowrap;
 }
 .nav-link:hover, .nav-item.open > .nav-link{background:var(--black);color:var(--white);}
 .nav-link--app{box-shadow:inset 0 -2px 0 var(--coral);}
-.nav-guide-icon{height:30px;width:auto;display:block;}
+/* Même logique que .nav-link : 30px (garanti) à 880px, jusqu'à 60px (×2) à 1600px. */
+.nav-guide-icon{height:clamp(30px, -6.67px + 4.17vw, 60px);width:auto;display:block;}
 .nav-item{position:relative;}
 .nav-caret{font-size:.7em;transition:transform .2s ease;}
 .nav-item.open .nav-caret{transform:rotate(180deg);}
@@ -151,6 +157,7 @@ button{font-family:inherit;cursor:pointer;}
 
 @media (max-width:880px){
   .menu-toggle{display:flex;}
+  .header-actions{margin-left:auto;}
   .main-nav{
     position:fixed;inset:0 0 0 auto;top:81px;width:min(320px,85vw);height:calc(100vh - 81px);
     background:var(--white);border-left:3px solid var(--black);
