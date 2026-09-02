@@ -512,11 +512,14 @@ button{font-family:inherit;cursor:pointer;}
 .newsletter-cta-section{padding:40px 0;}
 .newsletter-cta-box{
   max-width:600px;margin:0 auto;border:3px solid var(--black);border-radius:var(--radius-lg);
-  padding:32px 28px;text-align:center;background:var(--coral-light);
+  padding:32px 28px;text-align:center;background:var(--coral);
+  box-shadow:9px 9px 0 var(--black);transform:rotate(-1.2deg);
 }
 .newsletter-cta-monster{width:64px;height:auto;margin:0 auto 12px;display:block;}
-.newsletter-cta-box h3{font-family:var(--font-display);font-size:1.25rem;margin-bottom:10px;}
-.newsletter-cta-box p{color:var(--gray);max-width:440px;margin:0 auto 22px;}
+.newsletter-cta-box h3{font-family:var(--font-display);font-size:1.25rem;margin-bottom:10px;color:var(--white);}
+.newsletter-cta-box p{color:var(--white);opacity:.92;max-width:440px;margin:0 auto 22px;}
+.newsletter-cta-box .btn{background:var(--black);}
+.newsletter-cta-box .btn:hover{background:var(--white);color:var(--black);}
 
 /* ---------- share (jeu/article) ---------- */
 .share-section{padding:0 0 60px;}
