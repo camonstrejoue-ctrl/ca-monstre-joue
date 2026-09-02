@@ -508,6 +508,16 @@ button{font-family:inherit;cursor:pointer;}
 .article-games-row .gallery-card{aspect-ratio:1/1;}
 .article-games-row .gallery-card img{width:100%;height:100%;object-fit:cover;}
 
+/* ---------- newsletter CTA (jeu/article) ---------- */
+.newsletter-cta-section{padding:40px 0;}
+.newsletter-cta-box{
+  max-width:600px;margin:0 auto;border:3px solid var(--black);border-radius:var(--radius-lg);
+  padding:32px 28px;text-align:center;background:var(--coral-light);
+}
+.newsletter-cta-monster{width:64px;height:auto;margin:0 auto 12px;display:block;}
+.newsletter-cta-box h3{font-family:var(--font-display);font-size:1.25rem;margin-bottom:10px;}
+.newsletter-cta-box p{color:var(--gray);max-width:440px;margin:0 auto 22px;}
+
 /* ---------- share (jeu/article) ---------- */
 .share-section{padding:0 0 60px;}
 .share-box{
