@@ -563,7 +563,9 @@ function renderShareRow(container, url, title) {
 function renderAppShareLink(slug) {
   const link = qs('#app-share-link');
   if (!link) return;
-  link.href = `/app.html?utm_source=blog&utm_medium=partage&utm_campaign=${encodeURIComponent(slug)}`;
+  // Masqué le temps du lancement réduit (1re étape) : app pas encore promue.
+  // Réactiver en remettant le href ci-dessous au lieu de cacher l'élément.
+  link.style.display = 'none';
 }
 
 // ---------- GAME page ----------

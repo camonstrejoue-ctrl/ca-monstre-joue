@@ -7,8 +7,10 @@
 // Bannière publicitaire (format Superbanner 970x90) au-dessus du carrousel
 // d'accueil. Plusieurs entrées = une bannière est tirée au hasard à chaque
 // chargement de la page.
+// Bannière "app" volontairement retirée de la rotation pendant le lancement
+// réduit (1re étape) — à remettre avec le reste au lancement complet du
+// 1er novembre : { image: 'assets/banniere-app.jpg', href: '/app.html?utm_source=blog&utm_medium=banniere&utm_campaign=teaser_app', alt: "L'app Ça Monstre Joue arrive bientôt" },
 window.HOME_BANNERS = [
-  { image: 'assets/banniere-app.jpg', href: '/app.html?utm_source=blog&utm_medium=banniere&utm_campaign=teaser_app', alt: "L'app Ça Monstre Joue arrive bientôt" },
   { image: 'assets/banniere-gazette.jpg', href: 'https://camonstrejoue.substack.com?utm_source=blog&utm_medium=banniere&utm_campaign=gazette_substack', alt: "La Gazette du Monstre, notre newsletter sur Substack", external: true },
 ];
 

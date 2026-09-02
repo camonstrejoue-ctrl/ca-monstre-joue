@@ -177,7 +177,14 @@ function main() {
   const articleTemplate = fs.readFileSync(path.join(rootDir, 'article.html'), 'utf8');
   const categoryTemplate = fs.readFileSync(path.join(rootDir, 'categorie.html'), 'utf8');
 
-  const urls = [`${BASE_URL}/`, `${BASE_URL}/tous-les-jeux.html`, `${BASE_URL}/agenda.html`, `${BASE_URL}/guides.html`, `${BASE_URL}/equipe.html`, `${BASE_URL}/contact.html`, `${BASE_URL}/app.html`, `${BASE_URL}/politique-confidentialite.html`];
+  // /agenda.html et /app.html volontairement absents du sitemap pendant le
+  // lancement réduit (1re étape, voir commit dédié) : ni l'agenda (vide,
+  // en attente d'événements) ni l'app (pas encore prête) ne doivent être
+  // découverts par les moteurs de recherche avant le lancement complet du
+  // 1er novembre. Les pages restent en ligne (accessibles par URL directe),
+  // juste non indexées/liées. Remettre les deux entrées ci-dessous au moment
+  // du lancement complet.
+  const urls = [`${BASE_URL}/`, `${BASE_URL}/tous-les-jeux.html`, `${BASE_URL}/guides.html`, `${BASE_URL}/equipe.html`, `${BASE_URL}/contact.html`, `${BASE_URL}/politique-confidentialite.html`];
 
   GAMES.forEach((g) => {
     const url = `${BASE_URL}/jeu/${g.slug}/`;
