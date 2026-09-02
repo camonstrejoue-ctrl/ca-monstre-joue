@@ -2,6 +2,7 @@
 !.claude/skills/
 .claude/skills/**/node_modules/
 .claude/skills/**/package-lock.json
+**/.claude/*
 Thumbs.db
 .DS_Store
 
