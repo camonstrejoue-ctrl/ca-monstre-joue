@@ -562,7 +562,7 @@ button{font-family:inherit;cursor:pointer;}
 .philosophy-heading p{margin-bottom:16px;}
 .philosophy-heading p:last-child{margin-bottom:0;}
 .philosophy-heading a{color:var(--coral-dark);text-decoration:underline;}
-.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;}
+.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,240px));gap:26px;justify-content:center;}
 .team-card{text-align:center;}
 .team-card .thumb{
   border-radius:var(--radius-lg);overflow:hidden;border:3px solid var(--black);margin-bottom:16px;line-height:0;
