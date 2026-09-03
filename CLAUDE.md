@@ -9,6 +9,18 @@ Après chaque changement notable (nouveau jeu, nouvel article, modification de d
 crée un commit avec un message clair puis pousse-le vers `origin main` — sans attendre que ce soit demandé
 explicitement à chaque fois, cette instruction vaut comme autorisation permanente pour ce projet.
 
+**Exception (décidée le 2026-09-03)** : les changements SEO/contenu **structurants** — architecture des
+URLs, refonte du maillage interne, suppression/fusion de pages, changement de schéma de données touchant
+au SEO — demandent une validation explicite avant push, voir `docs/seo-geo-expert.md`. Tout le reste
+(bugs, ajustements visuels, contenu ajouté, nouveaux jeux/articles au schéma existant...) continue en
+auto-push comme ci-dessus.
+
+## Cadre SEO/GEO
+
+Pour tout travail lié au SEO ou au GEO (audit, construction, stratégie éditoriale, recherche de mots-clés),
+suivre le cadre de collaboration défini dans `docs/seo-geo-expert.md` — rôle, méthodologie d'audit, règles
+de collaboration (dont l'exception de validation ci-dessus).
+
 ## Aperçu local
 
 Le site n'a pas de serveur — pour le prévisualiser (notamment les vidéos YouTube, qui ne fonctionnent pas
