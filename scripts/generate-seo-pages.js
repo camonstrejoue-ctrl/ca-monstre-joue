@@ -101,7 +101,33 @@ function breadcrumb(items) {
   };
 }
 
-function gameJsonLd(g, categories, url) {
+// Person plutôt que Organization : signal E-E-A-T (auteur identifiable) que
+// les moteurs de recherche et de réponse IA valorisent pour décider qui
+// citer. Retombe sur Organization si l'auteur n'est pas dans window.TEAM
+// (ne doit normalement pas arriver, mais évite de casser le build sinon).
+function personJsonLd(name, team) {
+  const member = (team || []).find((m) => m.name === name);
+  if (!member) return { '@type': 'Organization', name: 'Ça Monstre Joue' };
+  return {
+    '@type': 'Person',
+    name: member.name,
+    url: `${BASE_URL}/equipe.html`,
+    ...(member.photo ? { image: absoluteUrl(member.photo) } : {}),
+    ...(member.linkedin ? { sameAs: [member.linkedin] } : {}),
+  };
+}
+
+// Article de critique associé à un jeu, pour attribuer l'avis à la bonne
+// personne sur la fiche jeu (le Review n'a pas d'auteur propre, seul
+// l'article qui porte l'avis en a un). Préfère un slug "critique" (l'avis
+// principal) ; à défaut, le premier article lié au jeu.
+function primaryReviewAuthor(g, articles, team) {
+  const linked = (articles || []).filter((a) => a.gameSlug === g.slug);
+  const primary = linked.find((a) => /critique/.test(a.slug)) || linked[0];
+  return primary ? personJsonLd(primary.author, team) : { '@type': 'Organization', name: 'Ça Monstre Joue' };
+}
+
+function gameJsonLd(g, categories, articles, team, url) {
   const firstCat = categories.find((c) => (g.categories || [])[0] === c.slug);
   const crumbs = [['Accueil', `${BASE_URL}/`]];
   if (firstCat) crumbs.push([firstCat.name, `${BASE_URL}/categorie/${firstCat.slug}/`]);
@@ -121,13 +147,13 @@ function gameJsonLd(g, categories, url) {
     ...(g.identity && g.identity.note
       ? { reviewRating: { '@type': 'Rating', ratingValue: g.identity.note.stars, bestRating: g.identity.note.max || 6, worstRating: 1 } }
       : {}),
-    author: { '@type': 'Organization', name: 'Ça Monstre Joue' },
+    author: primaryReviewAuthor(g, articles, team),
     publisher: { '@type': 'Organization', name: 'Ça Monstre Joue' },
   };
   return [breadcrumb(crumbs), review];
 }
 
-function articleJsonLd(a, game, url) {
+function articleJsonLd(a, game, team, url) {
   const crumbs = [['Accueil', `${BASE_URL}/`]];
   if (game) crumbs.push([game.name, `${BASE_URL}/jeu/${game.slug}/`]);
   crumbs.push([a.title, url]);
@@ -139,7 +165,7 @@ function articleJsonLd(a, game, url) {
     description: toDescription(a.excerpt || '', 300),
     image: absoluteUrl(a.banner || a.cover) || FALLBACK_IMAGE,
     ...(a.date ? { datePublished: a.date } : {}),
-    author: { '@type': 'Organization', name: 'Ça Monstre Joue' },
+    author: personJsonLd(a.author, team),
     publisher: {
       '@type': 'Organization',
       name: 'Ça Monstre Joue',
@@ -150,13 +176,24 @@ function articleJsonLd(a, game, url) {
   return [breadcrumb(crumbs), article];
 }
 
-function categoryJsonLd(c, url) {
+// Liste 2-4 jeux réels de la catégorie dans la description plutôt qu'une
+// phrase générique identique sur les 6 pages catégorie — meilleure valeur
+// différenciante pour le SEO (CTR, requêtes longue traîne) et le GEO.
+function categoryDescription(c, games) {
+  const names = games.filter((g) => (g.categories || []).includes(c.slug)).map((g) => g.name);
+  if (names.length === 0) return `Tous nos jeux de la catégorie ${c.name} sur Ça Monstre Joue.`;
+  const shown = names.slice(0, 3);
+  const rest = names.length > shown.length ? ` et ${names.length - shown.length} autre${names.length - shown.length > 1 ? 's' : ''}` : '';
+  return `${c.name} : ${shown.join(', ')}${rest}. Fiches détaillées, avis et conseils sur Ça Monstre Joue.`;
+}
+
+function categoryJsonLd(c, description, url) {
   const crumbs = [['Accueil', `${BASE_URL}/`], [c.name, url]];
   const collection = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `${c.name} — Ça Monstre Joue`,
-    description: `Tous nos jeux de la catégorie ${c.name} sur Ça Monstre Joue.`,
+    description,
     url,
   };
   return [breadcrumb(crumbs), collection];
@@ -171,7 +208,7 @@ function isPublished(article) {
 }
 
 function main() {
-  const { GAMES = [], ARTICLES = [], CATEGORIES = [] } = loadContent();
+  const { GAMES = [], ARTICLES = [], CATEGORIES = [], TEAM = [] } = loadContent();
 
   const gameTemplate = fs.readFileSync(path.join(rootDir, 'jeu.html'), 'utf8');
   const articleTemplate = fs.readFileSync(path.join(rootDir, 'article.html'), 'utf8');
@@ -197,7 +234,7 @@ function main() {
       url,
       ogType: 'website',
     });
-    html = injectJsonLd(html, gameJsonLd(g, CATEGORIES, url));
+    html = injectJsonLd(html, gameJsonLd(g, CATEGORIES, ARTICLES, TEAM, url));
     writePage(path.join(rootDir, 'jeu', g.slug), html);
     urls.push(url);
   });
@@ -214,23 +251,24 @@ function main() {
       ogType: 'article',
     });
     const game = GAMES.find((g) => g.slug === a.gameSlug);
-    html = injectJsonLd(html, articleJsonLd(a, game, url));
+    html = injectJsonLd(html, articleJsonLd(a, game, TEAM, url));
     writePage(path.join(rootDir, 'article', a.slug), html);
     if (isPublished(a)) urls.push(url);
   });
 
   CATEGORIES.forEach((c) => {
     const url = `${BASE_URL}/categorie/${c.slug}/`;
+    const description = categoryDescription(c, GAMES);
     let html = injectMeta(categoryTemplate, {
       genericTitle: 'Catégorie — Ça Monstre Joue',
       genericDescription: 'Explore nos jeux de société classés par catégorie sur Ça Monstre Joue.',
       title: `${c.name} — Ça Monstre Joue`,
-      description: `Tous nos jeux de la catégorie ${c.name} sur Ça Monstre Joue, classés par ordre alphabétique.`,
+      description,
       image: absoluteUrl(c.image),
       url,
       ogType: 'website',
     });
-    html = injectJsonLd(html, categoryJsonLd(c, url));
+    html = injectJsonLd(html, categoryJsonLd(c, description, url));
     writePage(path.join(rootDir, 'categorie', c.slug), html);
     urls.push(url);
   });
