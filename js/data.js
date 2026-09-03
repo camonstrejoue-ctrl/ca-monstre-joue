@@ -657,7 +657,7 @@ window.ARTICLES = [
   {
     slug: 'sub-terra-ii-compo-type',
     title: 'Sub Terra II - Notre compo type',
-    date: '2026-08-03',
+    date: '2026-08-04',
     author: 'Alex',
     gameSlug: 'sub-terra-ii',
     banner: 'assets/games/sub-terra-ii/compo-type-banniere.jpg',
@@ -711,7 +711,7 @@ window.ARTICLES = [
   {
     slug: 'eila-et-leclat-de-la-montagne-critique',
     title: "Eila - Entre appréhension et émotions fortes",
-    date: '2026-08-07',
+    date: '2026-08-09',
     author: 'Camille',
     gameSlug: 'eila-et-leclat-de-la-montagne',
     banner: 'assets/games/eila-et-leclat-de-la-montagne/eila3-banniere.JPG',
@@ -744,7 +744,7 @@ window.ARTICLES = [
   {
     slug: 'wingspan-critique',
     title: 'Wingspan, ça vaut l’coup d’aile ?',
-    date: '2026-08-10',
+    date: '2026-08-11',
     author: 'Alex',
     gameSlug: 'wingspan',
     hero: 'assets/games/wingspan/wingspan-bandeau1.jpg',
@@ -771,7 +771,7 @@ window.ARTICLES = [
   {
     slug: 'dorf-romantik-sakura-critique',
     title: 'Dorf Romantik Sakura - Votre couple mérite mieux que Netflix',
-    date: '2026-08-10',
+    date: '2026-08-14',
     author: 'Alex',
     gameSlug: 'dorf-romantik-sakura',
     hero: 'assets/games/dorf-romantik-sakura/sakura-bandeau.jpg',
@@ -801,7 +801,7 @@ window.ARTICLES = [
   {
     slug: 'combien-de-jeux-pour-etre-heureux',
     title: 'Combien de jeux faut-il posséder pour être vraiment heureux ?',
-    date: '2026-08-12',
+    date: '2026-08-16',
     author: 'Alex',
     guide: true,
     cover: 'assets/guides/combien-de-jeux-pour-etre-heureux/combien-de-jeux-pour-etre-heureux-vignette.jpg',
@@ -829,7 +829,7 @@ window.ARTICLES = [
     slug: 'comment-trainer-sa-moitie-au-magasin-de-jeux',
     title: 'Comment traîner subtilement votre moitié dans un magasin de jeu ?',
     subtitle: "Les 3 stratégies de P’tit Monstre",
-    date: '2026-08-12',
+    date: '2026-08-19',
     author: 'Alex',
     guide: true,
     hero: 'assets/guides/comment-trainer-sa-moitie-au-magasin-de-jeux/comment-trainer-sa-moitie-au-magasin-de-jeux-bandeau.jpg',
@@ -858,7 +858,7 @@ window.ARTICLES = [
     slug: 'extensions-jeux-de-societe-une-arnaque',
     title: 'Les extensions de jeux sont-elles une arnaque ?',
     subtitle: 'La corde nostalgique',
-    date: '2026-08-13',
+    date: '2026-08-21',
     author: 'Alex',
     guide: true,
     hero: 'assets/guides/extensions-jeux-de-societe-une-arnaque/extensions-jeux-de-societe-une-arnaque-bandeau.jpg',
@@ -894,7 +894,7 @@ window.ARTICLES = [
   {
     slug: 'organiser-soiree-jeux-competitif-ou-cooperatif',
     title: 'Organiser une soirée jeux – Jeux compétitifs ou coopératifs ?',
-    date: '2026-08-13',
+    date: '2026-08-24',
     author: 'Alex',
     guide: true,
     hero: 'assets/guides/organiser-soiree-jeux-competitif-ou-cooperatif/organiser-soiree-jeux-competitif-ou-cooperatif-bandeau.jpg',
@@ -923,7 +923,7 @@ window.ARTICLES = [
   {
     slug: 'jeux-pour-lapero',
     title: 'Les 3 jeux qui changent pour l’apéro',
-    date: '2026-08-13',
+    date: '2026-08-26',
     author: 'Camille',
     guide: true,
     hero: 'assets/guides/jeux-pour-lapero/jeux-pour-lapero-bandeau.jpg',
@@ -955,7 +955,7 @@ window.ARTICLES = [
   {
     slug: 'jeux-pour-convertir-un-non-joueur',
     title: 'Les 5 jeux qui vont convertir un non-joueur en joueur',
-    date: '2026-08-13',
+    date: '2026-08-29',
     author: 'Alex',
     guide: true,
     hero: 'assets/guides/jeux-pour-convertir-un-non-joueur/jeux-pour-convertir-un-non-joueur-bandeau.jpg',
@@ -994,7 +994,7 @@ window.ARTICLES = [
     slug: 'seigneur-des-anneaux-critique',
     title: 'Le Destin de la communauté – Bientôt votre jeu le plus précieux ?',
     subtitle: 'Êtes-vous prêt à réécrire l’histoire du Seigneur des anneaux ?',
-    date: '2026-08-17',
+    date: '2026-08-31',
     author: 'Alex',
     gameSlug: 'seigneur-des-anneaux-le-destin-de-la-communaute',
     hero: 'assets/games/seigneur-des-anneaux-le-destin-de-la-communaute/destin-communaute-bandeau.jpg',
