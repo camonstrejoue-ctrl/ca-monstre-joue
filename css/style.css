@@ -281,6 +281,7 @@ button{font-family:inherit;cursor:pointer;}
 .shortcut-card--guides{background:var(--coral-light);}
 .shortcut-card--agenda{background:var(--cream-dark);}
 .shortcut-icon{width:64px;flex:none;}
+.shortcut-card--guides .shortcut-icon{width:128px;}
 .shortcut-copy .tag{
   display:inline-block;font-family:var(--font-display);font-weight:700;font-size:.8rem;
   color:var(--coral-dark);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;
