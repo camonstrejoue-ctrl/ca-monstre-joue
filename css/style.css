@@ -177,7 +177,6 @@ button{font-family:inherit;cursor:pointer;}
   border:3px solid var(--black);border-radius:var(--radius-md);overflow:hidden;line-height:0;
 }
 .ad-slot-inner img{width:100%;height:100%;object-fit:cover;display:block;}
-@media (max-width:600px){.ad-slot-inner{aspect-ratio:320/50;}}
 .hero-banner{padding:36px 0 10px;}
 .carousel{
   position:relative;border-radius:var(--radius-lg);overflow:hidden;
