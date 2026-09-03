@@ -360,7 +360,15 @@ function renderHomeBanner() {
     link.removeAttribute('rel');
   }
   link.innerHTML = '';
-  link.appendChild(el('img', { src: assetUrl(banner.image), alt: banner.alt || '' }));
+  // Certaines bannières ont un visuel dédié pour mobile (ratio différent,
+  // pensé pour rester lisible en écran étroit) — bascule via <picture> sous
+  // 600px, comme le reste du site. Retombe sur l'image unique si absente.
+  const children = [];
+  if (banner.mobileImage) {
+    children.push(el('source', { media: '(max-width:600px)', srcset: assetUrl(banner.mobileImage) }));
+  }
+  children.push(el('img', { src: assetUrl(banner.image), alt: banner.alt || '' }));
+  link.appendChild(el('picture', {}, children));
 }
 
 function renderHomeHero() {

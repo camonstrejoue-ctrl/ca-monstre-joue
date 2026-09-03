@@ -11,7 +11,7 @@
 // réduit (1re étape) — à remettre avec le reste au lancement complet du
 // 1er novembre : { image: 'assets/banniere-app.jpg', href: '/app.html?utm_source=blog&utm_medium=banniere&utm_campaign=teaser_app', alt: "L'app Ça Monstre Joue arrive bientôt" },
 window.HOME_BANNERS = [
-  { image: 'assets/banniere-gazette.png', href: 'https://camonstrejoue.substack.com?utm_source=blog&utm_medium=banniere&utm_campaign=gazette_substack', alt: "La Gazette du Monstre, notre newsletter sur Substack", external: true },
+  { image: 'assets/banniere-gazette.png', mobileImage: 'assets/banniere-gazette-mobile.png', href: 'https://camonstrejoue.substack.com?utm_source=blog&utm_medium=banniere&utm_campaign=gazette_substack', alt: "La Gazette du Monstre, notre newsletter sur Substack", external: true },
 ];
 
 // Les événements affichés sur /agenda.html ne viennent plus d'ici : depuis

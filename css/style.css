@@ -176,7 +176,11 @@ button{font-family:inherit;cursor:pointer;}
   display:block;max-width:970px;aspect-ratio:970/90;margin:0 auto;
   border:3px solid var(--black);border-radius:var(--radius-md);overflow:hidden;line-height:0;
 }
+.ad-slot-inner picture{display:block;width:100%;height:100%;}
 .ad-slot-inner img{width:100%;height:100%;object-fit:cover;display:block;}
+/* Visuel mobile dédié (voir mobileImage, window.HOME_BANNERS) : ratio propre
+   à cette image (335/100), pas un simple rognage du bandeau desktop. */
+@media (max-width:600px){.ad-slot-inner{aspect-ratio:335/100;}}
 .hero-banner{padding:36px 0 10px;}
 .carousel{
   position:relative;border-radius:var(--radius-lg);overflow:hidden;
