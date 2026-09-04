@@ -1,0 +1,3549 @@
+{
+  "generatedAt": "2026-09-04T12:43:13.066Z",
+  "note": "Import unique — extraction heuristique depuis OneNote, à relire/corriger.",
+  "nodes": [
+    {
+      "id": "seed-folder-001",
+      "type": "folder",
+      "parentId": null,
+      "title": "Non Publiés",
+      "order": 0
+    },
+    {
+      "id": "seed-folder-002",
+      "type": "folder",
+      "parentId": "seed-folder-001",
+      "title": "Guides",
+      "order": 0
+    },
+    {
+      "id": "seed-folder-003",
+      "type": "folder",
+      "parentId": "seed-folder-001",
+      "title": "Pages de jeux",
+      "order": 1
+    },
+    {
+      "id": "seed-folder-004",
+      "type": "folder",
+      "parentId": null,
+      "title": "Publiés",
+      "order": 1
+    },
+    {
+      "id": "seed-folder-005",
+      "type": "folder",
+      "parentId": "seed-folder-004",
+      "title": "Guides",
+      "order": 0
+    },
+    {
+      "id": "seed-folder-006",
+      "type": "folder",
+      "parentId": "seed-folder-004",
+      "title": "Pages de jeux",
+      "order": 1
+    },
+    {
+      "id": "seed-page-007",
+      "type": "page",
+      "parentId": "seed-folder-002",
+      "title": "3 jeux pour s \"échouer sur une île déserte",
+      "order": 1
+    },
+    {
+      "id": "seed-page-008",
+      "type": "page",
+      "parentId": "seed-folder-002",
+      "title": "Jeux de société suisses : la scène qu'on ne vous raconte jamais",
+      "order": 2
+    },
+    {
+      "id": "seed-page-009",
+      "type": "page",
+      "parentId": "seed-folder-002",
+      "title": "Jeux de société, pourquoi c’est la meilleure idée de premier rencard ?",
+      "order": 3
+    },
+    {
+      "id": "seed-page-010",
+      "type": "page",
+      "parentId": "seed-folder-002",
+      "title": "Le jeu de société est-il le dernier endroit où on peut légalement humilier ses amis ? Les états d’âme d’un mauvais…",
+      "order": 4
+    },
+    {
+      "id": "seed-page-011",
+      "type": "page",
+      "parentId": "seed-folder-002",
+      "title": "Le syndrome de la boîte encore sous blister – Êtes-vous un ludopathe ?",
+      "order": 5
+    },
+    {
+      "id": "seed-page-012",
+      "type": "page",
+      "parentId": "seed-folder-003",
+      "title": "Alien le destin du Nostromo",
+      "order": 1
+    },
+    {
+      "id": "seed-page-013",
+      "type": "page",
+      "parentId": "seed-folder-005",
+      "title": "Combien de jeux faut-il posséder pour être vraiment heureux ?",
+      "order": 1
+    },
+    {
+      "id": "seed-page-014",
+      "type": "page",
+      "parentId": "seed-folder-005",
+      "title": "Comment traîner subtilement votre moitié dans un magasin de jeu ?",
+      "order": 2
+    },
+    {
+      "id": "seed-page-015",
+      "type": "page",
+      "parentId": "seed-folder-005",
+      "title": "Les 3 jeux qui changent pour l \"apéro",
+      "order": 3
+    },
+    {
+      "id": "seed-page-016",
+      "type": "page",
+      "parentId": "seed-folder-005",
+      "title": "Les 5 jeux qui vont convertir un non-joueur en joueur",
+      "order": 4
+    },
+    {
+      "id": "seed-page-017",
+      "type": "page",
+      "parentId": "seed-folder-005",
+      "title": "Les extensions de jeux sont elles une arnaque",
+      "order": 5
+    },
+    {
+      "id": "seed-page-018",
+      "type": "page",
+      "parentId": "seed-folder-005",
+      "title": "Organiser une soirée jeux Jeux compétitifs ou co",
+      "order": 6
+    },
+    {
+      "id": "seed-page-019",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Bandido",
+      "order": 1
+    },
+    {
+      "id": "seed-page-020",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Daybreak",
+      "order": 2
+    },
+    {
+      "id": "seed-page-021",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Daydream",
+      "order": 3
+    },
+    {
+      "id": "seed-page-022",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Dorf Romantik Sakura",
+      "order": 4
+    },
+    {
+      "id": "seed-page-023",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Eila et l'éclat de la montagne",
+      "order": 5
+    },
+    {
+      "id": "seed-page-024",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Escape the Dark Castle",
+      "order": 6
+    },
+    {
+      "id": "seed-page-025",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Finspan",
+      "order": 7
+    },
+    {
+      "id": "seed-page-026",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Flyin' Globlin",
+      "order": 8
+    },
+    {
+      "id": "seed-page-027",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Le destin de la communauté",
+      "order": 9
+    },
+    {
+      "id": "seed-page-028",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Service compris",
+      "order": 10
+    },
+    {
+      "id": "seed-page-029",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Sub Terra II",
+      "order": 11
+    },
+    {
+      "id": "seed-page-030",
+      "type": "page",
+      "parentId": "seed-folder-006",
+      "title": "Wingspan",
+      "order": 12
+    }
+  ],
+  "pages": [
+    {
+      "id": "seed-page-007",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "3 jeux pour s’échouer sur une île déserte",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et oui, comment ne pas jouer le jeu à fond et entrer dans la peau de votre propre personnage. Avec ce jeu coopératif (mais pas trop) vous allez devoir construire un radeau pour espérer quitter l’île déserte sur laquelle vous vous êtes échoués. Au programme, trouver de la nourriture, rapporter de l’eau potable (non on ne peut pas juste remplir sa gourde d’eau de mer), et bien évidemment construire le radeau. Malheureusement le jeu est contre vous et vos chances de tous vous en soprtir sont minces."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous n’avez que peu d’actions et beaucoup de besoins de nourriture et d’eau. Ca ne laisse pas énormément de place pour avancer sur la construction du radeau ni même pour chercher des objets échoués."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous jouez en premier ? Pourquoi ne pas décider de ne pas aller chasser pour piocher un objet ? Après tout, les autres seront bien obligés d’y aller ! Oh.. un pistolet ! Mais pas de balles dedans."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tiens tiens, Mathieu a trouvé une balle… « Bon tu me passes la balle et on sacrifie Jérémy ? Ca fera moins de nourriture et d’eau à aller chercher » « Hmmm…ok » « Merci pour la balle Mathieu mais… tu es de trop sur cette île. Pan ! »."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Finalement, quoi de mieux comme jeu pour se mettre dans l’ambiance autour de votre feu de camp improvisé ? Vous ne verrez plus vos compagnons de la même façon après ça."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "L’île interdite",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ici aussi, on reste dans le thème. Dans ce jeu coopératif, vous devrez trouver les 4 trésors perdus de l’île, avant que la montée des eaux ne vous engloutisse."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Charmant ! Vous êtes toujours autour du feu de camp, en bord de mer. Quoi de mieux pour mettre dans l’ambiance que le bruit des vagues et la marée haute qui monte inexorablement. Et voilà qu’après ce jeu vous vous demanderez jusqu’où elle ira et si vous serez encore là demain matin."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "D’un autre côté, coincé pour coincé, la perspective de trouver des trésors disparus et de vivre une aventure palpitante sur votre île, ça fait envie !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Faites attention quand même… on sait jamais."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Bon là c’est sûr, on sort du thème. Mais qu’est-ce que ça fait du bien d’avoir ENFIN la place de jouer au Kubb sans personne autour."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous ne connaissez pas ? C’est un jeu d’extérieur excellent."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Délimitez votre terrain (5m sur 8m, c’est pas mal hein) et placez vos valets en bois de chaque côté du terrain sur les deux lignes du fond ainsi que le roi en plein milieu du terrain."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "L’objectif : faire tomber chaque valet de votre adversaire avec vos bâtons à lancer. Une fois que tous les valets de bois de l’autre côté sont tombés, il ne reste plus qu’à dégommer le roi !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu est un de nos petits plaisirs de l’été et on avait très envie d’en parler."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais surtout, quel bonheur ce serait de pouvoir y jouer dans un vaste espace. Pas facile de trouver un terrain plat de 5x8m en ville, qui soit innocupé (les parcs, en été, c’est blindé). En plus, il faut pouvoir planter les piquets qui délimitent le terrain, donc on va nous accuser d’abîmer la pelouse. Vous rajoutez à ça les chiens qui à chaque passage veulent, soit courir après les bâtons, soit pisser contre le roi (oui, oui, c’est du vécu)."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "L’île déserte, c’est parfait ! Personne autour, on est tranquille…",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Est-ce que ça donnerait pas envie de s’y échouer finalement ?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-008",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le jeu de société est-il le dernier endroit où on peut légalement humilier ses amis ? Les états d’âme d’un mauvais gagnant."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Quand on pense jeux de société, on pense à l’Allemagne, on pense aux gros studios français. La Suisse ? Jamais. Et pourtant, plusieurs jeux qui traînent peut-être déjà dans votre ludothèque sont nés pas loin de chez nous."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je vous pose l’ambiance. Vous êtes en pleine soirée jeux avec 3 amis. C’est la fin d’une partie de Wingspan et vient le moment de compter les points. Mathieu 45 points. Lily 52 points. Emma 48 points. Et vous, 112 points."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Deux personnalités émergent en vous, un peu comme si un petit ange et un petit démon vous susurraient à l’oreille."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« -Roooh les pauvres, t’as encore gagné… ça doit pas être drôle pour eux. Fais donc profil bas et va te chercher un verre d’eau. »"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et vous avez Bob, l’enflure :"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« -Non mais franchement, ils font pas d’efforts. Demande leur donc s’ils ont prévu de commencer à jouer un jour»"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« Mais arrête, laisse les gagner la prochaine, sinon ils voudront plus jouer avec toi… »"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« Les laisser gagner ? Mais t’as fumé ou quoi ? À la prochaine, on les écrase c’est tout ! »"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous entendez ces petites voix dans votre tête ? C’est tout à fait normal mais c’est là que vous avez le choix. Vous pouvez décider quelle facette vous souhaitez montrer."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Celle qui a envie de garder ses amis « Désolé, j’ai encore gagné… j’ai vraiment beaucoup de chance »."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ou celle qui se dit « Tant pis pour eux, ils ont qu’à être moins nuls ! »."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Alors on vous le dit franchement, si vous vous reconnaissez dans Sam, c’est bien, vous êtes vraiment le bon ami et franchement, merci. On vous réinvitera à chaque fois, c’est sûr !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-009",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "À partir d’aujourd’hui vous voudrez faire un nouveau genre de « date ». Vous venez de « match » sur Tinder et vous parlez depuis quelques jours. Ça colle bien, vous rigolez, vous avez l’air de bien vous accorder. Et pourtant, comment être certain que ce n’est pas qu’une façade ? Qu’il ou elle ne vous dit pas ce que vous avez envie d’entendre."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "On vous propose de faire le tri d’une manière originale et inattendue !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Il est pas chaud pour ce rencard jeu de société ? Ça dégage, pas de temps à perdre avec quelqu’un qui n’aime pas jouer."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "On vous propose de commencer avec un premier jeu relativement facile. Les règles sont vite apprises mais demandent quand même un peu de réflexion, de patience et de pédagogie. Parfait pour voir en 30 minutes s’il a plus de 2 neurones qui se connectent."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ensuite, Finspan est vraiment le jeu intéressant pas excellence. Il permet d’apprendre plein d’anecdotes intéressantes sur les poissons et d’enrichir sa culture par la même occasion. Idéal pour voir un peu son niveau intellectuel et sa curiosité. Au passage, on peut aussi tester sa sensibilité à l’écologie et à la cause animale."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Evidemment, on ne va pas vous faire enchainer les lectures de règles intensives. C’est pourquoi on vous propose Dilemme Express que vous adapterez à 2 joueurs pour la soirée. L’occasion de faire une pause dans votre rencard avec un petit jeu facile à apprendre. Ici l’intérêt est ailleurs. On va tester son humour et sa capacité d’improvisation. Il n’est pas capable d’argumenter convenablement et de vous convaincre de sauver un patron cupide et imbu de lui-même plutôt qu’un pauvre enfant de retour de l’école ? C’est un manque criant d’imagination et de sens de l’humour. Fuyez !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Pour gagner, l’un de vous doit sortir du temple vivant avec l’Artefact."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je suis sûr que vous voyez où je veux en venir… Il sort du temple avec l’Artefact et vous abandonne lâchement à votre sort ? Il va sérieusement faire ça ? Aïe aïe aïe…."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce dernier jeu aura un seul but. Pouvoir enchaîner les parties compétitives afin de tester ses réactions en cas de victoires et de défaites. Mauvais perdant ? Il s’énerve et devient irritable ? Mauvais signe…"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais voilà, peut-être qu’il a passé tous les tests précédents et que lors de ce dernier il reste humble et sympathique. Et si c’était le bon ? Donnez-lui une chance. En plus vous avez peut-être trouvé votre partenaire de jeu !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-010",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le jeu de société est-il le dernier endroit où on peut légalement humilier ses amis ? Les états d’âme d’un mauvais gagnant."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je vous pose l’ambiance. Vous êtes en pleine soirée jeux avec 3 amis. C’est la fin d’une partie de Wingspan et vient le moment de compter les points. Mathieu 45 points. Lily 52 points. Emma 48 points. Et vous, 112 points."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Deux personnalités émergent en vous, un peu comme si un petit ange et un petit démon vous susurraient à l’oreille."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« -Roooh les pauvres, t’as encore gagné… ça doit pas être drôle pour eux. Fais donc profil bas et va te chercher un verre d’eau. »"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et vous avez Bob, l’enflure :"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« -Non mais franchement, ils font pas d’efforts. Demande leur donc s’ils ont prévu de commencer à jouer un jour»"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« Mais arrête, laisse les gagner la prochaine, sinon ils voudront plus jouer avec toi… »"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« Les laisser gagner ? Mais t’as fumé ou quoi ? À la prochaine, on les écrase c’est tout ! »"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous entendez ces petites voix dans votre tête ? C’est tout à fait normal mais c’est là que vous avez le choix. Vous pouvez décider quelle facette vous souhaitez montrer."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Celle qui a envie de garder ses amis « Désolé, j’ai encore gagné… j’ai vraiment beaucoup de chance »."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ou celle qui se dit « Tant pis pour eux, ils ont qu’à être moins nuls ! »."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Alors on vous le dit franchement, si vous vous reconnaissez dans Sam, c’est bien, vous êtes vraiment le bon ami et franchement, merci. On vous réinvitera à chaque fois, c’est sûr !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-011",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "S’il y a bien un mal qui touche les adeptes du jeu de société dans notre société moderne c’est celui-ci. Ce mal sercret que vous n’osez avouer ni à vos proches ni à vous-même. Celui qui vous pousse sans cesse à acheter un nouveau jeu de société car oui, vous « devez » tous les posséder."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce mal vous ronge peut-être à tel point que votre consommation de ludopéfiant n’arrive pas à absorber la quantité que vous achetez chaque mois."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et c’est souvent ainsi que commence la pile de la honte. Composée la plupart du temps de jeux encore sous blister."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Parfois vous ne parvenez pas à résister à l’appel et vous enlevez le blister simplement pour pouvoir la renifler… l’odeur du nouveau jeu."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je sais ce que vous ressentez… ce mal, j’y ai succombé aussi."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je vais tout de même vous partager une solution pour donner le change en société et « avoir l’air normal ». C’est simple… quand vous ramenez une boite à la maison, enlevez le blister (attention, on renifle mais on ne bave pas sur le jeu. Caaa les abiiiime), et déballez entièrement le jeu est ses composants. Ensuite seulement vous pourrez le mettre dans la pile de la honte en toute quiétude. Votre crime est maintenant parfaitement camouflé."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Alors, vous êtes atteint ? Ne craignez rien, je ne dirais rien à personne…"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-012",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Alien, Le destin du Nostromo",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "À la base, j’avais pas mal d’appréhensions en voyant que c’était un jeu Ravensburger. Je me disais que ça devait être vraiment un jeu grand public, et souvent, ce genre de jeu est un peu fade."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais bon le pitch me faisait très envie. Je suis grand fan d’un jeu vidéo horrifique qui s’appelle Dead by Daylight dans lequel il faut échapper à un tueur sanguinaire tout en réalisant des tâches pour pouvoir fuir. Et c’est exactement ce que ce jeu de société Alien me promettait, en plus dans un univers que j’apprécie réellement !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "D’ailleurs, petite aparté, je vous conseille d’aller à Gruyère pour voir le musée HR Giger et son magnifique bar sur le thème d’Alien !!"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Revenons au jeu. Franchement, j’avais peu d’attentes",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "et j’ai été très agréablement surpris. Il est excellent pour débuter dans ce type de jeu de survie horrifique. Bien équilibré, pas trop facile, accessible sans passer 3h à lire les règles, Alien, le destin du Nostromo a de nombreux arguments à mettre en avant."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "On l’a testé avec pas mal d’invités différents plus ou moins novices et, à chaque fois, ça a fait mouche et le jeu a été adoré !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Chacun des joueurs doit incarner un membre d’équipage avec un nombre d’actions différents et une compétence propre. Au fil de la partie, vous devrez réaliser des objectifs communs, comme par exemple, déposer 2 bombonnes de Fréons dans un lieu spécifique du plateau. Charge à vous d’aller les chercher à l’autre bout du vaisseau, d’éviter l’Alien qui renifle votre présence, de potentiellement faire diversion et vous défendre pour venir les rapporter au bon endroit. Mais attention, plus l’Alien vous affectera et plus vous perdrez du mental. Un mental réduit à Néant et c’est la fin de la partie."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Une fois tous les objectifs remplis, une mission finale vous sera révélée et vous demandera encore plus de réflexion, de stratégie, et d’un peu de chance."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous l’avez compris, ce jeu a été un vrai coup de cœur. On préfère cependant vous prévenir. Le jeu prend une autre dimension à 3 ou 4 joueurs. À 2, les objectifs peuvent parfois devenir très compliqué faute de joueurs pour faire diversion. On a vite fait d’avoir l’Alien qui nous bloque la route sans réellement pouvoir le contourner."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et si vous aimez ce genre de jeux, on vous conseille de jeter un œil au jeu de société Dead by Daylight ou, dans un genre légèrement différent, Sub Terra II !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-013",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le bonheur et c’est bien connu, est un état vers lequel nous essayons tous de « tendre ». Et c’est là toute l’importance. Le fait de tendre vers quelque chose, implique que nous devions ajouter une chose pour y arriver. Et cette chose vous vous en doutez, c’est un jeu de société."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Maintenant le bonheur n’est pas qu’une question de 0 ou de 1, vous le savez dans la vie rien n’est binaire. La vie, le bonheur, c’est aussi une affaire de centimètres."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Prenez un petit jeu de carte qui mesure 10cm. Vous sortez du magasin avec cette nouvelle boite sous le bras. 10 cm c’est bien, vous allez avoir de belles parties de plaisir c’est sûr et cet achat vous a procuré une dose non négligeable de bonheur."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais prenons maintenant une belle boite, 40 cm de Seigneur des anneaux, avec des figurines détaillées et de longues heures de jeu qui vous attendent. Votre bonheur qui certes vous pèse au bout du bras n’est-il pas plus conséquent à la sortie du magasin ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Alors oui si n+1 c’est être toujours un peu plus proche du bonheur, pourquoi ne pas simplement acheter plein de petits jeux me direz vous ? n+2, n+3 etc. Mais en fait c’est oublier les cm et le bonheur qui y est associé. Oubliez ce timide n+3 composé de petites boites ridicules. Prenez votre valise dans ce magasin de jeu et assumez votre envie d’un n+33 !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous l’aurez compris une boite de plus c’est tendre vers le bonheur. Une boite plus grosse de plus c’est tendre encore plus vers ce bonheur. Et en parlant de grosses boites, vous avez déjà entendu parler de ces jeux exceptionnels ?"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "À partir de l’adresse",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-014",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Les 3 stratégies de P’tit Monstre",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je vais vous parler d’expérience. Dans un soucis d’anonymat nous allons prendre des prénoms totalement fictifs. Mettons"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Alex et Camille. Ces techniques marchent à la perfection mais méfiez-vous, et utilisez les avec parcimonie. Car oui, toute la subtilité tient dans le fait de varier les techniques pour toujours bénéficier de l’effet de surprise. Si vous faites encore et encore le même coup, vous vous doutez bien que ça va finir par se voir et par ne plus marcher du tout…"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Imaginez. Vous êtes en vacances en France dans une ville que vous découvrez pour la première fois. Planning prévu pour aujourd’hui. Visites de la vieille ville, des lieux emblématiques, monuments, places, châteaux, cathédrales et certainement petite pause repas au restaurant à midi."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Premier point important. Vous devez impérativement être le guide et donc avoir la maîtrise du tracé et du GPS. Si ce n’est pas dans votre habitude, préparez votre coup quelques jours/semaines à l’avance et proposez-vous de regarder vous même le chemin à prendre. Menez votre moitié au premier monument, puis au second. Proposez de prendre cette petite rue car vous voyez qu’elle a de jolies façades, celle-ci car vous voyez un chat posé sur un rebord ou encore cette autre rue car il y a l’air d’avoir plus de monde."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "En secret bien sûr, et sous prétexte de ne pas vous perdre, vous contrôlez parfaitement votre trajet. Dans votre esprit c’est très clair. Entre la cathédrale St Justin et la place Louis IX, vous l’avez repéré. Il est là, votre objectif qui vous appelle et qui vous attire, qui monopolise toutes vos pensées, le magasin de jeu. Et c’est là qu’au détour d’une rue «Oh, un magasin de jeux de société ! Attends je vais jeter un œil 5 minutes.» BINGO. Le plan est parfait. Vous restez 3h30 et sortez avec 2 sacs bien dodus."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Au premier votre moitié n’y verra que du feu. Au second elle va pousser un petit soupir. Au 3e vous aurez droit à un regard suspicieux lourd de sens. Et au 4e...on vous laisse imaginer. N’abusez pas de cette technique ! Mais rassurez-vous...il y a les autres."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Plan n°2 : L’obligation «professionnelle»"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Celle-ci demande préparation mais vous apportera bien plus de constance que la précédente. Vous allez devoir, à la manière d’Inception, instiller dans son esprit que vous envisagez (à long terme pour pas trop l’inquiéter), de monter votre propre magasin de jeux. Ainsi à chaque fois que vous visiterez un nouvel endroit, vous aurez toute la légitimité requise pour prononcer cette phrase : «On va passer vite fait dans les 3 magasins de jeux pour que je regarde comment c’est agencé et que ça me donne des idées pour le futur magasin». Et BOUM, vous avez de nouveau acheté 2 jeux par magasin car «c’est malpoli de sortir d’un magasin sans rien acheter !»."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Plan n°3 : L’excuse des prochains «cadeaux»"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "6 mois dans l’année c’est facile. «C’est bientôt Noël et j’ai pas encore de cadeau pour Justin (oui le même qui a une cathédrale à son nom). J’ai une idée de jeu je vais aller regarder s’ils l’ont !». Bien évidemment vous ressortez du magasin avec des jeux pour vous."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Pour les 6 premiers mois de l’année, il va falloir que vous fassiez un peu plus d’effort. En effet, la seconde occasion de faire des cadeaux c’est bien évidemment les anniversaires mais attention c’est là que ça se corse. Vous n’allez pas acheter le cadeau d’anniversaire de Justin en février s’il est né en novembre."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "La conclusion est simple. Faites vous des amis qui ont des anniversaires dans les 6 premiers mois de l’année, de manière bien répartie. Idéalement 6 amis, chacun ayant son anniversaire un mois différent. Évitez les amis qui ont des anniversaires de juillet à décembre, ils n’apportent rien."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et voilà, vous avez maintenant 3 techniques solides qui ont été testées et éprouvées et qui vous permettront de remplir subtilement votre ludothèque car après tout, c’est pas ça le bonheur ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "D’ailleurs, si vous voulez savoir combien de jeu il faut vraiment posséder pour être heureux, on aborde la question dans cet article."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "À partir de l’adresse",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-015",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Les 3 jeux qui changent pour l’apéro",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Quand on a réfléchi aux différentes catégories de jeux pour le site on a vite été confrontés à un souci de définition… Un jeu d’ambiance, c’est quoi ??? Un p’tit jeu qu’on sort à l’apéro, qui comporte généralement un certain nombre de blagues salaces et qui va permettre de recueillir des informations croustillantes sur les convives ? Voilà en tout cas le genre de jeux d’ambiance que l’on peut retrouver dans les rayons dédiés de grands magasins."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais pour nous, un jeu d’ambiance c’est avant tout un jeu pas trop compliqué (qui ne prend pas 2h d’étude de règles), pendant lequel on arrive à grignoter et que l’on peut sortir pour créer un moment spécial : cocooning, rigolade ou autre."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Cette petite question terminologique étant réglée, nous pouvons en venir au vif du sujet : quels jeux sortir à l’apéro pour changer un peu des sempiternelles Blanc-Manger Coco, Time’s Up et compagnie ? Afin de ne pas me répéter dans la suite de cet article, veuillez prendre note que la consommation d’alcool doit bien évidemment se faire avec modération (même si le degré d’amusement est souvent proportionnel au nombre de verres ingurgités)."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Si vous flânez sur le site, vous l’aurez peut-être remarqué, nous parlons beaucoup de ce jeu et pour cause : il fait partie de nos jeux préférés ! Les règles sont très rapidement expliquées et il est très facile de jouer avec les dés dans une main et un cocktail dans l’autre. Qui plus est, il anime agréablement l’apéro puisqu’il permet de vivre une véritable aventure interactive, tous ensemble. Les plus théâtraux d’entre nous pourront briller par leur lecture fougueuse des différentes cartes de chapitre, ce qui ne manquera pas de transporter et faire rire l’assemblée."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je vous entends déjà ! « Quoi, le Jenga !? Y a pas plus original que ça !? » Et bien, des fois, il faut savoir retourner aux classiques. Le Jenga de base est un jeu hyper sympa avec un coup dans le nez. D’un coup, le jeu paraît 15 fois plus difficile. Pour pimenter vos soirées, nous vous proposons également une"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "customisation de votre Jenga. Après vous être amusés avec quelques bombes de peinture, vous pourrez écrire sur vos petits morceaux de bois. Pour ceux qui ont du mal à faire un choix, ça peut permettre de choisir le film du soir (la dernière brique qui fait tomber la tour détermine le film). Pour ceux qui veulent piéger leurs invités, ils peuvent noter des défis. Pour les grands intellectuels, des citations. Pour ceux qui détestent cuisiner, noter des noms sur les briques. Celui dont le nom est sur la dernière brique qui fait tomber la tour doit préparer le souper ! Bref, notez tout ce qui vous passe par la tête, adaptez-le à vos convives et vous obtiendrez un jeu super sympa pour l’apéro !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Sur le podium : Flyin’ Goblin",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "C’est notre dernière recommandation pour accompagner vos apéros. Si Escape the Dark Castle est particulièrement adapté à un apéritif entre adultes, Flyin’ Goblin est bien plus inclusif et vous permettra des parties avec de jeunes convives. Jeu léger par essence, il fera rire petits et grands !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Notez que si le jeu est sympa avec des enfants présents, il sera encore plus drôle, entre adultes, à mesure que les verres s’enchaîneront. Petite idée bonus : 5 diamants si vous visez le verre de votre voisin !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "À partir de l’adresse",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-016",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Escape the Dark Castle",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Facile à apprendre et à prendre en main, il saura convaincre les adeptes d’histoires glauques et horrifiques. Il ravira également les lecteurs en quête de sensations fortes."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans ce jeu d’ambiance, pas besoin d’être un joueur expert. Vous plongez dans une expérience du genre « Un livre dont vous êtes le héros ». Lisez les cartes et laissez vous porter par l’aventure en prenant toute sorte de choix cornéliens et en tentant de survivre."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous connaissez certainement ce classique. Plus qu’un jeu, c’est surtout l’occasion de montrer vos piètres talents en dessin et de vous marrer un bon coup. À ce jeu, plus on est nul, plus c’est drôle !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous vous dites certainement que le Jenga c’est un peu enfantin. Oui, vous connaissez ce jeu dans lequel on doit retirer des briques en bois d’une tour en espérant qu’elle ne s’effondre pas. Dit comme ça, c’est sûr, on a l’impression qu’on va s’amuser avec son petit neveu. Et pourtant, c’est un jeu sensationnel selon le contexte."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "On vous le conseille fortement lors d’une soirée arrosée. Après 2 Gin tonic, ce n’est plus du tout le même jeu ! Même les moins joueurs d’entre vous vont apprécier l’expérience."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "4. That’s Not a Hat",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tant qu’on est dans l’alcool (avec modération), comment ne pas parler de That’s not a hat. Encore une fois, en pleine possession de vos moyens, le jeu pourra vous paraître relativement moyen (encore que si vous êtes vraiment nombreux c’est déjà corsé !). En bref, vous vous passez des cartes faces cachées avec des objets en les annonçant « Je t’offre des lunettes ». Mais est-ce vraiment l’objet qu’on vient de vous passer ? Vous n’aviez pas l’impression que les lunettes étaient 2 personnes plus loin ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous vous doutez bien qu’à l’apéro, le jeu prend une autre dimension. Des objets qui sont sortis 10 minutes plus tôt réapparaissent bizarrement sans que personne ne relève le hic. La paire de lunettes dont on vient de parler est à 3 endroits en même temps. Fous rires garantis, même avec des non joueurs !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Si vous vous sentez mal dans une soirée où tout le monde est un peu coincé, sortez Dilemme Express ! Avec ce jeu, vous allez pouvoir désinhiber vos invités et faire ressortir leurs côtés les plus machiavéliques. Forcez-les à argumenter de mauvaise foi et surprenez-vous à être convaincu de devoir sauver du train en approche ce couple de vieux aigris malfaisants plutôt que ce groupe d’enfants en randonnée."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous verrez que des liens se créent entre des invités que tout éloigne grâce à ce jeu décalé. Ils vous diront même qu’ils ont hâte d’être à la prochaine soirée !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "À partir de l’adresse",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-017",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Article - Les extensions de jeux sont-elles une arnaque ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Soyons francs (au moins autant que Clovis), combien d’entre nous ont déjà craqué sur des extensions de jeux de société que nous avons adorés ? Allez-y, comptez ! Combien d’extensions avez-vous dans votre ludothèque ? Et parmi elles, combien appréciez-vous réellement ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Pour moi, le principe même d’une extension, du point de vue d’un éditeur, c’est de jouer sur la corde nostalgique des joueurs pour vous faire acheter."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Prenons un exemple assez classique. Catan. On ne compte plus le nombre d’extension pour ce bestseller des jeux de société. Beaucoup (et j’en fais partie) ont adoré le jeu de base et sont peut-être même rentré dans l’addiction aux jeux de société par ce titre."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Pour ma part Catan est réellement le jeu qui m’a fait basculer entièrement dans la ludomania."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "C’est donc tout naturellement que je regardais les extensions avec envie. Et pour être franc j’en ai acheté une seule, il y a maintenant 2 ans. Barbares et marchands. Résultat, je n’ai toujours pas sorti la boite de ma « pile de la honte ». Vous savez cette pile de jeux que vous avez acheté mais que vous n’avez jamais essayé car il y a toujours de nouveaux jeux qui lui passent devant. En réalité, j’ai simplement craqué car ma fibre nostalgique me rappelle que j’adore le jeu Catan. Mais pour être franc, il me suffit. Dès que j’ai envie de jouer à Catan, je ressors avec plaisir la boite de base."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Il faut aussi dire qu’un des problèmes qui m’empêche d’ouvrir l’extension, c’est les nouvelles règles."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et c’est là qu’on en arrive au cœur du sujet. En fait, il y a deux sortes d’extensions dans les jeux de société."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous voyez de quoi je parle. Oui il faut le jeu de base, donc il s’agit en théorie d’une extension. Mais dans les faits, les règles à ajouter sont si importantes qu’elles en dénaturent presque le jeu de base. Ce n’est plus du tout le jeu pour lequel vous avez de la nostalgie. Cela ne veut en aucun cas dire que le résultat est décevant, mais cela a un coût. Une boite de plus à déballer, des règles à intégrer et à mémoriser."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Pour moi, et c’est là un avis qui n’engage que moi, le vrai plaisir d’une extension, c’est l’enrichissement du jeu de base sans en perdre l’essence. Et cela se résume aussi ainsi : on peut tout ranger dans la même boite (jeu de base + extension) sans que cela ne pose d’autre problème que celui de la place."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Quand je pense à ce type d’extension, je ne peux m’empêcher de vous parler des boites de contenu supplémentaire de Fate les défenseurs de Grimheim qui rajoutent de nouveaux héros avec leurs propres capacités par exemple."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et c’est là que je prends le plus de plaisir dans les extensions. Un peu comme si dans un jeu vidéo, on faisait des mises à jour constantes du jeu pour diversifier le contenu, sans forcément créer une extension entièrement nouvelle."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Car oui, pour bon nombre (trop) d’extensions, j’ai la même impression que quand je regarde une suite de films à rallonge ou encore la saison 10 d’une série qui aurait dû s’arrêter à la 3e. J’ai toujours l’espoir de retrouver le plaisir de la saison 1 mais ça n’est qu’une chimère à laquelle ma nostalgie s’accroche et qui épuise simplement mon porte-monnaie."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "À partir de l’adresse",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "A — PRIMARY : Hot take + débat (#2/#1 combinés) — format post ou reel, visuel : pile d'extensions jamais ouvertes"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Bon, soyons honnêtes, les extensions de jeux, c’est vraiment une arnaque !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Bon ok… pas toutes ! Ma règle c’est « si ça rentre dans la boîte de base, tout va bien ». Sinon en fait c’est un nouveau jeu déguisé et franchement j’ai pas envie d’apprendre de nouvelles règles si c’est pour plus retrouver le jeu de base que j’ai adoré."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Franchement, T’es pas d’accord ? Dis moi en commentaire",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "B — SECONDARY : Checklist \"à sauvegarder\" (#4) — format carrousel",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Slide 1 : \"Dans la vie, il y a 2 types d’extensions",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Slide 2 : Celles où on essaie de te vendre un nouveau jeu en te faisant croire que c’est le jeu auquel tu as joué pendant 200 heures"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Slide 3 : L’extension, la vraie, celle qui t’ajoute du contenu mais ne dénature pas ton jeu préféré."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "C — STORY RELAY : sondage + lien direct (#5) — à poster le lendemain",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Sticker sondage : \"Les extensions de jeux de société, c'est...\"",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Toujours incroyable /",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Incroyablement inutile /",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je sais que ça ne va rien m’apporter mais il me les faut !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Sticker lien juste après : \"Notre avis complet (et pourquoi c'est pas si simple)"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "D — Reel storytelling / confession (#3) — format reel, visuel : la vraie boîte Barbares et marchands encore filmée"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je me suis encore fait avoir. A chaque fois c’est la même chose, j’achete une extension pour un jeu que j’ai adoré et elle finit dans ma pile de la honte. J’ai toujours envie de rejhouer au jeu de base et j’ai trop la flemme de lire les nouvelles règles. Ca te fait ca aussi ? Dis moi en commentaire"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "E — Tag un pote (#6) — portée pure, à garder pour un moment ciblé",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tag la personne qui a une extension de jeu de société encore sous blister depuis genre... 2 ans."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "On sait tous qui c'est",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "F — Reel",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« Dans la vie, il y a 2 types d’extensions :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Segoe UI Emoji",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-018",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Article - Organiser une soirée jeux – Jeux compétitifs ou coopératifs ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous vous êtes mis dans l’idée d’organiser prochainement une soirée jeux avec vos amis. Au moment d’envoyer les invitations, ça vous semblait être une super idée. Vous pensiez peut-être même réussir à intégrer des amis qui ne se sont jamais rencontrés, créer du lien et éviter les blancs gênants lorsque les principaux sujets de conversation seront épuisés."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Sur le principe ça a tout l’air d’être l’idée de l’année. Mais plus la date se rapproche et plus vous doutez. À raison ? On va en discuter."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Plusieurs cas de figures. Si vous organisez une soirée jeux entre des amis qui sont déjà immergées jusqu’au cou dans le monde du jeu de société, vous n’avez pas besoin de vous cantonner aux simples « jeux d’ambiance » qui permettent d’animer facilement une soirée."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "En effet, avec des novices allergiques aux règles d’un jeu, pas de doute possible, partez directement vers des jeux faciles à apprendre et qui brisent la glace. Pourquoi pas l’excellent That’s not a hat, ou encore le classique"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Service Compris ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais mettons que vous souhaitiez une soirée un peu plus conséquente au niveau ludique, avec des personnes qui sont d’accord d’apprendre des règles pendant plus de 5 minutes. Vous vous demandez alors mais quel jeu ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Jeux compétitifs, l’assurance de briser une amitié qui n’existe pas encore"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans le lot d’amis invités, c’est presque certain, vous avez des mauvais perdants. Mais voilà, vous les aimez bien et vous avez quand même envie qu’ils viennent."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans ce cas-là, soyez très prudents dans le choix des jeux. Les jeux compétitifs peuvent se révéler très risqués. En particulier si, à l’opposé, l’un des invités joue pour gagner et ne voit aucun problème à bloquer quelqu’un dans sa stratégie pour arriver à ses fins."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Jeux coopératifs, l’assurance d’une soirée apaisée. Vraiment ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous vous dites probablement que quel que soit le résultat, avec un jeu coopératif, c’est certain, la soirée va bien se passer. D’expérience, cela n’a rien d’une certitude ! Dans un groupe, il y a toujours des gens qui vont essayer de s’imposer, parler fort, prendre les devants et imposer leur stratégie, même quand cela n’est pas leur tour de jeu. D’autres se retrouvent alors esseulés et n’ont plus du tout l’impression ni de s’amuser, ni de jouer tout court. Et c’est bien là le risque."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Si vous souhaitez tout de même un conseil de P’tit Monstre, testez Flyin’Goblin en début de soirée. Fous rires garantis !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "A — PRIMARY : Hot take + débat (#2/#1 combinés) — format post ou reel, visuel : table de jeu, ambiance soirée"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je suis sûr que t’as un pote comme ça. Tu sais, le genre qui saoule tout le monde dans une soirée jeux."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Celui qui connait tous les jeux et qui t’en fait une critique même si tu l’as pas demandée."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "(Joueur à lunettes : [d’une voix pédante] Ce jeu allie à merveille mécaniques innovantes et stratégies de pointe)"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "(Joueur agité, surexcité : Tu sais là tu devrais avancer jusqu’à la prochaine tour, moi je te passe cette carte et toi le tour suivant tu les éclates tous)"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "(Joueur grognon : non mais là c’est sûr qu’ils ont triché, c’est pas possible)"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "(Air d’Hermione : je déplace mon perso sur case, j’ouvre le coffre, oh des armes, je lance les 6 dés, oh quelle chance 6 six, j’envoie des flèches sur toi toi toi et toi et voilà vous êtes dead)."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Celui qui te bouffe tout l’apéro mais ne sert à rien",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "([avec des chips dans la bouche] c’est mon tour ??)",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Alors… comment on la fait c’te soirée ?!?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu t’es reconnu ? Tu es lequel ? Dis-le en commentaire."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "B — SECONDARY : Checklist \"à sauvegarder\" (#4) — format carrousel",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Slide 1 : Tes soirées jeux partent toujours en sucette ? Et si c’était ta faute ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Slide 2 : A chaque soirée tu reproches à Marc d’être mauvais perdant ? Arrête les jeux compétitifs !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Slide 3 : Tu n’arrêtes pas d’inviter Luc qui ne comprend jamais rien aux règles ? Fais simple et sors les jeux d’ambiance faciles."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "C — STORY RELAY : sondage + lien direct (#5) — à poster le lendemain",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Sticker sondage : \"Pour une soirée entre amis, tu choisis plutôt...\"",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Compétitif Ici, on est là pour gagner quitte à briser une amitié /",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Coopératif, pas besoin d’en venir aux mains, mieux vaut laisser la grande gueule du groupe jouer tout seul pendant qu’on mange tout l’apéro / Le Uno"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "D — Reel storytelling / confession (#3) — format reel, visuel : préparatifs d'une soirée, invitations envoyées"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tout à l’heure j’organise une soirée jeux avec des gens qui se connaissent pas… l’angoisse ! J’avais tout bien préparé, j’avais choisi des jeux géniaux que je veux leur faire découvrir mais là… j’hésite… le Uno ok, le monopoly aussi mais… je laisse le Scrabble ou pas ? J’ai peur qu’il suffise d’un mot plus haut que l’autre pour qu’ils se tapent dessus"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "E — Tag un pote (#6) — portée pure --> faire un réel",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tag la personne qui, dans un jeu coopératif, décide de LA stratégie pour tout le monde... même quand c'est pas son tour."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "F — La soirée jeux",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "17h, les invités arrivent. Un peu de small talk ennuyant (on s’en fou de ta vie Mathieu, on est là pour jouer)"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "18h, on s’attaque enfin aux jeux, on va tous devant la ludothèque pour choisir le premier jeu."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "21h30, on a enfin choisi le jeu et on revient tous énervé dans le salon. La soirée s’annonce pas super."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "23h, Mathieu a toujours pas compris les règles de La Bête… Il pige rien ma parole celui là."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Minuit 30. On arrive à la fin de la première partie, c’était laborieux, on a regardé les règles toutes les 3 secondes et personne s’est amusé."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "C’est la fin de la soirée… quelle soirée de merde."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Si toi aussi t’angoisses pour ta prochaine soirée, lis notre article en description"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "J’organise une soirée jeu bientôt et je sais déjà comment ca va se passer."
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-019",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Bandido, c’est l’exemple parfait du petit jeu qui ne paie pas de mine mais auquel tu deviens vite accro !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Un prisonnier tente de s’échapper. Ton objectif est de réussir à lui couper toute possibilité de fuite en fermant l’intégralité de ses tunnels."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Place les tuiles une à une, pose judicieusement les tunnels et veille à ne pas créer trop d’embranchements sinon, ça va être compliqué de tout fermer !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu l’auras compris, Bandido est un jeu coopératif de placement de tuiles, de contrôle et d’optimisation."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2016",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Facile",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Bandido c’est vraiment le petit jeu qu’on adore sortir à 22h pour faire une partie avant d’aller se coucher. Ça permet de couper des écrans, de mettre une musique reposante et de passer un bon moment ensemble."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu cherches un jeu couple/famille facile et addictif",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes placer des tuiles et créer des routes",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux un jeu très simple, facile à apprendre et vite joué",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux de la compétition",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu cherches un gros jeu pour ta prochaine soirée entre amis",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Je sais plus quoi dire pour te dissuader de l’acheter, ce jeu est trop bien !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-020",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Daybreak, la critique",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Quel jeu est plus dans l’ère du temps ? Sauvez la planète, ou regardez la brûler, dans ce jeu coopératif à base de combos de cartes."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous devrez faire des choix de société clivants comme par exemple miser soit sur l’énergie nucléaire ou sur l’énergie éolienne pour faire des combos de cartes et produire de l’énergie propre de manière exponentielle."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "En un nombre de tours limité et avec une situation qui se détériore à chaque manche, vous allez devoir jongler entre la production d’énergie, la baisse des émissions, le renforcement de vos résiliences ou encore la séquestration de carbone."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2024",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Intermédiaire",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu es un fan de jeux coopératifs",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes les jeux tranquilles, sans prise de tête",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu adores faire des combos de cartes",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes varier la difficulté et devoir lutter pour gagner",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux sauver le monde",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes les interactions virulentes entre joueurs",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu ne supportes pas de perdre",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Le réchauffement climatique, tu n’y crois pas",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu n’arrives pas à rester plus de 45 minutes sur une chaise",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Lien de la vidéo :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Daybreak - Le One game show",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Image sans titre.png",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{4DCB1898-718F-0D0F-2019-080ACBB94E80}",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Aaaah Daybreak ! Si on nous avait dit, dans le magasin, que ce jeu qui ne payait pas de mine allait devenir un véritable coup de cœur, pas sûr qu’on y aurait cru !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "De prime abord, lutter contre le réchauffement climatique, en particulier dans le climat anxiogène actuel, ça fait pas super envie... on n’a pas vraiment l’impression qu’on va s’évader en jouant..."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Durant chaque début de manche, on choisit un projet global qui donne un bonus à toute l’équipe, on révèle la première carte crise qui donne le ton pour ce tour, on discute et on fait le point sur sa stratégie."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Passé cette étape, on utilise chacun les cartes de sa main, sur son propre plateau de jeu, pour lancer des projets locaux, équilibrer la demande en énergie, réduire ses émissions. Le tout en utilisant à bon escient les combos de cartes présentant les mêmes icônes afin d’amplifier les effets des cartes de manière exponentielle."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Les cartes projet et leurs combos, au cœur de la stratégie de chaque joueur."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Au final, Daybreak est le jeu qu’on aime sortir quand on a envie de jouer malgré la fatigue. Un peu d’interaction, de la réflexion, des combos à faire dans son coin. On met en commun et on adapte sa stratégie pour le tour suivant."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Côté rejouabilité, on apprécie beaucoup le fait de pouvoir varier les zones économiques. Chacune a ses forces et ses faiblesses et l’association de zones différentes fera considérablement varier la difficulté."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Fonte des glaces, dégel du pergélisol... les crises s’enchaînent et ne pardonnent pas."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "daybreak-article.JPG",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le plateau global : projets, crises et suivi du réchauffement, tout y passe."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "daybrek-article2.JPG",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "daybreak-article3.JPG",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{1DDE8536-9F16-0992-281A-526D406CE914}",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{F03546E6-2C8C-00B8-2DDD-DF5AB352B6D1}",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-021",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu veux un jeu pour accompagner ton petit café post repas mais t’en as marre du sudoku ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Daydream est le jeu qu’il te faut !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2025",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Facile",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Daydream, c’est pas le jeu révolutionnaire, mais c’est chill et ça fait du bien quand tu as 15 minutes à tuer avec une boisson chaude. Ça change vraiment des mots-croisés, du sudoku et autres jeux du genre et ça t’évite de scroller sur ton téléphone !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu cherches un jeu solo pour passer le temps",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux une alternative au sudoku et aux mots-croisés",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux un jeu très simple, facile à apprendre",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux de l’interaction entre joueurs",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "T’es en recherche d’un jeu dynamique pour ton prochain apéro",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu sais pas compter jusqu’à 6",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-022",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Dorf Romantik Sakura - Votre couple mérite mieux que Netflix",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2023",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Facile",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Placer des tuiles c’est définitivement ton truc !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes jouer sans trop réfléchir, même le soir, fatigué",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu adores suivre une campagne et continuer ta partie de jour en jour",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu recherches un jeu vite appris, vite expliqué, vite joué",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "T’es fan du Japon et tu as ton jardin zen à la maison",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu as besoin de surstimulation quand tu joues",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux un jeu à faire une fois à l’apéro",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu as cru que Sakura faisait référence au personnage de Naruto et t’es triste que y’ait pas de ninjas"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Complètement avachis sur le canapé, vous êtes à deux doigts d’appuyer sur le bouton de la télécommande pour, comme chaque soir, lancer la même série Netflix et éteindre votre cerveau."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Soudain vous l’apercevez. Là, sur la table du salon, posé depuis le week-end dernier, date à laquelle vous l’avez acheté, Dorf Romantik Sakura vous observe. Pire, il vous juge et vous rappelle que cela fait maintenant 4 jours qu’il est posé là, toujours sous blister."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Pourquoi l’avez-vous acheté déjà ? Ah oui, dans la boutique les couleurs flashy ont attiré votre œil et vous l’avez instantanément montré à votre moitié : « Oh un jeu sur le japon, trop cool, j’adore ! ». Pris d’une achtite aiguë, vous craquez et ressortez tous les deux du magasin, la boite sous le bras et avec une allure d’enfant le matin de Noël."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Arrivé à la maison, vous l’avez posé sur la table en disant « On y joue tout à l’heure ! ». Cela fait maintenant 4 jours, depuis cette date fatidique."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Avec un regain d’énergie, vous découvrez que les règles sont extrêmement faciles à apprendre et que le jeu vous les fera découvrir au fur et à mesure que vous avancerez dans la campagne, rajoutant toujours plus d’éléments au jeu."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous discutez ensemble de la meilleure manière d’agencer vos tuiles et vous marquez ainsi toujours plus de points en accomplissant les nombreux objectifs demandés : une rivière faite de 5 tuiles, fait ! une rizière de 6 tuiles, ok !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "À la manière d’un jardin zen, vous sentez que votre esprit se repose et que votre besoin de clôture est satisfait."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "La pile de tuile est épuisée et la partie s’achève. Bingo ! Votre nombre de points vous permet d’avancer sur la piste de la campagne et vous débloquez du nouveau contenu !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Désormais, de nouvelles tuiles s’ajoutent diversifiant les objectifs. Et ce n’est que le début. De longues soirées reposantes vous attendent. Une fois la première partie lancée, c’est fini pour vous, vous êtes devenus accro. Vous avez besoin de votre dose de calme et d’apaisement."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Alors…convaincu ? Sakuracheter le jeu ou pas ?"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Dorf-romantik-sakura-campagne.JPG",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "La campagne se dévoile au fil des parties."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Dorf-romantik-sakura-rivière.JPG",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Une rivière serpente au milieu du paysage."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{03944213-8A80-0BCC-34B7-FAAF18830787}",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-023",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Eila - Entre appréhension et émotions fortes",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Eila et l’Éclat de la Montagne est un jeu narratif et de gestion de ressources. Au travers de 5 chapitres, notre héroïne vit une multitude d’aventures de plus en plus sombres."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2023",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Nous avons adoré Eila et l’Éclat de la Montagne ! Mais ce jeu ne correspond pas à tout le monde…"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu es un fan de jeux coopératifs ou solo",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes les jeux narratifs, mais tu n’es pas un expert du domaine",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu es nostalgique des romans à la 1ère personne de ton enfance",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu sais t’émerveiller des petites choses dans la vie",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu es obstiné·e et prêt·e à redémarrer le jeu plusieurs fois pour obtenir la meilleure fin possible"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu cherches un jeu auquel tu pourras rejouer 250 fois",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Le design \"cute\" te rebute",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu as la \"capacité émotionnelle d’une cuillère à café\"",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu ne supportes pas la frustration du destin laissé aux dés",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu es un grand expert des jeux narratifs et tu es venu à bout des plus difficiles d’entre eux"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "La première fois que nous avons sorti la boîte de « Eila et l’Éclat de la Montagne » pour y jouer, j’ai eu peur. Très peur. Dans une boîte aussi énorme devait forcément se trouver un livre de règles. J’anticipais déjà de longues heures de lutte acharnée contre le sommeil... Mais NON ! Des règles simples introduites de manière progressive, des graphismes sublimes et une histoire qui en émouvra plus d’un. Un vrai coup de cœur !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous l’aurez peut-être compris, Eila et l’Éclat de la Montagne, c’est mon jeu préféré ! Mais, même si je ne suis pas totalement objective, je vais essayer de vous transmettre une partie des émotions que me procure Eila à chaque partie."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Contrairement à de nombreux jeux, les règles de Eila et l’Éclat de la Montagne sont simples et surtout elles sont introduites de manière progressive. Les chapitres 0 et 1 sont prévus pour se familiariser avec les différentes mécaniques et les règles de base. Dans chacun des chapitres suivants, la notice vous expliquera en quelques minutes les nouveaux ajustements à mettre en place et les nouvelles règles qui s’appliqueront."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Derrière un jeu aux apparences enfantines, se cache un jeu très complet, mettant en jeu une grande variété de mécaniques : gestion de ressources, lancers de dés, déplacements sur un plateau de tuiles, choix multiples... Cette large variété permet d’éviter le côté un peu répétitif de certains jeux se basant sur une unique mécanique."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Si les premiers chapitres peuvent paraître d’une simplicité enfantine, la difficulté monte crescendo avec les suivants. Ainsi, Eila et l’Éclat de la Montagne devient finalement un jeu particulièrement stratégique où chaque choix peut tout changer. Pour autant, même des personnes peu habituées aux jeux de société pourront jouer un rôle important dans les prises de décision. En effet, avec Eila, les stratégies offensives dont vous pouvez avoir l’habitude dans d’autres jeux ne sont pas nécessairement les meilleures à adopter ! Soyez prévenus !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Avec « Eila et l’Éclat de la Montagne », on parie que vous allez perdre ! Les derniers chapitres sont en effet plutôt complexes et vous souhaiterez forcément réussir les épreuves qui vous attendent. Par ailleurs, « Eila et l’Éclat de la Montagne » est un jeu narratif, toutes les fins ne se valent pas (si vous voulez en savoir un petit peu plus, ouvrez le ruban ci-dessous)..."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "La première fois que nous avons joué, nous sommes allés à toute vitesse. Le jeu nous paraissait hyper simple. Nous sommes rapidement arrivés au dernier chapitre que nous avons malgré tout dû rejouer car nous avions perdu face à plusieurs ennemis particulièrement résistants. Et nous avons lu une des fins... Avec une certaine déception, il faut bien le dire. Nous avons tout recommencé, plusieurs fois. Et nous sommes enfin arrivés (moyennant quelques petits arrangements avec les dés... « oups le dé est cassé », « c’était à moi de lancer ») à la fin pour laquelle il valait le coup de persévérer encore et encore. On lit souvent des commentaires de joueurs qui ne comprennent pas pourquoi Eila est un jeu touchant avec une histoire profonde. Je n’en dirai pas plus pour ne pas gâcher la découverte de l’histoire, mais juste un conseil : persévérez ! Et n’oubliez pas qu’il s’agit d’une quête initiatique et qu’Eila (mais pas seulement elle) a des choses à apprendre."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "À partir de l’adresse",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Si les premiers chapitres sont très simples, ce n’est pas du tout le cas des derniers. Face à la malchance des lancers de dés, il est possible de se décourager ou de... forcer un peu le destin ! Dans plusieurs de nos parties, nous avons eu beaucoup de malchance dans les lancers de dés ET dans les tirages des cartes. En effet, pour les plus poisseux d’entre nous, il est possible que le sort s’acharne avec les dés et avec les cartes. Ces dernières peuvent alors sortir dans un ordre particulièrement défavorable... Ce qui compromet toute la suite du jeu."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Même si, comme nous le disions plus haut, le jeu peut être recommencé plusieurs fois afin d’obtenir la meilleure fin possible, lorsque celle-ci est atteinte, le livre se termine. Malgré tout, je dirais que la rejouabilité est plutôt bonne pour un jeu narratif, mais forcément limitée si on la compare à d’autres jeux."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Une place importante est accordée aux lancers de dés qui peuvent parfois s’avérer frustrants si, comme moi, vous avez une poisse d’enfer. Par ailleurs, comme je le mentionnais plus haut, nous retrouvons beaucoup d’aléatoire lors des tirages de cartes. Si l’ordre vous est particulièrement défavorable, vous pouvez tout aussi bien recommencer le chapitre !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Si vous avez été convaincu, on espère que vous allez prendre autant de plaisir que nous ! N’hésitez pas à revenir ici pour nous donner votre avis sur le jeu dans les commentaires."
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-024",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans ce jeu d’exploration narratif, préparez-vous à perdre. C’est ce qui fait le charme du jeu."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous êtes des prisonniers en quête de liberté. Arpentez les couloirs du Dark Castle, plus dangereux les uns que les autres, pour espérer sortir vivants. Mais attention ! Un seul d’entre vous meurt et l’aventure s’achève."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2023",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Facile",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu es un fan de jeux narratifs",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes lire en mettant le ton",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu adores le challenge",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu recherches un jeu vite appris, vite expliqué, vite joué",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux varier tes jeux à l’apéro",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu apprécies gagner après 3 défaites d’affilée",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu n’aimes pas les graphismes sombres",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu cherches un jeu expert avec plein de stratégie",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "La lecture, c’est pas trop ton truc",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-025",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Finspan c’est l’archétype du jeu compétitif chill du soir."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "On en regretterait presque qu’il n’existe pas une version coopérative tellement l’aspect compétitif disparaît."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans ce jeu de gestion et de collection, vous devez développer votre écosystème aquatique, implanter de nouvelles espèces de poissons, pondre des œufs, les faire éclore en poissons juvéniles puis regrouper ces juvéniles en bancs."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2025",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Moyenne",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Finspan c’est le parfait mélange entre réflexion, simplicité et tranquillité, idéal pour entrer dans l’univers des jeux de société un peu plus complexes que le Uno sans se prendre la tête avec un apprentissage des règles de 2h."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu es un fan de jeux de collection",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes les poissons et en apprendre plus",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux un jeu chill mais avec une certaine profondeur",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu as envie qu’un gagnant clair se dessine",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu n’aimes que les jeux coopératifs",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu cherches un jeu d’ambiance pour ta prochaine soirée",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Les poissons, c’est pas trop ton truc",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-026",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et ne vous avisez pas de revenir avec moins d’or et de diamants que ces énergumènes, vous êtes prévenus !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans ce jeu familial (hilarant en soirée avec un coup dans le nez), vous devrez littéralement catapulter vos forces au sein du château afin de récupérer de l’or, des diamants et de prendre le contrôle de la forteresse, avant les autres bien sûr ! Visez bien et tirez !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2020",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Facile",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes les jeux d’adresse et sais bien viser et doser ta force",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu cherches un jeu à faire avec tes enfants",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu souhaites pimenter ton couple à l’heure de l’apéro",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu cherches un jeu super original pour ta prochaine soirée entre potes pour changer du Time’s Up et du Uno"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu n’as aucun sens de l’humour",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu es daltonien ? Tu risques de dégommer tes propres forces !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Franchement à part ça, je ne vois pas, le jeu est une pépite. Tu vas t’éclater !"
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-027",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le Destin de la communauté – Bientôt votre jeu le plus précieux ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans Le Destin de la Communauté, choisissez de revivre ou de réécrire l’histoire du Seigneur des anneaux."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous vous êtes toujours dit « Mais Frodon avait juste à prendre les aigles pour aller jeter l’anneau dans le feu ! » ou encore « Pourquoi on n’est pas allé chercher quelques nains pour défendre Minas Tirith ? », et bien figurez-vous que ce jeu est l’occasion pour vous de tester tout ce qui vous passe par la tête, et c’est assez jouissif !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2025",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le Destin de la Communauté fait partie des jeux que nous qualifierons d’expert. Pas parce que ses règles sont compliquées à apprendre (c’est même relativement simple), mais surtout car l’aspect stratégique est fortement présent. Une stratégie finement rôdée, en équipe, peut vous amener difficilement vers la victoire. Mais attention, le moindre faux pas, la moindre petite erreur d’appréciation et c’est la défaite immédiate."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu aimes le challenge et la tension constante dans un jeu où tu peux perdre à chaque instant"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Fan du Seigneur des anneaux, tu rêves de pouvoir tester de nouvelles variantes de l’histoire"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu adores communiquer avec tes amis (ou avec toi-même) dans les jeux coopératifs"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu sais anticiper plusieurs coups à l’avance et avoir un peu de chance dans le tirage"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Les Hobbits et les Nains c’est la même chose pour toi",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Au bout de 20 minutes autour d’une table tu ne te sens pas très bien",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Les jeux c’est chacun dans son coin pour faire sa stratégie",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Êtes-vous prêt à réécrire l’histoire du Seigneur des anneaux ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "On ne va pas y aller par 4 chemins, pouvoir modifier l’histoire c’est certainement ce qui, pour nous, a rendu l’aventure d’autant plus palpitante."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans ce jeu de stratégie coopératif, chacun de vous incarne deux personnages (on a testé à 3 !) du Seigneur des anneaux, qu’ils soient bons ou Gollum. Votre mission, remplir 3 objectifs préliminaires avant de pouvoir espérer jeter l’anneau dans le volcan de la Montagne du Destin."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Petit exemple d’objectif qui vous attend : « Défier Sauron » devant la porte noire du Mordor avec un personnage, 2 armées elfes, 2 armées du Rohan et 3 armées du Gondor !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Durant notre première partie, Frodon et Sam se sont rapidement déplacés de la Comté à Fondcombe puis direction Minas Tirith en compagnie de Merry et Pippin. Arwen et Aragorn de leur côté ont recruté de nombreuses armées Elfes pour couper toute possibilité à l’ennemi d’attaquer le Rohan. Legolas, seul héros contre des légions d’Orcs ininterrompues a repoussé les attaques sur Erebor aux côtés des armées naines tandis qu’Éowyn, à la tête d’une armée de Rohirrims a défendu la Comté et supprimé de sa main quelques Nazgûls. Ça change, n’est-ce pas ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Soyez prêt à vivre un véritable périple d’au moins deux heures ! La mise en place est assez longue mais la beauté du matériel et des illustrations (aux dessins pour le moins originaux) en vaut le coup et offre une immersion de qualité."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Raconté ainsi, le jeu paraît sympathique et fun, et c’est le cas, sans l’ombre d’un doute !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais attention, ne vous attendez pas à gagner à chaque partie. Les chances ne sont clairement pas de votre côté. Les mécaniques du jeu inspirées du célèbre Pandemic, sont excessivement oppressantes et vous pouvez vite vous retrouver submergés entre les attaques innombrables des armées du Mordor aux 4 coins de la Terre du Milieu et la traque de l’œil de Sauron et de ses fidèles Nazgûls qui encercleront vite Frodon et décimeront vos armées, grâce à de nombreux jets de dés (pipés en votre défaveur)."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le challenge sera au rendez-vous et même la difficulté la plus faible vous fera cravacher et c’est tout ce qui fait le charme du Destin de la Communauté !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "« Une mort certaine ? De faibles chances de survie ? Et bien, qu’attendons-nous ? »"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "destin-communaute-alex.jpeg",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu va vite devenir votre...précccieux."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "destin-communaute-perso.JPG",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Chaque joueur incarne deux personnages, chacun avec ses propres capacités."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{C94467FD-0F52-02DA-3ED9-A6D4F9FD8924}",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-028",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Service Compris c’est l’archétype du jeu simple et efficace !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Dans ce jeu parfait pour animer vos soirées, votre objectif est de remporter la victoire face aux familles de vos adversaires. Vous êtes tous invités (contre votre gré) à la table du Géant Oscar Hamel. Votre objectif : être le dernier à passer sous sa dent en l’encourageant à manger les autres joueurs avant vous."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "À l’aide de votre main de cartes, jouez des tours les plus fourbes possibles à vos adversaires en poussant leurs personnages au plus près de l’assiette."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition1998",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Moyenne",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Service compris c’est le petit jeu à sortir à l’apéro. Fini les Uno, Skyjo et compagnie. Soyez fourbes et retors, brisez vos amitiés et n’hésitez pas à mettre des coups de fourchette dans le dos de vos adversaires (façon de parler hein…) !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux un nouveau petit jeu à l’apéro pour épater les copains",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "T’aimes bien les jeux de mollets pour cerfs-volants",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "T’as envie d’un jeu où les coups bas sont permis et même chaudement recommandés"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu veux à la fois gagner et conserver tes amis",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu soupires rien qu’à l’idée de voir écrit Nicolas Vabeau",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-029",
+      "blocks": [
+        {
+          "type": "header",
+          "data": {
+            "text": "Sub Terra II - Notre critique brûlante",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Sub Terra II - Notre compo type",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2023",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Facile",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu es un fan de jeux coopératifs",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes les aventures immersives pleines de tension",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu adores placer des tuiles et explorer",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu recherches un jeu vite appris, vite expliqué",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu apprécies refaire encore et encore des parties en changeant de personnages (ou pas)"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu aimes broyer tes adversaires autour de la table",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "La victoire, c’est pour toi seul",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le thème des temples mystérieux et des volcans, c’est définitivement pas ton truc"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu détestes les jeux de société (tu t’es perdu ??)",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "T’as pas aimé le premier Sub Terra",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Réfléchis bien à ton choix d’équipe ! Nous on a notre",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "compo type."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Lien de la vidéo :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Sub Terra II - Le One game show",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Image sans titre.png",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Si vous souhaitez un peu d’aide, découvrez notre",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "composition type pour bien débuter. La variété des personnages et de leurs compétences offre une très grande rejouabilité et permettra à chacun de trouver un gameplay qui lui plaira. Que vous soyez un bourrin qui veut foncer dans le tas et tuer ses ennemis, un explorateur agile qui veut se déplacer facilement ou un support pour vos amis, vous trouverez chaussure à votre pied."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "gameplay-tuiles.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Chaque tuile posée peut cacher un piège... ou la clé que vous cherchez."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "gameplay-lave.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "La fuite vers la sortie, entre coulées de lave et effondrements."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "gameplay-meeples.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Composez votre équipe avec soin : chaque personnage a son rôle à jouer."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{8AE86B06-4FAE-0FF3-3F4F-D884419C434C}",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "guerisseuse.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "La guérisseuse (mamie pour les intimes)",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "combattante-chevronnee.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "La combattante chevronnée",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "sapeur.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Le sapeur",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "gredin.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Le gredin",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "aristocrate.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "L'aristocrate",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "contremaitre.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Le contremaître",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "tireuse-elite.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "La tireuse d'élite",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "guide.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Le guide",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "archeologue.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "L'archéologue",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "pretre.jpg",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Le prêtre",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{565B7AEF-FA44-0BF3-33B1-0591D829D1B0}",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{86C492E7-C49A-0D03-2316-9DB5B0D26319}",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "<ifndf>{99AAAC93-E553-0751-0633-6A1B3F5CA38A}",
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "seed-page-030",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Wingspan, ça vaut l'coup d'aile ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Avec Wingspan, on apprend en s’amusant."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous avez toujours rêvé de savoir quel est l’oiseau que vous entendez chaque matin dans votre jardin ? Vous ne le saurez pas plus en jouant à Wingspan ! Mais vous apprendrez plein de noms d’oiseaux, et d’informations intéressantes à leur sujet."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Combien mesure un Geai bleu ? Quel type de nid utilise un Héron vert ? Combien d’œufs peut pondre un Tarin des pins ? Vous trouverez toutes ces réponses au fil de vos parties, en même temps que vous écraserez vos adversaires grâce à votre stratégie rondement ficelée."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Placez un maximum d’oiseaux, pondez le plus d’œufs possibles, et marquez toutes sortes de points en remplissant des objectifs de manche et des objectifs secrets sur vos cartes bonus !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Année d’édition2019",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Difficulté",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Moyenne",
+            "level": 3
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Note de Ça Monstre Joue",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Wingspan est un jeu qui saura vous faire entrer dans le monde magnifique de l’ornithologie. Des parties relativement courtes et sans interactions vigoureuses entre joueurs vous offriront des soirées ludiques mais reposantes."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu aimes faire tes combos dans ton coin sans qu’on passe la partie à te mettre des bâtons dans les roues"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu adores apprendre en t’amusant et souhaite découvrir chaque espèce",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu as un jeune ado à la maison et cherche un jeu pour le stimuler intellectuellement tout en s’amusant"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "Tu as adoré Finspan ou Wyrmspan et souhaites varier les univers",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Ce jeu n’est malheureusement pas pour toi si :"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "La nature, c’est vraiment pas ton truc",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Pour toi les oiseaux, c’est clairement pas assez cool. Tu veux des dragons !"
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "T’as le budget que pour un jeu et t’es fan de poissons, va voir",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Finspan !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Tu veux un jeu pour jouer avec ton enfant. 10 ans c’est vraiment le minimum."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "À Pâques, substitue les œufs par des œufs en chocolat !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Wingspan, ca vaut l’coup d’aile ?"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Et bien figurez-vous qu’on ne l’a testé que très récemment ! Et pour cause, parmi nous, aucun n’était particulièrement fan d’oiseaux ! Ainsi, on est entré dans la franchise par Finspan (lien de la page Finspan sur le mot) et on a adoré."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Bon ok, on n’est peut-être pas si objectifs que ça vu qu’on a chacun un aquarium à la maison !"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "De là, on s’est dit, et pourquoi pas tester Wingspan ?!"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Déjà, il faut le dire, le matériel est magnifique. Les cartes sont illustrées avec soin, les œufs rajoutent un charme fou au jeu, et surtout il y a une mangeoire à oiseau qui sert à lancer les dés (ça, on a kiffé comme disent les jeunes)."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Vous le savez si vous avez lu nos autres critiques, Camille et moi on est vraiment fans des jeux coop et surtout pas des jeux prises de tête. Et bien Wingspan, c’est pas coop, mais c’est vraiment chill. Chacun fait son plateau de son côté, on est focus sur sa stratégie, sur ses cartes, on prend plaisir à découvrir chaque oiseau et tous les détails le concernant."
+          }
+        },
+        {
+          "type": "header",
+          "data": {
+            "text": "(Image d’un oiseau)",
+            "level": 3
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Bien sûr, l’objectif reste de gagner, et si vous êtes vraiment des compétitifs purs et durs, vous allez vous y retrouver. À la fin, on compte bien évidemment les points, et comme d’hab, avec sa poisse légendaire combinée à ma chance insolente, Camille perd."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Le jeu a de nombreux avantages qui ont su nous conquérir. D’abord, il est facile à apprendre. Les mécaniques sont sensiblement les mêmes que dans Finspan, on n’était donc pas perdu. Mais même pour un novice, c’est vite compris et vite appris."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Les parties sont plutôt rapides et ne vous bloqueront pas une après-midi complète. Côté rejouabilité, chaque partie est différente ! Avec des objectifs tirés aléatoirement, qu’ils soient communs ou personnels, votre stratégie et votre expérience de jeu seront complètement différentes à chaque fois."
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Mais du coup vous vous dites : « bon ok ça a l’air cool mais ils veulent en venir où ? »"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "C’est vrai, on aurait pu vous épargner tout cet article. En bref, notre avis pourrait se résumer en une phrase :"
+          }
+        },
+        {
+          "type": "paragraph",
+          "data": {
+            "text": "Les oiseaux, c’est pas notre truc, pourtant le jeu a su nous happer et nous émerveiller."
+          }
+        }
+      ]
+    }
+  ]
+}

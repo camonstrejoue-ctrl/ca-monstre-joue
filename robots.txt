@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+# Outil interne de rédaction (accès équipe par mot de passe, données protégées
+# côté Firestore) : rien à indexer ici.
+Disallow: /hub.html
+Disallow: /js/hub-seed.json
 
 # Autorisation explicite des robots IA (entraînement et réponse/citation) :
 # choix assumé du 2026-08-08 pour maximiser les chances d'être cité par les

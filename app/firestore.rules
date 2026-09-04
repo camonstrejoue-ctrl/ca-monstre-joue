@@ -153,5 +153,23 @@ service cloud.firestore {
       // manuelle depuis la console Firebase comme avant.
       allow read, update, delete: if isAdmin();
     }
+
+    // ---- Le Hub de CMJ (hub.html) : atelier de rédaction interne -----------
+    // Éditeur d'articles collaboratif de l'équipe. Tout passe par UN compte
+    // partagé (auth e-mail/mot de passe) ; l'uid de ce compte est le seul
+    // autorisé à lire/écrire l'arborescence (`hubNodes`) et le contenu
+    // (`hubPages`). Rien de public ici. Remplacer l'uid ci-dessous par celui
+    // du compte créé dans Authentication > Users (tant qu'il vaut 'REMPLACER',
+    // l'accès est fermé, ce qui est le comportement voulu par défaut).
+    function isHubTeam() {
+      return request.auth != null
+        && request.auth.uid == 'REMPLACER_PAR_UID_DU_COMPTE_HUB';
+    }
+    match /hubNodes/{nodeId} {
+      allow read, write: if isHubTeam();
+    }
+    match /hubPages/{pageId} {
+      allow read, write: if isHubTeam();
+    }
   }
 }

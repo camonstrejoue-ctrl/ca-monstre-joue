@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ST1V87HQW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2ST1V87HQW');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Hub de CMJ</title>
+<meta name="description" content="Espace de rédaction interne de l'équipe Ça Monstre Joue.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/assets/monstre.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/hub.css">
+</head>
+<body>
+
+<!-- ===== Écran de connexion ===== -->
+<div id="hub-login" class="hub-login" hidden>
+  <form id="hub-login-form" class="hub-login__card">
+    <img src="/assets/logo.png" alt="Ça Monstre Joue" class="hub-login__logo">
+    <h1>Le Hub</h1>
+    <p>Espace de rédaction de l'équipe.</p>
+    <label for="hub-password">Mot de passe de l'équipe</label>
+    <input type="password" id="hub-password" autocomplete="current-password" required>
+    <button type="submit" class="hub-btn hub-btn--primary" id="hub-login-btn">Entrer</button>
+    <p class="hub-login__error" id="hub-login-error" hidden></p>
+  </form>
+</div>
+
+<!-- ===== Modale « Qui es-tu ? » ===== -->
+<div id="hub-whoami" class="hub-modal" hidden>
+  <div class="hub-modal__card">
+    <h2>Qui es-tu ?</h2>
+    <p>Ton prénom s'affiche quand tu édites un article, pour éviter que deux personnes se marchent dessus.</p>
+    <div class="hub-whoami__list" id="hub-whoami-list"></div>
+    <form id="hub-whoami-other" class="hub-whoami__other">
+      <input type="text" id="hub-whoami-input" placeholder="Autre prénom" maxlength="24">
+      <button type="submit" class="hub-btn">OK</button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== Confirmation générique ===== -->
+<div id="hub-confirm" class="hub-modal" hidden>
+  <div class="hub-modal__card">
+    <h2 id="hub-confirm-title">Confirmer</h2>
+    <p id="hub-confirm-text"></p>
+    <div class="hub-modal__actions">
+      <button class="hub-btn" id="hub-confirm-cancel">Annuler</button>
+      <button class="hub-btn hub-btn--danger" id="hub-confirm-ok">Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Application ===== -->
+<div id="hub-app" class="hub-app" hidden>
+  <header class="hub-topbar">
+    <div class="hub-topbar__left">
+      <img src="/assets/monstre.png" alt="" class="hub-topbar__mark">
+      <strong>Le Hub</strong>
+      <button class="hub-icon-btn hub-tree-toggle" id="hub-tree-toggle" aria-label="Afficher/masquer l'arbre">☰</button>
+    </div>
+    <div class="hub-topbar__center">
+      <span id="hub-save-state" class="hub-save-state"></span>
+      <span id="hub-presence" class="hub-presence" hidden></span>
+    </div>
+    <div class="hub-topbar__right">
+      <button class="hub-identity" id="hub-identity" title="Changer de prénom"></button>
+      <button class="hub-icon-btn" id="hub-signout" title="Se déconnecter">⏻</button>
+    </div>
+  </header>
+
+  <div class="hub-body">
+    <!-- Panneau arbre -->
+    <aside class="hub-tree" id="hub-tree">
+      <div class="hub-tree__toolbar">
+        <input type="search" id="hub-filter" placeholder="Filtrer…" class="hub-filter">
+        <button class="hub-btn hub-btn--sm" id="hub-add-folder" title="Nouveau dossier à la racine">+ Dossier</button>
+      </div>
+      <nav class="hub-tree__list" id="hub-tree-list" aria-label="Arborescence des articles"></nav>
+      <div class="hub-tree__footer">
+        <button class="hub-btn hub-btn--sm hub-btn--ghost" id="hub-import" hidden>Importer le contenu OneNote</button>
+      </div>
+    </aside>
+
+    <!-- Panneau éditeur -->
+    <main class="hub-editor-pane" id="hub-editor-pane">
+      <div class="hub-editor-empty" id="hub-editor-empty">
+        <img src="/assets/monstre.png" alt="">
+        <p>Choisis un article à gauche, ou crée-en un nouveau.</p>
+      </div>
+
+      <div class="hub-editor-doc" id="hub-editor-doc" hidden>
+        <div class="hub-editor-head">
+          <input type="text" id="hub-title" class="hub-title-input" placeholder="Titre de l'article" maxlength="160">
+          <div class="hub-editor-meta" id="hub-editor-meta"></div>
+        </div>
+        <div class="hub-readonly-banner" id="hub-readonly-banner" hidden></div>
+        <div id="hub-editor" class="hub-editor"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Editor.js (bloc, type Notion) — CDN jsDelivr, versions épinglées -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@2.30.7"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@2.8.7"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/nested-list@1.4.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@1.6.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@2.7.6"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@1.4.2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/table@2.4.3"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@1.4.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@1.5.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/underline@1.2.1"></script>
+
+<script type="module" src="/js/hub.js"></script>
+</body>
+</html>
