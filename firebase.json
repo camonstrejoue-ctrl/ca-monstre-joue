@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "hub-dist",
+    "predeploy": ["node scripts/build-hub-dist.js"],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "rewrites": [
+      { "source": "**", "destination": "/hub.html" }
+    ]
+  }
+}
