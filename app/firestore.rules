@@ -159,11 +159,10 @@ service cloud.firestore {
     // partagé (auth e-mail/mot de passe) ; l'uid de ce compte est le seul
     // autorisé à lire/écrire l'arborescence (`hubNodes`) et le contenu
     // (`hubPages`). Rien de public ici. Remplacer l'uid ci-dessous par celui
-    // du compte créé dans Authentication > Users (tant qu'il vaut 'REMPLACER',
-    // l'accès est fermé, ce qui est le comportement voulu par défaut).
+    // du compte créé dans Authentication > Users (hub@camonstrejoue.ch).
     function isHubTeam() {
       return request.auth != null
-        && request.auth.uid == 'REMPLACER_PAR_UID_DU_COMPTE_HUB';
+        && request.auth.uid == '2v6UV4hlLEbfYtsqR3szeVlkx2z1';
     }
     match /hubNodes/{nodeId} {
       allow read, write: if isHubTeam();
