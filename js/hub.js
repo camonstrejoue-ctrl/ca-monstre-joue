@@ -82,6 +82,7 @@ const el = {
   whoamiOther: $('hub-whoami-other'), whoamiInput: $('hub-whoami-input'),
   confirm: $('hub-confirm'), confirmTitle: $('hub-confirm-title'),
   confirmText: $('hub-confirm-text'), confirmOk: $('hub-confirm-ok'), confirmCancel: $('hub-confirm-cancel'),
+  move: $('hub-move'), moveName: $('hub-move-name'), moveList: $('hub-move-list'), moveCancel: $('hub-move-cancel'),
   app: $('hub-app'), treeToggle: $('hub-tree-toggle'), tree: $('hub-tree'),
   treeList: $('hub-tree-list'), filter: $('hub-filter'), addFolder: $('hub-add-folder'),
   importBtn: $('hub-import'),
@@ -288,6 +289,7 @@ function renderNode(node, visible, filterText) {
     actions.appendChild(iconAction('＋📁', 'Sous-dossier', (e) => { e.stopPropagation(); createNode('folder', node.id); }));
     actions.appendChild(iconAction('＋📄', 'Article', (e) => { e.stopPropagation(); createNode('page', node.id); }));
   }
+  actions.appendChild(iconAction('⤷', 'Déplacer vers…', (e) => { e.stopPropagation(); openMoveDialog(node); }));
   actions.appendChild(iconAction('✏️', 'Renommer', (e) => { e.stopPropagation(); startRename(row, label, node); }));
   actions.appendChild(iconAction('🗑️', 'Supprimer', (e) => { e.stopPropagation(); removeNode(node); }));
 
@@ -300,7 +302,7 @@ function renderNode(node, visible, filterText) {
   row.addEventListener('dblclick', (e) => { e.preventDefault(); startRename(row, label, node); });
 
   // --- glisser-déposer : déplacer un nœud dans un autre dossier -------------
-  row.draggable = true;
+  row.setAttribute('draggable', 'true');
   row.dataset.nodeId = node.id;
   row.addEventListener('dragstart', (e) => {
     dragNodeId = node.id;
@@ -373,6 +375,40 @@ function startRename(row, label, node) {
   });
   input.addEventListener('blur', () => commit(true));
 }
+
+// --- Déplacer un nœud via une liste de dossiers (marche partout, y compris
+//     mobile, contrairement au glisser-déposer natif) ----------------------
+function openMoveDialog(node) {
+  el.moveName.textContent = node.title || 'Sans titre';
+  el.moveList.innerHTML = '';
+
+  const addRow = (labelText, targetParentId, depth, disabled) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'hub-btn hub-btn--sm';
+    b.style.marginLeft = depth * 14 + 'px';
+    b.textContent = labelText;
+    b.disabled = disabled;
+    b.addEventListener('click', async () => {
+      el.move.hidden = true;
+      await reparentNode(node.id, targetParentId, null);
+    });
+    el.moveList.appendChild(b);
+  };
+
+  addRow('↑ Racine (aucun dossier)', null, 0, (node.parentId || null) === null);
+  const walk = (pid, depth) => {
+    for (const f of childrenOf(pid).filter((n) => n.type === 'folder')) {
+      const forbidden = isInSubtree(f.id, node.id);          // f est node ou un descendant
+      const already = (node.parentId || null) === f.id;
+      addRow('📂 ' + (f.title || 'Sans titre'), f.id, depth + 1, forbidden || already);
+      walk(f.id, depth + 1);
+    }
+  };
+  walk(null, 0);
+  el.move.hidden = false;
+}
+el.moveCancel.addEventListener('click', () => { el.move.hidden = true; });
 
 // ---------------------------------------------------------------------------
 // Arbre : CRUD
@@ -454,8 +490,13 @@ async function reparentNode(dragId, newParentId, afterId) {
     }
     batch.update(doc(db, 'hubNodes', s.id), patch);
   });
-  await batch.commit();
-  if (newParentId) { collapsed.delete(newParentId); persistCollapsed(); }
+  try {
+    await batch.commit();
+    if (newParentId) { collapsed.delete(newParentId); persistCollapsed(); }
+  } catch (err) {
+    console.error('[hub] déplacement impossible', err);
+    alert('Déplacement impossible : ' + (err.code || err.message));
+  }
 }
 
 function descendantsOf(id) {

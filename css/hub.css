@@ -86,6 +86,12 @@ button{font-family:inherit;cursor:pointer;}
 .hub-modal__card h2{font-size:1.4rem;}
 .hub-modal__card p{color:var(--gray);margin:.3em 0 1.1em;}
 .hub-modal__actions,.hub-whoami__other{display:flex;gap:10px;justify-content:flex-end;}
+.hub-move__list{
+  display:flex;flex-direction:column;gap:6px;align-items:flex-start;
+  max-height:48vh;overflow:auto;margin-bottom:14px;
+}
+.hub-move__list .hub-btn{border-color:var(--gray-light);}
+.hub-move__list .hub-btn:not(:disabled):hover{background:var(--green-light);border-color:var(--green-dark);}
 .hub-whoami__list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
 .hub-whoami__list .hub-btn{background:var(--green-light);border-color:var(--green-dark);}
 .hub-whoami__list .hub-btn:hover{background:var(--green);color:var(--white);}
@@ -142,10 +148,16 @@ button{font-family:inherit;cursor:pointer;}
 .hub-tree__footer{flex:none;padding:10px;border-top:2px solid var(--cream-dark);}
 .hub-tree__footer .hub-btn{width:100%;}
 
-.hub-node{user-select:none;}
 .hub-node__row{
   display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:8px;
   font-size:.92rem;line-height:1.3;cursor:pointer;
+  -webkit-user-drag:element;
+}
+/* Pas de sélection de texte sur les libellés (gêne le double-clic + le drag),
+   mais on n'applique PAS user-select:none à la row entière : sur Chrome ça
+   empêche le glisser natif de démarrer. */
+.hub-node__label,.hub-node__caret,.hub-node__icon,.hub-node__actions{
+  user-select:none;-webkit-user-select:none;
 }
 .hub-node__row:hover{background:var(--cream);}
 .hub-node__row.is-active{background:var(--coral-light);font-weight:700;}
