@@ -46,7 +46,7 @@ const HUB_ACCOUNT_EMAIL = 'hub@camonstrejoue.ch';
 
 // Prénoms proposés dans la modale « Qui es-tu ? » (window.TEAM n'est pas chargé
 // sur cette page — liste courte codée en dur, un champ libre reste possible).
-const TEAM_NAMES = ['Alex', 'Camille', 'Guillaume'];
+const TEAM_NAMES = ['Alex', 'Camille', 'Guillaume', 'Mylène'];
 
 const LOCK_STALE_MS = 90_000;      // un verrou plus vieux que ça est réputé abandonné
 const HEARTBEAT_MS = 30_000;       // rafraîchissement du verrou tant que la page est ouverte
