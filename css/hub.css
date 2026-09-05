@@ -150,6 +150,12 @@ button{font-family:inherit;cursor:pointer;}
 .hub-node__row:hover{background:var(--cream);}
 .hub-node__row.is-active{background:var(--coral-light);font-weight:700;}
 .hub-node__row.is-hidden{display:none;}
+.hub-node__row.is-dragging{opacity:.4;}
+.hub-node__row.drop-into{
+  background:var(--green-light);
+  outline:2px dashed var(--green-dark);outline-offset:-2px;
+}
+.hub-node__row.drop-after{box-shadow:inset 0 -3px 0 var(--coral);}
 .hub-node__caret{
   flex:none;width:16px;text-align:center;color:var(--gray);
   transition:transform .12s ease;font-size:.7rem;

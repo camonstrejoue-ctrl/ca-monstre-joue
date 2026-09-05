@@ -67,6 +67,8 @@ let heartbeatTimer = null;
 let autosaveTimer = null;
 let suppressChange = false;        // ignore l'événement onChange pendant un chargement programmatique
 let lastLocalSaveAt = 0;
+let dragNodeId = null;             // nœud en cours de glisser-déposer dans l'arbre
+let dragEndedAt = 0;               // pour ignorer le clic parasite après un drop
 const collapsed = new Set(JSON.parse(localStorage.getItem('hubCollapsed') || '[]'));
 
 // ---------------------------------------------------------------------------
@@ -291,10 +293,45 @@ function renderNode(node, visible, filterText) {
 
   row.append(caret, icon, label, actions);
   row.addEventListener('click', () => {
+    if (Date.now() - dragEndedAt < 150) return; // clic parasite juste après un drop
     if (node.type === 'page') openPage(node.id);
     else { if (collapsed.has(node.id)) collapsed.delete(node.id); else collapsed.add(node.id); persistCollapsed(); renderTree(); }
   });
   row.addEventListener('dblclick', (e) => { e.preventDefault(); startRename(row, label, node); });
+
+  // --- glisser-déposer : déplacer un nœud dans un autre dossier -------------
+  row.draggable = true;
+  row.dataset.nodeId = node.id;
+  row.addEventListener('dragstart', (e) => {
+    dragNodeId = node.id;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', node.id);
+    row.classList.add('is-dragging');
+  });
+  row.addEventListener('dragend', () => {
+    dragNodeId = null;
+    dragEndedAt = Date.now();
+    row.classList.remove('is-dragging');
+    clearDropMarks();
+  });
+  row.addEventListener('dragover', (e) => {
+    if (!dragNodeId || dragNodeId === node.id) return;
+    if (isInSubtree(node.id, dragNodeId)) return; // pas dans son propre sous-arbre
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    clearDropMarks();
+    row.classList.add(node.type === 'folder' ? 'drop-into' : 'drop-after');
+  });
+  row.addEventListener('dragleave', () => row.classList.remove('drop-into', 'drop-after'));
+  row.addEventListener('drop', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const id = dragNodeId || e.dataTransfer.getData('text/plain');
+    clearDropMarks();
+    if (!id || id === node.id || isInSubtree(node.id, id)) return;
+    if (node.type === 'folder') await reparentNode(id, node.id, null);
+    else await reparentNode(id, node.parentId || null, node.id);
+  });
   wrap.appendChild(row);
 
   if (kids.length) {
@@ -315,6 +352,7 @@ function iconAction(text, title, onClick) {
 
 function startRename(row, label, node) {
   if (row.querySelector('.hub-node__label-input')) return;
+  row.draggable = false; // sinon la sélection de texte déclenche un drag
   const input = document.createElement('input');
   input.className = 'hub-node__label-input';
   input.value = node.title || '';
@@ -323,6 +361,7 @@ function startRename(row, label, node) {
   const commit = async (save) => {
     const v = input.value.trim();
     input.replaceWith(label);
+    row.draggable = true;
     if (save && v && v !== node.title) {
       await updateDoc(doc(db, 'hubNodes', node.id), { title: v, updatedAt: serverTimestamp(), updatedBy: identity });
       if (node.id === openId) el.title.value = v;
@@ -370,6 +409,53 @@ async function moveNode(node, dir) {
   batch.update(doc(db, 'hubNodes', a.id), { order: b.order ?? j });
   batch.update(doc(db, 'hubNodes', b.id), { order: a.order ?? i });
   await batch.commit();
+}
+
+// --- Glisser-déposer -------------------------------------------------------
+function clearDropMarks() {
+  el.treeList.querySelectorAll('.drop-into, .drop-after')
+    .forEach((n) => n.classList.remove('drop-into', 'drop-after'));
+}
+
+// candidateId est-il rootId lui-même ou l'un de ses descendants ?
+function isInSubtree(candidateId, rootId) {
+  let cur = candidateId;
+  while (cur) {
+    if (cur === rootId) return true;
+    cur = nodesById.get(cur)?.parentId || null;
+  }
+  return false;
+}
+
+// Déplace `dragId` sous `newParentId` (null = racine). Si `afterId` est fourni,
+// il est inséré juste après ce frère ; sinon à la fin. Les `order` du dossier
+// cible sont renumérotés 0,1,2… dans un seul batch.
+async function reparentNode(dragId, newParentId, afterId) {
+  const drag = nodesById.get(dragId);
+  if (!drag) return;
+  if (newParentId && isInSubtree(newParentId, dragId)) return;
+  if ((drag.parentId || null) === (newParentId || null) && !afterId) return;
+
+  const sibs = childrenOf(newParentId).filter((s) => s.id !== dragId);
+  let at = sibs.length;
+  if (afterId) {
+    const idx = sibs.findIndex((s) => s.id === afterId);
+    if (idx >= 0) at = idx + 1;
+  }
+  sibs.splice(at, 0, drag);
+
+  const batch = writeBatch(db);
+  sibs.forEach((s, i) => {
+    const patch = { order: i };
+    if (s.id === dragId) {
+      patch.parentId = newParentId || null;
+      patch.updatedAt = serverTimestamp();
+      patch.updatedBy = identity;
+    }
+    batch.update(doc(db, 'hubNodes', s.id), patch);
+  });
+  await batch.commit();
+  if (newParentId) { collapsed.delete(newParentId); persistCollapsed(); }
 }
 
 function descendantsOf(id) {
@@ -428,6 +514,18 @@ function confirmDialog(title, text) {
 
 el.filter.addEventListener('input', renderTree);
 el.treeToggle.addEventListener('click', () => el.tree.classList.toggle('is-open'));
+
+// Déposer sur le fond de la liste = remonter le nœud à la racine.
+el.treeList.addEventListener('dragover', (e) => {
+  if (dragNodeId && e.target === el.treeList) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+});
+el.treeList.addEventListener('drop', async (e) => {
+  if (e.target !== el.treeList) return;
+  e.preventDefault();
+  const id = dragNodeId || e.dataTransfer.getData('text/plain');
+  clearDropMarks();
+  if (id) await reparentNode(id, null, null);
+});
 
 // ---------------------------------------------------------------------------
 // Éditeur : ouverture d'une page
