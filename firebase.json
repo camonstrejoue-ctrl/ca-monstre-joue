@@ -6,6 +6,13 @@
     "cleanUrls": true,
     "rewrites": [
       { "source": "**", "destination": "/hub.html" }
+    ],
+    "headers": [
+      {
+        "//": "Outil interne mis à jour souvent : pas de cache navigateur, on revalide à chaque chargement (fichiers minuscules, l'ETag renvoie 304 si rien n'a changé). Sans ça, un déploiement ne se voit qu'après 1h (défaut Firebase).",
+        "source": "**",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      }
     ]
   }
 }
