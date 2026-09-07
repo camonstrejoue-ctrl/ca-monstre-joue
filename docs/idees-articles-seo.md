@@ -5,7 +5,41 @@ Liste vivante des propositions de contenu SEO/GEO générées avec Claude, en at
 `js/data.js`), elle est retirée de ce fichier. Chaque idée suit le format défini dans
 `docs/seo-geo-expert.md` (titre optimisé, mots-clés secondaires, intention de recherche, angle GEO).
 
-Dernière mise à jour : 2026-09-03.
+Dernière mise à jour : 2026-09-07.
+
+---
+
+## Priorité 0 — sujets à forte conversion (recherche concurrentielle du 2026-09-07)
+
+Recherche réelle (WebSearch) sur 4 requêtes types du secteur : "meilleur jeu de société 2/famille 2026",
+"avis Wingspan", "idée cadeau jeu de société Noël/anniversaire", "cadeau jeu de société Suisse romande".
+Verdict : les formats génériques ("top 10", avis de jeux connus) sont saturés par des gros médias
+([Ludum.fr](https://www.ludum.fr/blog/jeux-de-societe/les-100-meilleurs-jeux-de-societe-a-deux),
+[Les Amis Ludiques](https://lesamisludiques.com/les-100-meilleurs-jeux-de-societe-pour-jouer-a-deux),
+[Play-in](https://www.play-in.com/fr/articles/5-jeux-de-societe/actualite/top-des-jeux-de-societe-inities-experts-a-offrir-a-noel),
+Fnac...). Seule exception trouvée : "cadeau jeu de société" croisé Suisse romande ne renvoie que des
+boutiques ([400coups.ch](https://www.400coups.ch/), [aubergedujeu.ch](https://www.aubergedujeu.ch/),
+[aquoionjoue.ch](https://aquoionjoue.ch/), [ideecadeau.ch](https://www.ideecadeau.ch/)) — aucun média
+éditorial identifié sur ce croisement précis.
+
+### 0.1. Guide cadeau "édition Suisse romande" — le plus prometteur
+- **Titre** : *Quel jeu de société offrir cette année ? Notre guide cadeau (édition suisse romande)*
+- **Mots-clés secondaires** : cadeau jeu de société Suisse, idée cadeau jeu de société, jeu à offrir Noël/anniversaire
+- **Intention** : transactionnelle (lecteur en phase de décision d'achat)
+- **Angle GEO** : structuré par profil de destinataire (enfant / couple / groupe d'amis / joueur expérimenté), format Q/R extractible
+- **Pourquoi forte conversion** : aucun concurrent éditorial sur ce croisement (que des boutiques) ; moment de décision d'achat = idéal pour proposer l'abonnement newsletter ; trafic saisonnier récurrent chaque année (Noël, anniversaires), réutilisable sans réécrire.
+
+### 0.2. Finspan vs Wingspan (reclassé depuis priorité 1, item 3)
+Même titre/angle que l'item 3 ci-dessous, mais justification renforcée : ce n'est pas qu'un trou de
+catalogue, c'est un sujet à forte conversion — quelqu'un qui cherche cette comparaison est déjà convaincu
+par le jeu, en toute fin de décision. Aucun concurrent trouvé ne fait cette comparaison directe.
+
+### 0.3. "Quel jeu offrir selon la personnalité ?" — lié au chatbot
+- **Titre** : *Quel jeu de société offrir selon la personnalité de la personne ? (avec P'tit Monstre)*
+- **Mots-clés secondaires** : quel jeu de société choisir, test personnalité jeu de société
+- **Intention** : décisionnelle mais hésitante (ne sait pas quoi offrir)
+- **Angle GEO** : contenu qui pointe vers un outil interactif réel du site plutôt qu'une liste statique
+- **Pourquoi forte conversion** : seul sujet qui relie le contenu SEO à une fonctionnalité produit déjà existante (chatbot de recommandation) — double conversion possible : lecture → chatbot → découverte du catalogue → newsletter.
 
 ---
 
