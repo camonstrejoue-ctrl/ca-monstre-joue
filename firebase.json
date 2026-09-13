@@ -1,4 +1,7 @@
 {
+  "firestore": {
+    "rules": "app/firestore.rules"
+  },
   "hosting": {
     "public": "hub-dist",
     "predeploy": ["node scripts/build-hub-dist.js"],
