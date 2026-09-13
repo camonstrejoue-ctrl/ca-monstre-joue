@@ -79,6 +79,14 @@ function youTubeEmbed(url) {
   }
   return null;
 }
+// Vidéo verticale (format Shorts/Reels, 9:16) vs. horizontale (vidéo YouTube
+// classique, 16:9) — détermine quel gabarit de lecteur utiliser (voir
+// .video-wrap / .video-wrap--horizontal dans style.css) pour que la vidéo
+// s'affiche dans ses vraies proportions au lieu d'être écrasée dans une case
+// pensée pour l'autre format.
+function isVerticalVideo(url) {
+  return !!url && (/instagram\.com\/(reel|p)\//.test(url) || /shorts\//.test(url));
+}
 function isInstagramUrl(url) {
   return !!url && /instagram\.com\/(reel|p)\//.test(url);
 }
@@ -719,6 +727,7 @@ function renderGamePage() {
   const videoWrap = qs('#video-wrap');
   const embed = youTubeEmbed(g.video);
   videoWrap.innerHTML = '';
+  videoWrap.classList.toggle('video-wrap--horizontal', !!g.video && !isVerticalVideo(g.video));
   if (!g.video) {
     videoSection.style.display = 'none';
   } else {
