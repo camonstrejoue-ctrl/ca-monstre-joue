@@ -817,7 +817,6 @@ window.ARTICLES = [
         type: 'games',
         items: [
           { slug: 'eila-et-leclat-de-la-montagne' },
-          { name: 'Fate' },
           { slug: 'seigneur-des-anneaux-le-destin-de-la-communaute' },
         ],
       },
