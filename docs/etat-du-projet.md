@@ -1,7 +1,7 @@
 # Ça Monstre Joue — État du projet
 
 Résumé de ce qu'on a construit ensemble : comment le site fonctionne, ce qu'il contient, et où on en est.
-Dernière mise à jour : 2026-09-09.
+Dernière mise à jour : 2026-09-13.
 
 ---
 
@@ -110,15 +110,16 @@ suisse, ajustée depuis les données globales Substack qui sont à dominante am�
 | Statut | Élément |
 |---|---|
 | ⏳ En attente | DNS + GitHub Pages — seule étape qui empêche le site d'être joignable |
-| ⏳ En attente | Photos de Guillaume et Prune (chemins actuels non pourvus) |
-| ⏳ En attente | Vrais liens Instagram/Facebook/TikTok (retour prévu le 1er novembre) |
+| ⏳ En attente | Vrais liens Facebook/TikTok (Instagram et YouTube déjà en place) |
 | ⏳ En attente | Publication de l'app sur les stores |
 | ⏳ En attente | Contenu du backlog SEO à écrire (6 jeux sans article, guide cadeau Suisse romande…) |
-| ✅ Fait | Lancement réduit (app/agenda/réseaux masqués sauf Substack + YouTube) |
+| ✅ Fait | Photos de Guillaume et Prune ajoutées (2026-09-13) |
+| ✅ Fait | Lancement réduit (app/agenda/réseaux masqués sauf Substack + YouTube + Instagram) |
 | ✅ Fait | SEO/GEO technique (sitemap, données structurées, llms.txt, robots.txt) |
 | ✅ Fait | Newsletter étendue à tout le site + bug bannière mobile corrigé |
 | ✅ Fait | Équipe à jour (4 membres, bios complètes) |
 | ✅ Fait | 7 notes Substack pré-lancement rédigées, prêtes à poster |
+| ✅ Fait | Vérification globale pré-publication (2026-09-13) : SEO, liens internes, images, vidéos, formulaires — 1 bug corrigé (casse d'un chemin d'image) |
 
 ---
 
