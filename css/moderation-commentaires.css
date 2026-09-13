@@ -8,6 +8,11 @@
 }
 *{box-sizing:border-box;}
 body{margin:0;font-family:var(--font-body);background:var(--cream);color:var(--black);}
+/* `.mod-login{display:flex}` a la même spécificité que la règle native
+   [hidden]{display:none} et la bat dans la cascade (chargée après) : sans ce
+   correctif, l'écran de connexion reste affiché même une fois `hidden` posé
+   par le JS après une connexion réussie. */
+[hidden]{display:none!important;}
 
 .mod-login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
 .mod-login__card{
