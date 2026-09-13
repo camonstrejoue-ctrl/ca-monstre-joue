@@ -275,8 +275,7 @@ window.GAMES = [
       'Tu cherches un jeu expert avec plein de stratégie',
       'La lecture, c’est pas trop ton truc',
     ],
-    // Pas encore de vidéo reçue : placeholder "Vidéo à venir" affiché automatiquement.
-    video: '',
+    video: 'https://youtu.be/7wAOqxJqgYQ',
     // Pas encore de playlist reçue.
     spotify: '',
     // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
