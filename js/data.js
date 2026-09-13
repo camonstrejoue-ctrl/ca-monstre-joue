@@ -173,7 +173,7 @@ window.GAMES = [
       'Le réchauffement climatique, tu n’y crois pas',
       'Tu n’arrives pas à rester plus de 45 minutes sur une chaise',
     ],
-    video: 'https://youtube.com/shorts/ZlMJrS7kiDk',
+    video: 'https://youtube.com/shorts/1-qo_lG-CoU?feature=share',
     // Playlist à ajouter plus tard.
     spotify: '',
     gallery: [
