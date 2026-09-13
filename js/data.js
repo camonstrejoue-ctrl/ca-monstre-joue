@@ -25,7 +25,7 @@ window.HOME_BANNERS = [
 window.CATEGORIES = [
   { slug: 'jeux-a-deux',        name: 'Jeux à deux',        image: 'assets/categories/jeux-adeux-categorie.JPG' },
   { slug: 'jeux-cooperatifs',   name: 'Jeux coopératifs',   image: 'assets/categories/jeux-cooperatifs-categorie.jpg' },
-  { slug: 'jeux-dambiance',     name: "Jeux d'ambiance",    image: 'assets/categories/jeux-dambiance-categorie.jpg' },
+  { slug: 'jeux-dambiance',     name: "Jeux d'ambiance",    image: 'assets/categories/jeux-dambiance-categorie.JPG' },
   { slug: 'jeux-de-strategie',  name: 'Jeux de stratégie',  image: 'assets/categories/jeux-strategie-categorie.JPG' },
   { slug: 'jeux-narratifs',     name: 'Jeux narratifs',     image: 'assets/categories/jeux-narratifs-categorie.JPG' },
   { slug: 'jeux-famille',       name: 'Jeux famille',       image: 'assets/categories/jeux-famille-categorie.JPG' },
