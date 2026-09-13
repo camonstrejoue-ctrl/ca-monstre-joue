@@ -699,12 +699,11 @@ window.ARTICLES = [
       { type: 'image', src: 'assets/games/daybreak/daybrek-article2.JPG', caption: 'Les cartes projet et leurs combos, au cœur de la stratégie de chaque joueur.' },
       { type: 'p', text: "Au final, Daybreak est le jeu qu’on aime sortir quand on a envie de jouer malgré la fatigue. Un peu d’interaction, de la réflexion, des combos à faire dans son coin. On met en commun et on adapte sa stratégie pour le tour suivant." },
       { type: 'p', text: "Côté rejouabilité, on apprécie beaucoup le fait de pouvoir varier les zones économiques. Chacune a ses forces et ses faiblesses et l’association de zones différentes fera considérablement varier la difficulté." },
-      { type: 'image', src: 'assets/games/daybreak/daybreak-article3.JPG', caption: 'Fonte des glaces, dégel du pergélisol... les crises s’enchaînent et ne pardonnent pas.' },
       { type: 'list', items: [
         'Europe et États-Unis : partie facile',
         'Chine et Monde majoritaire : préparez-vous à perdre !',
       ] },
-      { type: 'p', text: "Si vous voulez en découvrir plus sur les zones économiques et comment les exploiter au mieux, découvrez notre article dédié." },
+      { type: 'image', src: 'assets/games/daybreak/daybreak-article3.JPG', caption: 'Fonte des glaces, dégel du pergélisol... les crises s’enchaînent et ne pardonnent pas.' },
     ],
   },
   {
