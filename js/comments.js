@@ -4,7 +4,8 @@
 // status: 'pending'. Rien de ce qui est écrit ici n'est visible publiquement
 // tant que l'admin ne l'a pas approuvé depuis moderation-commentaires.html
 // (voir js/moderation-commentaires.js et le bloc `comments` de
-// app/firestore.rules).
+// app/firestore.rules). Un commentaire peut avoir des réponses (parentId) —
+// un seul niveau de profondeur, comme la plupart des blogs.
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getFirestore, collection, addDoc, getDocs, query, where, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
@@ -61,48 +62,6 @@ function renderTextBlock(text, className) {
   return p;
 }
 
-function renderComment(c) {
-  const card = el('div', { class: 'comment-card' });
-  const head = el('div', { class: 'comment-card__head' });
-  head.appendChild(el('strong', { text: c.authorName || 'Anonyme' }));
-  const createdAt = c.createdAt && typeof c.createdAt.toDate === 'function' ? c.createdAt.toDate() : null;
-  if (createdAt) head.appendChild(el('span', { class: 'comment-card__date', text: formatDate(createdAt) }));
-  card.appendChild(head);
-  card.appendChild(renderTextBlock(c.text, 'comment-card__text'));
-  if (c.reply && c.reply.text) {
-    const reply = el('div', { class: 'comment-reply' });
-    reply.appendChild(el('strong', { class: 'comment-reply__label', text: 'Réponse de Ça Monstre Joue' }));
-    reply.appendChild(renderTextBlock(c.reply.text, 'comment-reply__text'));
-    card.appendChild(reply);
-  }
-  return card;
-}
-
-async function loadComments(contentType, slug, list, empty) {
-  const q = query(
-    collection(db, 'comments'),
-    where('contentType', '==', contentType),
-    where('contentSlug', '==', slug),
-    where('status', '==', 'approved'),
-  );
-  let snap;
-  try {
-    snap = await getDocs(q);
-  } catch (err) {
-    console.error('Chargement des commentaires impossible', err);
-    return;
-  }
-  // Tri côté client (pas d'orderBy côté serveur) : évite d'avoir à créer un
-  // index composite Firestore pour un volume de commentaires par page qui
-  // restera de toute façon modeste.
-  const comments = snap.docs
-    .map(d => d.data())
-    .sort((a, b) => (a.createdAt?.toMillis?.() || 0) - (b.createdAt?.toMillis?.() || 0));
-  list.innerHTML = '';
-  comments.forEach(c => list.appendChild(renderComment(c)));
-  if (empty) empty.style.display = comments.length ? 'none' : '';
-}
-
 function ensureErrorEl(form) {
   let error = qs('.form-error', form);
   if (!error) {
@@ -128,12 +87,14 @@ function showFeedback(form, kind, message) {
   }
 }
 
-function initForm(contentType, slug, form, onPosted) {
+// Câble un formulaire (le principal ou une mini-form de réponse) : mêmes
+// règles de validation/anti-spam pour les deux.
+function bindForm(form, { contentType, slug, parentId }, onPosted) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const nameInput = qs('#comment-name', form);
-    const textInput = qs('#comment-text', form);
-    const honeypot = qs('#comment-hp', form);
+    const nameInput = qs('.comment-name', form);
+    const textInput = qs('.comment-text', form);
+    const honeypot = qs('.comment-hp', form);
 
     // Honeypot rempli = bot. On "réussit" en apparence (pas d'indice pour le
     // script qui a rempli le formulaire) sans rien écrire en base.
@@ -164,14 +125,16 @@ function initForm(contentType, slug, form, onPosted) {
     const btn = qs('button[type="submit"]', form);
     if (btn) btn.disabled = true;
     try {
-      await addDoc(collection(db, 'comments'), {
+      const payload = {
         contentType,
         contentSlug: slug,
         authorName: name.slice(0, 60),
         text: text.slice(0, 1500),
         status: 'pending',
         createdAt: serverTimestamp(),
-      });
+      };
+      if (parentId) payload.parentId = parentId;
+      await addDoc(collection(db, 'comments'), payload);
       try { localStorage.setItem(rateLimitKey, String(Date.now())); } catch (_) { /* stockage indisponible, tant pis */ }
       form.reset();
       showFeedback(form, 'success');
@@ -183,6 +146,104 @@ function initForm(contentType, slug, form, onPosted) {
       if (btn) btn.disabled = false;
     }
   });
+}
+
+// Mini-formulaire de réponse, créé à la demande sous un commentaire.
+function buildReplyForm(contentType, slug, parentId) {
+  const form = el('form', { class: 'contact-form comment-form comment-reply-form' });
+  const nameField = el('div', { class: 'field' });
+  nameField.appendChild(el('label', { text: 'Ton pseudo' }));
+  nameField.appendChild(el('input', { type: 'text', class: 'comment-name', maxlength: '60', required: '' }));
+  const textField = el('div', { class: 'field' });
+  textField.appendChild(el('label', { text: 'Ta réponse' }));
+  textField.appendChild(el('textarea', { class: 'comment-text', maxlength: '1500', required: '' }));
+  const hpWrap = el('div', { class: 'comment-hp-wrap', 'aria-hidden': 'true' });
+  hpWrap.appendChild(el('label', { text: 'Laisse ce champ vide' }));
+  hpWrap.appendChild(el('input', { type: 'text', class: 'comment-hp', tabindex: '-1', autocomplete: 'off' }));
+  const btn = el('button', { type: 'submit', class: 'btn btn--block', text: 'Répondre' });
+  const success = el('p', { class: 'form-success', text: 'Merci ! Ta réponse est en attente de validation.' });
+  form.appendChild(nameField);
+  form.appendChild(textField);
+  form.appendChild(hpWrap);
+  form.appendChild(btn);
+  form.appendChild(success);
+  bindForm(form, { contentType, slug, parentId });
+  return form;
+}
+
+function renderReply(c) {
+  const card = el('div', { class: 'comment-card comment-card--reply' });
+  const head = el('div', { class: 'comment-card__head' });
+  head.appendChild(el('strong', { text: c.authorName || 'Anonyme' }));
+  const createdAt = c.createdAt && typeof c.createdAt.toDate === 'function' ? c.createdAt.toDate() : null;
+  if (createdAt) head.appendChild(el('span', { class: 'comment-card__date', text: formatDate(createdAt) }));
+  card.appendChild(head);
+  card.appendChild(renderTextBlock(c.text, 'comment-card__text'));
+  return card;
+}
+
+function renderComment(c, replies, contentType, slug) {
+  const card = el('div', { class: 'comment-card' });
+  const head = el('div', { class: 'comment-card__head' });
+  head.appendChild(el('strong', { text: c.authorName || 'Anonyme' }));
+  const createdAt = c.createdAt && typeof c.createdAt.toDate === 'function' ? c.createdAt.toDate() : null;
+  if (createdAt) head.appendChild(el('span', { class: 'comment-card__date', text: formatDate(createdAt) }));
+  card.appendChild(head);
+  card.appendChild(renderTextBlock(c.text, 'comment-card__text'));
+
+  if (c.reply && c.reply.text) {
+    const reply = el('div', { class: 'comment-reply' });
+    reply.appendChild(el('strong', { class: 'comment-reply__label', text: 'Réponse de Ça Monstre Joue' }));
+    reply.appendChild(renderTextBlock(c.reply.text, 'comment-reply__text'));
+    card.appendChild(reply);
+  }
+
+  const toggle = el('button', { type: 'button', class: 'comment-reply-toggle', text: 'Répondre' });
+  const replyForm = buildReplyForm(contentType, slug, c.id);
+  replyForm.hidden = true;
+  toggle.addEventListener('click', () => { replyForm.hidden = !replyForm.hidden; });
+  card.appendChild(toggle);
+  card.appendChild(replyForm);
+
+  if (replies.length) {
+    const repliesWrap = el('div', { class: 'comment-replies' });
+    replies.forEach(r => repliesWrap.appendChild(renderReply(r)));
+    card.appendChild(repliesWrap);
+  }
+
+  return card;
+}
+
+async function loadComments(contentType, slug, list, empty) {
+  const q = query(
+    collection(db, 'comments'),
+    where('contentType', '==', contentType),
+    where('contentSlug', '==', slug),
+    where('status', '==', 'approved'),
+  );
+  let snap;
+  try {
+    snap = await getDocs(q);
+  } catch (err) {
+    console.error('Chargement des commentaires impossible', err);
+    return;
+  }
+  // Tri côté client (pas d'orderBy côté serveur) : évite d'avoir à créer un
+  // index composite Firestore pour un volume de commentaires par page qui
+  // restera de toute façon modeste.
+  const comments = snap.docs
+    .map(d => ({ id: d.id, ...d.data() }))
+    .sort((a, b) => (a.createdAt?.toMillis?.() || 0) - (b.createdAt?.toMillis?.() || 0));
+  const topLevel = comments.filter(c => !c.parentId);
+  const repliesByParent = new Map();
+  comments.filter(c => c.parentId).forEach(c => {
+    if (!repliesByParent.has(c.parentId)) repliesByParent.set(c.parentId, []);
+    repliesByParent.get(c.parentId).push(c);
+  });
+
+  list.innerHTML = '';
+  topLevel.forEach(c => list.appendChild(renderComment(c, repliesByParent.get(c.id) || [], contentType, slug)));
+  if (empty) empty.style.display = topLevel.length ? 'none' : '';
 }
 
 function init() {
@@ -197,11 +258,7 @@ function init() {
   const form = qs('#comment-form', section);
 
   if (list) loadComments(contentType, slug, list, empty);
-  if (form) initForm(contentType, slug, form, () => {
-    // Le commentaire posté est en attente : pas de rechargement de la liste
-    // (il n'apparaîtrait pas tant qu'il n'est pas approuvé), le message de
-    // succès suffit à confirmer l'envoi.
-  });
+  if (form) bindForm(form, { contentType, slug, parentId: null });
 }
 
 init();

@@ -559,6 +559,14 @@ button{font-family:inherit;cursor:pointer;}
 .comment-reply__label{display:block;color:var(--green-dark);font-family:var(--font-display);margin-bottom:6px;}
 .comments-empty{color:var(--gray);margin:0 auto 24px;max-width:640px;text-align:center;}
 .comment-form{max-width:640px;margin:0 auto;}
+.comment-reply-toggle{
+  background:none;border:none;padding:10px 0 0;margin:0;color:var(--coral-dark);font-weight:700;
+  font-family:var(--font-body);cursor:pointer;text-decoration:underline;
+}
+.comment-reply-toggle:hover{color:var(--coral);}
+.comment-reply-form{margin-top:14px;max-width:none;}
+.comment-replies{margin-top:16px;padding-left:20px;border-left:3px solid var(--cream-dark);display:flex;flex-direction:column;gap:12px;}
+.comment-card--reply{padding:14px 18px;background:var(--cream);}
 .comment-hp-wrap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 .share-row svg{width:20px;height:20px;fill:currentColor;flex:none;}
 .share-row .share-copy{width:auto;padding:0 18px;border-radius:999px;font-weight:700;font-size:.85rem;}

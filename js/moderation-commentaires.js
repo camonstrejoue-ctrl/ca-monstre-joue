@@ -45,6 +45,10 @@ const elApprovedEmpty = $('mod-approved-empty');
 
 let unsubPending = null;
 let unsubApproved = null;
+// Toutes les données de commentaires vues jusqu'ici (pending + approved),
+// pour retrouver le pseudo/texte d'un parent quand on affiche une réponse
+// en attente, sans requête Firestore supplémentaire.
+const commentsCache = new Map();
 
 function el(tag, attrs, children) {
   const node = document.createElement(tag);
@@ -76,6 +80,19 @@ function renderTextBlock(text) {
   return p;
 }
 
+function renderParentContext(c) {
+  if (!c.parentId) return null;
+  const parent = commentsCache.get(c.parentId);
+  const note = el('p', { class: 'mod-card__parent' });
+  note.appendChild(document.createTextNode('↳ en réponse à '));
+  note.appendChild(el('strong', { text: parent ? (parent.authorName || 'Anonyme') : 'un commentaire' }));
+  if (parent && parent.text) {
+    note.appendChild(document.createTextNode(' : '));
+    note.appendChild(el('em', { text: parent.text.length > 80 ? `${parent.text.slice(0, 80)}…` : parent.text }));
+  }
+  return note;
+}
+
 function renderPendingCard(id, c) {
   const card = el('div', { class: 'mod-card' });
   const head = el('div', { class: 'mod-card__head' });
@@ -83,6 +100,8 @@ function renderPendingCard(id, c) {
   head.appendChild(el('a', { href: contentLink(c), target: '_blank', rel: 'noopener', class: 'mod-card__link', text: c.contentSlug || '' }));
   head.appendChild(el('span', { class: 'mod-card__date', text: formatDate(c.createdAt) }));
   card.appendChild(head);
+  const parentNote = renderParentContext(c);
+  if (parentNote) card.appendChild(parentNote);
   card.appendChild(renderTextBlock(c.text));
 
   const actions = el('div', { class: 'mod-card__actions' });
@@ -113,7 +132,34 @@ function renderPendingCard(id, c) {
   return card;
 }
 
-function renderApprovedCard(id, c) {
+// Réponse (visiteur) déjà approuvée, affichée sous son commentaire parent —
+// juste de quoi la lire et la supprimer, pas d'édition de réponse d'équipe
+// dessus (réservée aux commentaires de premier niveau).
+function renderApprovedReplyCard(id, c) {
+  const card = el('div', { class: 'mod-card mod-card--reply' });
+  const head = el('div', { class: 'mod-card__head' });
+  head.appendChild(el('strong', { text: c.authorName || 'Anonyme' }));
+  head.appendChild(el('span', { class: 'mod-card__date', text: formatDate(c.createdAt) }));
+  card.appendChild(head);
+  card.appendChild(renderTextBlock(c.text));
+  const actions = el('div', { class: 'mod-card__actions' });
+  const deleteBtn = el('button', { type: 'button', class: 'mod-btn mod-btn--danger', text: 'Supprimer' });
+  deleteBtn.addEventListener('click', async () => {
+    if (!confirm('Supprimer définitivement cette réponse ?')) return;
+    deleteBtn.disabled = true;
+    try {
+      await deleteDoc(doc(db, 'comments', id));
+    } catch (err) {
+      console.error('Delete failed', err);
+      deleteBtn.disabled = false;
+    }
+  });
+  actions.appendChild(deleteBtn);
+  card.appendChild(actions);
+  return card;
+}
+
+function renderApprovedCard(id, c, replies) {
   const card = el('div', { class: 'mod-card' });
   const head = el('div', { class: 'mod-card__head' });
   head.appendChild(el('strong', { text: c.authorName || 'Anonyme' }));
@@ -159,6 +205,13 @@ function renderApprovedCard(id, c) {
   replyActions.appendChild(deleteBtn);
   replyWrap.appendChild(replyActions);
   card.appendChild(replyWrap);
+
+  if (replies.length) {
+    const repliesWrap = el('div', { class: 'mod-replies' });
+    replies.forEach(r => repliesWrap.appendChild(renderApprovedReplyCard(r.id, r)));
+    card.appendChild(repliesWrap);
+  }
+
   return card;
 }
 
@@ -166,6 +219,7 @@ function watchComments() {
   unsubPending = onSnapshot(
     query(collection(db, 'comments'), where('status', '==', 'pending')),
     (snap) => {
+      snap.docs.forEach(d => commentsCache.set(d.id, d.data()));
       const docs = snap.docs.slice().sort((a, b) => (a.data().createdAt?.toMillis?.() || 0) - (b.data().createdAt?.toMillis?.() || 0));
       elPendingList.innerHTML = '';
       docs.forEach(d => elPendingList.appendChild(renderPendingCard(d.id, d.data())));
@@ -178,10 +232,21 @@ function watchComments() {
   unsubApproved = onSnapshot(
     query(collection(db, 'comments'), where('status', '==', 'approved')),
     (snap) => {
-      const docs = snap.docs.slice().sort((a, b) => (b.data().createdAt?.toMillis?.() || 0) - (a.data().createdAt?.toMillis?.() || 0));
+      snap.docs.forEach(d => commentsCache.set(d.id, d.data()));
+      const all = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const topLevel = all
+        .filter(c => !c.parentId)
+        .sort((a, b) => (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0));
+      const repliesByParent = new Map();
+      all.filter(c => c.parentId).forEach(c => {
+        if (!repliesByParent.has(c.parentId)) repliesByParent.set(c.parentId, []);
+        repliesByParent.get(c.parentId).push(c);
+      });
+      repliesByParent.forEach(list => list.sort((a, b) => (a.createdAt?.toMillis?.() || 0) - (b.createdAt?.toMillis?.() || 0)));
+
       elApprovedList.innerHTML = '';
-      docs.forEach(d => elApprovedList.appendChild(renderApprovedCard(d.id, d.data())));
-      elApprovedEmpty.hidden = docs.length > 0;
+      topLevel.forEach(c => elApprovedList.appendChild(renderApprovedCard(c.id, c, repliesByParent.get(c.id) || [])));
+      elApprovedEmpty.hidden = topLevel.length > 0;
     },
     (err) => console.error('Approved comments watch failed', err),
   );

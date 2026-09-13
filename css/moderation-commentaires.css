@@ -63,6 +63,9 @@ body{margin:0;font-family:var(--font-body);background:var(--cream);color:var(--b
 .mod-card__date{color:var(--gray);font-size:.85rem;margin-left:auto;}
 .mod-card__text{line-height:1.5;white-space:normal;}
 .mod-card__actions{display:flex;gap:10px;margin-top:12px;}
+.mod-card__parent{color:var(--gray);font-size:.9rem;margin:0 0 8px;}
+.mod-card--reply{padding:12px 16px;background:var(--cream);}
+.mod-replies{margin-top:14px;padding-left:18px;border-left:3px solid var(--cream-dark);display:flex;flex-direction:column;gap:10px;}
 
 .mod-reply{margin-top:14px;padding-top:14px;border-top:2px dashed var(--cream-dark);}
 .mod-reply__input{
