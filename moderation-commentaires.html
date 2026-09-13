@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ST1V87HQW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2ST1V87HQW');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modération des commentaires</title>
+<meta name="description" content="Outil interne de modération des commentaires — Ça Monstre Joue.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/assets/monstre.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/moderation-commentaires.css">
+</head>
+<body>
+
+<div id="mod-login" class="mod-login">
+  <form id="mod-login-form" class="mod-login__card">
+    <img src="/assets/logo.png" alt="Ça Monstre Joue" class="mod-login__logo">
+    <h1>Modération des commentaires</h1>
+    <p>Connecte-toi avec ton compte administrateur.</p>
+    <label for="mod-email">E-mail</label>
+    <input type="email" id="mod-email" autocomplete="username" required>
+    <label for="mod-password">Mot de passe</label>
+    <input type="password" id="mod-password" autocomplete="current-password" required>
+    <button type="submit" class="mod-btn mod-btn--primary" id="mod-login-btn">Entrer</button>
+    <p class="mod-login__error" id="mod-login-error" hidden></p>
+  </form>
+</div>
+
+<div id="mod-app" class="mod-app" hidden>
+  <header class="mod-header">
+    <h1>Modération des commentaires</h1>
+    <button type="button" class="mod-btn" id="mod-signout">Se déconnecter</button>
+  </header>
+
+  <main class="mod-main">
+    <section class="mod-section">
+      <h2>En attente <span class="mod-count" id="mod-pending-count">0</span></h2>
+      <p class="mod-empty" id="mod-pending-empty" hidden>Rien en attente pour l'instant.</p>
+      <div class="mod-list" id="mod-pending-list"></div>
+    </section>
+
+    <section class="mod-section">
+      <h2>Approuvés</h2>
+      <p class="mod-empty" id="mod-approved-empty" hidden>Aucun commentaire approuvé pour l'instant.</p>
+      <div class="mod-list" id="mod-approved-list"></div>
+    </section>
+  </main>
+</div>
+
+<script type="module" src="/js/moderation-commentaires.js"></script>
+</body>
+</html>

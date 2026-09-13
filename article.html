@@ -109,6 +109,32 @@
       </div>
     </div>
   </section>
+
+  <section class="comments-section" id="comments-section" data-content-type="article">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Commentaires</h2>
+      </div>
+      <div class="comments-list" id="comments-list"></div>
+      <p class="comments-empty" id="comments-empty">Aucun commentaire pour l'instant — sois le premier à réagir !</p>
+      <form class="contact-form comment-form" id="comment-form">
+        <div class="field">
+          <label for="comment-name">Ton pseudo</label>
+          <input type="text" id="comment-name" name="name" maxlength="60" required>
+        </div>
+        <div class="field">
+          <label for="comment-text">Ton commentaire</label>
+          <textarea id="comment-text" name="text" maxlength="1500" required></textarea>
+        </div>
+        <div class="comment-hp-wrap" aria-hidden="true">
+          <label for="comment-hp">Laisse ce champ vide</label>
+          <input type="text" id="comment-hp" name="hp" tabindex="-1" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn--block">Envoyer</button>
+        <p class="form-success">Merci ! Ton commentaire est en attente de validation et apparaîtra une fois approuvé.</p>
+      </form>
+    </div>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -166,5 +192,6 @@
 
 <script src="/js/data.js"></script>
 <script src="/js/main.js"></script>
+<script type="module" src="/js/comments.js"></script>
 </body>
 </html>

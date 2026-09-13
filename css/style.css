@@ -541,6 +541,25 @@ button{font-family:inherit;cursor:pointer;}
   transition:background .15s ease,color .15s ease,border-color .15s ease;
 }
 .share-row a:hover, .share-row button:hover{background:var(--coral);border-color:var(--coral);color:var(--white);}
+
+/* ---------- commentaires ---------- */
+.comments-section{padding:0 0 60px;}
+.comments-list{display:flex;flex-direction:column;gap:18px;margin-bottom:24px;}
+.comment-card{
+  border:3px solid var(--black);border-radius:var(--radius-md);padding:18px 22px;background:var(--white);
+}
+.comment-card__head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
+.comment-card__head strong{font-family:var(--font-display);}
+.comment-card__date{color:var(--gray);font-size:.85rem;}
+.comment-card__text{white-space:normal;line-height:1.5;}
+.comment-reply{
+  margin-top:14px;padding:14px 16px;border-radius:var(--radius-sm);background:var(--green-light);
+  border:2px dashed var(--green);
+}
+.comment-reply__label{display:block;color:var(--green-dark);font-family:var(--font-display);margin-bottom:6px;}
+.comments-empty{color:var(--gray);margin-bottom:24px;}
+.comment-form{max-width:640px;}
+.comment-hp-wrap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
 .share-row svg{width:20px;height:20px;fill:currentColor;flex:none;}
 .share-row .share-copy{width:auto;padding:0 18px;border-radius:999px;font-weight:700;font-size:.85rem;}
 .share-row .share-copy span{white-space:nowrap;}

@@ -5,6 +5,10 @@ Allow: /
 Disallow: /hub.html
 Disallow: /js/hub-seed.json
 
+# Outil interne de modération des commentaires (accès admin par mot de
+# passe, données protégées côté Firestore) : rien à indexer ici.
+Disallow: /moderation-commentaires.html
+
 # Autorisation explicite des robots IA (entraînement et réponse/citation) :
 # choix assumé du 2026-08-08 pour maximiser les chances d'être cité par les
 # IA répondantes (Perplexity, ChatGPT Search, Copilot...), au prix d'accepter
