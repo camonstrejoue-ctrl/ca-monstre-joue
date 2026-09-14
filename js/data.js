@@ -1053,6 +1053,35 @@ window.ARTICLES = [
       },
     ],
   },
+  {
+    slug: 'syndrome-boite-sous-blister-ludopathe',
+    title: 'Le syndrome de la boîte encore sous blister – Êtes-vous un ludopathe ?',
+    date: '2026-09-23',
+    author: 'Alex',
+    guide: true,
+    hero: 'assets/guides/syndrome-boite-sous-blister-ludopathe/syndrome-boite-sous-blister-ludopathe-bandeau.jpg',
+    cover: 'assets/guides/syndrome-boite-sous-blister-ludopathe/syndrome-boite-sous-blister-ludopathe-vignette.jpg',
+    excerpt: "Une pile de la honte qui ne désenfle jamais et une irrésistible envie de renifler le blister neuf ? Petit auto-diagnostic entre ludopathes.",
+    blocks: [
+      { type: 'p', text: "S’il y a bien un mal qui touche les adeptes du jeu de société dans notre société moderne c’est celui-ci. Ce mal secret que vous n’osez avouer ni à vos proches ni à vous-même. Celui qui vous pousse sans cesse à acheter un nouveau jeu de société car oui, vous « devez » tous les posséder." },
+      { type: 'p', text: "Ce mal vous ronge peut-être à tel point que votre consommation de ludopéfiant n’arrive pas à absorber la quantité que vous achetez chaque mois." },
+      { type: 'p', text: "Et c’est souvent ainsi que commence la pile de la honte. Composée la plupart du temps de jeux encore sous blister." },
+      { type: 'p', text: "Parfois vous ne parvenez pas à résister à l’appel et vous enlevez le blister simplement pour pouvoir la renifler… l’odeur du nouveau jeu." },
+      { type: 'p', text: "Mais voilà, à peine avez-vous succombé à votre pulsion que vous revenez déjà avec une autre boite." },
+      { type: 'p', text: "Je sais ce que vous ressentez… ce mal, j’y ai succombé aussi." },
+      { type: 'p', text: "Alors je vous proposerais bien de participer à ce genre de réunions où vous vous rassemblez pour partager votre addiction et vos problèmes, peut être votre chemin vers la rédemption et la désintoxication (Bonjouuuur Aleeex). Mais en réalité, vous y participez certainement déjà, on appelle ça des clubs de jeux de société, ou des soirées jeux entre amis." },
+      { type: 'p', text: "Oui, ne vous voilez pas la face, il est trop tard pour vous. Personne ne peut plus rien pour vous, et tant mieux." },
+      { type: 'p', text: "Je vais tout de même vous partager une solution pour donner le change en société et « avoir l’air normal ». C’est simple… quand vous ramenez une boite à la maison, enlevez le blister (attention, on renifle mais on ne bave pas sur le jeu. Caaa les abiiiime), et déballez entièrement le jeu est ses composants. Ensuite seulement vous pourrez le mettre dans la pile de la honte en toute quiétude. Votre crime est maintenant parfaitement camouflé." },
+      { type: 'p', text: "Alors, vous êtes atteint ? Ne craignez rien, je ne dirais rien à personne…" },
+      {
+        type: 'articles',
+        items: [
+          { slug: 'combien-de-jeux-pour-etre-heureux' },
+          { slug: 'extensions-jeux-de-societe-une-arnaque' },
+        ],
+      },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des membres de la team.
