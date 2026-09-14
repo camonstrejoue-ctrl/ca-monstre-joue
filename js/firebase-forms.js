@@ -15,6 +15,16 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js';
+import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/+esm';
+
+// Alerte email (EmailJS) à chaque soumission du formulaire Contact — best
+// effort : la donnée est de toute façon déjà sauvegardée dans Firestore
+// juste avant, donc un échec d'envoi d'email ne doit jamais faire échouer
+// la soumission côté visiteur (voir le try/catch dédié plus bas).
+const EMAILJS_PUBLIC_KEY = '6XMhl-LyooMOmYVvs';
+const EMAILJS_SERVICE_ID = 'service_4dv2esl';
+const EMAILJS_CONTACT_TEMPLATE_ID = 'template_6k7ucaj';
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDDttOJiQtScP2PDVrK3vJAOexg-OPQx6U',
@@ -79,6 +89,16 @@ if (contactForm) {
         status: 'new',
         createdAt: serverTimestamp(),
       });
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_CONTACT_TEMPLATE_ID, {
+          name: data.name || '',
+          email: data.email || '',
+          subject: data.subject || '',
+          message: data.message || '',
+        });
+      } catch (emailErr) {
+        console.error('Contact email alert failed', emailErr);
+      }
       showFeedback(contactForm, 'success');
       contactForm.reset();
     } catch (err) {
