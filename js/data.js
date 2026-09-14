@@ -1082,6 +1082,37 @@ window.ARTICLES = [
       },
     ],
   },
+  {
+    slug: 'quel-jeu-sortir-pour-ta-soiree-halloween',
+    title: 'Quel jeu sortir pour ta soirée Halloween ?',
+    date: '2026-09-30',
+    author: 'Alex',
+    guide: true,
+    hero: 'assets/guides/quel-jeu-sortir-pour-ta-soiree-halloween/quel-jeu-sortir-pour-ta-soiree-halloween-bandeau.jpg',
+    banner: 'assets/guides/quel-jeu-sortir-pour-ta-soiree-halloween/quel-jeu-sortir-pour-ta-soiree-halloween-banniere.jpg',
+    cover: 'assets/guides/quel-jeu-sortir-pour-ta-soiree-halloween/quel-jeu-sortir-pour-ta-soiree-halloween-vignette.jpg',
+    excerpt: "Mediums, loups-garous, tueurs psychopathes... 4 jeux pour transformer ta soirée Halloween en véritable scène de crime.",
+    blocks: [
+      { type: 'h2', text: 'Mysterium' },
+      { type: 'p', text: "On commence par un classique qui ne se démode pas ! Dans ce jeu coopératif, vous incarnez un groupe de medium en quête de réponses après un meurtre. L’un d’entre vous incarnera le fantôme de la victime et enverra des messages imagés aux mediums pour leur faire deviner tour à tour le meurtrier, le lieu du crime et l’arme utilisée. Vous devrez discuter, débattre, et surtout vous mettre d’accord sur les visions envoyées par le fantôme qui bien évidemment, n’a pas le droit de parler. Ambiance garantie !" },
+      { type: 'h2', text: 'Killer party' },
+      { type: 'p', text: "Petit jeu assez méconnu, Killer party va se jouer tout au long de la soirée. Chaque personne pioche une carte sur laquelle est expliqué comment il doit tuer sa prochaine victime. Par exemple : Faites la chanter avec vous dans la cuisine. Si vous remplissez les conditions, conservez la carte et piochez en une autre. À la fin de la soirée, celui avec le plus de cartes l’emporte !" },
+      { type: 'h2', text: 'Loup Garou' },
+      { type: 'p', text: "Est-il encore nécessaire de présenter ce classique des jeux d’ambiance ? Réunissez votre village autour de la table et piochez chacun une carte. Vous pourriez alors être un simple villageois, un loup garou ou l’un des nombreux personnages spéciaux !" },
+      { type: 'p', text: "L’un de vous endossera le rôle du narrateur et aura pour mission d’animer la partie. Chaque nuit, le village s’endort et les villageois ferment les yeux. Les loups garous se réveillent et désignent discrètement leur prochaine victime au narrateur. Le jour arrive, le village se réveille et le narrateur révèle que l’un des villageois a été assassiné. Vient alors le moment de débattre, de révéler le moindre bruit suspect et de tenter de désigner un coupable. Mais attention, vous auriez vite fait d’être induit en erreur par un loup garou ou par une oreille mal aiguisée et vous pourriez alors éliminer par erreur un autre villageois innocent, faisant ainsi le jeu des prédateurs. Seul inconvénient de cet excellent jeu, il faut vraiment être nombreux pour que la partie prenne une autre dimension !" },
+      { type: 'h2', text: 'Dead by Daylight' },
+      { type: 'p', text: "Aaah, là on touche à l’un de mes types de jeux favoris, le survival !" },
+      { type: 'p', text: "Vous êtes tous enfermés avec un tueur sanguinaire incarné par l’un d’entre vous. Votre objectif pour vous en sortir vivant est de réparer les générateurs qui alimentent la porte de sortie avant que vous ne soyez tous éliminez. Fuyez, entraidez-vous, faites diversion mais n’espérez pas pouvoir vous défendre. Tout ce que vous pouvez espérer c’est fuir assez longtemps pour réussir à ouvrir la porte et que l’un de vous parvienne à s’échapper. On ne va pas vous mentir, les chances de tous vous en sortir sont quasiment nulles..." },
+      { type: 'p', text: "Côté tueur, choisissez parmi une variété de psychopathes aux pouvoirs et aux gameplays très différents. Vous être plus fort et plus rapide que toutes vos futurs victimes, mais serez-vous plus intelligent ? Un seul évadé serait inadmissible tant votre supériorité est grande alors, jouez un peu avec vos proies... mais pas trop !" },
+      {
+        type: 'articles',
+        items: [
+          { slug: 'organiser-soiree-jeux-competitif-ou-cooperatif' },
+          { slug: 'jeux-pour-lapero' },
+        ],
+      },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des membres de la team.
