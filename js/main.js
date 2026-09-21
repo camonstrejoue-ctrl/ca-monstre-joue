@@ -12,6 +12,18 @@ function getSlugFromPath() {
   const parts = window.location.pathname.split('/').filter(p => p && p !== 'index.html');
   return parts.length ? parts[parts.length - 1] : null;
 }
+// Corrige la balise canonique/og:url une fois le contenu résolu côté client
+// (categorie.html?cat=…, jeu.html?slug=…, article.html?slug=…) : ces gabarits
+// bruts pointent en dur vers eux-mêmes sans paramètre — une page vide — au
+// lieu de la vraie page jumelle générée pour le SEO (/categorie/<slug>/ etc.).
+// Sans ça, Google reçoit un signal contradictoire sur la page à indexer.
+function fixCanonical(path) {
+  const url = `${window.location.origin}${path}`;
+  const link = qs('link[rel="canonical"]');
+  if (link) link.setAttribute('href', url);
+  const meta = qs('meta[property="og:url"]');
+  if (meta) meta.setAttribute('content', url);
+}
 function el(tag, attrs, children) {
   const node = document.createElement(tag);
   Object.entries(attrs || {}).forEach(([k, v]) => {
@@ -470,6 +482,7 @@ function renderCategoryPage() {
   if (!mount) return;
   const catSlug = getParam('cat') || getSlugFromPath();
   const cat = findCategory(catSlug);
+  if (cat) fixCanonical(`/categorie/${cat.slug}/`);
   qsa('[data-cat-name]').forEach(n => n.textContent = cat ? cat.name : 'Catégorie');
   const games = gamesInCategory(catSlug);
   mount.innerHTML = '';
@@ -593,6 +606,7 @@ function renderGamePage() {
     root.innerHTML = '<div class="container"><p style="padding:60px 0;text-align:center;">Ce jeu n\'existe pas (encore).</p></div>';
     return;
   }
+  fixCanonical(`/jeu/${g.slug}/`);
   document.title = `${g.name} — Ça Monstre Joue`;
   renderShareRow(qs('#share-row'), `${window.location.origin}/jeu/${g.slug}/`, g.name);
   renderAppShareLink(g.slug);
@@ -787,6 +801,7 @@ function renderArticlePage() {
     root.innerHTML = '<div class="container"><p style="padding:60px 0;text-align:center;">Cet article n\'existe pas (encore).</p></div>';
     return;
   }
+  fixCanonical(`/article/${a.slug}/`);
   document.title = `${a.title} — Ça Monstre Joue`;
   renderShareRow(qs('#share-row'), `${window.location.origin}/article/${a.slug}/`, a.title);
   renderAppShareLink(a.slug);
