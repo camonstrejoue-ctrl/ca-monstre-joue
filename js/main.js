@@ -482,8 +482,15 @@ function renderCategoryPage() {
   if (!mount) return;
   const catSlug = getParam('cat') || getSlugFromPath();
   const cat = findCategory(catSlug);
-  if (cat) fixCanonical(`/categorie/${cat.slug}/`);
-  qsa('[data-cat-name]').forEach(n => n.textContent = cat ? cat.name : 'Catégorie');
+  // Aucune catégorie reconnue (ex. /categorie.html visité tel quel, sans
+  // paramètre) : rien à afficher ici, plutôt renvoyer vers une page utile
+  // que de laisser une grille vide.
+  if (!cat) {
+    window.location.replace('/tous-les-jeux.html');
+    return;
+  }
+  fixCanonical(`/categorie/${cat.slug}/`);
+  qsa('[data-cat-name]').forEach(n => n.textContent = cat.name);
   const games = gamesInCategory(catSlug);
   mount.innerHTML = '';
   if (games.length === 0) {
