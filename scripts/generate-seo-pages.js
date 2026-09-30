@@ -308,8 +308,46 @@ function main() {
   ].join('\n');
   fs.writeFileSync(path.join(rootDir, 'llms.txt'), llmsTxt, 'utf8');
 
+  // Flux RSS des articles publiés (même règle de programmation que le
+  // sitemap) : un article daté dans le futur n'y entre que le jour venu, au
+  // déploiement quotidien (voir .github/workflows/deploy.yml). Sert aussi de
+  // déclencheur à la notification Discord (Zapier « New Item in Feed »).
+  const feedArticles = [...publishedArticles]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 50);
+  const feed = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">',
+    '  <channel>',
+    '    <title>Ça Monstre Joue</title>',
+    `    <link>${BASE_URL}/</link>`,
+    `    <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>`,
+    '    <description>Critiques, guides et avis sur les jeux de société, par l’équipe de Ça Monstre Joue.</description>',
+    '    <language>fr-CH</language>',
+    ...feedArticles.map((a) => {
+      const url = `${BASE_URL}/article/${a.slug}/`;
+      const game = GAMES.find((g) => g.slug === a.gameSlug);
+      const category = a.guide ? 'Guides du Monstre' : game && game.name;
+      return [
+        '    <item>',
+        `      <title>${escapeHtml(a.title)}</title>`,
+        `      <link>${url}</link>`,
+        `      <guid isPermaLink="true">${url}</guid>`,
+        `      <pubDate>${new Date(`${a.date}T00:00:00Z`).toUTCString()}</pubDate>`,
+        `      <description>${escapeHtml(toDescription(a.excerpt || '', 300))}</description>`,
+        ...(a.author ? [`      <dc:creator>${escapeHtml(a.author)}</dc:creator>`] : []),
+        ...(category ? [`      <category>${escapeHtml(category)}</category>`] : []),
+        '    </item>',
+      ].join('\n');
+    }),
+    '  </channel>',
+    '</rss>',
+    '',
+  ].join('\n');
+  fs.writeFileSync(path.join(rootDir, 'feed.xml'), feed, 'utf8');
+
   console.log(
-    `Pages SEO générées : ${GAMES.length} jeux, ${ARTICLES.length} articles, ${CATEGORIES.length} catégories. sitemap.xml : ${urls.length} URLs. llms.txt généré.`
+    `Pages SEO générées : ${GAMES.length} jeux, ${ARTICLES.length} articles, ${CATEGORIES.length} catégories. sitemap.xml : ${urls.length} URLs. llms.txt et feed.xml (${feedArticles.length} articles) générés.`
   );
 }
 

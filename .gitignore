@@ -15,6 +15,7 @@ Thumbs.db
 /categorie/*/
 /sitemap.xml
 /llms.txt
+/feed.xml
 
 # Assemblé par scripts/build-hub-dist.js avant `firebase deploy` (Le Hub)
 /hub-dist/

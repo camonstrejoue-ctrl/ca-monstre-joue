@@ -8,6 +8,12 @@ on:
   # jusque-là, il ne spamme rien.
   push:
     branches: [main]
+  # Redéploiement quotidien (04:00 UTC = 6h en été, 5h en hiver en Suisse)
+  # pour qu'un article programmé (champ `date` dans le futur) entre dans
+  # sitemap.xml, llms.txt et feed.xml le jour de sa publication, même sans
+  # push ce jour-là. Le masquage côté navigateur, lui, se fait déjà seul.
+  schedule:
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 permissions:

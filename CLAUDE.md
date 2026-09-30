@@ -103,6 +103,12 @@ root-relative (`/jeu.html`, pas `jeu.html`), des pages statiques générées par
 (`scripts/generate-seo-pages.js`, branché dans `.github/workflows/deploy.yml`) avec `sitemap.xml` et
 `robots.txt`. Domaine de référence : `https://www.camonstrejoue.ch`.
 
+Le même script génère `feed.xml` (flux RSS des **articles** publiés uniquement, pas des jeux), lié depuis
+les pages publiques par `<link rel="alternate">`. Il sert de déclencheur à la notification Discord
+(Zapier « RSS by Zapier → New Item in Feed ») : ne pas changer son URL ni le `guid` des items (= URL de
+l'article), sinon Zapier renotifie tout. Le workflow de déploiement tourne aussi chaque jour à 04:00 UTC
+pour que les articles programmés entrent dans le sitemap/llms.txt/flux le jour de leur date.
+
 Toute modification ou nouvelle fonctionnalité doit **respecter ces standards et les améliorer si
 l'occasion se présente**, pas seulement éviter de les casser :
 - Toute nouvelle page a un `<h1>` unique, une meta description, des balises OG/Twitter et un canonical.
