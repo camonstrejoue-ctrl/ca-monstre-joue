@@ -612,6 +612,48 @@ window.GAMES = [
       { image: '', articleSlug: 'organiser-soiree-jeux-competitif-ou-cooperatif' },
     ],
   },
+  {
+    slug: 'alien-le-destin-du-nostromo',
+    name: 'Alien, le destin du Nostromo',
+    categories: ['jeux-cooperatifs', 'jeux-a-deux', 'jeux-de-strategie'],
+    // Pas encore d'image reçue (-cover, -liste, -fiche).
+    cover: '',
+    thumbnail: '',
+    heroImages: [],
+    intro: [
+      "Dans Alien, le destin du Nostromo, vous coopérez tous ensemble pour survivre à l’Alien qui rôde dans les couloirs du vaisseau.",
+      "Dans cette adaptation du tout premier film, vous incarnez Ripley et ses compagnons d’équipage. Vous devez réaliser un certain nombre de tâches dans le vaisseau avant que l’Alien ne parvienne à vous éliminer.",
+    ],
+    identity: {
+      players: '1-5',
+      age: '10 ans et plus',
+      duration: '45-60 minutes',
+      year: '2022',
+      publisher: 'Ravensburger',
+      author: 'Scott Rogers',
+      illustrator: 'Stefan Koidl et Vladimir Rodriguez',
+      type: 'Coopératif',
+      difficulty: { stars: 3, label: 'Moyenne' },
+      note: { stars: 5, max: 6 },
+    },
+    fitIntro: "Alien, le destin du Nostromo est un excellent jeu pour découvrir les jeux de survie coopératifs. Attention, on devient vite accro à ce type de jeu !",
+    fitFor: [
+      'Tu aimes les jeux dans lesquels tu es poursuivi par un tueur sanguinaire',
+      'Tu es fan du premier film Alien et souhaites te plonger dans l’aventure',
+      'T’adores discuter en groupe de la meilleure stratégie à adopter',
+      'T’as aimé Dead By Daylight ou Sub Terra I et II',
+    ],
+    notFitFor: [
+      'T’es du genre à laisser les autres décider sans donner ton avis',
+      'T’as envie de jouer dans ton coin avant de compter les points',
+      'Tu aimes décider seul sans écouter l’avis des autres',
+    ],
+    // Pas de vidéo ni de playlist reçues pour l'instant.
+    video: '',
+    spotify: '',
+    // Pas encore d'articles associés reçus : galerie masquée automatiquement tant que vide.
+    gallery: [],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article
