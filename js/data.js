@@ -616,9 +616,9 @@ window.GAMES = [
     slug: 'alien-le-destin-du-nostromo',
     name: 'Alien, le destin du Nostromo',
     categories: ['jeux-cooperatifs', 'jeux-a-deux', 'jeux-de-strategie'],
-    // Pas encore d'image reçue (-cover, -liste, -fiche).
-    cover: '',
-    thumbnail: '',
+    cover: 'assets/games/alien-le-destin-du-nostromo/Alien-cover.JPG',
+    thumbnail: 'assets/games/alien-le-destin-du-nostromo/Alien-liste.JPG',
+    // Pas encore d'images -fiche reçues : le carrousel réutilise `cover` + les images de `gallery`.
     heroImages: [],
     intro: [
       "Dans Alien, le destin du Nostromo, vous coopérez tous ensemble pour survivre à l’Alien qui rôde dans les couloirs du vaisseau.",
@@ -652,8 +652,7 @@ window.GAMES = [
     video: '',
     spotify: '',
     gallery: [
-      // Vignette de la critique pas encore reçue.
-      { image: '', articleSlug: 'alien-le-destin-du-nostromo-critique' },
+      { image: 'assets/games/alien-le-destin-du-nostromo/Alien-vignette.JPG', articleSlug: 'alien-le-destin-du-nostromo-critique' },
     ],
   },
 ];
@@ -1257,10 +1256,10 @@ window.ARTICLES = [
     date: '2026-10-02',
     author: 'Alex',
     gameSlug: 'alien-le-destin-du-nostromo',
-    // Pas encore d'image reçue (-bandeau, -banniere, -vignette).
-    hero: '',
+    hero: 'assets/games/alien-le-destin-du-nostromo/Alien-bandeau.jpg',
+    // Pas encore de -banniere reçue : le carrousel d'accueil réutilise `cover`.
     banner: '',
-    cover: '',
+    cover: 'assets/games/alien-le-destin-du-nostromo/Alien-vignette.JPG',
     excerpt: "On a testé Alien, le destin du Nostromo : un jeu de survie coopératif accessible, bien équilibré, et un vrai coup de cœur.",
     blocks: [
       { type: 'p', text: "Je suis content de vous parler de ce jeu !" },
@@ -1269,7 +1268,7 @@ window.ARTICLES = [
       { type: 'p', text: "D’ailleurs, petit aparté, je vous conseille d’aller à Gruyère pour voir le musée HR Giger et son magnifique bar sur le thème d’Alien !!" },
       { type: 'p', text: "Revenons au jeu. Franchement, j’avais peu d’attentes et j’ai été très agréablement surpris. Il est excellent pour débuter dans ce type de jeu de survie horrifique. Bien équilibré, pas trop facile, accessible sans passer 3h à lire les règles, Alien, le destin du Nostromo a de nombreux arguments à mettre en avant." },
       { type: 'p', text: "On l’a testé avec pas mal d’invités différents plus ou moins novices et, à chaque fois, ça a fait mouche et le jeu a été adoré !" },
-      // Image personnage à venir : { type: 'image', src: 'assets/games/alien-le-destin-du-nostromo/...', caption: '...' },
+      { type: 'image', src: 'assets/games/alien-le-destin-du-nostromo/Alien-personnage-article.JPG', caption: 'Chaque membre d’équipage a son nombre d’actions et sa compétence propre.' },
       { type: 'p', text: "Chacun des joueurs doit incarner un membre d’équipage avec un nombre d’actions différent et une compétence propre. Au fil de la partie, vous devrez réaliser des objectifs communs, comme par exemple, déposer 2 bonbonnes de fréon dans un lieu spécifique du plateau. Charge à vous d’aller les chercher à l’autre bout du vaisseau, d’éviter l’Alien qui renifle votre présence, de potentiellement faire diversion et vous défendre pour venir les rapporter au bon endroit. Mais attention, plus l’Alien vous affectera et plus vous perdrez du mental. Un mental réduit à néant et c’est la fin de la partie." },
       { type: 'p', text: "Une fois tous les objectifs remplis, une mission finale vous sera révélée et vous demandera encore plus de réflexion, de stratégie, et d’un peu de chance." },
       // Image plateau à venir : { type: 'image', src: 'assets/games/alien-le-destin-du-nostromo/...', caption: '...' },
