@@ -266,7 +266,7 @@ elLoginForm.addEventListener('submit', async (e) => {
     await signInWithEmailAndPassword(auth, elEmail.value.trim(), elPassword.value);
   } catch (err) {
     console.error('Sign-in failed', err);
-    elLoginError.textContent = 'Connexion refusée — vérifie l\'e-mail et le mot de passe.';
+    elLoginError.textContent = 'Connexion refusée : vérifie l\'e-mail et le mot de passe.';
     elLoginError.hidden = false;
   } finally {
     elLoginBtn.disabled = false;

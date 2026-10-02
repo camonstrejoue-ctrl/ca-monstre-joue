@@ -782,7 +782,7 @@ function setReadonly(ro, who) {
     el.readonlyBanner.hidden = false;
     el.readonlyBanner.innerHTML = '';
     const span = document.createElement('span');
-    span.textContent = `✏️ ${who || 'Quelqu’un'} est en train d'éditer cet article — ouvert en lecture seule.`;
+    span.textContent = `✏️ ${who || 'Quelqu’un'} est en train d'éditer cet article : ouvert en lecture seule.`;
     const btn = document.createElement('button');
     btn.className = 'hub-btn hub-btn--sm';
     btn.textContent = 'Éditer quand même';

@@ -64,7 +64,7 @@ function starRow(stars, max, label) {
   max = max || 5;
   const full = Math.floor(stars);
   const hasHalf = (stars - full) >= 0.5;
-  const wrap = el('span', { class: 'stars', 'aria-label': `${stars}/${max}` + (label ? ` — ${label}` : '') });
+  const wrap = el('span', { class: 'stars', 'aria-label': `${stars}/${max}` + (label ? `, ${label}` : '') });
   for (let i = 1; i <= max; i++) {
     if (i <= full) {
       wrap.appendChild(el('span', { class: 'star star--full', html: '&#9733;' }));
@@ -315,7 +315,7 @@ async function renderAgendaPage() {
     list.innerHTML = '';
     list.appendChild(el('p', {
       class: 'agenda-empty',
-      text: "Impossible de charger l'agenda pour le moment — réessaie dans un instant.",
+      text: "Impossible de charger l'agenda pour le moment, réessaie dans un instant.",
     }));
     return;
   }
@@ -329,7 +329,7 @@ async function renderAgendaPage() {
   if (events.length === 0) {
     list.appendChild(el('p', {
       class: 'agenda-empty',
-      text: 'Aucun événement pour le moment — reviens bientôt, ou propose le tien juste en dessous !',
+      text: 'Aucun événement pour le moment. Reviens bientôt, ou propose le tien juste en dessous !',
     }));
     return;
   }
@@ -614,7 +614,7 @@ function renderGamePage() {
     return;
   }
   fixCanonical(`/jeu/${g.slug}/`);
-  document.title = `${g.name} — Ça Monstre Joue`;
+  document.title = `${g.name} - Ça Monstre Joue`;
   renderShareRow(qs('#share-row'), `${window.location.origin}/jeu/${g.slug}/`, g.name);
   renderAppShareLink(g.slug);
   qsa('[data-game-name]').forEach(n => {
@@ -809,7 +809,7 @@ function renderArticlePage() {
     return;
   }
   fixCanonical(`/article/${a.slug}/`);
-  document.title = `${a.title} — Ça Monstre Joue`;
+  document.title = `${a.title} - Ça Monstre Joue`;
   renderShareRow(qs('#share-row'), `${window.location.origin}/article/${a.slug}/`, a.title);
   renderAppShareLink(a.slug);
   const hero = qs('#article-hero');

@@ -192,7 +192,7 @@ function categoryJsonLd(c, description, url) {
   const collection = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: `${c.name} — Ça Monstre Joue`,
+    name: `${c.name} - Ça Monstre Joue`,
     description,
     url,
   };
@@ -226,9 +226,9 @@ function main() {
   GAMES.forEach((g) => {
     const url = `${BASE_URL}/jeu/${g.slug}/`;
     let html = injectMeta(gameTemplate, {
-      genericTitle: 'Fiche jeu — Ça Monstre Joue',
+      genericTitle: 'Fiche jeu - Ça Monstre Joue',
       genericDescription: 'Découvre nos fiches jeux détaillées : identité complète, notre avis, vidéo et bien plus, sur le blog Ça Monstre Joue.',
-      title: `${g.name} — Ça Monstre Joue`,
+      title: `${g.name} - Ça Monstre Joue`,
       description: toDescription(g.intro || g.fitIntro || '', 160),
       image: absoluteUrl(g.cover || g.thumbnail),
       url,
@@ -242,9 +242,9 @@ function main() {
   ARTICLES.forEach((a) => {
     const url = `${BASE_URL}/article/${a.slug}/`;
     let html = injectMeta(articleTemplate, {
-      genericTitle: 'Article — Ça Monstre Joue',
+      genericTitle: 'Article - Ça Monstre Joue',
       genericDescription: "Critiques, conseils et avis détaillés sur des jeux de société, par l'équipe de Ça Monstre Joue.",
-      title: `${a.title} — Ça Monstre Joue`,
+      title: `${a.title} - Ça Monstre Joue`,
       description: toDescription(a.excerpt || '', 160),
       image: absoluteUrl(a.banner || a.cover),
       url,
@@ -260,9 +260,9 @@ function main() {
     const url = `${BASE_URL}/categorie/${c.slug}/`;
     const description = categoryDescription(c, GAMES);
     let html = injectMeta(categoryTemplate, {
-      genericTitle: 'Catégorie — Ça Monstre Joue',
+      genericTitle: 'Catégorie - Ça Monstre Joue',
       genericDescription: 'Explore nos jeux de société classés par catégorie sur Ça Monstre Joue.',
-      title: `${c.name} — Ça Monstre Joue`,
+      title: `${c.name} - Ça Monstre Joue`,
       description,
       image: absoluteUrl(c.image),
       url,
