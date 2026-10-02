@@ -1257,8 +1257,8 @@ window.ARTICLES = [
     author: 'Alex',
     gameSlug: 'alien-le-destin-du-nostromo',
     hero: 'assets/games/alien-le-destin-du-nostromo/Alien-bandeau.jpg',
-    // Pas encore de -banniere reçue : le carrousel d'accueil réutilise `cover`.
-    banner: '',
+    // Pas de -banniere dédiée : le carrousel d'accueil utilise la cover 16:9 de la fiche jeu.
+    banner: 'assets/games/alien-le-destin-du-nostromo/Alien-cover.JPG',
     cover: 'assets/games/alien-le-destin-du-nostromo/Alien-vignette.JPG',
     excerpt: "On a testé Alien, le destin du Nostromo : un jeu de survie coopératif accessible, bien équilibré, et un vrai coup de cœur.",
     blocks: [
