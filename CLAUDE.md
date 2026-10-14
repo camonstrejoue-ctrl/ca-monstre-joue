@@ -113,6 +113,10 @@ Toute modification ou nouvelle fonctionnalité doit **respecter ces standards et
 l'occasion se présente**, pas seulement éviter de les casser :
 - Toute nouvelle page a un `<h1>` unique, une meta description, des balises OG/Twitter et un canonical.
 - Tout lien interne (HTML statique ou généré en JS) est en root-relative (`/xxx.html`), jamais relatif.
+- Le déploiement publie une **liste blanche** (étape « Assembler le site public » de
+  `.github/workflows/deploy.yml`) : toute page `.html` de la racine part en ligne d'office, mais un
+  nouveau dossier public doit y être ajouté, sinon il ne sera pas servi. Rien d'interne (notes, docs,
+  brouillons) ne doit entrer dans cette liste.
 - Si une nouvelle page « par slug » est ajoutée (sur le modèle jeu/article/catégorie), pense à l'intégrer
   à `scripts/generate-seo-pages.js` pour qu'elle ait sa propre page statique + entrée sitemap.
 - Un nouveau champ de contenu qui pourrait enrichir une meta description ou une image Open Graph est une

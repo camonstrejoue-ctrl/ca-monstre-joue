@@ -46,13 +46,29 @@ jobs:
       - name: Générer les pages SEO par jeu/article/catégorie + sitemap.xml
         run: node scripts/generate-seo-pages.js
 
+      # Liste blanche : seuls les fichiers dont le site public a besoin partent
+      # en ligne. Avant (path: .), tout le dépôt était servi sur
+      # camonstrejoue.ch : notes internes (docs/, CLAUDE.md, social/), code de
+      # l'app (app/), skills (.claude/) et brouillons du Hub (js/hub-seed.json).
+      # Le Hub vit sur Firebase Hosting (scripts/build-hub-dist.js), pas ici.
+      # Toute page .html ajoutée à la racine est publiée d'office ; un NOUVEAU
+      # dossier public (autre que ceux listés ci-dessous) doit être ajouté ici.
+      - name: Assembler le site public (liste blanche)
+        run: |
+          set -euo pipefail
+          mkdir _site
+          cp *.html _site/
+          cp -r assets css js data jeu article categorie .well-known _site/
+          cp CNAME robots.txt sitemap.xml llms.txt feed.xml _site/
+          rm _site/hub.html _site/css/hub.css _site/js/hub.js _site/js/hub-seed.json
+
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Préparer l'artefact (site + data/content.json)
+      - name: Préparer l'artefact (site public assemblé)
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Publier sur GitHub Pages
         id: deployment
