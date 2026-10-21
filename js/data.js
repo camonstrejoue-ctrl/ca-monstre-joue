@@ -1334,7 +1334,7 @@ window.ARTICLES = [
   },
   {
     slug: 'foret-mixte-regles',
-    title: 'Résumé des règles du jeu de société Forêt Mixte',
+    title: 'Forêt Mixte - Règles du jeu',
     h1: 'Comment jouer à Forêt Mixte ? Le point sur les règles de ce jeu',
     date: '2026-10-21',
     author: 'Prune',
