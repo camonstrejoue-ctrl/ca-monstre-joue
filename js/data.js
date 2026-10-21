@@ -38,6 +38,9 @@ window.CATEGORIES = [
 // format paysage ~16:9 à 21:9 recommandé, ex. 1600x500px) pour choisir précisément
 // les photos du carrousel tournant en haut de la fiche jeu. Sans ce champ, le
 // carrousel réutilise automatiquement `cover` + les images de `gallery`.
+// Ajoute `metaDescription: '...'` pour imposer la balise meta description de la
+// page SEO statique du jeu (scripts/generate-seo-pages.js) au lieu du résumé
+// auto-généré à partir de `intro`/`fitIntro`.
 window.GAMES = [
   {
     slug: 'sub-terra-ii',
@@ -655,6 +658,47 @@ window.GAMES = [
       { image: 'assets/games/alien-le-destin-du-nostromo/Alien-vignette.JPG', articleSlug: 'alien-le-destin-du-nostromo-critique' },
     ],
   },
+  {
+    slug: 'foret-mixte',
+    name: 'Forêt Mixte',
+    categories: ['jeux-a-deux', 'jeux-de-strategie', 'jeux-famille'],
+    cover: 'assets/games/foret-mixte/foret-mixte-cover.jpg',
+    thumbnail: 'assets/games/foret-mixte/foret-mixte-vignette.jpg',
+    heroTitle: ['Forêt Mixte', 'le jeu des amoureux de la nature !'],
+    heroImages: [],
+    metaDescription: 'Est-ce que le jeu de société Forêt Mixte est fait pour vous ? Découvrez l’essentiel à savoir sur ce jeu grâce au résumé de l’équipe Ça Monstre Joue !',
+    intro: 'Lorsque vous jouez à Forêt Mixte, vous créez votre propre forêt en utilisant des cartes Arbre, Plante et Animal. Votre objectif : former un écosystème qui vous rapportera plus de points que vos adversaires avant la fin de l’hiver…',
+    identity: {
+      players: '2-5',
+      age: '10 ans et plus',
+      duration: '60 minutes',
+      year: '2023',
+      publisher: 'Lookout',
+      author: 'Kosch',
+      illustrator: 'Toni Llobet, Judit Piella',
+      type: 'Compétitif',
+      difficulty: { stars: 2, label: 'Facile' },
+      note: { stars: 4, max: 6 },
+    },
+    fitIntro: 'Forêt Mixte est le jeu de société idéal pour un dimanche après-midi pluvieux : il est l’heure d’allumer un petit feu de cheminée (ou des bougies) pour une ambiance cosy, et se préparer un thé pour jouer en toute détente.',
+    fitFor: [
+      'Tu aimes les jeux compétitifs',
+      'Tu apprécies les jeux de société calmes',
+      'Tu adores la nature et les animaux',
+      'Tu aimes les jolies illustrations',
+    ],
+    notFitFor: [
+      'T’es du genre à aimer les parties de jeu endiablées',
+      'Tu préfères les jeux coopératifs',
+    ],
+    // Pas de vidéo ni de playlist reçues pour l'instant.
+    video: '',
+    spotify: '',
+    monsterTip: 'Si tu joues à 4 ou 5 joueurs, prévois une grande table !',
+    gallery: [
+      { image: 'assets/games/foret-mixte/foret-mixte-vignette.jpg', articleSlug: 'foret-mixte-regles' },
+    ],
+  },
 ];
 
 // Astuce : ajoute un champ `banner: 'chemin/vers/image-16-9.jpg'` à un article
@@ -662,6 +706,11 @@ window.GAMES = [
 // de la page d'accueil, différente de sa vignette `cover` (utilisée ailleurs).
 // Ajoute aussi `hero: 'chemin/vers/image-32-9.jpg'` (suffixe -bandeau) pour
 // l'image tout en haut de la page de l'article (format 32:9, ultra-large).
+// Ajoute `h1: '...'` quand le titre affiché en haut de l'article doit différer
+// de `title` (qui reste utilisé pour la balise <title>, les cartes/listes et le
+// flux RSS) — même principe que `heroTitle` pour les jeux.
+// Un bloc `{ type: 'toc' }` dans `blocks` insère un sommaire cliquable généré
+// automatiquement à partir des blocs `h2` de l'article (aucun champ à remplir).
 //
 // Publication programmée : un article dont le champ `date` est dans le futur
 // reste écrit et déployé normalement, mais n'apparaît dans aucune liste
@@ -1281,6 +1330,127 @@ window.ARTICLES = [
           { slug: 'sub-terra-ii' },
         ],
       },
+    ],
+  },
+  {
+    slug: 'foret-mixte-regles',
+    title: 'Résumé des règles du jeu de société Forêt Mixte',
+    h1: 'Comment jouer à Forêt Mixte ? Le point sur les règles de ce jeu',
+    date: '2026-10-21',
+    author: 'Prune',
+    gameSlug: 'foret-mixte',
+    banner: 'assets/games/foret-mixte/foret-mixte-banniere.jpg',
+    hero: 'assets/games/foret-mixte/foret-mixte-bandeau.jpg',
+    cover: 'assets/games/foret-mixte/foret-mixte-vignette.jpg',
+    excerpt: 'Comment jouer à Forêt Mixte ? Découvrez les règles essentielles, nos conseils et astuces pour ce jeu de société aux multiples combinaisons !',
+    blocks: [
+      { type: 'p', text: "Pour jouer à Forêt Mixte, rien de plus simple : lisez les règles et lancez-vous ! C’est un jeu de société qui, à première vue, est simple à jouer. Il demande malgré tout de mettre en place des stratégies pour réaliser les meilleurs combos de points avec les cartes que vous avez en main et celles que vous piochez. En lançant une partie de Forêt Mixte, vous vous apprêtez à créer votre propre forêt, avec les animaux, insectes, plantes et arbres de votre choix. Les illustrations des cartes sont douces et réalistes : on pourrait presque qualifier ce jeu de cozy game !" },
+      { type: 'p', text: "Dans cet article, découvrez les règles essentielles de Forêt Mixte pour comprendre le fonctionnement du jeu et vous lancer sereinement dans votre première partie. Nous vous expliquons notamment comment préparer le jeu, constituer votre forêt, utiliser la clairière et tirer parti des effets et bonus des cartes." },
+
+      { type: 'toc' },
+
+      { type: 'h2', text: 'L’objectif du jeu Forêt Mixte' },
+      { type: 'p', text: "Lorsque vous jouez à Forêt Mixte, votre objectif est de gagner le plus de glands : ils représentent les points dans ce jeu. Certaines cartes sont à combiner pour obtenir encore plus de glands ! À vous de choisir les cartes Arbre, Plante, Animal, Insecte, etc., qui créeront une avalanche de points à la fin de la partie !" },
+
+      { type: 'h2', text: 'Comment jouer à Forêt Mixte ? Les règles de base' },
+      { type: 'p', text: "Si vous vous posez la question, c’est que vous avez la boîte de jeu entre les mains ! Alors nous n’allons pas reprendre chacune des règles de Forêt Mixte, mais balayons plutôt ensemble ce jeu de stratégie ! Le jeu contient des cartes de référence, qui recensent les cartes du jeu pour vous guider durant la partie si vous avez peur d’être perdu." },
+
+      { type: 'h2', text: 'Mettre en place le jeu Forêt Mixte' },
+      { type: 'p', text: "Commencez par retirer les 3 cartes Hiver du paquet ainsi que les cartes Grottes, puis mélangez le reste des cartes. Selon le nombre de joueurs à table, vous ne conserverez peut-être pas toutes les cartes du jeu." },
+      { type: 'list', items: [
+        '2 joueurs : retirez 30 cartes du paquet.',
+        '3 joueurs : retirez 20 cartes du paquet.',
+        '4 joueurs : retirez 10 cartes du paquet.',
+        '5 joueurs : aucune carte à retirer, vous jouez avec tout le paquet !',
+      ] },
+      { type: 'p', text: "Maintenant que vous avez retiré un certain nombre de cartes, vous pouvez les mettre dans votre boîte de jeu : vous n’en aurez plus besoin durant la partie. Prenez maintenant les cartes restantes et divisez-les en 3 piles de taille similaire (pas besoin de compter !). Choisissez l’un des 3 tas de cartes et mélangez-le avec 2 cartes Hiver. Enfin, posez la 3e carte Hiver sur ce même tas. Il vous reste 2 piles de cartes que vous n’avez pas touchées : posez-les sur le tas qui contient les cartes Hiver. Cette pile de cartes ainsi formée sera votre pioche." },
+      { type: 'p', text: "Si vous avez bien suivi, aucun risque de piocher une carte Hiver lors des premiers instants du jeu, rassurez-vous !" },
+      { type: 'p', text: "Lorsque la 3e carte Hiver a été piochée, le jeu est terminé ! La partie s’arrête immédiatement et le joueur qui a pioché cette carte ne peut malheureusement pas finir son tour…" },
+      { type: 'p', text: "Placez le plateau de la clairière au milieu de la table : tous les joueurs doivent pouvoir y accéder. C’est sur ce plateau que vous “jetterez” vos cartes au fil du jeu, cartes qui pourront être piochées par vos adversaires. À gauche de la clairière, c’est la pioche ; à droite, c’est la défausse. Les cartes de la défausse ne sont plus accessibles aux joueurs." },
+      { type: 'p', text: "Les joueurs posent devant eux une carte Grotte chacun. Durant la partie, certaines cartes du jeu, comme l’Ours, vous permettront de glisser des cartes sous votre grotte. À la clé : 1 gland par carte de la grotte en fin de partie." },
+      { type: 'p', text: "Chaque joueur pioche 6 cartes pour créer sa main. Si vous n’avez aucune carte Arbre dans votre jeu, vous pouvez défausser votre main (dans la défausse, pas la clairière) et re-piocher 6 cartes. Attention : vous ne pouvez le faire qu’une seule fois, alors croisez les doigts pour espérer obtenir au moins une carte Arbre !" },
+
+      { type: 'h2', text: 'Le point sur les cartes Forêt Mixte' },
+      { type: 'p', text: "Chaque carte possède plusieurs informations, qui vous seront utiles !" },
+      { type: 'list', items: [
+        'En haut à gauche : coût de la carte. Pour poser une carte, vous devez la payer avec d’autres cartes de votre main. Prenez le nombre de cartes indiqué et posez-les face visible dans la clairière. Ces cartes “jetées” sont désormais accessibles aux autres joueurs…',
+        'En haut à droite : couleur de la carte.',
+        'En bas à gauche : effet de la carte. S’il y a une petite icône représentant des jumelles, c’est un bonus que vous obtiendrez si, en plaçant la carte en question dans votre forêt, vous l’avez payée avec des cartes de la couleur indiquée.',
+        'En bas à droite : valeur de la carte (très important : c’est le nombre de glands que la carte vous fera gagner !).',
+        'En bas à gauche, au-dessus de l’effet et/ou du bonus : icône de la carte et le nom de l’arbre, l’animal ou la plante.',
+      ] },
+      { type: 'p', text: "Attention : une carte divisée en deux ne compte pas pour deux cartes !" },
+      { type: 'p', text: "Si, par exemple, vous choisissez de jouer une plante qui se trouve sur la partie basse de la carte, glissez votre carte sous votre arbre en laissant dépasser la partie où la plante est représentée. La partie haute est alors cachée : elle ne compte pas dans votre forêt (c’est comme si elle n’existait plus)." },
+
+      { type: 'h2', text: 'Focus sur les effets et les bonus' },
+      { type: 'p', text: "Les effets et les bonus sont facultatifs : vous pouvez choisir de ne pas les utiliser. Par exemple, en plaçant une carte Fouine sur un arbre, vous gagnez une carte (c’est son effet) mais vous n’êtes pas obligé de la prendre." },
+      { type: 'p', text: "Lorsqu’une carte comporte un effet et un bonus, c’est l’effet qui se produit en premier, puis ensuite le bonus." },
+
+      { type: 'h2', text: 'Que faire avec vos cartes en main ?' },
+      { type: 'p', text: "La clairière et la pioche sont installées, la grotte est posée et vous avez vos 6 cartes en main ? Il est l’heure de commencer la partie ! Chacun à votre tour, dans le sens des aiguilles d’une montre, vous avez le choix entre deux actions : piocher 2 cartes ou jouer 1 carte." },
+      { type: 'p', text: "À noter : vous ne pouvez pas avoir plus de 10 cartes en main. Donc, si vous avez déjà 9 cartes en main lorsque c’est à votre tour de jouer, et que vous choisissez l’action “Piocher”, vous ne pourrez prendre qu’une seule carte…" },
+      { type: 'p', text: "Vous pouvez piocher dans la clairière (s’il y a des cartes) et/ou dans la pioche. Vous avez bien lu : vous avez le choix ! Par exemple, vous pouvez piocher une carte dans la pioche, réfléchir un instant, puis décider de prendre votre deuxième carte dans la clairière. Vous pouvez également faire l’inverse : c’est comme vous voulez ! Les cartes de la pioche sont face cachée, mais pas dans la clairière." },
+      { type: 'p', text: "Bon à savoir : lorsque vous jouez un Arbre dans votre forêt, prenez une carte de la pioche et posez-la dans la clairière." },
+      { type: 'p', text: "À la fin de chaque tour, si la clairière contient 10 cartes ou plus, alors elle est vidée. Les cartes vont dans la défausse." },
+
+      { type: 'h2', text: 'Que faire si je n’ai pas de carte Arbre en main ?' },
+      { type: 'p', text: "Durant la partie, vous n’avez pas d’Arbre mais vous avez vraiment besoin de poser vos animaux et vos plantes ? Vous pouvez utiliser n’importe quelle carte de votre main face cachée et la jouer gratuitement devant vous : vous aurez ainsi une pousse d’arbre (c’est l’illustration au verso de chaque carte). Elle fonctionne comme un arbre et vous offre donc 4 emplacements pour poser vos cartes autour. La pousse d’arbre ne vous rapporte aucun point et vous ne pouvez plus jouer les animaux ou les plantes qui étaient sur le recto de la carte..." },
+
+      { type: 'image', src: 'assets/games/foret-mixte/foret-mixte-article-illustration.jpg', caption: 'Votre forêt prend forme au fil de la partie, une carte après l’autre.' },
+
+      { type: 'h2', text: 'Bon, concrètement, on fait quoi ?' },
+      { type: 'p', text: "Pour jouer à Forêt Mixte, vous devez créer… votre forêt ! Commencez par placer une carte Arbre devant vous, face visible (en payant son coût) : vous ne pouvez placer aucune carte sans Arbre. C’est la base de votre écosystème. Les autres cartes sont divisées en deux parties, soit verticalement, soit horizontalement. Vous pourrez donc placer des cartes :" },
+      { type: 'list', items: [
+        'au-dessus de votre arbre,',
+        'sous votre arbre,',
+        'à gauche de votre arbre,',
+        'et à droite de votre arbre.',
+      ] },
+      { type: 'p', text: "Exemple : si vous choisissez de poser la chouette hulotte, elle se trouve sur la partie supérieure verticale de sa carte. Donc, vous devrez la placer au-dessus d’un arbre. Ne tenez pas compte de la partie inférieure de la carte. La chouette hulotte coûte 2 cartes et vous fera gagner une carte (c’est son effet). Si la couleur de cette carte est le vert foncé (en haut à droite) et que vous payez avec 2 cartes de cette couleur, alors vous obtenez le bonus associé, soit 2 cartes supplémentaires. Vous gagnez donc 3 cartes ! En fin de partie, la chouette hulotte vous fait gagner 5 glands." },
+      { type: 'p', text: "Bon à savoir : n’oubliez pas que les cartes posées dans la clairière sont visibles des autres joueurs. Ils pourront donc les piocher quand ce sera leur tour. Faites attention à ce que vous posez…" },
+      { type: 'p', text: "Regardez bien les effets et les bonus de chaque carte avant de les jouer, afin de maximiser les gains." },
+      { type: 'p', text: "À vous maintenant de choisir les cartes à placer autour de vos arbres et de mettre en place une ou plusieurs stratégies pour gagner la partie !" },
+
+      { type: 'h2', text: 'Comment compter ses points en fin de partie Forêt Mixte ?' },
+      { type: 'p', text: "Un joueur a dévoilé la 3e carte Hiver ? Le jeu est alors terminé : place au décompte des glands !" },
+      { type: 'p', text: "Il vous suffit d'additionner tous les glands présents sur les cartes de votre forêt. Malheureusement, les cartes que vous avez encore en main ne comptent pas… Dans la boîte du jeu de base, vous avez un petit carnet pour vous guider dans le décompte des glands, qui est divisé en plusieurs catégories :" },
+      { type: 'list', items: [
+        'vos cartes Arbres ;',
+        'les cartes au-dessus et au-dessous de vos arbres ;',
+        'les cartes placées à gauche et droite de vos arbres ;',
+        'les cartes que vous avez éventuellement placées durant la partie dans votre grotte.',
+      ] },
+      { type: 'p', text: "Faites le total des glands : celui qui en a le plus remporte la partie !" },
+
+      { type: 'h2', text: 'Quelques astuces pour vous aider à jouer à Forêt Mixte' },
+      { type: 'p', text: "Jouez un cerf en le payant avec 2 cartes de la couleur indiquée dans son bonus et vous pourrez placer durant le même tour de jeu une autre carte de “cervidé” gratuitement ! Assurez-vous d’en avoir une dans votre jeu et bien sûr une place pour la jouer." },
+      { type: 'p', text: "Vous vous souvenez, plus haut dans cet article, nous vous disions que vous pouviez placer une carte de chaque côté de votre arbre ? Mais si vous jouez des cartes Lièvre, vous pouvez en poser de façon illimitée sur le même emplacement ! Et si vous jouez en parallèle des cartes Renard, vous obtenez des cartes gratuitement…" },
+      { type: 'p', text: "Évitez de mettre des cartes qui pourraient vous rapporter beaucoup de glands dans votre grotte : leurs points sont perdus lorsqu’elles atterrissent dans la grotte." },
+
+      { type: 'h2', text: 'Exemples de combo cartes' },
+      { type: 'p', text: "Si vous posez un sanglier, assurez-vous de poser aussi à un moment du jeu un marcassin pour obtenir 10 glands ! À noter : si vous avez un Sanglier et plusieurs Marcassins, vous ne gagnez pas plusieurs fois les 10 glands… Par exemple, un Sanglier et 3 Marcassins vous font gagner : 10 + 1 + 1 + 1. Mais 3 Sangliers et 1 Marcassin vous rapportent : 10 + 10 + 10 + 1. Encore faut-il réussir à obtenir toutes ces cartes Sangliers…" },
+      { type: 'p', text: "Si vous placez dans votre forêt, durant la partie, 3 cartes chauve-souris, faites en sorte que ce soit 3 espèces différentes pour obtenir 5 glands par carte !" },
+      { type: 'p', text: "Si vous possédez plusieurs cartes Marronnier communs, vous pouvez gagner pas mal de glands : jusqu’à 49 glands si vous avez 7 Marronniers communs ou plus." },
+      { type: 'p', text: "Ce ne sont que quelques exemples, mais vous l’aurez compris : les combos de cartes vous feront gagner plein de glands !" },
+
+      { type: 'h2', text: 'La clairière : comment l’utiliser à bon escient ?' },
+      { type: 'p', text: "Regardez bien les forêts de vos adversaires lorsque vous vous apprêtez à poser une carte dans votre forêt et à la payer. Pourquoi ? Voici un exemple. Vous jouez dans votre forêt une carte Pinson des arbres, qui coûte 1 carte. Vous choisissez de placer dans la clairière un Marronnier. Mais si l’un de vos adversaires a choisi comme stratégie d’avoir le plus de Marronniers possible, alors, il pourra piocher cette carte lorsque ce sera son tour. C’est comme si vous lui offriez des points !" },
+      { type: 'p', text: "Notre conseil : attendez que la clairière contient 8 à 9 cartes pour “jeter” des cartes potentiellement intéressantes pour vos adversaires. Car, lorsque la clairière comporte 10 cartes ou plus, ces cartes sont toutes défaussées : les joueurs n’y auront plus accès. Impossible pour votre adversaire suivant de prendre ce fameux Marronnier si la clairière est vidée…" },
+
+      { type: 'h2', text: 'Complétez le jeu Forêt Mixte avec ses 3 extensions !' },
+      { type: 'p', text: "Le jeu Forêt Mixte a l’avantage d’avoir une bonne rejouabilité, notamment grâce à ses trois extensions. Et le meilleur dans tout ça ? Vous pouvez jouer avec une, deux ou trois extensions en même temps !" },
+      { type: 'p', text: "Vous aurez le choix entre :" },
+      { type: 'list', items: [
+        'Lisière de forêt et ses 36 nouvelles cartes ;',
+        'Alpes, qui comprend aussi 36 nouvelles cartes ;',
+        'Exploration, avec 55 nouvelles cartes et de nouvelles règles de jeu…',
+      ] },
+      { type: 'p', text: "Le petit détail qu’on aime : dans la boîte du jeu de base Forêt Mixte, vous avez la place de ranger les cartes du jeu initial et des trois extensions. Un vrai gain de place sur votre étagère à jeux de société !" },
+
+      { type: 'h2', text: 'Grand fan de Forêt Mixte ? Vous n’êtes pas prêt…' },
+      { type: 'p', text: "Vous avez aimé Forêt Mixte (avec ou sans ses extensions) ? Vous allez être servi puisqu’il existe deux autres jeux de la famille Forêt Mixte ! Ce ne sont pas des extensions : ce sont bien des jeux à part, basés sur l’univers Forêt Mixte, avec la même mécanique de jeu, des cartes et des règles légèrement différentes." },
+      { type: 'p', text: "Envie de découvrir les landes anglaises ? Découvrez Forêt Mixte Dartmoor (qui a d’ailleurs sa propre extension nommée Exmoor). Si vous êtes plutôt team Amérique du Nord, alors succombez à Forêt Mixte Smoky Mountains !" },
+      { type: 'p', text: "Si vous avez acheté des extensions pour le jeu Forêt Mixte, elles ne peuvent pas être utilisées avec Dartmoor et Smoky Mountains : on vous le redit, ce sont des jeux à part !" },
     ],
   },
 ];

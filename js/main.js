@@ -34,6 +34,13 @@ function el(tag, attrs, children) {
   (children || []).forEach(c => c && node.appendChild(c));
   return node;
 }
+function slugifyHeading(text) {
+  return (text || '')
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 function formatDate(iso) {
   const d = new Date(iso + 'T00:00:00');
   return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -826,18 +833,36 @@ function renderArticlePage() {
   } else {
     authorEl.style.display = 'none';
   }
-  qs('#article-title').textContent = a.title;
+  qs('#article-title').textContent = a.h1 || a.title;
   qs('#article-subtitle').textContent = a.subtitle || '';
 
   const body = qs('#article-blocks');
   body.innerHTML = '';
+  const headings = a.blocks.filter(b => b.type === 'h2').map(b => ({ text: b.text, id: slugifyHeading(b.text) }));
   a.blocks.forEach(b => {
     if (b.type === 'p') {
       body.appendChild(el('p', { html: b.text }));
     } else if (b.type === 'h2') {
-      body.appendChild(el('h2', { html: b.text, style: 'margin-top:40px;' }));
+      body.appendChild(el('h2', { html: b.text, id: slugifyHeading(b.text), style: 'margin-top:40px;scroll-margin-top:100px;' }));
+    } else if (b.type === 'toc') {
+      const nav = el('nav', { class: 'article-toc', 'aria-label': 'Sommaire' }, [
+        el('p', { class: 'article-toc__title', text: 'Sommaire' }),
+      ]);
+      const ol = el('ol', { class: 'article-toc__list' });
+      headings.forEach(h => {
+        const link = el('a', { href: `#${h.id}`, text: h.text });
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.getElementById(h.id);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', `#${h.id}`);
+        });
+        ol.appendChild(el('li', {}, [link]));
+      });
+      nav.appendChild(ol);
+      body.appendChild(nav);
     } else if (b.type === 'list') {
-      const ul = el('ul', {});
+      const ul = el('ul', { class: 'article-list' });
       b.items.forEach(item => ul.appendChild(el('li', { html: item })));
       body.appendChild(ul);
     } else if (b.type === 'spoiler') {

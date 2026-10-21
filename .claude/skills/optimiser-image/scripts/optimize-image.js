@@ -51,14 +51,21 @@ async function main() {
 
   const sizeBefore = fs.statSync(inputPath).size;
   const ext = path.extname(inputPath).toLowerCase();
-  const isPng = ext === '.png';
-  const convertToJpeg = isPng && !keepFormat;
+  // PNG et WebP sont les deux formats qu'on reçoit parfois pour une photo
+  // (export d'un outil de retouche, capture d'écran...) mais qui ne sont
+  // pas le format cible du site pour les photos : on les convertit en JPEG,
+  // comme pour toute photo, sauf --keep-format explicite.
+  const isPhotoSource = ext === '.png' || ext === '.webp';
+  const convertToJpeg = isPhotoSource && !keepFormat;
 
   const outputPath = convertToJpeg
     ? inputPath.slice(0, -ext.length) + '.jpg'
     : inputPath;
 
-  let pipeline = sharp(inputPath).rotate(); // auto-oriente selon l'EXIF, puis strip le tag
+  // Lu en mémoire (plutôt que sharp(inputPath)) pour que sharp/libvips ne garde pas
+  // de handle ouvert sur le fichier source : sinon, sous Windows, le unlink de
+  // l'original plus bas échoue (EBUSY) tant que ce handle n'est pas libéré.
+  let pipeline = sharp(fs.readFileSync(inputPath)).rotate(); // auto-oriente selon l'EXIF, puis strip le tag
   pipeline = pipeline.resize({ width: max, height: max, fit: 'inside', withoutEnlargement: true });
 
   if (convertToJpeg || ext === '.jpg' || ext === '.jpeg') {
@@ -74,7 +81,7 @@ async function main() {
   await pipeline.toFile(tmpPath);
 
   if (outputPath !== inputPath) {
-    fs.unlinkSync(inputPath); // supprime l'original si l'extension a changé (png -> jpg)
+    fs.unlinkSync(inputPath); // supprime l'original si l'extension a changé (png/webp -> jpg)
   }
   fs.renameSync(tmpPath, outputPath);
 

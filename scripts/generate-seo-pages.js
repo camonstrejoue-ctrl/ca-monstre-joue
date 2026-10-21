@@ -229,7 +229,7 @@ function main() {
       genericTitle: 'Fiche jeu - Ça Monstre Joue',
       genericDescription: 'Découvre nos fiches jeux détaillées : identité complète, notre avis, vidéo et bien plus, sur le blog Ça Monstre Joue.',
       title: `${g.name} - Ça Monstre Joue`,
-      description: toDescription(g.intro || g.fitIntro || '', 160),
+      description: g.metaDescription || toDescription(g.intro || g.fitIntro || '', 160),
       image: absoluteUrl(g.cover || g.thumbnail),
       url,
       ogType: 'website',

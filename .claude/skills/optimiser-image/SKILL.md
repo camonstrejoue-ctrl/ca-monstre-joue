@@ -25,8 +25,8 @@ Plus généralement, tout PNG qui est un logo/icône (pas une photo) reste en PN
 - Redimensionne à 2400px max sur le plus grand côté (suffisant pour tous les usages du site, y
   compris écrans retina) — jamais d'agrandissement d'une image plus petite.
 - Recompresse en JPEG qualité ~82 (quasi sans perte visuelle, standard web).
-- Convertit en JPEG les PNG qui sont en réalité des photos (le PNG est sans perte, très lourd pour
-  ce type de contenu).
+- Convertit en JPEG les PNG et WebP qui sont en réalité des photos (ce ne sont pas le format cible
+  du site pour ce type de contenu).
 - Respecte l'orientation EXIF avant recompression (sinon risque de photo pivotée après traitement).
 
 ## Comment l'exécuter
