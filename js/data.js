@@ -1570,6 +1570,34 @@ window.ARTICLES = [
       { type: 'p', text: "Et vous, quelles stratégies aimez-vous utiliser lorsque vous jouez à Forêt Mixte ? Dites-nous tout en commentaire !" },
     ],
   },
+  {
+    slug: 'jeux-de-societe-suisses',
+    title: "Jeux de société suisses : la scène qu'on ne vous raconte jamais",
+    date: '2026-10-28',
+    author: 'Alex',
+    guide: true,
+    // TODO : aucune image reçue pour cet article (cover/hero/banner).
+    excerpt: "Jaipur, Mr Jack, Bandido : trois jeux que vous connaissez peut-être déjà, et qui sont tous les trois nés à quelques kilomètres de chez nous.",
+    blocks: [
+      { type: 'p', text: "Quand on pense jeux de société, on pense à l’Allemagne, on pense aux gros studios français. La Suisse ? Jamais. Et pourtant, plusieurs jeux qui traînent peut-être déjà dans votre ludothèque sont nés pas loin de chez nous." },
+
+      { type: 'h2', text: 'Jaipur, ou comment un trajet en train a donné naissance à un classique' },
+      { type: 'p', text: "Vous connaissez sûrement Jaipur, ce duel de marchands à dos de chameau devenu un incontournable du jeu à deux. Ce que vous ne savez peut-être pas : son créateur, Sébastien Pauchon, est vaudois. En 2006, il fonde sa structure d’édition Gameworks à Vevey avec Malcolm Braff. L’idée de Jaipur serait née lors d’un trajet en train avec ce dernier, vers 2008. Le jeu sort en 2009, sera recommandé au très prestigieux Spiel des Jahres en 2010, avant que Pauchon ne rejoigne en 2013 Space Cowboys, le studio créatif du groupe Asmodée." },
+
+      { type: 'h2', text: 'Mr Jack, le succès discret de Genève' },
+      { type: 'p', text: "Direction Veyrier, dans le canton de Genève, où l’éditeur suisse Hurrican voit le jour en 2006. Son tout premier jeu au catalogue, Mr Jack, un duel asymétrique imaginé par les auteurs français Bruno Cathala et Ludovic Maublanc, devient un succès commercial avec plus de 250 000 exemplaires vendus. Hurrican compte aujourd’hui une quinzaine de jeux à son catalogue." },
+
+      { type: 'h2', text: 'Helvetiq, la maison qui a créé Bandido' },
+      { type: 'p', text: "Et puis il y a Helvetiq, fondée en 2008, aujourd’hui distribuée dans plus de 40 pays. Vous ne connaissez peut-être pas leur nom, mais vous connaissez sûrement l’un de leurs jeux : Bandido, le petit jeu coopératif qu’on vous présente justement sur le site." },
+      {
+        type: 'games',
+        items: [
+          { slug: 'bandido' },
+        ],
+      },
+      { type: 'p', text: "Trois histoires différentes, trois succès, un point commun : ils sont nés à quelques kilomètres de chez nous." },
+    ],
+  },
 ];
 
 // À compléter : noms, rôles, bios et photos des membres de la team.
