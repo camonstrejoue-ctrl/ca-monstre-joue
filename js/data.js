@@ -1463,8 +1463,7 @@ window.ARTICLES = [
     date: '2026-11-04',
     author: 'Prune',
     gameSlug: 'foret-mixte',
-    // TODO banner (-banniere, 16:9) toujours en attente pour le carrousel d'accueil.
-    banner: '',
+    banner: 'assets/games/foret-mixte/foret-mixte-cover.jpg',
     hero: 'assets/games/foret-mixte/foret-mixte-bandeau.jpg',
     cover: 'assets/games/foret-mixte/foret-mixte-astuces-vignette.jpg',
     excerpt: 'Comment gagner à Forêt Mixte ? Découvrez nos meilleures astuces et nos conseils stratégiques pour triompher à ce jeu de société !',
