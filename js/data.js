@@ -714,6 +714,9 @@ window.GAMES = [
 // automatiquement à partir des blocs `h2` de l'article (aucun champ à remplir).
 // Un bloc `{ type: 'h3', text }` affiche un sous-titre (sous-section à l'intérieur
 // d'un `h2`) — contrairement à `h2`, il n'apparaît pas dans le sommaire `toc`.
+// Un bloc `{ type: 'table', headers: [...], rows: [[...], [...]] }` affiche un
+// tableau (ex. nombre de joueurs / cartes à retirer) — `rows` est un tableau de
+// lignes, chaque ligne un tableau de cellules dans le même ordre que `headers`.
 //
 // Publication programmée : un article dont le champ `date` est dans le futur
 // reste écrit et déployé normalement, mais n'apparaît dans aucune liste
@@ -1360,11 +1363,11 @@ window.ARTICLES = [
 
       { type: 'h2', text: 'Mettre en place le jeu Forêt Mixte' },
       { type: 'p', text: "Commencez par retirer les 3 cartes Hiver du paquet ainsi que les cartes Grottes, puis mélangez le reste des cartes. Selon le nombre de joueurs à table, vous ne conserverez peut-être pas toutes les cartes du jeu." },
-      { type: 'list', items: [
-        '2 joueurs : retirez 30 cartes du paquet.',
-        '3 joueurs : retirez 20 cartes du paquet.',
-        '4 joueurs : retirez 10 cartes du paquet.',
-        '5 joueurs : aucune carte à retirer, vous jouez avec tout le paquet !',
+      { type: 'table', headers: ['Nombre de joueurs', 'Nombre de cartes à retirer du paquet'], rows: [
+        ['2 joueurs', '30 cartes'],
+        ['3 joueurs', '20 cartes'],
+        ['4 joueurs', '10 cartes'],
+        ['5 joueurs', 'Aucune carte à retirer : vous jouez avec tout le paquet !'],
       ] },
       { type: 'p', text: "Maintenant que vous avez retiré un certain nombre de cartes, vous pouvez les mettre dans votre boîte de jeu : vous n’en aurez plus besoin durant la partie. Prenez maintenant les cartes restantes et divisez-les en 3 piles de taille similaire (pas besoin de compter !). Choisissez l’un des 3 tas de cartes et mélangez-le avec 2 cartes Hiver. Enfin, posez la 3e carte Hiver sur ce même tas. Il vous reste 2 piles de cartes que vous n’avez pas touchées : posez-les sur le tas qui contient les cartes Hiver. Cette pile de cartes ainsi formée sera votre pioche." },
       { type: 'p', text: "Si vous avez bien suivi, aucun risque de piocher une carte Hiver lors des premiers instants du jeu, rassurez-vous !" },

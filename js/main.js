@@ -870,6 +870,18 @@ function renderArticlePage() {
       const ul = el('ul', { class: 'article-list' });
       b.items.forEach(item => ul.appendChild(el('li', { html: item })));
       body.appendChild(ul);
+    } else if (b.type === 'table') {
+      const wrap = el('div', { class: 'article-table-wrap' });
+      const table = el('table', { class: 'article-table' });
+      const thead = el('thead', {}, [
+        el('tr', {}, b.headers.map(h => el('th', { html: h }))),
+      ]);
+      const tbody = el('tbody', {});
+      b.rows.forEach(row => tbody.appendChild(el('tr', {}, row.map(cell => el('td', { html: cell })))));
+      table.appendChild(thead);
+      table.appendChild(tbody);
+      wrap.appendChild(table);
+      body.appendChild(wrap);
     } else if (b.type === 'spoiler') {
       const details = el('details', { class: 'accordion', style: 'margin:28px 0;' }, [
         el('summary', { class: 'accordion-header' }, [
