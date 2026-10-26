@@ -697,6 +697,7 @@ window.GAMES = [
     monsterTip: 'Si tu joues à 4 ou 5 joueurs, prévois une grande table !',
     gallery: [
       { image: 'assets/games/foret-mixte/foret-mixte-vignette.jpg', articleSlug: 'foret-mixte-regles' },
+      { image: '', articleSlug: 'foret-mixte-astuces' },
     ],
   },
 ];
@@ -711,6 +712,8 @@ window.GAMES = [
 // flux RSS) — même principe que `heroTitle` pour les jeux.
 // Un bloc `{ type: 'toc' }` dans `blocks` insère un sommaire cliquable généré
 // automatiquement à partir des blocs `h2` de l'article (aucun champ à remplir).
+// Un bloc `{ type: 'h3', text }` affiche un sous-titre (sous-section à l'intérieur
+// d'un `h2`) — contrairement à `h2`, il n'apparaît pas dans le sommaire `toc`.
 //
 // Publication programmée : un article dont le champ `date` est dans le futur
 // reste écrit et déployé normalement, mais n'apparaît dans aucune liste
@@ -1451,6 +1454,118 @@ window.ARTICLES = [
       { type: 'p', text: "Vous avez aimé Forêt Mixte (avec ou sans ses extensions) ? Vous allez être servi puisqu’il existe deux autres jeux de la famille Forêt Mixte ! Ce ne sont pas des extensions : ce sont bien des jeux à part, basés sur l’univers Forêt Mixte, avec la même mécanique de jeu, des cartes et des règles légèrement différentes." },
       { type: 'p', text: "Envie de découvrir les landes anglaises ? Découvrez Forêt Mixte Dartmoor (qui a d’ailleurs sa propre extension nommée Exmoor). Si vous êtes plutôt team Amérique du Nord, alors succombez à Forêt Mixte Smoky Mountains !" },
       { type: 'p', text: "Si vous avez acheté des extensions pour le jeu Forêt Mixte, elles ne peuvent pas être utilisées avec Dartmoor et Smoky Mountains : on vous le redit, ce sont des jeux à part !" },
+    ],
+  },
+  {
+    slug: 'foret-mixte-astuces',
+    title: 'Astuces et stratégies pour jouer à Forêt Mixte',
+    h1: 'Jeu Forêt Mixte : les astuces et stratégies à mettre en place pour gagner !',
+    date: '2026-11-04',
+    author: 'Prune',
+    gameSlug: 'foret-mixte',
+    // TODO images en attente : banner (-banniere, 16:9), hero (-bandeau, 32:9), cover (-vignette, 1:1).
+    banner: '',
+    hero: '',
+    cover: '',
+    excerpt: 'Comment gagner à Forêt Mixte ? Découvrez nos meilleures astuces et nos conseils stratégiques pour triompher à ce jeu de société !',
+    blocks: [
+      { type: 'p', text: 'Vous connaissez <a href="/article.html?slug=foret-mixte-regles">les règles du jeu Forêt Mixte</a> et vous avez joué de nombreuses heures ? Nous vous proposons quelques astuces à utiliser sans scrupule et des stratégies à mettre en place pour obtenir le plus de glands possible !' },
+      { type: 'p', text: "Petite précision : cet article ne parle que des cartes disponibles dans le jeu de base, sans mention des cartes que vous pouvez trouver dans les extensions." },
+
+      { type: 'toc' },
+
+      { type: 'h2', text: 'Les synergies de cartes les plus intéressantes' },
+
+      { type: 'h3', text: 'Ne sous-estimez pas les cartes Champignons…' },
+      { type: 'p', text: "Dans le jeu de base Forêt Mixte, il y a 4 espèces de champignons, et seulement 2 cartes par espèce, soit 8 au total." },
+      { type: 'p', text: "Il y a donc peu de cartes Champignons dans le jeu, alors, si vous en piochez en début de partie, ne les jetez pas dans la clairière ! Elles vous feront gagner des bonus tout au long du jeu. Par exemple, vous obtenez une carte de la pioche à chaque fois que vous placez un arbre dans votre forêt grâce à la carte Girolle. Cette carte est très forte à jouer dans les premiers tours du jeu. On pense aussi à la Coulemelle : remportez une carte à chaque fois que vous placez une carte au-dessous d’un arbre." },
+      { type: 'p', text: "À noter : lorsque vous jouez un Champignon, l’effet se déclenche dès votre prochain tour. Donc, vous ne gagnez pas de carte au moment où vous placez une Coulemelle sous un arbre : l’effet sera valable pour la prochaine carte que vous placerez sous d’un arbre." },
+
+      { type: 'h3', text: '… Ni la carte Fouine !' },
+      { type: 'p', text: "Petite, pas chère mais bougrement efficace ! Si vous posez une carte Fouine dans votre forêt, vous obtiendrez 5 glands par arbre entièrement occupé (c’est-à-dire un arbre qui a une carte en haut, une en bas, une à gauche et une à droite). C’est le moment de compléter tous les emplacements de vos arbres. Et les fouines se cumulent : 2 fouines dans votre forêt = 10 points par arbre complètement occupé, 15 points si vous avez 3 fouines, etc." },
+      { type: 'p', text: "À noter : il n’y a que 5 cartes Fouine dans le jeu." },
+
+      { type: 'h3', text: 'La stratégie des lièvres' },
+      { type: 'p', text: "Les cartes Lièvre d’Europe vous permettent de placer plusieurs lièvres sur le même arbre, et ce de façon illimitée. Lorsque vous combinez ces cartes Lièvre aux cartes Renard roux, vous remportez une carte par Lièvre présent dans votre forêt à chaque fois que vous posez un renard." },
+      { type: 'p', text: "Notre astuce pour gagner encore plus de points : jouez plutôt vos lièvres sur un Sapin blanc. Chaque carte rattachée à cet arbre vous fait gagner 2 glands supplémentaires, alors pourquoi se priver ? D’ailleurs, lorsque vous posez un Sapin blanc dans votre forêt, si vous le payez avec 2 cartes de la même couleur, vous pourrez jouer gratuitement une carte animal de type “plantigrade/digitigrade”. C’est le nom donné aux cartes qui ont le symbole d’une empreinte de patte. Nous, on aime bien appeler ce type de carte “petite patte”, parce que c’est quand même plus mignon que “digitigrade”, vous ne trouvez pas ? Bref, c’est l’occasion de poser un lièvre (ou un autre animal) sans attendre le tour suivant !" },
+
+      { type: 'h3', text: 'Les cartes Cervidés vous feront-elles gagner ?' },
+      { type: 'p', text: "Là, on va parler d’un sacré combo, mais il va falloir avoir de la chance quand vous piochez et être au taquet sur les cartes disponibles dans la clairière !" },
+      { type: 'p', text: "Lorsque vous avez en main une carte Cerf élaphe, ne la posez pas tout de suite. Soyez patients et attendez d’avoir une autre carte “ongulé” ou “cervidé” (c’est-à-dire : Daim et Chevreuil) dans votre jeu. Ainsi, lorsque vous jouez dans votre forêt une carte Cerf élaphe en payant son coût avec 2 cartes de la même couleur, vous pourrez poser gratuitement un autre cervidé/ongulé. Et ça, ça fait plaisir, parce que ces animaux coûtent 2 cartes !" },
+      { type: 'p', text: "Et les cervidés/ongulés ont tout pour plaire :" },
+      { type: 'list', items: [
+        'Carte Cerf élaphe : gagnez 1 gland par arbre et plante dans votre forêt ;',
+        'Carte Daim : chaque carte “ongulé” vous rapporte 3 glands ;',
+        'Carte Chevreuil : à combiner avec une carte Lynx pour gagner 10 glands.',
+      ] },
+      { type: 'p', text: "À noter : le combo chevreuil/lynx fonctionne de la même façon que le marcassin/sanglier. Mieux vaut avoir un seul chevreuil et plusieurs lynx pour optimiser vos points." },
+      { type: 'p', text: "Et la cerise sur le gâteau : la carte Loup ! Là aussi, ne foncez pas tête baissée, et gardez cette carte de côté le temps d’avoir plusieurs cervidés dans votre forêt. Le Loup coûte 3 cartes, certes, mais vous obtiendrez 5 glands + 1 carte de la pioche par cervidé déjà posé dans votre forêt. Et si vous êtes joueur, payez la carte Loup avec 3 cartes de la même couleur pour obtenir un tour supplémentaire…" },
+
+      { type: 'h3', text: 'La stratégie des arbres' },
+      { type: 'p', text: "Pour réussir cette stratégie, vous allez jouer le plus de cartes Arbres possibles (ou du moins les plus intéressantes). Mais pas seulement ! Vous devrez jouer des cartes qui vous feront gagner des points grâce aux arbres. Donc, comme vu précédemment :" },
+      { type: 'list', items: [
+        'la carte Girolle bien sûr (à jouer en début de partie) ;',
+        'les cartes Plantes (notamment la Mousse, qui fait gagner 10 glands si vous avez posé 10 arbres dans votre forêt ; ou encore la Fraise des bois qui vous rapporte 10 glands si vous avez 8 espèces d’arbres différentes) ;',
+        'la carte Cerf élaphe (1 gland par arbre) ;',
+        'la carte Pic épeiche (10 glands si votre forêt a plus d’arbres que les forêts de vos concurrents)...',
+      ] },
+
+      { type: 'h3', text: 'Les arbres intéressants à jouer pour cette stratégie' },
+      { type: 'p', text: "Tous ! Mais plus particulièrement :" },
+      { type: 'list', items: [
+        'le Hêtre (si vous en avez 4, vous gagnez 20 glands ; sinon c’est inutile) ;',
+        'le Marronnier commun (si vous en avez 7 ou plus, vous gagnez 49 glands !!!);',
+        'le Chêne (10 glands si vous avez 8 espèces d’arbres différentes, comme la Fraise des bois).',
+      ] },
+      { type: 'p', text: "Et si vous avez réussi à avoir plusieurs Marronniers communs (qui ont une icône de feuille orange), essayez de jouer des cartes qui vous font gagner des points par icône feuille orange comme certaines cartes Chevreuil (3 glands par carte à icône feuille orange)." },
+
+      { type: 'h3', text: 'N’oubliez pas les cartes Plantes !' },
+      { type: 'p', text: "Les cartes Plante sont gratuites (leur coût est de 0 carte) : ne vous privez pas d’en jouer ! Elles vous apporteront des points supplémentaires, et leurs effets peuvent également se cumuler. Par exemple, la carte Mousse vous fait gagner 10 glands si vous avez 10 arbres (de n’importe quelle espèce), donc 2 cartes Mousse vous feront gagner 20 glands !" },
+      { type: 'p', text: "Petit coup de cœur pour la Fougère arborescente : avec elle, vous obtiendrez 6 glands par amphibien (crapaud, cistude, salamandre tachetée, rainette verte). Ne lâchez jamais cette carte dans la clairière, au risque de voir vos adversaires s’en emparer sur le champ ! Vous pourrez alors monter une petite stratégie très lucrative autour de la Fougère et des cartes Amphibiens…" },
+
+      { type: 'h2', text: 'Les décisions tactiques lorsque vous jouez à Forêt Mixte' },
+      { type: 'p', text: "Avoir des cartes en main, c’est bien, mais encore faut-il les gérer habilement !" },
+
+      { type: 'h3', text: 'Apprenez à gérer votre main' },
+      { type: 'p', text: "Vous pouvez avoir jusqu’à 10 cartes en main, ne l’oubliez pas durant la partie. Attention donc si vous en avez 9 : si vous décidez de piocher, vous ne pourrez prendre qu’une seule carte dans la pioche ou la clairière." },
+      { type: 'p', text: "Ne vous focalisez pas sur une carte dans votre main parce qu’elle vous semble intéressante : si vous ne pouvez pas la jouer rapidement, mieux vaut l’abandonner sans scrupule. Elle plombe votre main et vous désavantage parce qu’elle “prend la place” d’autres cartes qui pourraient être tout aussi intéressantes (mais ça, vous ne le saurez pas puisque vous gardez ce fichu loup depuis 6 tours !!!)." },
+      { type: 'p', text: "Vous devrez par moments renoncer à des combos de cartes si la carte que vous attendez n’arrive pas. Vous perdez du temps durant le jeu à construire une stratégie avec une carte que vous n’avez pas encore piochée… Si au bout de plusieurs tours, vous n’avez pas réussi à obtenir la carte tant espérée, notre conseil : lâchez l’affaire et passez à autre chose. Plus on pioche pour essayer d’obtenir une carte qui n’arrive pas, plus on s’approche d’une potentielle carte Hiver…" },
+      { type: 'p', text: "Par exemple, vous avez un Sanglier en main : il n’apporte des points que s’il est combiné à un Marcassin (10 glands !). Ne gardez pas votre Sanglier toute la partie en espérant qu’un Marcassin arrive, surtout qu’il y a très peu de cartes Marcassin dans le jeu (seulement 4 !)." },
+
+      { type: 'h3', text: 'Surveillez la clairière !' },
+      { type: 'p', text: "Gardez toujours un œil sur la clairière durant la partie : elle peut être source de cartes intéressantes… arrivées là par ou grâce à vos adversaires !" },
+      { type: 'p', text: "Les cartes dont vous vous débarrassez atterrissent dans la clairière… Elles sont donc accessibles aux autres joueurs ! Soyez attentifs aux cartes posées devant vos adversaires avant de vous défausser des vôtres. Cela vous évitera de leur offrir des cartes intéressantes (même si elles ne le sont pas forcément pour vous)." },
+      { type: 'p', text: "Par exemple, vous vous débarrassez d’une carte Marronnier, et vous la placez dans la clairière : votre adversaire essaie justement d’avoir le plus de Marronniers possible et vous venez de lui offrir des points parce que vous n’avez pas regardé les cartes posées devant lui… Peut-être que vous venez de l’aider à gagner la partie, qui sait ?" },
+      { type: 'p', text: "Restez donc vigilant à ce que vous défaussez, au jeu de vos adversaires… et au contenu de la clairière. Si elle comporte 9 cartes, c’est le moment pour vous de défausser n’importe quelle carte : n’oubliez pas que la clairière est vidée dès qu'elle contient 10 cartes ou plus (et ce, à la fin du tour et non dès que la 10e carte est posée dans la clairière). Cette fois, vous pouvez jeter ce Marronnier ou cette carte Loup tant convoitée par votre adversaire qui cumule les cervidés ;)" },
+      { type: 'p', text: "Astuce : si vous jouez une carte Ours brun dans votre forêt, toutes les cartes de la clairière vont dans votre grotte. Pratique pour couper l’herbe sous le pied de vos adversaires et gagner des points supplémentaires !" },
+      { type: 'p', text: "À noter : les cartes placées dans la grotte vous rapportent un seul gland chacune. Attention donc à ne pas jeter des cartes qui rapportent beaucoup de points (jetez ces fichus Moustiques que personne ne joue !!!)." },
+
+      { type: 'h3', text: 'Utilisez à bon escient les emplacements autour des arbres' },
+      { type: 'p', text: "Les cartes Arbres ne sont pas là simplement pour placer des cartes Animaux, Insectes, Plantes, etc. Utilisez leur effet ou celui des autres cartes pour décupler vos points. Par exemple :" },
+      { type: 'list', items: [
+        'Le Sapin blanc (carte arbre dont on parle plus haut dans la stratégie des Lièvres) : vous gagnez 2 glands par carte jouée sur cet arbre. Il est donc particulièrement intéressant pour les cartes Lièvre ou Crapaud commun (on peut en cumuler 2 sous un arbre et vous gagnerez alors un total de 10 points pour ces 2 Crapauds, et 4 points supplémentaires grâce au Sapin blanc).',
+        'L’Écureuil roux (carte “petite patte”) : il vous rapporte 5 glands si vous le positionnez sur un Chêne.',
+        'Le Loir gris (carte “petite patte”) : vous obtenez 15 glands s’il est posé sur le même arbre qu’une Chauve-souris (qu’importe son espèce).',
+        'Le Pinson des arbres (carte oiseau) : gagnez 5 glands s’il est posé sur un Hêtre.',
+        'La Fouine (carte “petite patte”) : si vous en avez une, c’est bien, mais plusieurs c’est encore mieux ! Remportez 5 glands par arbre entièrement occupé (ça peut vite faire la différence en fin de partie au moment du décompte de points !).',
+        'La Coulemelle (carte champignon) : placée dans votre forêt, elle vous permet d’obtenir une carte de la pioche à chaque fois que vous jouez une carte sous un arbre.',
+        'Le Cèpe de Bordeaux (carte champignon) : dans la même lignée que la Coulemelle, une fois jouée, elle vous fait gagner une carte à chaque fois que vous placez une carte au-dessus d’un arbre.',
+      ] },
+      { type: 'p', text: "C’est bien beau de vouloir accumuler des cartes autour de vos arbres, mais vous n’auriez pas oublié quelque chose ? Avant de jouer des cartes dans votre forêt, analysez les emplacements disponibles : en avez-vous suffisamment pour avancer dans votre stratégie ? Par exemple, vous avez joué une Fougère arborescente et avez très envie de placer ces cartes Amphibiens que vous traînez dans votre main depuis 5 minutes. Elles ne vont que sous les arbres : avez-vous suffisamment d’arbres dans votre forêt pour poser toutes ces cartes ?" },
+
+      { type: 'h2', text: 'Avoir une vision stratégique globale : votre meilleure chance de gagner !' },
+      { type: 'p', text: "Vous l’aurez peut-être compris au cours de la lecture de notre article : vous n’obtiendrez pas toujours les cartes dont vous avez besoin pour poursuivre votre stratégie. Nous vous conseillons de ne pas vous fixer obstinément sur une seule stratégie : il faut varier les plaisirs ! Vous devrez combiner plusieurs stratégies pour obtenir le plus de glands possible. Adaptez-vous aux cartes que vous piochez et à celles disponibles dans la clairière. Par exemple, vous avez pioché un Loup mais pas de Cervidés : lâchez le Loup et passez à autre chose. Quelques exemples de combos de stratégies que nous trouvons intéressants à jouer :" },
+      { type: 'list', items: [
+        'Arbres + Plantes ;',
+        'Arbres + Amphibiens ;',
+        'Amphibiens + Cervidés (et Loup bien sûr !)...',
+      ] },
+      { type: 'p', text: "À vous de choisir les stratégies à combiner selon les cartes obtenues au fil de la partie…" },
+      { type: 'p', text: "Aussi, selon votre manière de jouer, la partie peut être plus ou moins longue… Et c’est peut-être ce que vous recherchez en fonction des cartes que vous aimeriez jouer. Si vous souhaitez que la partie traîne en longueur, piochez vos cartes dans la clairière. Ainsi, la pioche s’épuisera moins vite, et vous mettrez plus de temps à rencontrer les cartes Hiver ! À l’inverse, piocher constamment dans la pioche accélérera la partie." },
+      { type: 'p', text: "À noter : n’oubliez pas qu’à chaque fois qu’un joueur pose une carte Arbre dans sa forêt, une carte de la pioche est posée dans la clairière. Donc la pioche est utilisée même sans piocher…" },
+      { type: 'p', text: "Et là, vous vous dites “Mais pourquoi voudrais-je accélérer/ralentir la partie ?”. Bonne question ! Accélérez la partie si vous pensez que vous avez une belle avance de points face à vos adversaires : ainsi, en terminant rapidement la partie, vous limitez leurs possibilités de développer leurs stratégies. Au contraire, vous pourriez vouloir ralentir le jeu si vos stratégies mettent du temps à porter leurs fruits." },
+      { type: 'p', text: "Alors, quelle est la meilleure stratégie à mettre en place ? À vrai dire, c’est votre façon de vous adapter aux cartes disponibles qui fera toute la différence durant la partie ;)" },
+      { type: 'p', text: "Et vous, quelles stratégies aimez-vous utiliser lorsque vous jouez à Forêt Mixte ? Dites-nous tout en commentaire !" },
     ],
   },
 ];

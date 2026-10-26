@@ -844,6 +844,8 @@ function renderArticlePage() {
       body.appendChild(el('p', { html: b.text }));
     } else if (b.type === 'h2') {
       body.appendChild(el('h2', { html: b.text, id: slugifyHeading(b.text), style: 'margin-top:40px;scroll-margin-top:100px;' }));
+    } else if (b.type === 'h3') {
+      body.appendChild(el('h3', { html: b.text, style: 'margin-top:28px;' }));
     } else if (b.type === 'toc') {
       const nav = el('nav', { class: 'article-toc', 'aria-label': 'Sommaire' }, [
         el('p', { class: 'article-toc__title', text: 'Sommaire' }),
