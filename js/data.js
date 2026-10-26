@@ -1576,7 +1576,9 @@ window.ARTICLES = [
     date: '2026-10-28',
     author: 'Alex',
     guide: true,
-    // TODO : aucune image reçue pour cet article (cover/hero/banner).
+    hero: 'assets/guides/jeux-de-societe-suisses/jeux-de-societe-suisses-bandeau.jpg',
+    banner: 'assets/guides/jeux-de-societe-suisses/jeux-de-societe-suisses-banniere.jpg',
+    cover: 'assets/guides/jeux-de-societe-suisses/jeux-de-societe-suisses-vignette.jpg',
     excerpt: "Jaipur, Mr Jack, Bandido : trois jeux que vous connaissez peut-être déjà, et qui sont tous les trois nés à quelques kilomètres de chez nous.",
     blocks: [
       { type: 'p', text: "Quand on pense jeux de société, on pense à l’Allemagne, on pense aux gros studios français. La Suisse ? Jamais. Et pourtant, plusieurs jeux qui traînent peut-être déjà dans votre ludothèque sont nés pas loin de chez nous." },
