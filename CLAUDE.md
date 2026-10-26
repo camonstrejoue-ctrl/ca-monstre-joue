@@ -49,6 +49,11 @@ Quand l'utilisateur ajoute une image, le suffixe indique où elle doit être uti
 Sans suffixe reconnu, l'image est identifiée par le contexte de la demande (photo de partie, carte de
 personnage, couverture de jeu, etc.).
 
+**Règle (depuis le 2026-10-26)** : quand Claude mentionne un suffixe à l'oral/à l'écrit dans la
+conversation (hors noms de fichiers réels, qui gardent le suffixe seul), toujours accoler le ratio au
+suffixe, ex. `-bandeau32:9`, `-vignette1:1`, `-fiche16:9à21:9` — pas besoin de reformuler "format X:Y"
+en plus.
+
 ## Ajouter un nouveau jeu
 
 1. Dès que l'utilisateur annonce un nouveau jeu (même sans images), créer immédiatement le dossier
