@@ -697,7 +697,7 @@ window.GAMES = [
     monsterTip: 'Si tu joues à 4 ou 5 joueurs, prévois une grande table !',
     gallery: [
       { image: 'assets/games/foret-mixte/foret-mixte-vignette.jpg', articleSlug: 'foret-mixte-regles' },
-      { image: '', articleSlug: 'foret-mixte-astuces' },
+      { image: 'assets/games/foret-mixte/foret-mixte-astuces-vignette.jpg', articleSlug: 'foret-mixte-astuces' },
     ],
   },
 ];
@@ -1463,10 +1463,10 @@ window.ARTICLES = [
     date: '2026-11-04',
     author: 'Prune',
     gameSlug: 'foret-mixte',
-    // TODO images en attente : banner (-banniere, 16:9), hero (-bandeau, 32:9), cover (-vignette, 1:1).
+    // TODO banner (-banniere, 16:9) toujours en attente pour le carrousel d'accueil.
     banner: '',
-    hero: '',
-    cover: '',
+    hero: 'assets/games/foret-mixte/foret-mixte-bandeau.jpg',
+    cover: 'assets/games/foret-mixte/foret-mixte-astuces-vignette.jpg',
     excerpt: 'Comment gagner à Forêt Mixte ? Découvrez nos meilleures astuces et nos conseils stratégiques pour triompher à ce jeu de société !',
     blocks: [
       { type: 'p', text: 'Vous connaissez <a href="/article.html?slug=foret-mixte-regles">les règles du jeu Forêt Mixte</a> et vous avez joué de nombreuses heures ? Nous vous proposons quelques astuces à utiliser sans scrupule et des stratégies à mettre en place pour obtenir le plus de glands possible !' },

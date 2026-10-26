@@ -640,9 +640,12 @@ function renderGamePage() {
   const heroDotsWrap = qs('#game-hero-dots');
   const heroScrim = qs('.game-hero-scrim');
   if (heroTrack) {
+    const publishedGalleryImages = (g.gallery || [])
+      .filter(item => isPublished(findArticle(item.articleSlug)))
+      .map(i => i.image);
     const images = (g.heroImages && g.heroImages.length)
       ? g.heroImages
-      : [g.cover, ...(g.gallery || []).map(i => i.image)].filter(Boolean);
+      : [g.cover, ...publishedGalleryImages].filter(Boolean);
     const slides = images.length ? images : [null];
     heroTrack.innerHTML = '';
     heroDotsWrap.innerHTML = '';
