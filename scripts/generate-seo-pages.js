@@ -71,6 +71,27 @@ function writePage(outDir, html) {
   fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
 }
 
+// Date ISO (2026-10-28) -> format suisse lisible (28.10.2026), pour signaler
+// la fraîcheur du contenu aux moteurs génératifs (voir docs/seo-geo-expert.md § 2).
+function formatDateCh(iso) {
+  const [y, m, d] = iso.split('-');
+  return `${d}.${m}.${y}`;
+}
+
+// Faits structurés d'un jeu (joueurs, durée, âge, difficulté, note) en une
+// ligne compacte : les moteurs de réponse IA citent plus volontiers un fait
+// chiffré précis qu'un paragraphe descriptif.
+function gameFacts(g) {
+  const id = g.identity || {};
+  const parts = [];
+  if (id.players) parts.push(/joueur/i.test(id.players) ? id.players : `${id.players} joueurs`);
+  if (id.duration) parts.push(id.duration);
+  if (id.age) parts.push(`dès ${id.age.replace(/\s*ans et plus/, ' ans')}`);
+  if (id.difficulty) parts.push(`difficulté ${id.difficulty.stars}/${id.difficulty.max || 6}${id.difficulty.label ? ` (${id.difficulty.label})` : ''}`);
+  if (id.note) parts.push(`note CMJ ${id.note.stars}/${id.note.max || 6}`);
+  return parts.length ? ` [${parts.join(' · ')}]` : '';
+}
+
 function parsePlayerRange(str) {
   const nums = ((str || '').match(/\d+/g) || []).map(Number);
   if (nums.length === 0) return null;
@@ -289,6 +310,8 @@ function main() {
   const llmsTxt = [
     '# Ça Monstre Joue',
     '',
+    `_Dernière mise à jour : ${formatDateCh(new Date().toISOString().slice(0, 10))}_`,
+    '',
     '> Blog suisse de jeux de société tenu par une bande de passionnés : critiques honnêtes, fiches jeux',
     '> détaillées (nombre de joueurs, âge, durée, complexité, note sur 6) et conseils pour choisir',
     '> sa prochaine partie.',
@@ -305,17 +328,18 @@ function main() {
     '- Note sur 6 étoiles (barème suisse) et critères structurés (joueurs, âge, durée, difficulté) sur chaque fiche jeu.',
     '- Format "compo type" : recommandations de personnages ou de stratégies pour bien débuter un jeu.',
     '- Guides du Monstre : contenu éditorial sur la culture et les habitudes de jeu, en plus des critiques.',
+    `- Équipe et méthodologie de notation détaillées : ${BASE_URL}/equipe.html`,
     '',
     '## Jeux',
-    ...GAMES.map((g) => `- [${g.name}](${BASE_URL}/jeu/${g.slug}/): ${toDescription(g.intro || g.fitIntro || '', 200)}`),
+    ...GAMES.map((g) => `- [${g.name}](${BASE_URL}/jeu/${g.slug}/): ${toDescription(g.intro || g.fitIntro || '', 200)}${gameFacts(g)}`),
     '',
     '## Articles',
-    ...otherArticles.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)}`),
+    ...otherArticles.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)} (publié le ${formatDateCh(a.date)})`),
     '',
     `## Guides du Monstre (${BASE_URL}/guides.html)`,
-    ...guideArticles.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)}`),
+    ...guideArticles.map((a) => `- [${a.title}](${BASE_URL}/article/${a.slug}/): ${toDescription(a.excerpt || '', 200)} (publié le ${formatDateCh(a.date)})`),
     '',
-    '## Catégories',
+    '## Optional',
     ...CATEGORIES.map((c) => `- [${c.name}](${BASE_URL}/categorie/${c.slug}/)`),
     '',
   ].join('\n');
