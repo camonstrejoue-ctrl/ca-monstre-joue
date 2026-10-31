@@ -24,6 +24,17 @@ function fixCanonical(path) {
   const meta = qs('meta[property="og:url"]');
   if (meta) meta.setAttribute('content', url);
 }
+// Ajoute un bloc JSON-LD au <head> — pour les listes construites côté client
+// (tous les jeux, équipe) dont le contenu dépend de window.GAMES/TEAM : Google
+// exécute le JS au crawl, donc ce bloc est bien vu à l'indexation même sans
+// génération statique (contrairement aux balises og: pour les bots de partage
+// social, qui n'exécutent pas le JS — voir scripts/generate-seo-pages.js).
+function injectJsonLd(obj) {
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(obj);
+  document.head.appendChild(script);
+}
 function el(tag, attrs, children) {
   const node = document.createElement(tag);
   Object.entries(attrs || {}).forEach(([k, v]) => {
@@ -556,6 +567,17 @@ function renderAllGamesPage() {
     groups[letter].forEach(g => grid.appendChild(gameCard(g)));
     group.appendChild(grid);
     mount.appendChild(group);
+  });
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Tous les jeux - Ça Monstre Joue',
+    itemListElement: games.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${window.location.origin}/jeu/${g.slug}/`,
+      name: g.name,
+    })),
   });
 }
 

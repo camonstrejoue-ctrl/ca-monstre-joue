@@ -178,6 +178,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     grid.appendChild(card);
   });
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@graph': (window.TEAM || []).map(m => ({
+      '@type': 'Person',
+      name: m.name,
+      jobTitle: m.role,
+      worksFor: { '@type': 'Organization', name: 'Ça Monstre Joue' },
+      ...(m.photo ? { image: `${window.location.origin}/${m.photo}` } : {}),
+      ...(m.linkedin ? { sameAs: [m.linkedin] } : {}),
+    })),
+  });
 });
 </script>
 </body>

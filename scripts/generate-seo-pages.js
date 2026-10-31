@@ -148,6 +148,43 @@ function primaryReviewAuthor(g, articles, team) {
   return primary ? personJsonLd(primary.author, team) : { '@type': 'Organization', name: 'Ça Monstre Joue' };
 }
 
+// Identifiant YouTube extrait d'un lien court (youtu.be), shorts ou format
+// standard watch?v=/embed/ — pour construire la miniature et l'URL d'intégration
+// sans appel réseau.
+function youtubeId(url) {
+  if (!url) return null;
+  const patterns = [
+    /youtu\.be\/([\w-]+)/,
+    /youtube\.com\/shorts\/([\w-]+)/,
+    /[?&]v=([\w-]+)/,
+    /youtube\.com\/embed\/([\w-]+)/,
+  ];
+  for (const re of patterns) {
+    const m = url.match(re);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+// VideoObject pour la vidéo YouTube d'un jeu (champ `video`), rattaché à la
+// fiche via `about` — absent si le jeu n'a pas de vidéo ou si le lien n'est
+// pas reconnu.
+function videoJsonLd(g, url) {
+  const id = youtubeId(g.video);
+  if (!id) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: `${g.name} - vidéo Ça Monstre Joue`,
+    description: toDescription(g.intro || g.fitIntro || '', 200),
+    thumbnailUrl: [`https://img.youtube.com/vi/${id}/hqdefault.jpg`],
+    embedUrl: `https://www.youtube.com/embed/${id}`,
+    contentUrl: g.video,
+    about: url,
+    publisher: { '@type': 'Organization', name: 'Ça Monstre Joue' },
+  };
+}
+
 function gameJsonLd(g, categories, articles, team, url) {
   const firstCat = categories.find((c) => (g.categories || [])[0] === c.slug);
   const crumbs = [['Accueil', `${BASE_URL}/`]];
@@ -171,7 +208,8 @@ function gameJsonLd(g, categories, articles, team, url) {
     author: primaryReviewAuthor(g, articles, team),
     publisher: { '@type': 'Organization', name: 'Ça Monstre Joue' },
   };
-  return [breadcrumb(crumbs), review];
+  const video = videoJsonLd(g, url);
+  return [breadcrumb(crumbs), review, ...(video ? [video] : [])];
 }
 
 function articleJsonLd(a, game, team, url) {
@@ -208,7 +246,7 @@ function categoryDescription(c, games) {
   return `${c.name} : ${shown.join(', ')}${rest}. Fiches détaillées, avis et conseils sur Ça Monstre Joue.`;
 }
 
-function categoryJsonLd(c, description, url) {
+function categoryJsonLd(c, description, url, games) {
   const crumbs = [['Accueil', `${BASE_URL}/`], [c.name, url]];
   const collection = {
     '@context': 'https://schema.org',
@@ -217,7 +255,18 @@ function categoryJsonLd(c, description, url) {
     description,
     url,
   };
-  return [breadcrumb(crumbs), collection];
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${c.name} - Ça Monstre Joue`,
+    itemListElement: games.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${BASE_URL}/jeu/${g.slug}/`,
+      name: g.name,
+    })),
+  };
+  return [breadcrumb(crumbs), collection, itemList];
 }
 
 // Même règle de programmation que côté client (js/main.js) : un article dont
@@ -280,6 +329,7 @@ function main() {
   CATEGORIES.forEach((c) => {
     const url = `${BASE_URL}/categorie/${c.slug}/`;
     const description = categoryDescription(c, GAMES);
+    const gamesInCat = GAMES.filter((g) => (g.categories || []).includes(c.slug));
     let html = injectMeta(categoryTemplate, {
       genericTitle: 'Catégorie - Ça Monstre Joue',
       genericDescription: 'Explore nos jeux de société classés par catégorie sur Ça Monstre Joue.',
@@ -289,7 +339,7 @@ function main() {
       url,
       ogType: 'website',
     });
-    html = injectJsonLd(html, categoryJsonLd(c, description, url));
+    html = injectJsonLd(html, categoryJsonLd(c, description, url, gamesInCat));
     writePage(path.join(rootDir, 'categorie', c.slug), html);
     urls.push(url);
   });
